@@ -7,6 +7,7 @@ function getComponents() {
     for (const path in components) {
         const component = components[path]
         component().then((module: any) => {
+            console.log(module)
             const comp = defineCustomElement(module)
             map[module.name] = comp
         })

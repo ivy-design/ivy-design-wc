@@ -6,19 +6,13 @@
     </header>
 
     <main>
-        <ivy-button>default</ivy-button>
-        <ivy-tooltip content="这是 tooltip 的内容">
-            <ivy-button>top</ivy-button>
-        </ivy-tooltip>
-        <ivy-tooltip content="这是 tooltip 的内容" placement="right">
-            <ivy-button>right</ivy-button>
-        </ivy-tooltip>
-        <ivy-tooltip content="这是 tooltip 的内容" placement="bottom">
-            <ivy-button>bottom</ivy-button>
-        </ivy-tooltip>
-        <ivy-tooltip content="这是 tooltip 的内容" placement="left">
-            <ivy-button>left</ivy-button>
-        </ivy-tooltip>
+        <ivy-grid square cols="4">
+            <ivy-grid-item>1</ivy-grid-item>
+            <ivy-grid-item>2</ivy-grid-item>
+            <ivy-grid-item>3</ivy-grid-item>
+            <ivy-grid-item>4</ivy-grid-item>
+            <ivy-grid-item>5</ivy-grid-item>
+        </ivy-grid>
     </main>
 </template>
 
@@ -32,23 +26,6 @@ header {
     margin: 0 auto 2rem;
 }
 
-@media (min-width: 1024px) {
-    header {
-        display: flex;
-        place-items: center;
-        padding-right: calc(var(--section-gap) / 2);
-    }
-
-    .logo {
-        margin: 0 2rem 0 0;
-    }
-
-    header .wrapper {
-        display: flex;
-        place-items: flex-start;
-        flex-wrap: wrap;
-    }
-}
 ivy-tooltip {
     --ivy-tooltip-background-color: rgba(70, 76, 91, 0.9);
 }
