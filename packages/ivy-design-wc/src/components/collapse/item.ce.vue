@@ -33,7 +33,7 @@ export default defineComponent({
 
         return () => (
             <div class={['ivy-collapse-item', { 'ivy-collapse-item-active': isActive.value }]}>
-                <div class="ivy-collapse-item__header" onclick={handleChange}>
+                <div class="ivy-collapse-item__header" onClick={handleChange}>
                     <span class={['ivy-icon-right', `ivy-collapse-arrow-${arrowPosition}`]}>
                         <slot name="icon">{ICON_ARROW_RIGHT()}</slot>
                     </span>
