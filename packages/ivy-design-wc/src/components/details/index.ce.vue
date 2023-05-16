@@ -1,7 +1,7 @@
 <script lang="tsx">
 import { defineComponent, ref, Transition } from 'vue'
 import { transition } from '@/utils/collapse-transition'
-import { ICON_ARROW_RIGHT } from '@/utils/const'
+import { genArrowRight } from '@/utils/icons'
 
 export default defineComponent({
     name: `Details`,
@@ -22,7 +22,7 @@ export default defineComponent({
         return () => (
             <div class="details">
                 <div class="details-summary" onClick={handlerClick}>
-                    {ICON_ARROW_RIGHT(`details-icon ${visible.value ? 'is-open' : ''}`)}
+                    {genArrowRight({ class: `details-icon ${visible.value ? 'is-open' : ''}` })}
 
                     <slot name="summary">{props.summary}</slot>
                 </div>

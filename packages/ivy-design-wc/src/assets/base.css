@@ -54,9 +54,10 @@
 *::before,
 *::after {
     box-sizing: border-box;
+}
+p,
+body {
     margin: 0;
-    position: relative;
-    font-weight: normal;
 }
 
 body {

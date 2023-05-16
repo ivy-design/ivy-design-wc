@@ -10,36 +10,31 @@ const value = ref([1, 2])
     </header>
 
     <main>
-        <ivy-collapse :model-value="value">
-            <ivy-collapse-item header="史蒂夫·乔布斯">
-                <div>
-                    史蒂夫·乔布斯（Steve
-                    Jobs），1955年2月24日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。
-                </div>
-            </ivy-collapse-item>
-            <ivy-collapse-item header="盖瑞·沃兹尼亚克">
-                <div>
-                    斯蒂夫·盖瑞·沃兹尼亚克（Stephen Gary
-                    Wozniak），美国电脑工程师，曾与史蒂夫·乔布斯合伙创立苹果电脑（今之苹果公司）。斯蒂夫·盖瑞·沃兹尼亚克曾就读于美国科罗拉多大学，后转学入美国著名高等学府加州大学伯克利分校（UC
-                    Berkeley）并获得电机工程及计算机（EECS）本科学位（1987年）。
-                </div>
-            </ivy-collapse-item>
-            <ivy-collapse-item header="乔纳森·伊夫">
-                <div>
-                    乔纳森·伊夫是一位工业设计师，现任Apple公司设计师兼资深副总裁，英国爵士。他曾参与设计了iPod，iMac，iPhone，iPad等众多苹果产品。除了乔布斯，他是对苹果那些著名的产品最有影响力的人。
-                </div>
-            </ivy-collapse-item>
-        </ivy-collapse>
-        <ivy-details>
-            发大水发射点加拉开始减肥了静安寺打飞机啊圣诞节是大家附近的是放假啦圣诞节分厘卡静安寺大家法术等级受到激发教师砥砺奋进四点九六精神独立解放昆仑山大家拉萨到家乐福计算定积分撒旦解放螺丝钉了法撒旦解放圣诞节乐山大佛大师傅
-        </ivy-details>
-        <ivy-details summary="这是标题">
-            发大水发射点加拉开始减肥了静安寺打飞机啊圣诞节是大家附近的是放假啦圣诞节分厘卡静安寺大家法术等级受到激发教师砥砺奋进四点九六精神独立解放昆仑山大家拉萨到家乐福计算定积分撒旦解放螺丝钉了法撒旦解放圣诞节乐山大佛大师傅
-        </ivy-details>
+        <div style="margin-top: 24px">
+            <ivy-button>default</ivy-button>
+            <ivy-button type="primary">primary</ivy-button>
+            <ivy-button type="success">success</ivy-button>
+            <ivy-button type="warning">warning</ivy-button>
+            <ivy-button type="danger">danger</ivy-button>
+            <ivy-button type="info">info</ivy-button>
+        </div>
+        <div style="margin-top: 24px">
+            <ivy-button disabled>default</ivy-button>
+            <ivy-button type="primary" disabled>primary</ivy-button>
+            <ivy-button type="success" disabled>success</ivy-button>
+            <ivy-button type="warning" disabled>warning</ivy-button>
+            <ivy-button type="danger" disabled>danger</ivy-button>
+            <ivy-button type="info" disabled>info</ivy-button>
+        </div>
 
-        <details summary="这是标题">
-            发大水发射点加拉开始减肥了静安寺打飞机啊圣诞节是大家附近的是放假啦圣诞节分厘卡静安寺大家法术等级受到激发教师砥砺奋进四点九六精神独立解放昆仑山大家拉萨到家乐福计算定积分撒旦解放螺丝钉了法撒旦解放圣诞节乐山大佛大师傅
-        </details>
+        <div style="margin-top: 24px">
+            <ivy-button loading>default</ivy-button>
+            <ivy-button type="primary" loading>primary</ivy-button>
+            <ivy-button type="success" loading>success</ivy-button>
+            <ivy-button type="warning" loading>warning</ivy-button>
+            <ivy-button type="danger" loading>danger</ivy-button>
+            <ivy-button type="info" loading>info</ivy-button>
+        </div>
     </main>
 </template>
 
