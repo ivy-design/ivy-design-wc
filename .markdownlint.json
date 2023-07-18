@@ -1,0 +1,21 @@
+{
+  "default": true,
+  "MD007": { "indent": 4 },
+  "no-hard-tabs": false,
+  "MD013": { "line_length": 100 },
+  "MD030": { "ul_multi": 3, "ul_single": 3, "ol_multi": 1, "ol_single": 1 },
+  "MD033": {
+    "allowed_elements": [
+      "script",
+      "style",
+      "div",
+      "ClientOnly",
+      "ivy-button",
+      "br",
+      "span",
+      "el-icon",
+      "el-button",
+      "textarea"
+    ]
+  }
+}

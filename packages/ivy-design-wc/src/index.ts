@@ -1,6 +1,8 @@
 import { defineCustomElement } from 'vue'
 
-const components = import.meta.glob(['./**/*.ce.vue', '!./*.ce.vue'], { import: 'default' })
+const components = import.meta.glob(['./components/**/*.ce.vue', '!./*.ce.vue'], {
+    import: 'default'
+})
 
 function getComponents() {
     const map: { [x: string]: any } = {}
