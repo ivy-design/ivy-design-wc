@@ -6,6 +6,7 @@
   "MD030": { "ul_multi": 3, "ul_single": 3, "ol_multi": 1, "ol_single": 1 },
   "MD033": {
     "allowed_elements": [
+      "input",
       "script",
       "style",
       "div",
@@ -13,8 +14,10 @@
       "ivy-button",
       "br",
       "span",
-      "el-icon",
-      "el-button",
+      "ivy-space",
+      "ivy-collapse",
+      "ivy-collapse-item",
+      "ivy-divider",
       "textarea"
     ]
   }
