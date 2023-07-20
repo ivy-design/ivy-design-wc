@@ -26,6 +26,9 @@ export const Tooltip = comp.Tooltip
 export const Collapse = comp.Collapse
 export const CollapseItem = comp.CollapseItem
 export const Divider = comp.Divider
+export const Card = comp.Card
+export const Space = comp.Space
+export const Empty = comp.Empty
 
 // console.log(components)
 
