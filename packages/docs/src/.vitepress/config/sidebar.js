@@ -196,6 +196,10 @@ const components = [
                 text: "ContextMenu 右键菜单",
                 link: "/components/contentmenu",
             },
+            {
+                text: "Details 详情",
+                link: '/components/details'
+            }
         ],
     },
 ]
