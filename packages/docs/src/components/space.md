@@ -6,26 +6,37 @@
 
 最基础的用法，通过这个组件来给组件之间提供统一的间距。
 
-<div class="demo-block">
 <ivy-space>
     <ivy-button type="primary">新增</ivy-button>
     <ivy-button type="warning">编辑</ivy-button>
     <ivy-button type="danger">删除</ivy-button>
-123
 </ivy-space>
-</div>
+
+```html
+<ivy-space>
+    <ivy-button type="primary">新增</ivy-button>
+    <ivy-button type="warning">编辑</ivy-button>
+    <ivy-button type="danger">删除</ivy-button>
+</ivy-space>
+```
 
 ## 垂直布局
 
 使用 `vertical` 来控制布局的方式, 背后实际上是利用了 `flex-direction` 来控制.
 
-<div class="demo-block">
 <ivy-space vertical>
     <ivy-button type="primary">新增</ivy-button>
     <ivy-button type="warning">编辑</ivy-button>
     <ivy-button type="danger">删除</ivy-button>
 </ivy-space>
-</div>
+
+```html
+<ivy-space vertical>
+    <ivy-button type="primary">新增</ivy-button>
+    <ivy-button type="warning">编辑</ivy-button>
+    <ivy-button type="danger">删除</ivy-button>
+</ivy-space>
+```
 
 ## 控制间距的大小
 
