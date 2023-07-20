@@ -23,9 +23,9 @@ export const Button = comp.Button
 export const Grid = comp.Grid
 export const GridItem = comp.GridItem
 export const Tooltip = comp.Tooltip
-
 export const Collapse = comp.Collapse
 export const CollapseItem = comp.CollapseItem
+export const Divider = comp.Divider
 
 // console.log(components)
 

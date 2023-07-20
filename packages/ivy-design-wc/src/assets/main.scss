@@ -1,0 +1,92 @@
+$ivy-color-white: #fff !default;
+$ivy-color-primary: #409eff !default;
+$ivy-color-success: #67c23a !default;
+$ivy-color-warning: #e6a23c !default;
+$ivy-color-danger: #f56c6c !default;
+$ivy-color-info: #909399 !default;
+:root{
+  --ivy-color-white: #fff;
+  --ivy-color-black: #000;
+  --ivy-color-primary: #409eff;
+  --ivy-color-primary-light-1: mix($ivy-color-white, $ivy-color-primary, 10%);
+  --ivy-color-primary-light-2: mix($ivy-color-white, $ivy-color-primary, 20%);
+  --ivy-color-primary-light-3: mix($ivy-color-white, $ivy-color-primary, 30%);
+  --ivy-color-primary-light-4: mix($ivy-color-white, $ivy-color-primary, 40%);
+  --ivy-color-primary-light-5: mix($ivy-color-white, $ivy-color-primary, 50%);
+  --ivy-color-primary-light-6: mix($ivy-color-white, $ivy-color-primary, 60%);
+  --ivy-color-primary-light-7: mix($ivy-color-white, $ivy-color-primary, 70%);
+  --ivy-color-primary-light-8: mix($ivy-color-white, $ivy-color-primary, 80%);
+  --ivy-color-primary-light-9: mix($ivy-color-white, $ivy-color-primary, 90%);
+  --ivy-color-success: #67c23a;
+  --ivy-color-success-light-1: mix($ivy-color-white, $ivy-color-success, 10%);
+  --ivy-color-success-light-2: mix($ivy-color-white, $ivy-color-success, 20%);
+  --ivy-color-success-light-3: mix($ivy-color-white, $ivy-color-success, 30%);
+  --ivy-color-success-light-4: mix($ivy-color-white, $ivy-color-success, 40%);
+  --ivy-color-success-light-5: mix($ivy-color-white, $ivy-color-success, 50%);
+  --ivy-color-success-light-6: mix($ivy-color-white, $ivy-color-success, 60%);
+  --ivy-color-success-light-7: mix($ivy-color-white, $ivy-color-success, 70%);
+  --ivy-color-success-light-8: mix($ivy-color-white, $ivy-color-success, 80%);
+  --ivy-color-success-light-9: mix($ivy-color-white, $ivy-color-success, 90%);
+  --ivy-color-warning: #e6a23c;
+  --ivy-color-warning-light-1: mix($ivy-color-white, $ivy-color-warning, 10%);
+  --ivy-color-warning-light-2: mix($ivy-color-white, $ivy-color-warning, 20%);
+  --ivy-color-warning-light-3: mix($ivy-color-white, $ivy-color-warning, 30%);
+  --ivy-color-warning-light-4: mix($ivy-color-white, $ivy-color-warning, 40%);
+  --ivy-color-warning-light-5: mix($ivy-color-white, $ivy-color-warning, 50%);
+  --ivy-color-warning-light-6: mix($ivy-color-white, $ivy-color-warning, 60%);
+  --ivy-color-warning-light-7: mix($ivy-color-white, $ivy-color-warning, 70%);
+  --ivy-color-warning-light-8: mix($ivy-color-white, $ivy-color-warning, 80%);
+  --ivy-color-warning-light-9: mix($ivy-color-white, $ivy-color-warning, 90%);
+  --ivy-color-danger: #f56c6c;
+  --ivy-color-danger-light-1: mix($ivy-color-white, $ivy-color-danger, 10%);
+  --ivy-color-danger-light-2: mix($ivy-color-white, $ivy-color-danger, 20%);
+  --ivy-color-danger-light-3: mix($ivy-color-white, $ivy-color-danger, 30%);
+  --ivy-color-danger-light-4: mix($ivy-color-white, $ivy-color-danger, 40%);
+  --ivy-color-danger-light-5: mix($ivy-color-white, $ivy-color-danger, 50%);
+  --ivy-color-danger-light-6: mix($ivy-color-white, $ivy-color-danger, 60%);
+  --ivy-color-danger-light-7: mix($ivy-color-white, $ivy-color-danger, 70%);
+  --ivy-color-danger-light-8: mix($ivy-color-white, $ivy-color-danger, 80%);
+  --ivy-color-danger-light-9: mix($ivy-color-white, $ivy-color-danger, 90%);
+  --ivy-color-info: #909399;
+  --ivy-color-info-light-1: mix($ivy-color-white, $ivy-color-info, 10%);
+  --ivy-color-info-light-2: mix($ivy-color-white, $ivy-color-info, 20%);
+  --ivy-color-info-light-3: mix($ivy-color-white, $ivy-color-info, 30%);
+  --ivy-color-info-light-4: mix($ivy-color-white, $ivy-color-info, 40%);
+  --ivy-color-info-light-5: mix($ivy-color-white, $ivy-color-info, 50%);
+  --ivy-color-info-light-6: mix($ivy-color-white, $ivy-color-info, 60%);
+  --ivy-color-info-light-7: mix($ivy-color-white, $ivy-color-info, 70%);
+  --ivy-color-info-light-8: mix($ivy-color-white, $ivy-color-info, 80%);
+  --ivy-color-info-light-9: mix($ivy-color-white, $ivy-color-info, 90%);
+  --ivy-text-color-primary: #303133;
+  --ivy-text-color-regular: #606266;
+  --ivy-text-color-secondary: #909399;
+  --ivy-text-color-placeholder: #a8abb2;
+  --ivy-text-color-disabled: #c0c4cc;
+
+  --ivy-fill-color: #f0f2f5;
+  --ivy-fill-color-light: #f5f7fa;
+  --ivy-fill-color-lighter: #fafafa;
+  --ivy-fill-color-extra-light: #fafcff;
+
+  --ivy-border-color: #dcdfe6;
+  --ivy-border-color-light: #e4e7ed;
+  --ivy-border-color-lighter: #ebeef5;
+  --ivy-border-color-extra-light: #f2f6fc;
+  --ivy-shadow: drop-shadow(0 0 10px rgba(0, 0, 0, 0.15));
+  --ivy-font-size: 14px;
+  --ivy-font-size-small: 12px;
+
+  --ivy-timeline-node-size: 12px;
+  --ivy-timeline-node-size-large: 14px;
+
+  --ivy-border-radius: 4px;
+  --ivy-border-radius-medium: 8px;
+
+  --ivy-all-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ivy-fade-transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  --ivy-fade-linear-transition: opacity 200ms linear;
+  --ivy-md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) opacity
+  300ms cubic-bezier(0.23, 1, 0.32, 1);
+  --ivy-border-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ivy-color-transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
