@@ -1,27 +1,28 @@
 import { defineConfig } from "vitepress";
 
-// https://vitepress.dev/reference/site-config
+import sidebar from "./config/sidebar";
+import nav from "./config/nav";
+
 export default defineConfig({
   title: "ivy-design-wc",
   description: "使用 vue3 开发的web component组件库",
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: "Home", link: "/" },
-      { text: "组件", link: "/component/button" },
-    ],
-
-    sidebar: {
-      "/component/": [
-        {
-          text: "基础组件",
-          items: [{ text: "Button 按钮", link: "/component/button" }],
-        },
-      ],
-    },
-
+    nav,
+    sidebar,
+    outline: [2, 3],
+    outlineTitle: '章节目录',
     socialLinks: [
       { icon: "github", link: "https://github.com/vuejs/vitepress" },
     ],
+    search:{
+      provider: 'local'
+    }
   },
+  vue:{
+    template:{
+      compilerOptions:{
+        isCustomElement: tag => tag.startsWith('ivy-')
+      }
+    }
+  }
 });
