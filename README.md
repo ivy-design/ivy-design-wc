@@ -1,10 +1,8 @@
 # @ivy-design/wc
 
-This template should help get you started developing with Vue 3 in Vite.
+使用 vue3 构建的 web component 组件库
 
-
-
-## Project Setup
+## 参与开发
 
 ```sh
 pnpm install
@@ -28,27 +26,13 @@ pnpm build
 pnpm test:unit
 ```
 
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
+## 现有组件
 
-```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-pnpm build
-
-# Runs the end-to-end tests
-pnpm test:e2e
-# Runs the tests only on Chromium
-pnpm test:e2e --project=chromium
-# Runs the tests of a specific file
-pnpm test:e2e tests/example.spec.ts
-# Runs the tests in debug mode
-pnpm test:e2e --debug
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
-```
+|   组件名称   | 组件描述 |
+|:--------:|:----:|
+|  Button  |  按钮  |
+|  Space   |  间隔  |
+| Collapse | 折叠面板 |
+| Divider  | 分割线  |
+|   Card   |  卡片  |
+|   Grid   |  宫格  |
