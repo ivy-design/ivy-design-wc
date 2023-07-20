@@ -36,3 +36,4 @@ pnpm test:unit
 | Divider  | 分割线  |
 |   Card   |  卡片  |
 |   Grid   |  宫格  |
+|  Empty   | 空状态  |
