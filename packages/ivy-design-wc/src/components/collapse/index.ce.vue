@@ -5,7 +5,7 @@ import useIndex from '@/use/useIndex'
 export default defineComponent({
     name: `Collapse`,
     props: {
-        modelValue: [String, Number, Array],
+        active: [String, Array],
         accordion: Boolean,
         arrow: {
             type: String,
@@ -14,16 +14,16 @@ export default defineComponent({
             }
         }
     },
-    emits: ['update:modelValue'],
+    emits: ['change'],
     setup(props, { emit }) {
         const value: any = ref(null)
         onMounted(() => {
-            if (!props.modelValue) {
+            if (!props.active) {
                 value.value = props.accordion ? null : []
             } else {
                 value.value = props.accordion
-                    ? props.modelValue
-                    : (props.modelValue as string).split(',')
+                    ? props.active
+                    : (props.active as string).split(',')
             }
         })
 
@@ -38,7 +38,7 @@ export default defineComponent({
         provide('update', (index: any) => {
             if (props.accordion) {
                 value.value = value.value === index ? null : index
-                emit('update:modelValue', value.value)
+                emit('change', value.value)
             } else {
                 const has = (value.value as Array<any>).includes(index)
                 if (has) {
@@ -46,7 +46,7 @@ export default defineComponent({
                 } else {
                     value.value = [...(value.value as Array<any>), index]
                 }
-                emit('update:modelValue', value.value)
+                emit('change', value.value)
             }
         })
 
@@ -62,10 +62,13 @@ export default defineComponent({
 <style lang="scss">
 :host {
     display: block;
+    --ivy-collapse-header-bg-color: #f7f7f7;
+    --ivy-collapse-border-color: #dcdee2;
+    --ivy-collapse-color: #666666;
 }
 .ivy-collapse {
-    background-color: #f7f7f7;
+    background-color: var(--ivy-collapse-header-bg-color);
     border-radius: 4px;
-    border: 1px solid #dcdee2;
+    border: 1px solid var(--ivy-collapse-border-color);
 }
 </style>

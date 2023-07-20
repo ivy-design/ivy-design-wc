@@ -65,7 +65,7 @@ export default defineComponent({
 <style lang="scss">
 :host {
     display: block;
-    border-top: 1px solid #dcdee2;
+    border-top: 1px solid var(--ivy-collapse-border-color);
 }
 :host(:first-child) {
     border-top: none;
@@ -76,7 +76,7 @@ export default defineComponent({
         height: 38px;
         line-height: 38px;
         padding-left: 16px;
-        color: #666;
+        color: var(--ivy-collapse-color);
         cursor: pointer;
         position: relative;
         border-bottom: 1px solid transparent;

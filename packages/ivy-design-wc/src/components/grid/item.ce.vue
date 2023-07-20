@@ -1,5 +1,5 @@
 <script lang="tsx">
-import { defineComponent, ref, onMounted, type PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 
 export type IvyGridMode = 'grid' | 'flex'
 
@@ -14,7 +14,7 @@ export default defineComponent({
             }
         }
     },
-    setup(props, { slots }) {
+    setup() {
         return () => (
             <div class={['ivy-grid-item']}>
                 <slot></slot>

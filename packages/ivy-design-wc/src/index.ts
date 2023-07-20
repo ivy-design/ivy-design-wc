@@ -9,8 +9,7 @@ function getComponents() {
     for (const path in components) {
         const component = components[path]
         component().then((module: any) => {
-            const comp = defineCustomElement(module)
-            map[module.name] = comp
+            map[module.name] = defineCustomElement(module)
         })
     }
     return map
@@ -18,10 +17,15 @@ function getComponents() {
 
 const comp = getComponents()
 
+console.log(comp)
+
 export const Button = comp.Button
 export const Grid = comp.Grid
 export const GridItem = comp.GridItem
 export const Tooltip = comp.Tooltip
+
+export const Collapse = comp.Collapse
+export const CollapseItem = comp.CollapseItem
 
 // console.log(components)
 
