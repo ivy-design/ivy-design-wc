@@ -30,7 +30,7 @@
 
 ## 最大值
 
-可使用`max`自定义最大值,默认最大值为`99`。
+可使用 `max` 自定义最大值,默认最大值为 `99`。
 
 <ivy-badge value="100">
     <ivy-button>评论</ivy-button>
@@ -128,11 +128,11 @@
 
 ## Attributes
 
-| 属性名 | 描述 | 类型 | 可选值 | 默认值 |
-|-|-|-|-|-|
-|value|数量，输入非数字类型的字符串时显示汉字|string|||
-|max|最大值|string||`99`|
-|type|类型|string|`primary/success/warning/error/info`|`error`|
+| 属性名 | 描述 | 类型 | 可选值                           | 默认值     |
+|-|-|-|--------------------------------------|---------|
+|value|数量，输入非数字类型的字符串时显示汉字|string| -   | -       |
+|max|最大值|string| -                                | `99`    |
+|type|类型|string| `primary/success/warning/danger/info` | `danger` |
 
 <style scoped>
 .ml-40{
