@@ -34,6 +34,7 @@ export const TimelineItem = comp.TimelineItem
 export const Breadcrumb = comp.Breadcrumb
 export const BreadcrumbItem = comp.BreadcrumbItem
 export const Tag = comp.Tag
+export const Badge = comp.Badge
 
 // console.log(components)
 
