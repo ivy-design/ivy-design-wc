@@ -12,24 +12,6 @@
 <ivy-tag type="info">info</ivy-tag>
 
 
-## 自定义颜色
-
-通过`type`属性来设置主题,默认颜色有 5 中-`primary`、`success`、`warning`、`error`、`info`
-
-<ivy-tag type="#008000">#008000</ivy-tag>
-<ivy-tag type="#67C23A">#67C23A</ivy-tag>
-<ivy-tag type="#E6A23C">#E6A23C</ivy-tag>
-<ivy-tag type="#F56C6C">#F56C6C</ivy-tag>
-<ivy-tag type="#909399">#909399</ivy-tag>
-
-```html
-<ivy-tag type="#008000">#008000</ivy-tag>
-<ivy-tag type="#67C23A">#67C23A</ivy-tag>
-<ivy-tag type="#E6A23C">#E6A23C</ivy-tag>
-<ivy-tag type="#F56C6C">#F56C6C</ivy-tag>
-<ivy-tag type="#909399">#909399</ivy-tag>
-```
-
 ## theme
 
 通过`theme`属性来设置主题,一共有三种`plain`、`dark`、`default`,其中`default`是默认的不用写
@@ -66,11 +48,11 @@ dark：
 
 ## Size 大小
 
-通过`size`属性来设置主题,一共有四种`mini`、`small`、`medium`、`default`,其中`default`是默认的不用写
+通过`size`属性来设置主题,一共有四种`mini`、`default`、`medium`、`large`,其中`default`是默认的不用写
 
-<ivy-tag>default</ivy-tag>
+<ivy-tag size="large">small</ivy-tag>
 <ivy-tag size="medium">medium</ivy-tag>
-<ivy-tag size="small">small</ivy-tag>
+<ivy-tag>default</ivy-tag>
 <ivy-tag size="mini">mini</ivy-tag>
 
 ```html
@@ -79,3 +61,33 @@ dark：
 <ivy-tag size="small">small</ivy-tag>
 <ivy-tag size="mini">mini</ivy-tag>
 ```
+
+## 自定义颜色
+
+通过 css 变量可以自定义颜色
+
+<ivy-tag style="--ivy-tag-color: #008000;--ivy-tag-border-color: red; --ivy-tag-bg-color: white;">#008000</ivy-tag>
+
+```html
+<ivy-tag style="--ivy-tag-color: #008000;--ivy-tag-border-color: red; --ivy-tag-bg-color: white;">#008000</ivy-tag>
+```
+
+## 可用的 CSS 变量
+
+:::details 点击打开
+```css
+:host {
+    --ivy-tag-color: var(--ivy-color-primary, #409eff);
+    --ivy-tag-border-color: var(--ivy-color-primary-light-8, #d9ecff);
+    --ivy-tag-bg-color: var(--ivy-color-primary-light-9, #ecf5ff);
+}
+```
+:::
+
+## props
+
+| 属性名     | 说明  | 可选值                            | 默认值       |
+|---------|-----|---------------------------------------|-----------|
+| type    | 类型  | `primary/success/warning/danger/info` | `primary` |
+| theme   | 主题  | `plain/dark`                          | -         |
+| size    | 大小  | `mini/small/medium/large`             | `small`   |
