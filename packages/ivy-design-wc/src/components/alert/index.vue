@@ -92,7 +92,6 @@ export default defineComponent({
 }
 .ivy-alert {
     display: flex;
-    align-items: var(--ivy-alert-icon-align, flex-start);
     padding: 10px 20px;
     border-radius: var(--ivy-alert-border-radius);
     font-size: var(--ivy-alert-font-size);

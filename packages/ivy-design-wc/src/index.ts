@@ -33,6 +33,7 @@ export const Timeline = comp.Timeline
 export const TimelineItem = comp.TimelineItem
 export const Breadcrumb = comp.Breadcrumb
 export const BreadcrumbItem = comp.BreadcrumbItem
+export const Tag = comp.Tag
 
 // console.log(components)
 
