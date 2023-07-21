@@ -28,13 +28,14 @@ pnpm test:unit
 
 ## 现有组件
 
-| 组件名称 | 组件描述 |
-| :------: | :------: |
-|  Button  |   按钮   |
-|  Space   |   间隔   |
-| Collapse | 折叠面板 |
+| 组件名称 | 组件描述  |
+| :------: |:-----:|
+|  Button  |  按钮   |
+|  Space   |  间隔   |
+| Collapse | 折叠面板  |
 | Divider  |  分割线  |
-|   Card   |   卡片   |
-|   Grid   |   宫格   |
+|   Card   |  卡片   |
+|   Grid   |  宫格   |
 |  Empty   |  空状态  |
 | Timeline |  时间轴  |
+| Breadcrumb | 面包屑导航 |
