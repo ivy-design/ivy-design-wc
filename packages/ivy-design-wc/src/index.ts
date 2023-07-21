@@ -29,6 +29,11 @@ export const Divider = comp.Divider
 export const Card = comp.Card
 export const Space = comp.Space
 export const Empty = comp.Empty
+export const Timeline = comp.Timeline
+export const TimelineItem = comp.TimelineItem
+export const Breadcrumb = comp.Breadcrumb
+export const BreadcrumbItem = comp.BreadcrumbItem
+export const Tag = comp.Tag
 
 // console.log(components)
 
