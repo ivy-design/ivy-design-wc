@@ -40,11 +40,11 @@
 </ivy-row>
 ```
 
-## 间隔
+<!-- ## 间隔
 
 通过`Gutter`设置 col 组件之间的间隔
 
-<ivy-row gutter="10" class="grid-row">
+<ivy-row gap="10" class="grid-row">
     <ivy-col span="6" class="grid-item">6</ivy-col>
     <ivy-col span="6" class="grid-item">6</ivy-col>
     <ivy-col span="6" class="grid-item">6</ivy-col>
@@ -58,7 +58,7 @@
   <ivy-col span="6">6</ivy-col>
   <ivy-col span="6" style="background-color: #67C23A;">6</ivy-col>
 </ivy-row>
-```
+``` -->
 
 ## 偏移量
 
@@ -77,6 +77,13 @@
   <ivy-col span="8">8</ivy-col>
 </ivy-row>
 ```
+
+## Col Props
+
+| 属性名 | 说明           | 可选值 | 默认值 |
+| ------ | -------------- | ------ | ------ |
+| span   | 占有的列数     | -      | `24`   |
+| offset | 向右偏移的列数 | -      | `0`    |
 
 <style scoped>
 .grid-item {

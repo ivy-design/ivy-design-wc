@@ -26,7 +26,6 @@ const props = defineProps({
 })
 
 const value = computed(() => {
-  console.log(props.value, props.max)
   if (props.isDot) {
     return ""
   }
