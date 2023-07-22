@@ -43,3 +43,4 @@ pnpm test:unit
 |   Badge    |       徽章 |
 |    Row     |         行 |
 |    Col     |         列 |
+|   Result   |       结果 |
