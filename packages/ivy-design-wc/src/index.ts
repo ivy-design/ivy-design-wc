@@ -35,6 +35,8 @@ export const Breadcrumb = comp.Breadcrumb
 export const BreadcrumbItem = comp.BreadcrumbItem
 export const Tag = comp.Tag
 export const Badge = comp.Badge
+export const Row = comp.Row
+export const Col = comp.Col
 
 // console.log(components)
 
