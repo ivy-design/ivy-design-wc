@@ -5,7 +5,7 @@ defineOptions({
 </script>
 
 <template>
-    <slot></slot>
+    <slot style="gap: 24px"></slot>
 </template>
 
 <style lang="scss">
