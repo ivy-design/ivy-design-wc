@@ -38,6 +38,7 @@ export const Badge = comp.Badge
 export const Row = comp.Row
 export const Col = comp.Col
 export const Result = comp.Result
+export const Progress = comp.Progress
 
 // console.log(components)
 
