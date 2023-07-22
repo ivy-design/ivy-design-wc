@@ -18,13 +18,13 @@
 
 ```html
 <ivy-badge value="12">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="10" class="ml-40">
-    <ivy-button>踩</ivy-button>
+  <ivy-button>踩</ivy-button>
 </ivy-badge>
 <ivy-badge value="22" class="ml-40">
-    <ivy-button>点赞</ivy-button>
+  <ivy-button>点赞</ivy-button>
 </ivy-badge>
 ```
 
@@ -41,10 +41,10 @@
 
 ```html
 <ivy-badge value="100">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="100" max="10" class="ml-40">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 ```
 
@@ -61,10 +61,10 @@
 
 ```html
 <ivy-badge value="new">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="hot" class="ml-40">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 ```
 
@@ -81,16 +81,16 @@
 
 ```html
 <ivy-badge is-dot>
-    <ivy-icon name="chat-dot-round"></ivy-icon>
+  <ivy-icon name="chat-dot-round"></ivy-icon>
 </ivy-badge>
 <ivy-badge is-dot class="ml-40">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 ```
 
 ## 类型
 
-支持5中类型，`primary`、`success`、`warning`、`error`、`info`；默认是`error`、
+支持 5 中类型，`primary`、`success`、`warning`、`error`、`info`；默认是`error`、
 
 <ivy-badge value="12">
     <ivy-button>评论</ivy-button>
@@ -110,29 +110,29 @@
 
 ```html
 <ivy-badge value="12">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="12" type="primary" class="ml-40">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="12" type="success" class="ml-40">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="12" type="warning" class="ml-40">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="12" type="info" class="ml-40">
-    <ivy-button>评论</ivy-button>
+  <ivy-button>评论</ivy-button>
 </ivy-badge>
 ```
 
-## Attributes
+## Props
 
-| 属性名 | 描述 | 类型 | 可选值                           | 默认值     |
-|-|-|-|--------------------------------------|---------|
-|value|数量，输入非数字类型的字符串时显示汉字|string| -   | -       |
-|max|最大值|string| -                                | `99`    |
-|type|类型|string| `primary/success/warning/danger/info` | `danger` |
+| 属性名 | 描述                                   | 类型   | 可选值                                | 默认值   |
+| ------ | -------------------------------------- | ------ | ------------------------------------- | -------- |
+| value  | 数量，输入非数字类型的字符串时显示汉字 | string | -                                     | -        |
+| max    | 最大值                                 | string | -                                     | `99`     |
+| type   | 类型                                   | string | `primary/success/warning/danger/info` | `danger` |
 
 <style scoped>
 .ml-40{
