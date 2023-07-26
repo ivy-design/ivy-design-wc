@@ -39,6 +39,7 @@ export const Row = comp.Row
 export const Col = comp.Col
 export const Result = comp.Result
 export const Progress = comp.Progress
+export const Drawer = comp.Drawer
 
 // console.log(components)
 
