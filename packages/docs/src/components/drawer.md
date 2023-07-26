@@ -7,7 +7,7 @@
 <ivy-drawer id="drawer" header="Drawer标题"></ivy-drawer>
 
 ```html
-<ivy-button type="success" onclick="document.getElementById('drawer').open()">打开 Drawer</ivy-button>
+<ivy-button type="success" onclick="document.getElementById('drawer').open = true">打开 Drawer</ivy-button>
 
 <ivy-drawer id="drawer" header="Drawer标题"></ivy-drawer>
 ```
@@ -54,6 +54,6 @@
 
 <script setup>
 const click = (className)=>{
-    document.getElementById(className).open()
+    document.getElementById(className).open = true
 }
 </script>
