@@ -45,3 +45,5 @@ pnpm test:unit
 |    Col     |     列 |
 |   Result   |    结果 |
 |   Drawer   |    抽屉 |
+|   Input    |   输入框 |
+|    Tip     |    提示 |

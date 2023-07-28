@@ -40,6 +40,8 @@ export const Col = comp.Col
 export const Result = comp.Result
 export const Progress = comp.Progress
 export const Drawer = comp.Drawer
+export const Input = comp.Input
+export const Tip = comp.Tip
 
 // console.log(components)
 

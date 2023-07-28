@@ -30,27 +30,13 @@
 <ivy-input readonly style="width: 224px;"></ivy-input>
 ```
 
-## 前置图标和后置图标
+## Props
 
-通过设置 `prefix-icon` 属性来添加前置图标，通过设置 `suffix-icon` 属性来添加后置图标
-
-<ivy-input style="width: 224px;" prefix-icon="reading"></ivy-input>
-&nbsp;
-<ivy-input style="width: 224px;" suffix-icon="date"></ivy-input>
-&nbsp;
-<ivy-input style="width: 224px;" prefix-icon="reading" suffix-icon="date"></ivy-input>
-
-```html
-<ivy-input style="width: 224px;" prefix-icon="reading"></ivy-input>
-<ivy-input style="width: 224px;" suffix-icon="date"></ivy-input>
-<ivy-input style="width: 224px;" prefix-icon="reading" suffix-icon="date"></ivy-input>
-```
-
-<script setup>
-import { onMounted } from 'vue';
-onMounted(()=>{
-    document.getElementById('input1').addEventListener('change', ev=>{
-        console.log(ev, this.value)
-    })
-})
-</script>
+| 参数          | 说明 | 类型 | 可选值 | 默认值 |
+|-------------| --- | --- | --- | --- |
+| type        | 类型 | string | text, textarea, password, url, email, date, number | text |
+| value       | 绑定值 | string | - | - |
+| placeholder | 占位文本 | string | - | - |
+| disabled    | 是否禁用 | boolean | - | false |
+| readonly    | 是否只读 | boolean | - | false |
+| autoFocus   | 是否自动获取焦点 | boolean | - | false |
