@@ -128,6 +128,7 @@ onBeforeUnmount(() => {
 <style lang="scss">
 :host {
     --ivy-select-font-size: var(--ivy-font-size, 14px);
+    --ivy-select-height: 32px;
     display: block;
     position: relative;
 }
@@ -140,11 +141,10 @@ onBeforeUnmount(() => {
     box-sizing: border-box;
     color: #606266;
     display: inline-block;
-    font-size: inherit;
-    height: 34px;
-    line-height: 34px;
+    height: var(--ivy-select-height);
+    line-height: var(--ivy-select-height);
     outline: none;
-    padding: 0 15px;
+    padding: 0 12px;
     transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     width: 100%;
     font-size: var(--ivy-font-size, 14px);
@@ -187,22 +187,21 @@ onBeforeUnmount(() => {
     position: absolute;
     width: 100%;
     min-width: 240px;
-    padding-top: 1px;
     left: 0;
-    top: 40px;
+    top: calc(var(--ivy-select-height) + 2px);
     border-radius: 2px;
     overflow: hidden;
     z-index: 10;
 }
 
 .select-option-scroll {
-    overflow: auto;
-    overflow: overlay;
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: #fff;
     max-height: 274px;
     border-radius: 4px;
     border: 1px solid var(--ivy-border-color, #dcdfe6);
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: var(--ivy-box-shadow, 0px 12px 32px 4px rgba(0, 0, 0, .04), 0px 8px 20px rgba(0, 0, 0, .08));
 }
 .select-option {
     margin: 6px 0;
