@@ -44,6 +44,7 @@ export const Input = comp.Input
 export const Tip = comp.Tip
 export const Select = comp.Select
 export const Option = comp.Option
+export const Loading = comp.Loading
 
 // console.log(components)
 
