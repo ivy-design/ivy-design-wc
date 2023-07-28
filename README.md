@@ -47,3 +47,4 @@ pnpm test:unit
 |   Drawer   |    抽屉 |
 |   Input    |   输入框 |
 |    Tip     |    提示 |
+|   Select   |  下拉选择 |
