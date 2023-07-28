@@ -168,6 +168,10 @@ const components = [
                 text: "Result 结果",
                 link: "/components/result",
             },
+            {
+                text: "Loading 加载",
+                link: "/components/loading",
+            },
         ],
     },
     {
