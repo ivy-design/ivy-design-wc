@@ -4,7 +4,7 @@ import { ref } from 'vue'
  ***/
 export const useHostElement = () => {
     const el = ref<HTMLElement | null>(null)
-    const getHostElement = () => (el.value.parentNode as ShadowRoot).host
+    const getHostElement = () => ((el.value as HTMLElement).parentNode as ShadowRoot).host
     return {
         el,
         getHostElement

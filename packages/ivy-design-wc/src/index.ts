@@ -42,6 +42,8 @@ export const Progress = comp.Progress
 export const Drawer = comp.Drawer
 export const Input = comp.Input
 export const Tip = comp.Tip
+export const Select = comp.Select
+export const Option = comp.Option
 
 // console.log(components)
 
