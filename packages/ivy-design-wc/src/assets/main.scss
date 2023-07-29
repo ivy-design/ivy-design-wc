@@ -72,7 +72,11 @@ $ivy-color-info: #909399 !default;
   --ivy-border-color-light: #e4e7ed;
   --ivy-border-color-lighter: #ebeef5;
   --ivy-border-color-extra-light: #f2f6fc;
-  --ivy-shadow: drop-shadow(0 0 10px rgba(0, 0, 0, 0.15));
+  --ivy-shadow: 0px 12px 32px 4px rgba(0, 0, 0, .04), 0px 8px 20px rgba(0, 0, 0, .08);
+  --ivy-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, .04), 0px 8px 20px rgba(0, 0, 0, .08);
+  --ivy-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, .12);
+  --ivy-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, .12);
+  --ivy-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, .08), 0px 12px 32px rgba(0, 0, 0, .12), 0px 8px 16px -8px rgba(0, 0, 0, .16);
   --ivy-font-size: 14px;
   --ivy-font-size-small: 12px;
 
