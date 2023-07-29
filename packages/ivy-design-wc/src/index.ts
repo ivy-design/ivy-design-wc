@@ -45,6 +45,8 @@ export const Tip = comp.Tip
 export const Select = comp.Select
 export const Option = comp.Option
 export const Loading = comp.Loading
+export const Details = comp.Details
+export const Dialog = comp.Dialog
 
 // console.log(components)
 
