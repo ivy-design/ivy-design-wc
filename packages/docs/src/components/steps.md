@@ -5,18 +5,18 @@
 只设置时间和描述
 
 <ivy-steps :active="active">
-    <ivy-step  title="验证手机号"></ivy-step>
-    <ivy-step title="修改密码"></ivy-step>
-    <ivy-step title="完成"></ivy-step>
+    <ivy-step  header="验证手机号"></ivy-step>
+    <ivy-step header="修改密码"></ivy-step>
+    <ivy-step header="完成"></ivy-step>
 </ivy-steps>
 
 <ivy-button @click="next">Next</ivy-button >
 
 ```html
 <ivy-steps>
-    <ivy-step  title="验证手机号"></ivy-step>
-    <ivy-step title="修改密码"></ivy-step>
-    <ivy-step title="完成"></ivy-step>
+    <ivy-step  header="验证手机号"></ivy-step>
+    <ivy-step header="修改密码"></ivy-step>
+    <ivy-step header="完成"></ivy-step>
 </ivy-steps>
 ```
 
@@ -24,17 +24,17 @@
 
 可以在标题下方增加描述性文字
 
-<ivy-steps :active="active">
-    <ivy-step  title="验证手机号">验证手机号是否正确</ivy-step>
-    <ivy-step title="修改密码">设置新密码</ivy-step>
-    <ivy-step title="完成">修改完成</ivy-step>
+<ivy-steps current="2">
+    <ivy-step  header="验证手机号">验证手机号是否正确</ivy-step>
+    <ivy-step header="修改密码">设置新密码</ivy-step>
+    <ivy-step header="完成">修改完成</ivy-step>
 </ivy-steps>
 
 ```html
 <ivy-steps :active="active">
-    <ivy-step  title="验证手机号">验证手机号是否正确</ivy-step>
-    <ivy-step title="修改密码">设置新密码</ivy-step>
-    <ivy-step title="完成">修改完成</ivy-step>
+    <ivy-step  header="验证手机号">验证手机号是否正确</ivy-step>
+    <ivy-step header="修改密码">设置新密码</ivy-step>
+    <ivy-step header="完成">修改完成</ivy-step>
 </ivy-steps>
 ```
 
