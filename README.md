@@ -52,3 +52,20 @@ pnpm test:unit
 |  Details   | 详情-同原生的 `details` 标签 |
 |  Progress  |                  进度条 |
 |   Dialog   |                   弹框 |
+|  Dropdown  |                 下拉菜单 |
+
+## 代办
+
+|     组件名称     | 组件描述 |
+|:------------:|:----:|
+|     tabs     | 标签页  |
+|    radio     | 单选框  |
+|   checkbox   | 多选框  |
+|    image     |  图片  |
+|     step     | 步骤条  |
+|   message    | 消息提醒 |
+| notification | 通知框  |
+|    table     |  表格  |
+|    switch    |  开关  |
+|     rate     |  评分  |
+|    split     | 分割面板 |
