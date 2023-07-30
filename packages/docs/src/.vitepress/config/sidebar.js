@@ -186,6 +186,10 @@ const components = [
         text: "Steps 步骤条",
         link: "/components/steps",
       },
+      {
+        text: "Dropdown 下拉菜单",
+        link: "/components/dropdown",
+      },
     ],
   },
   {

@@ -47,6 +47,9 @@ export const Option = comp.Option
 export const Loading = comp.Loading
 export const Details = comp.Details
 export const Dialog = comp.Dialog
+export const Dropdown = comp.Dropdown
+export const DropdownMenu = comp.DropdownMenu
+export const DropdownItem = comp.DropdownItem
 
 // console.log(components)
 
