@@ -17,8 +17,6 @@ function getComponents() {
 
 const comp = getComponents()
 
-console.log(comp)
-
 export const Button = comp.Button
 export const Grid = comp.Grid
 export const GridItem = comp.GridItem
@@ -65,5 +63,35 @@ export const registerComponents = (prefix = 'Ivy') => {
             })
             customElements.define(name.join('-'), comp)
         })
+    }
+}
+
+declare module 'vue' {
+    export interface GlobalComponents {
+        Button: typeof comp.Button
+        Grid: typeof comp.Grid
+        GridItem: typeof comp.GridItem
+        Tooltip: typeof comp.Tooltip
+        Collapse: typeof comp.Collapse
+        CollapseItem: typeof comp.CollapseItem
+        Divider: typeof comp.Divider
+        Card: typeof comp.Card
+        Space: typeof comp.Space
+        Empty: typeof comp.Empty
+        Timeline: typeof comp.Timeline
+        TimelineItem: typeof comp.TimelineItem
+        Breadcrumb: typeof comp.Breadcrumb
+        BreadcrumbItem: typeof comp.BreadcrumbItem
+        Tag: typeof comp.Tag
+        Badge: typeof comp.Badge
+        Row: typeof comp.Row
+        Col: typeof comp.Col
+        Result: typeof comp.Result
+        Progress: typeof comp.Progress
+        Drawer: typeof comp.Drawer
+        Input: typeof comp.Input
+        Tip: typeof comp.Tip
+        Select: typeof comp.Select
+        Option: typeof comp.Option
     }
 }
