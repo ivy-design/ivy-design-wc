@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onBeforeUnmount, onMounted, ref, Transition } from 'vue'
+import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useHostElement } from '@/use/useHostElement'
 
 const { el, getHostElement } = useHostElement()
@@ -201,7 +201,11 @@ onBeforeUnmount(() => {
     max-height: 274px;
     border-radius: 4px;
     border: 1px solid var(--ivy-border-color, #dcdfe6);
-    box-shadow: var(--ivy-box-shadow, 0px 12px 32px 4px rgba(0, 0, 0, .04), 0px 8px 20px rgba(0, 0, 0, .08));
+    box-shadow: var(
+        --ivy-box-shadow,
+        0px 12px 32px 4px rgba(0, 0, 0, 0.04),
+        0px 8px 20px rgba(0, 0, 0, 0.08)
+    );
 }
 .select-option {
     margin: 6px 0;

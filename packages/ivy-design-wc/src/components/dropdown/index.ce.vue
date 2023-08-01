@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Transition, onBeforeUnmount, onMounted } from 'vue'
+import { ref, onBeforeUnmount, onMounted } from 'vue'
 import { useHostElement } from '@/use/useHostElement'
 
 defineOptions({
