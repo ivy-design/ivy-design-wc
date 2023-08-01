@@ -54,6 +54,7 @@ pnpm test:unit
 |   Dialog   |                   弹框 |
 |  Dropdown  |                 下拉菜单 |
 |   Steps    |                  步骤条 |
+|   Switch   |                   开关 |
 
 ## 代办
 
@@ -66,6 +67,5 @@ pnpm test:unit
 |   message    | 消息提醒 |
 | notification | 通知框  |
 |    table     |  表格  |
-|    switch    |  开关  |
 |     rate     |  评分  |
 |    split     | 分割面板 |
