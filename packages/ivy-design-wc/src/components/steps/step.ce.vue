@@ -95,21 +95,21 @@ const props = defineProps({
 :host(:last-child) .step-line {
     display: none;
 }
-:host(.is-process) .step-icon {
+:host([status='process']) .step-icon {
     border-color: rgba(0, 102, 255, 1);
     color: rgba(0, 102, 255, 1);
 }
-:host(.is-process) .step-title {
+:host([status='process']) .step-title {
     color: rgba(32, 44, 61, 1);
 }
-:host(.is-finish) .step-line {
+:host([status='finish']) .step-line {
     background-color: rgba(0, 102, 255, 1);
 }
-:host(.is-finish) .step-title {
+:host([status='finish']) .step-title {
     border-color: rgba(0, 102, 255, 1);
     color: rgba(0, 102, 255, 1);
 }
-:host(.is-finish) .step-icon {
+:host([status='finish']) .step-icon {
     background-color: rgba(0, 102, 255, 1);
     border-color: rgba(0, 102, 255, 1);
     color: white;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, provide, toRef } from 'vue'
+import { onMounted, watch, toRef } from 'vue'
 import { useHostElement } from '@/use/useHostElement'
 
 defineOptions({
@@ -16,11 +16,9 @@ const props = defineProps({
 
 const currentIndex = toRef(props, 'current')
 
-const { el, getHostElement } = useHostElement()
+const { el } = useHostElement()
 const init = () => {
-    const children = el.value
-        .assignedElements()
-        .filter((c: HTMLElement) => c.tagName === 'IVY-STEP')
+    let children = el.value.assignedElements().filter((c: HTMLElement) => c.tagName === 'IVY-STEP')
     const current = parseInt(props.current)
     children.forEach((el: any, index: Number) => {
         el.index = index + 1
@@ -33,6 +31,9 @@ const init = () => {
         }
     })
 }
+watch(currentIndex, () => {
+    init()
+})
 onMounted(() => {
     init()
 })
