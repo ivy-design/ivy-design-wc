@@ -50,6 +50,7 @@ export const DropdownMenu = comp.DropdownMenu
 export const DropdownItem = comp.DropdownItem
 export const Steps = comp.Steps
 export const Step = comp.Step
+export const Switch = comp.Switch
 
 // console.log(components)
 
