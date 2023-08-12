@@ -10,3 +10,5 @@ export const useHostElement = () => {
         getHostElement
     }
 }
+
+export default useHostElement
