@@ -20,7 +20,9 @@
       "ivy-divider",
       "textarea",
       "ivy-radio",
-      "ivy-radio-group"
+      "ivy-radio-group",
+      "ivy-checkbox",
+      "ivy-checkbox-group"
     ]
   }
 }

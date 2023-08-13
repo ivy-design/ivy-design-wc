@@ -32,15 +32,37 @@
 ## 配合`ivy-checkbox-group`使用
 
 <ivy-checkbox-group onchange="console.log(this.value)">
-    <ivy-checkbox value="1" checked>苹果</ivy-checkbox>
-    <ivy-checkbox value="2">橘子</ivy-checkbox>
-    <ivy-checkbox value="3">香蕉</ivy-checkbox>
+    <ivy-checkbox label="1" checked>苹果</ivy-checkbox>
+    <ivy-checkbox label="2">橘子</ivy-checkbox>
+    <ivy-checkbox label="3">香蕉</ivy-checkbox>
 </ivy-checkbox-group>
 
 ```html
 <ivy-checkbox-group onchange="console.log(this.value)">
-    <ivy-checkbox value="1" checked>苹果</ivy-checkbox>
-    <ivy-checkbox value="2">橘子</ivy-checkbox>
-    <ivy-checkbox value="3">香蕉</ivy-checkbox>
+  <ivy-checkbox label="1" checked>苹果</ivy-checkbox>
+  <ivy-checkbox label="2">橘子</ivy-checkbox>
+  <ivy-checkbox label="3">香蕉</ivy-checkbox>
 </ivy-checkbox-group>
 ```
+
+## Checkbox Props
+
+| Prop       | 描述                                    | 类型                      | 可选值 | 默认值  |
+| ---------- | --------------------------------------- | ------------------------- | ------ | ------- |
+| label      | 选中后的值，在配合 CheckboxGroup 时可用 | _string\|number\|boolean_ | -      | `false` |
+| trueLabel  | 选中的值                                | _string_                  | -      | -       |
+| falseLabel | 未选中的值                              | _string_                  | -      | -       |
+| disabled   | 是否禁用                                | _boolean_                 | -      | `false` |
+| checked    | 选中                                    | _boolean_                 | -      | `false` |
+
+## Checkbox Group Props
+
+| Prop     | 描述     | 类型      | 可选值 | 默认值  |
+| -------- | -------- | --------- | ------ | ------- |
+| disabled | 是否禁用 | _boolean_ | -      | `false` |
+
+## Checkbox Group Event
+
+| Event  | 描述             |
+| ------ | ---------------- |
+| change | 选中值改变时触发 |
