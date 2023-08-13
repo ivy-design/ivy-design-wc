@@ -56,13 +56,13 @@ pnpm test:unit
 |   Steps    |                       步骤条 |
 |   Switch   |                         开关 |
 |   radio    |                       单选框 |
+|  checkbox  |                       多选框 |
 
 ## 代办
 
 |   组件名称   | 组件描述 |
 | :----------: | :------: |
 |     tabs     |  标签页  |
-|   checkbox   |  多选框  |
 |    image     |   图片   |
 |   message    | 消息提醒 |
 | notification |  通知框  |

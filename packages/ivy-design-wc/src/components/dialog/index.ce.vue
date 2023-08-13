@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Transition, watch } from 'vue'
+import { watch } from 'vue'
 import { useHostElement } from '@/use/useHostElement'
 
 defineOptions({
@@ -40,7 +40,7 @@ const emit = defineEmits(['sure', 'close', 'change'])
 
 const { el, getHostElement } = useHostElement()
 const handleClose = (type = 'close') => {
-    getHostElement().open = false
+    ;(getHostElement() as any).open = false
     emit('close', type)
 }
 
@@ -59,7 +59,7 @@ watch(
     (val) => {
         emit('change', val)
         if (val) {
-            el.value.focus()
+            el.value?.focus()
         }
     }
 )
@@ -83,14 +83,14 @@ watch(
                         class="ivy-modal-button ivy-modal-button-cancel"
                         @click="handleClose('cancel')"
                     >
-                        {{ props.sureText }}
+                        {{ props.cancelText }}
                     </button>
                     <button class="ivy-modal-button ivy-modal-button-primary" @click="handlerSure">
                         {{ props.sureText }}
                     </button>
                 </slot>
             </div>
-            <div class="ivy-modal-close" @click="handleClose"></div>
+            <div class="ivy-modal-close" @click="handleClose('close')"></div>
         </div>
     </transition>
 </template>
