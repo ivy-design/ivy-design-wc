@@ -51,6 +51,8 @@ export const DropdownItem = comp.DropdownItem
 export const Steps = comp.Steps
 export const Step = comp.Step
 export const Switch = comp.Switch
+export const Radio = comp.Radio
+export const RadioGroup = comp.RadioGroup
 
 // console.log(components)
 
@@ -96,5 +98,7 @@ declare module 'vue' {
         Tip: typeof comp.Tip
         Select: typeof comp.Select
         Option: typeof comp.Option
+        Radio: typeof comp.Radio
+        RadioGroup: typeof comp.RadioGroup
     }
 }

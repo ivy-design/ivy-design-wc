@@ -4,14 +4,14 @@
             <span class="ivy-radio-inner"></span>
         </span>
         <span class="ivy-radio-label">
-            <slot>{{ props.label }}</slot>
+            <slot></slot>
         </span>
     </div>
 </template>
 
 <script setup lang="ts">
 defineOptions({
-    name: 'radio'
+    name: 'Radio'
 })
 
 const props = defineProps({
@@ -19,10 +19,7 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    disabled: {
-        type: Boolean,
-        default: false
-    },
+    disabled: Boolean,
     checked: {
         type: Boolean,
         default: false
