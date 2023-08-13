@@ -18,7 +18,9 @@
       "ivy-collapse",
       "ivy-collapse-item",
       "ivy-divider",
-      "textarea"
+      "textarea",
+      "ivy-radio",
+      "ivy-radio-group"
     ]
   }
 }

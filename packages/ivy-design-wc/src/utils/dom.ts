@@ -65,3 +65,8 @@ export function removeClass(el: HTMLElement, cls: string) {
         el.className = trim(curClass)
     }
 }
+
+/**通过 tagName 获取指定元素下的元素 */
+export const getElementsByTagName = (el: HTMLElement, tagName: string) => {
+    return Array.from(el.querySelectorAll(tagName))
+}
