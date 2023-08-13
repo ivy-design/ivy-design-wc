@@ -53,6 +53,8 @@ export const Step = comp.Step
 export const Switch = comp.Switch
 export const Radio = comp.Radio
 export const RadioGroup = comp.RadioGroup
+export const Checkbox = comp.Checkbox
+export const CheckboxGroup = comp.CheckboxGroup
 
 // console.log(components)
 
@@ -100,5 +102,7 @@ declare module 'vue' {
         Option: typeof comp.Option
         Radio: typeof comp.Radio
         RadioGroup: typeof comp.RadioGroup
+        Checkbox: typeof comp.Checkbox
+        CheckboxGroup: typeof comp.CheckboxGroup
     }
 }
