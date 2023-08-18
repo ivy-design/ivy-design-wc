@@ -54,6 +54,10 @@ const components = [
         text: "Divider 分割线",
         link: "/components/divider",
       },
+      {
+        text: "AspectRatio 比例容器",
+        link: "/components/aspect-ratio",
+      },
     ],
   },
   {
