@@ -1,4 +1,3 @@
-import { IvyAspectRatio } from './components/ivy-aspect-ratio/ivy-aspect-ratio'
 import { defineCustomElement } from 'vue'
 
 const components = import.meta.glob(['./components/**/*.ce.vue', '!./*.ce.vue'], {
