@@ -1,3 +1,4 @@
+import { IvyAspectRatio } from './components/ivy-aspect-ratio/ivy-aspect-ratio'
 import { defineCustomElement } from 'vue'
 
 const components = import.meta.glob(['./components/**/*.ce.vue', '!./*.ce.vue'], {
@@ -55,6 +56,7 @@ export const Radio = comp.Radio
 export const RadioGroup = comp.RadioGroup
 export const Checkbox = comp.Checkbox
 export const CheckboxGroup = comp.CheckboxGroup
+export const AspectRatio = comp.AspectRatio
 
 // console.log(components)
 
@@ -100,9 +102,19 @@ declare module 'vue' {
         Tip: typeof comp.Tip
         Select: typeof comp.Select
         Option: typeof comp.Option
+        Loading: typeof comp.Loading
+        Details: typeof comp.Details
+        Dialog: typeof comp.Dialog
+        Dropdown: typeof comp.Dropdown
+        DropdownMenu: typeof comp.DropdownMenu
+        DropdownItem: typeof comp.DropdownItem
+        Steps: typeof comp.Steps
+        Step: typeof comp.Step
+        Switch: typeof comp.Switch
         Radio: typeof comp.Radio
         RadioGroup: typeof comp.RadioGroup
         Checkbox: typeof comp.Checkbox
         CheckboxGroup: typeof comp.CheckboxGroup
+        AspectRatio: typeof comp.AspectRatio
     }
 }
