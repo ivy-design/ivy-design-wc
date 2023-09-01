@@ -79,7 +79,7 @@ const handleDragEnd = (e: MouseEvent) => {
 
 /**单位是否为 px */
 const isPx = (val: string) => {
-    return val.endsWith('%')
+    return val.endsWith('px')
 }
 
 /**计算开始块的大小 */
