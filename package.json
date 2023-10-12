@@ -1,9 +1,10 @@
 {
-  "name": "wc",
+  "name": "root",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nx run-many -t dev",
     "docs:dev": "pnpm --filter docs run dev",
     "docs:build": "pnpm --filter docs run build",
     "docs:preview": "pnpm --filter docs run preview",
@@ -22,7 +23,8 @@
     "vue",
     "web-component",
     "webComponent",
-    "web component"
+    "web component",
+    "ivy-design"
   ],
   "pnpm": {
     "peerDependencyRules": {
@@ -32,5 +34,9 @@
     }
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nx": "16.10.0",
+    "nx-cloud": "latest"
+  }
 }
