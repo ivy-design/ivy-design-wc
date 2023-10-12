@@ -1,411 +1,415 @@
 # Icon 图标
 
-## 安装
-
-现在 `ivy-icon` 被抽离成了一个单独的 npm 包，现在使用时需要单独安装 `ivy-icon`
-
-```bash
-npm i ivy-icon
-```
-
-## 使用
-
-```js
-// 全量引入
-import { registerComponent} from 'ivy-icon'
-registerComponent()
-
-// 按需引入
-import { registerComponent as registerBackComponent } from 'ivy-icon/dist/es/back.js'
-registerBackComponent()
-```
-
 ## 基础用法
 
-通过`name`来设置不同的图标
+通过 `name` 来设置不同的图标
 
-<ivy-icon-download></ivy-icon-download>
-<ivy-icon-edit class="margin-left"></ivy-icon-edit>
-<ivy-icon-reading class="margin-left"></ivy-icon-reading>
+<ivy-icon name="download"></ivy-icon>
+<ivy-icon name="edit" class="margin-left"></ivy-icon>
+<ivy-icon name="reading" class="margin-left"></ivy-icon>
 
 ```html
-<ivy-icon-download></ivy-icon-download>
-<ivy-icon-edit class="margin-left"></ivy-icon-edit>
-<ivy-icon-reading class="margin-left"></ivy-icon-reading>
+<ivy-icon name="download"></ivy-icon>
+<ivy-icon name="edit" class="margin-left"></ivy-icon>
+<ivy-icon name="reading" class="margin-left"></ivy-icon>
 ```
 
 ## 旋转
 
-添加`spin`属性来使 icon 旋转
+添加 `spin` 属性来使 icon 旋转
 
-<ivy-icon-loading spin></ivy-icon-loading>
-<ivy-icon-refresh-right spin class="margin-left"></ivy-icon-refresh-right>
-<ivy-icon-refresh spin class="margin-left"></ivy-icon-refresh>
+<ivy-icon name="loading" spin></ivy-icon>
+<ivy-icon name="refresh-right" spin class="margin-left"></ivy-icon>
+<ivy-icon name="refresh" spin class="margin-left"></ivy-icon>
 
 ```html
-<ivy-icon-loading spin></ivy-icon-loading>
-<ivy-icon-refresh-right spin class="margin-left"></ivy-icon-refresh-right>
-<ivy-icon-refresh spin class="margin-left"></ivy-icon-refresh>
+<ivy-icon name="loading" spin></ivy-icon>
+<ivy-icon name="refresh-right" spin class="margin-left"></ivy-icon>
+<ivy-icon name="refresh" spin class="margin-left"></ivy-icon>
 ```
 
 ## 大小
 
-添加`size`属性来设置大小
+添加 `size` 属性和直接设置 css 来设置大小，`size` 属性的优先级高
 
-<ivy-icon-loading size="12px"></ivy-icon-loading>
-<ivy-icon-loading class="margin-left"></ivy-icon-loading>
-<ivy-icon-loading size="16px" class="margin-left"></ivy-icon-loading>
-<ivy-icon-loading size="18px" class="margin-left"></ivy-icon-loading>
-<ivy-icon-loading size="20px" class="margin-left"></ivy-icon-loading>
+<ivy-icon name="loading" size="12px"></ivy-icon>
+<ivy-icon name="loading" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" size="16px" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" size="18px" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" size="20px" class="margin-left"></ivy-icon>
 
 ```html
-<ivy-icon-loading size="12"></ivy-icon-loading>
-<ivy-icon-loading></ivy-icon-loading>
-<ivy-icon-loading size="16"></ivy-icon-loading>
-<ivy-icon-loading size="18"></ivy-icon-loading>
-<ivy-icon-loading size="20"></ivy-icon-loading>
+<ivy-icon name="loading" size="12px"></ivy-icon>
+<ivy-icon name="loading" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" size="16px" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" size="18px" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" size="20px" class="margin-left"></ivy-icon>
 ```
 
 ## 颜色
 
-添加`color`属性来设置颜色
+添加 `color` 属性和直接设置 css 来设置颜色，`size` 属性的优先级高
 
-<ivy-icon-loading></ivy-icon-loading>
-<ivy-icon-loading color="red" class="margin-left"></ivy-icon-loading>
-<ivy-icon-loading color="blue" class="margin-left"></ivy-icon-loading>
-<ivy-icon-loading color="pink" class="margin-left"></ivy-icon-loading>
-<ivy-icon-loading color="green" class="margin-left"></ivy-icon-loading>
+<ivy-icon name="loading"></ivy-icon>
+<ivy-icon name="loading" color="red" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" color="blue" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" color="pink" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" color="green" class="margin-left"></ivy-icon>
 
 ```html
-<ivy-icon-loading></ivy-icon-loading>
-<ivy-icon-loading color="red"></ivy-icon-loading>
-<ivy-icon-loading color="blue"></ivy-icon-loading>
-<ivy-icon-loading color="pink"></ivy-icon-loading>
-<ivy-icon-loading color="green"></ivy-icon-loading>
+<ivy-icon name="loading"></ivy-icon>
+<ivy-icon name="loading" color="red" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" color="blue" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" color="pink" class="margin-left"></ivy-icon>
+<ivy-icon name="loading" color="green" class="margin-left"></ivy-icon>
 ```
 
 ## Attrs
 
-| 属性名   | 说明   |类型| 可选值       | 默认值    |
-|-------|------|-|-----------|--------|
-| size  | 图标大小 |`string`| 合法的 css 单位 | `14px` |
-| color | 图标颜色 |`string`| 合法的颜色值    | -      |
+| 属性名 | 说明                      | 类型     | 可选值 | 默认值 |
+| ------ | ------------------------- | -------- | ------ | ------ |
+| size   | 图标大小，合法的 css 单位 | `string` | -      | -      |
+| color  | 图标颜色，合法的颜色值    | `string` | -      | -      |
+| name   | 图标名字                  | `string` | -      | -      |
 
 ## 所有 icon
 
-<div id="icons">
-<ivy-icon-edit size="20" style="margin: 10px;"></ivy-icon-edit>
-<ivy-icon-download size="20" style="margin: 10px;"></ivy-icon-download>
-<ivy-icon-coin size="20" style="margin: 10px;"></ivy-icon-coin>
-<ivy-icon-female size="20" style="margin: 10px;"></ivy-icon-female>
-<ivy-icon-edit-outline size="20" style="margin: 10px;"></ivy-icon-edit-outline>
-<ivy-icon-files size="20" style="margin: 10px;"></ivy-icon-files>
-<ivy-icon-film size="20" style="margin: 10px;"></ivy-icon-film>
-<ivy-icon-error size="20" style="margin: 10px;"></ivy-icon-error>
-<ivy-icon-eleme size="20" style="margin: 10px;"></ivy-icon-eleme>
-<ivy-icon-coffee size="20" style="margin: 10px;"></ivy-icon-coffee>
-<ivy-icon-folder-remove size="20" style="margin: 10px;"></ivy-icon-folder-remove>
-<ivy-icon-folder-checked size="20" style="margin: 10px;"></ivy-icon-folder-checked>
-<ivy-icon-folder-add size="20" style="margin: 10px;"></ivy-icon-folder-add>
-<ivy-icon-folder-delete size="20" style="margin: 10px;"></ivy-icon-folder-delete>
-<ivy-icon-football size="20" style="margin: 10px;"></ivy-icon-football>
-<ivy-icon-finished size="20" style="margin: 10px;"></ivy-icon-finished>
-<ivy-icon-folder size="20" style="margin: 10px;"></ivy-icon-folder>
-<ivy-icon-fork-spoon size="20" style="margin: 10px;"></ivy-icon-fork-spoon>
-<ivy-icon-first-aid-kit size="20" style="margin: 10px;"></ivy-icon-first-aid-kit>
-<ivy-icon-goblet-full size="20" style="margin: 10px;"></ivy-icon-goblet-full>
-<ivy-icon-food size="20" style="margin: 10px;"></ivy-icon-food>
-<ivy-icon-folder-opened size="20" style="margin: 10px;"></ivy-icon-folder-opened>
-<ivy-icon-full-screen size="20" style="margin: 10px;"></ivy-icon-full-screen>
-<ivy-icon-goblet-square-full size="20" style="margin: 10px;"></ivy-icon-goblet-square-full>
-<ivy-icon-goblet size="20" style="margin: 10px;"></ivy-icon-goblet>
-<ivy-icon-goblet-square size="20" style="margin: 10px;"></ivy-icon-goblet-square>
-<ivy-icon-goods size="20" style="margin: 10px;"></ivy-icon-goods>
-<ivy-icon-guide size="20" style="margin: 10px;"></ivy-icon-guide>
-<ivy-icon-help size="20" style="margin: 10px;"></ivy-icon-help>
-<ivy-icon-headset size="20" style="margin: 10px;"></ivy-icon-headset>
-<ivy-icon-house size="20" style="margin: 10px;"></ivy-icon-house>
-<ivy-icon-ice-cream-round size="20" style="margin: 10px;"></ivy-icon-ice-cream-round>
-<ivy-icon-hot-water size="20" style="margin: 10px;"></ivy-icon-hot-water>
-<ivy-icon-heavy-rain size="20" style="margin: 10px;"></ivy-icon-heavy-rain>
-<ivy-icon-ice-drink size="20" style="margin: 10px;"></ivy-icon-ice-drink>
-<ivy-icon-ice-cream size="20" style="margin: 10px;"></ivy-icon-ice-cream>
-<ivy-icon-key size="20" style="margin: 10px;"></ivy-icon-key>
-<ivy-icon-ice-cream-square size="20" style="margin: 10px;"></ivy-icon-ice-cream-square>
-<ivy-icon-knife-fork size="20" style="margin: 10px;"></ivy-icon-knife-fork>
-<ivy-icon-ice-tea size="20" style="margin: 10px;"></ivy-icon-ice-tea>
-<ivy-icon-info size="20" style="margin: 10px;"></ivy-icon-info>
-<ivy-icon-grape size="20" style="margin: 10px;"></ivy-icon-grape>
-<ivy-icon-light-rain size="20" style="margin: 10px;"></ivy-icon-light-rain>
-<ivy-icon-location-information size="20" style="margin: 10px;"></ivy-icon-location-information>
-<ivy-icon-lock size="20" style="margin: 10px;"></ivy-icon-lock>
-<ivy-icon-location-outline size="20" style="margin: 10px;"></ivy-icon-location-outline>
-<ivy-icon-lightning size="20" style="margin: 10px;"></ivy-icon-lightning>
-<ivy-icon-magic-stick size="20" style="margin: 10px;"></ivy-icon-magic-stick>
-<ivy-icon-link size="20" style="margin: 10px;"></ivy-icon-link>
-<ivy-icon-lollipop size="20" style="margin: 10px;"></ivy-icon-lollipop>
-<ivy-icon-location size="20" style="margin: 10px;"></ivy-icon-location>
-<ivy-icon-loading size="20" style="margin: 10px;"></ivy-icon-loading>
-<ivy-icon-male size="20" style="margin: 10px;"></ivy-icon-male>
-<ivy-icon-menu size="20" style="margin: 10px;"></ivy-icon-menu>
-<ivy-icon-microphone size="20" style="margin: 10px;"></ivy-icon-microphone>
-<ivy-icon-minus size="20" style="margin: 10px;"></ivy-icon-minus>
-<ivy-icon-message size="20" style="margin: 10px;"></ivy-icon-message>
-<ivy-icon-map-location size="20" style="margin: 10px;"></ivy-icon-map-location>
-<ivy-icon-message-solid size="20" style="margin: 10px;"></ivy-icon-message-solid>
-<ivy-icon-mic size="20" style="margin: 10px;"></ivy-icon-mic>
-<ivy-icon-milk-tea size="20" style="margin: 10px;"></ivy-icon-milk-tea>
-<ivy-icon-medal size="20" style="margin: 10px;"></ivy-icon-medal>
-<ivy-icon-medal- size="20" style="margin: 10px;"></ivy-icon-medal->
-<ivy-icon-mobile size="20" style="margin: 10px;"></ivy-icon-mobile>
-<ivy-icon-mobile-phone size="20" style="margin: 10px;"></ivy-icon-mobile-phone>
-<ivy-icon-money size="20" style="margin: 10px;"></ivy-icon-money>
-<ivy-icon-more size="20" style="margin: 10px;"></ivy-icon-more>
-<ivy-icon-no-smoking size="20" style="margin: 10px;"></ivy-icon-no-smoking>
-<ivy-icon-more-outline size="20" style="margin: 10px;"></ivy-icon-more-outline>
-<ivy-icon-notebook- size="20" style="margin: 10px;"></ivy-icon-notebook->
-<ivy-icon-s-home size="20" style="margin: 10px;"></ivy-icon-s-home>
-<ivy-icon-news size="20" style="margin: 10px;"></ivy-icon-news>
-<ivy-icon-odometer size="20" style="margin: 10px;"></ivy-icon-odometer>
-<ivy-icon name="notebook-1" size="20" style="margin: 10px;"></ivy-icon>
-<ivy-icon-s-open size="20" style="margin: 10px;"></ivy-icon-s-open>
-<ivy-icon-s-marketing size="20" style="margin: 10px;"></ivy-icon-s-marketing>
-<ivy-icon-mouse size="20" style="margin: 10px;"></ivy-icon-mouse>
-<ivy-icon-s-management size="20" style="margin: 10px;"></ivy-icon-s-management>
-<ivy-icon-s-operation size="20" style="margin: 10px;"></ivy-icon-s-operation>
-<ivy-icon-office-building size="20" style="margin: 10px;"></ivy-icon-office-building>
-<ivy-icon-open size="20" style="margin: 10px;"></ivy-icon-open>
-<ivy-icon-ship size="20" style="margin: 10px;"></ivy-icon-ship>
-<ivy-icon-sell size="20" style="margin: 10px;"></ivy-icon-sell>
-<ivy-icon-search size="20" style="margin: 10px;"></ivy-icon-search>
-<ivy-icon-service size="20" style="margin: 10px;"></ivy-icon-service>
-<ivy-icon-scissors size="20" style="margin: 10px;"></ivy-icon-scissors>
-<ivy-icon-shopping-bag- size="20" style="margin: 10px;"></ivy-icon-shopping-bag->
-<ivy-icon-orange size="20" style="margin: 10px;"></ivy-icon-orange>
-<ivy-icon-phone-outline size="20" style="margin: 10px;"></ivy-icon-phone-outline>
-<ivy-icon-picture size="20" style="margin: 10px;"></ivy-icon-picture>
-<ivy-icon-receiving size="20" style="margin: 10px;"></ivy-icon-receiving>
-<ivy-icon-phone size="20" style="margin: 10px;"></ivy-icon-phone>
-<ivy-icon-picture-outline-round size="20" style="margin: 10px;"></ivy-icon-picture-outline-round>
-<ivy-icon-refresh-left size="20" style="margin: 10px;"></ivy-icon-refresh-left>
-<ivy-icon-picture-outline size="20" style="margin: 10px;"></ivy-icon-picture-outline>
-<ivy-icon-pie-chart size="20" style="margin: 10px;"></ivy-icon-pie-chart>
-<ivy-icon-s-data size="20" style="margin: 10px;"></ivy-icon-s-data>
-<ivy-icon-refrigerator size="20" style="margin: 10px;"></ivy-icon-refrigerator>
-<ivy-icon-s-cooperation size="20" style="margin: 10px;"></ivy-icon-s-cooperation>
-<ivy-icon-s-check size="20" style="margin: 10px;"></ivy-icon-s-check>
-<ivy-icon-s-flag size="20" style="margin: 10px;"></ivy-icon-s-flag>
-<ivy-icon-s-custom size="20" style="margin: 10px;"></ivy-icon-s-custom>
-<ivy-icon-s-fold size="20" style="margin: 10px;"></ivy-icon-s-fold>
-<ivy-icon-s-finance size="20" style="margin: 10px;"></ivy-icon-s-finance>
-<ivy-icon-remove-outline size="20" style="margin: 10px;"></ivy-icon-remove-outline>
-<ivy-icon-s-comment size="20" style="margin: 10px;"></ivy-icon-s-comment>
-<ivy-icon-remove size="20" style="margin: 10px;"></ivy-icon-remove>
-<ivy-icon-refresh-right size="20" style="margin: 10px;"></ivy-icon-refresh-right>
-<ivy-icon-s-unfold size="20" style="margin: 10px;"></ivy-icon-s-unfold>
-<ivy-icon-school size="20" style="margin: 10px;"></ivy-icon-school>
-<ivy-icon-s-shop size="20" style="margin: 10px;"></ivy-icon-s-shop>
-<ivy-icon-s-ticket size="20" style="margin: 10px;"></ivy-icon-s-ticket>
-<ivy-icon-sort-up size="20" style="margin: 10px;"></ivy-icon-sort-up>
-<ivy-icon-star-on size="20" style="margin: 10px;"></ivy-icon-star-on>
-<ivy-icon-success size="20" style="margin: 10px;"></ivy-icon-success>
-<ivy-icon-sort size="20" style="margin: 10px;"></ivy-icon-sort>
-<ivy-icon-takeaway-box size="20" style="margin: 10px;"></ivy-icon-takeaway-box>
-<ivy-icon-stopwatch size="20" style="margin: 10px;"></ivy-icon-stopwatch>
-<ivy-icon-thumb size="20" style="margin: 10px;"></ivy-icon-thumb>
-<ivy-icon-tickets size="20" style="margin: 10px;"></ivy-icon-tickets>
-<ivy-icon-turn-off-microphone size="20" style="margin: 10px;"></ivy-icon-turn-off-microphone>
-<ivy-icon-time size="20" style="margin: 10px;"></ivy-icon-time>
-<ivy-icon-truck size="20" style="margin: 10px;"></ivy-icon-truck>
-<ivy-icon-upload size="20" style="margin: 10px;"></ivy-icon-upload>
-<ivy-icon-user size="20" style="margin: 10px;"></ivy-icon-user>
-<ivy-icon-user-solid size="20" style="margin: 10px;"></ivy-icon-user-solid>
-<ivy-icon name="upload1" size="20" style="margin: 10px;"></ivy-icon>
-<ivy-icon-video-camera-solid size="20" style="margin: 10px;"></ivy-icon-video-camera-solid>
-<ivy-icon-video-play size="20" style="margin: 10px;"></ivy-icon-video-play>
-<ivy-icon-video-camera size="20" style="margin: 10px;"></ivy-icon-video-camera>
-<ivy-icon-right size="20" style="margin: 10px;"></ivy-icon-right>
-<ivy-icon-video-pause size="20" style="margin: 10px;"></ivy-icon-video-pause>
-<ivy-icon-star-off size="20" style="margin: 10px;"></ivy-icon-star-off>
-<ivy-icon-trophy size="20" style="margin: 10px;"></ivy-icon-trophy>
-<ivy-icon-wallet size="20" style="margin: 10px;"></ivy-icon-wallet>
-<ivy-icon-watch size="20" style="margin: 10px;"></ivy-icon-watch>
-<ivy-icon-warning-outline size="20" style="margin: 10px;"></ivy-icon-warning-outline>
-<ivy-icon-wind-power size="20" style="margin: 10px;"></ivy-icon-wind-power>
-<ivy-icon-view size="20" style="margin: 10px;"></ivy-icon-view>
-<ivy-icon-watermelon size="20" style="margin: 10px;"></ivy-icon-watermelon>
-<ivy-icon-share size="20" style="margin: 10px;"></ivy-icon-share>
-<ivy-icon-set-up size="20" style="margin: 10px;"></ivy-icon-set-up>
-<ivy-icon-zoom-in size="20" style="margin: 10px;"></ivy-icon-zoom-in>
-<ivy-icon-water-cup size="20" style="margin: 10px;"></ivy-icon-water-cup>
-<ivy-icon-warning size="20" style="margin: 10px;"></ivy-icon-warning>
-<ivy-icon-watch- size="20" style="margin: 10px;"></ivy-icon-watch->
-<ivy-icon-setting size="20" style="margin: 10px;"></ivy-icon-setting>
-<ivy-icon-plus size="20" style="margin: 10px;"></ivy-icon-plus>
-<ivy-icon-zoom-out size="20" style="margin: 10px;"></ivy-icon-zoom-out>
-<ivy-icon-place size="20" style="margin: 10px;"></ivy-icon-place>
-<ivy-icon-pear size="20" style="margin: 10px;"></ivy-icon-pear>
-<ivy-icon-partly-cloudy size="20" style="margin: 10px;"></ivy-icon-partly-cloudy>
-<ivy-icon-paperclip size="20" style="margin: 10px;"></ivy-icon-paperclip>
-<ivy-icon-platform-eleme size="20" style="margin: 10px;"></ivy-icon-platform-eleme>
-<ivy-icon-s-claim size="20" style="margin: 10px;"></ivy-icon-s-claim>
-<ivy-icon-s-goods size="20" style="margin: 10px;"></ivy-icon-s-goods>
-<ivy-icon-s-grid size="20" style="margin: 10px;"></ivy-icon-s-grid>
-<ivy-icon-s-help size="20" style="margin: 10px;"></ivy-icon-s-help>
-<ivy-icon name="shopping-bag-1" size="20" style="margin: 10px;"></ivy-icon>
-<ivy-icon-shopping-cart- size="20" style="margin: 10px;"></ivy-icon-shopping-cart->
-<ivy-icon name="shopping-cart-1" size="20" style="margin: 10px;"></ivy-icon>
-<ivy-icon-smoking size="20" style="margin: 10px;"></ivy-icon-smoking>
-<ivy-icon-shopping-cart-full size="20" style="margin: 10px;"></ivy-icon-shopping-cart-full>
-<ivy-icon-soccer size="20" style="margin: 10px;"></ivy-icon-soccer>
-<ivy-icon-s-promotion size="20" style="margin: 10px;"></ivy-icon-s-promotion>
-<ivy-icon-sort-down size="20" style="margin: 10px;"></ivy-icon-sort-down>
-<ivy-icon-s-release size="20" style="margin: 10px;"></ivy-icon-s-release>
-<ivy-icon-s-opportunity size="20" style="margin: 10px;"></ivy-icon-s-opportunity>
-<ivy-icon-s-order size="20" style="margin: 10px;"></ivy-icon-s-order>
-<ivy-icon-s-tools size="20" style="margin: 10px;"></ivy-icon-s-tools>
-<ivy-icon-sold-out size="20" style="margin: 10px;"></ivy-icon-sold-out>
-<ivy-icon-s-platform size="20" style="margin: 10px;"></ivy-icon-s-platform>
-<ivy-icon-suitcase size="20" style="margin: 10px;"></ivy-icon-suitcase>
-<ivy-icon-suitcase- size="20" style="margin: 10px;"></ivy-icon-suitcase->
-<ivy-icon-sugar size="20" style="margin: 10px;"></ivy-icon-sugar>
-<ivy-icon-refresh size="20" style="margin: 10px;"></ivy-icon-refresh>
-<ivy-icon-sunset size="20" style="margin: 10px;"></ivy-icon-sunset>
-<ivy-icon-sunrise size="20" style="margin: 10px;"></ivy-icon-sunrise>
-<ivy-icon-sunrise size="20" style="margin: 10px;"></ivy-icon-sunrise>
-<ivy-icon-top-left size="20" style="margin: 10px;"></ivy-icon-top-left>
-<ivy-icon-add-location size="20" style="margin: 10px;"></ivy-icon-add-location>
-<ivy-icon-switch-button size="20" style="margin: 10px;"></ivy-icon-switch-button>
-<ivy-icon-aim size="20" style="margin: 10px;"></ivy-icon-aim>
-<ivy-icon-toilet-paper size="20" style="margin: 10px;"></ivy-icon-toilet-paper>
-<ivy-icon-back size="20" style="margin: 10px;"></ivy-icon-back>
-<ivy-icon-timer size="20" style="margin: 10px;"></ivy-icon-timer>
-<ivy-icon-arrow-left size="20" style="margin: 10px;"></ivy-icon-arrow-left>
-<ivy-icon-table-lamp size="20" style="margin: 10px;"></ivy-icon-table-lamp>
-<ivy-icon-attract size="20" style="margin: 10px;"></ivy-icon-attract>
-<ivy-icon-tableware size="20" style="margin: 10px;"></ivy-icon-tableware>
-<ivy-icon-arrow-right size="20" style="margin: 10px;"></ivy-icon-arrow-right>
-<ivy-icon-top-right size="20" style="margin: 10px;"></ivy-icon-top-right>
-<ivy-icon-arrow-up size="20" style="margin: 10px;"></ivy-icon-arrow-up>
-<ivy-icon-trophy- size="20" style="margin: 10px;"></ivy-icon-trophy->
-<ivy-icon-alarm-clock size="20" style="margin: 10px;"></ivy-icon-alarm-clock>
-<ivy-icon-top size="20" style="margin: 10px;"></ivy-icon-top>
-<ivy-icon-arrow-down size="20" style="margin: 10px;"></ivy-icon-arrow-down>
-<ivy-icon-turn-off size="20" style="margin: 10px;"></ivy-icon-turn-off>
-<ivy-icon-apple size="20" style="margin: 10px;"></ivy-icon-apple>
-<ivy-icon-monitor size="20" style="margin: 10px;"></ivy-icon-monitor>
-<ivy-icon-bangzhu size="20" style="margin: 10px;"></ivy-icon-bangzhu>
-<ivy-icon-unlock size="20" style="margin: 10px;"></ivy-icon-unlock>
-<ivy-icon-bell size="20" style="margin: 10px;"></ivy-icon-bell>
-<ivy-icon-postcard size="20" style="margin: 10px;"></ivy-icon-postcard>
-<ivy-icon-bottom-right size="20" style="margin: 10px;"></ivy-icon-bottom-right>
-<ivy-icon-umbrella size="20" style="margin: 10px;"></ivy-icon-umbrella>
-<ivy-icon-box size="20" style="margin: 10px;"></ivy-icon-box>
-<ivy-icon-moon size="20" style="margin: 10px;"></ivy-icon-moon>
-<ivy-icon-brush size="20" style="margin: 10px;"></ivy-icon-brush>
-<ivy-icon-present size="20" style="margin: 10px;"></ivy-icon-present>
-<ivy-icon-bank-card size="20" style="margin: 10px;"></ivy-icon-bank-card>
-<ivy-icon-position size="20" style="margin: 10px;"></ivy-icon-position>
-<ivy-icon-bottom-left size="20" style="margin: 10px;"></ivy-icon-bottom-left>
-<ivy-icon-price-tag size="20" style="margin: 10px;"></ivy-icon-price-tag>
-<ivy-icon-bicycle size="20" style="margin: 10px;"></ivy-icon-bicycle>
-<ivy-icon-potato-strips size="20" style="margin: 10px;"></ivy-icon-potato-strips>
-<ivy-icon-baseball size="20" style="margin: 10px;"></ivy-icon-baseball>
-<ivy-icon-printer size="20" style="margin: 10px;"></ivy-icon-printer>
-<ivy-icon-caret-left size="20" style="margin: 10px;"></ivy-icon-caret-left>
-<ivy-icon-sunny size="20" style="margin: 10px;"></ivy-icon-sunny>
-<ivy-icon-camera-solid size="20" style="margin: 10px;"></ivy-icon-camera-solid>
-<ivy-icon-moon-night size="20" style="margin: 10px;"></ivy-icon-moon-night>
-<ivy-icon-caret-right size="20" style="margin: 10px;"></ivy-icon-caret-right>
-<ivy-icon-reading size="20" style="margin: 10px;"></ivy-icon-reading>
-<ivy-icon-caret-top size="20" style="margin: 10px;"></ivy-icon-caret-top>
-<ivy-icon-rank size="20" style="margin: 10px;"></ivy-icon-rank>
-<ivy-icon-caret-bottom size="20" style="margin: 10px;"></ivy-icon-caret-bottom>
-<ivy-icon-question size="20" style="margin: 10px;"></ivy-icon-question>
-<ivy-icon-basketball size="20" style="margin: 10px;"></ivy-icon-basketball>
-<ivy-icon-burger size="20" style="margin: 10px;"></ivy-icon-burger>
-<ivy-icon-bottom size="20" style="margin: 10px;"></ivy-icon-bottom>
-<ivy-icon-c-scale-to-original size="20" style="margin: 10px;"></ivy-icon-c-scale-to-original>
-<ivy-icon-camera size="20" style="margin: 10px;"></ivy-icon-camera>
-<ivy-icon-chat-dot-round size="20" style="margin: 10px;"></ivy-icon-chat-dot-round>
-<ivy-icon-check size="20" style="margin: 10px;"></ivy-icon-check>
-<ivy-icon-chat-line-square size="20" style="margin: 10px;"></ivy-icon-chat-line-square>
-<ivy-icon-chat-round size="20" style="margin: 10px;"></ivy-icon-chat-round>
-<ivy-icon-chat-dot-square size="20" style="margin: 10px;"></ivy-icon-chat-dot-square>
-<ivy-icon-chat-line-round size="20" style="margin: 10px;"></ivy-icon-chat-line-round>
-<ivy-icon-chat-square size="20" style="margin: 10px;"></ivy-icon-chat-square>
-<ivy-icon-circle-check size="20" style="margin: 10px;"></ivy-icon-circle-check>
-<ivy-icon-circle-close size="20" style="margin: 10px;"></ivy-icon-circle-close>
-<ivy-icon-chicken size="20" style="margin: 10px;"></ivy-icon-chicken>
-<ivy-icon-circle-plus-outline size="20" style="margin: 10px;"></ivy-icon-circle-plus-outline>
-<ivy-icon-circle-plus size="20" style="margin: 10px;"></ivy-icon-circle-plus>
-<ivy-icon-close-notification size="20" style="margin: 10px;"></ivy-icon-close-notification>
-<ivy-icon-close size="20" style="margin: 10px;"></ivy-icon-close>
-<ivy-icon-cloudy-and-sunny size="20" style="margin: 10px;"></ivy-icon-cloudy-and-sunny>
-<ivy-icon-cherry size="20" style="margin: 10px;"></ivy-icon-cherry>
-<ivy-icon-coffee-cup size="20" style="margin: 10px;"></ivy-icon-coffee-cup>
-<ivy-icon-cloudy size="20" style="margin: 10px;"></ivy-icon-cloudy>
-<ivy-icon-collection-tag size="20" style="margin: 10px;"></ivy-icon-collection-tag>
-<ivy-icon-cold-drink size="20" style="margin: 10px;"></ivy-icon-cold-drink>
-<ivy-icon-collection size="20" style="margin: 10px;"></ivy-icon-collection>
-<ivy-icon-coordinate size="20" style="margin: 10px;"></ivy-icon-coordinate>
-<ivy-icon-connection size="20" style="margin: 10px;"></ivy-icon-connection>
-<ivy-icon-crop size="20" style="margin: 10px;"></ivy-icon-crop>
-<ivy-icon-cpu size="20" style="margin: 10px;"></ivy-icon-cpu>
-<ivy-icon-copy-document size="20" style="margin: 10px;"></ivy-icon-copy-document>
-<ivy-icon-d-caret size="20" style="margin: 10px;"></ivy-icon-d-caret>
-<ivy-icon-d-arrow-right size="20" style="margin: 10px;"></ivy-icon-d-arrow-right>
-<ivy-icon-data-board size="20" style="margin: 10px;"></ivy-icon-data-board>
-<ivy-icon-data-analysis size="20" style="margin: 10px;"></ivy-icon-data-analysis>
-<ivy-icon-data-line size="20" style="margin: 10px;"></ivy-icon-data-line>
-<ivy-icon-d-arrow-left size="20" style="margin: 10px;"></ivy-icon-d-arrow-left>
-<ivy-icon-delete-solid size="20" style="margin: 10px;"></ivy-icon-delete-solid>
-<ivy-icon-delete-location size="20" style="margin: 10px;"></ivy-icon-delete-location>
-<ivy-icon-discount size="20" style="margin: 10px;"></ivy-icon-discount>
-<ivy-icon-date size="20" style="margin: 10px;"></ivy-icon-date>
-<ivy-icon-dessert size="20" style="margin: 10px;"></ivy-icon-dessert>
-<ivy-icon-dish size="20" style="margin: 10px;"></ivy-icon-dish>
-<ivy-icon-delete size="20" style="margin: 10px;"></ivy-icon-delete>
-<ivy-icon-document-copy size="20" style="margin: 10px;"></ivy-icon-document-copy>
-<ivy-icon-document size="20" style="margin: 10px;"></ivy-icon-document>
-<ivy-icon-discover size="20" style="margin: 10px;"></ivy-icon-discover>
-<ivy-icon-document-add size="20" style="margin: 10px;"></ivy-icon-document-add>
-<ivy-icon-document-checked size="20" style="margin: 10px;"></ivy-icon-document-checked>
-<ivy-icon-document-delete size="20" style="margin: 10px;"></ivy-icon-document-delete>
-<ivy-icon-document-remove size="20" style="margin: 10px;"></ivy-icon-document-remove>
-<ivy-icon-dish- size="20" style="margin: 10px;"></ivy-icon-dish->
+<div id="icons" class="icons">
+<ivy-icon name="shopping-trolley"></ivy-icon>
+<ivy-icon name="smoking"></ivy-icon>
+<ivy-icon name="soccer"></ivy-icon>
+<ivy-icon name="sold-out"></ivy-icon>
+<ivy-icon name="sort"></ivy-icon>
+<ivy-icon name="sort-down"></ivy-icon>
+<ivy-icon name="sort-up"></ivy-icon>
+<ivy-icon name="stamp"></ivy-icon>
+<ivy-icon name="star"></ivy-icon>
+<ivy-icon name="star-filled"></ivy-icon>
+<ivy-icon name="stopwatch"></ivy-icon>
+<ivy-icon name="success-filled"></ivy-icon>
+<ivy-icon name="sugar"></ivy-icon>
+<ivy-icon name="suitcase"></ivy-icon>
+<ivy-icon name="suitcase-line"></ivy-icon>
+<ivy-icon name="sunny"></ivy-icon>
+<ivy-icon name="sunrise"></ivy-icon>
+<ivy-icon name="sunset"></ivy-icon>
+<ivy-icon name="switch"></ivy-icon>
+<ivy-icon name="switch-button"></ivy-icon>
+<ivy-icon name="switch-filled"></ivy-icon>
+<ivy-icon name="takeaway-box"></ivy-icon>
+<ivy-icon name="ticket"></ivy-icon>
+<ivy-icon name="tickets"></ivy-icon>
+<ivy-icon name="timer"></ivy-icon>
+<ivy-icon name="toilet-paper"></ivy-icon>
+<ivy-icon name="tools"></ivy-icon>
+<ivy-icon name="top"></ivy-icon>
+<ivy-icon name="top-left"></ivy-icon>
+<ivy-icon name="top-right"></ivy-icon>
+<ivy-icon name="trend-charts"></ivy-icon>
+<ivy-icon name="trophy"></ivy-icon>
+<ivy-icon name="trophy-base"></ivy-icon>
+<ivy-icon name="turn-off"></ivy-icon>
+<ivy-icon name="umbrella"></ivy-icon>
+<ivy-icon name="unlock"></ivy-icon>
+<ivy-icon name="upload"></ivy-icon>
+<ivy-icon name="upload-filled"></ivy-icon>
+<ivy-icon name="user"></ivy-icon>
+<ivy-icon name="user-filled"></ivy-icon>
+<ivy-icon name="van"></ivy-icon>
+<ivy-icon name="video-camera"></ivy-icon>
+<ivy-icon name="video-camera-filled"></ivy-icon>
+<ivy-icon name="video-pause"></ivy-icon>
+<ivy-icon name="video-play"></ivy-icon>
+<ivy-icon name="view"></ivy-icon>
+<ivy-icon name="wallet"></ivy-icon>
+<ivy-icon name="wallet-filled"></ivy-icon>
+<ivy-icon name="warning"></ivy-icon>
+<ivy-icon name="warning-filled"></ivy-icon>
+<ivy-icon name="warn-triangle-filled"></ivy-icon>
+<ivy-icon name="watch"></ivy-icon>
+<ivy-icon name="watermelon"></ivy-icon>
+<ivy-icon name="wind-power"></ivy-icon>
+<ivy-icon name="zoom-in"></ivy-icon>
+<ivy-icon name="zoom-out"></ivy-icon>
+<ivy-icon name="ice-cream"></ivy-icon>
+<ivy-icon name="ice-drink"></ivy-icon>
+<ivy-icon name="ice-tea"></ivy-icon>
+<ivy-icon name="info-filled"></ivy-icon>
+<ivy-icon name="iphone"></ivy-icon>
+<ivy-icon name="key"></ivy-icon>
+<ivy-icon name="knife-fork"></ivy-icon>
+<ivy-icon name="lightning"></ivy-icon>
+<ivy-icon name="link"></ivy-icon>
+<ivy-icon name="list"></ivy-icon>
+<ivy-icon name="loading"></ivy-icon>
+<ivy-icon name="location"></ivy-icon>
+<ivy-icon name="location-filled"></ivy-icon>
+<ivy-icon name="location-information"></ivy-icon>
+<ivy-icon name="lock"></ivy-icon>
+<ivy-icon name="lollipop"></ivy-icon>
+<ivy-icon name="magic-stick"></ivy-icon>
+<ivy-icon name="magnet"></ivy-icon>
+<ivy-icon name="male"></ivy-icon>
+<ivy-icon name="management"></ivy-icon>
+<ivy-icon name="map-location"></ivy-icon>
+<ivy-icon name="medal"></ivy-icon>
+<ivy-icon name="memo"></ivy-icon>
+<ivy-icon name="menu"></ivy-icon>
+<ivy-icon name="message"></ivy-icon>
+<ivy-icon name="message-box"></ivy-icon>
+<ivy-icon name="mic"></ivy-icon>
+<ivy-icon name="microphone"></ivy-icon>
+<ivy-icon name="milk-tea"></ivy-icon>
+<ivy-icon name="minus"></ivy-icon>
+<ivy-icon name="money"></ivy-icon>
+<ivy-icon name="monitor"></ivy-icon>
+<ivy-icon name="moon"></ivy-icon>
+<ivy-icon name="moon-night"></ivy-icon>
+<ivy-icon name="more"></ivy-icon>
+<ivy-icon name="more-filled"></ivy-icon>
+<ivy-icon name="mostly-cloudy"></ivy-icon>
+<ivy-icon name="mouse"></ivy-icon>
+<ivy-icon name="mug"></ivy-icon>
+<ivy-icon name="mute"></ivy-icon>
+<ivy-icon name="mute-notification"></ivy-icon>
+<ivy-icon name="no-smoking"></ivy-icon>
+<ivy-icon name="notebook"></ivy-icon>
+<ivy-icon name="notification"></ivy-icon>
+<ivy-icon name="odometer"></ivy-icon>
+<ivy-icon name="office-building"></ivy-icon>
+<ivy-icon name="open"></ivy-icon>
+<ivy-icon name="operation"></ivy-icon>
+<ivy-icon name="opportunity"></ivy-icon>
+<ivy-icon name="orange"></ivy-icon>
+<ivy-icon name="paperclip"></ivy-icon>
+<ivy-icon name="partly-cloudy"></ivy-icon>
+<ivy-icon name="pear"></ivy-icon>
+<ivy-icon name="phone"></ivy-icon>
+<ivy-icon name="phone-filled"></ivy-icon>
+<ivy-icon name="picture"></ivy-icon>
+<ivy-icon name="picture-filled"></ivy-icon>
+<ivy-icon name="picture-rounded"></ivy-icon>
+<ivy-icon name="pie-chart"></ivy-icon>
+<ivy-icon name="place"></ivy-icon>
+<ivy-icon name="platform"></ivy-icon>
+<ivy-icon name="plus"></ivy-icon>
+<ivy-icon name="pointer"></ivy-icon>
+<ivy-icon name="position"></ivy-icon>
+<ivy-icon name="postcard"></ivy-icon>
+<ivy-icon name="pouring"></ivy-icon>
+<ivy-icon name="present"></ivy-icon>
+<ivy-icon name="price-tag"></ivy-icon>
+<ivy-icon name="printer"></ivy-icon>
+<ivy-icon name="promotion"></ivy-icon>
+<ivy-icon name="quartz-watch"></ivy-icon>
+<ivy-icon name="question-filled"></ivy-icon>
+<ivy-icon name="rank"></ivy-icon>
+<ivy-icon name="reading"></ivy-icon>
+<ivy-icon name="reading-lamp"></ivy-icon>
+<ivy-icon name="refresh"></ivy-icon>
+<ivy-icon name="refresh-left"></ivy-icon>
+<ivy-icon name="refresh-right"></ivy-icon>
+<ivy-icon name="refrigerator"></ivy-icon>
+<ivy-icon name="remove"></ivy-icon>
+<ivy-icon name="remove-filled"></ivy-icon>
+<ivy-icon name="right"></ivy-icon>
+<ivy-icon name="scale-to-original"></ivy-icon>
+<ivy-icon name="school"></ivy-icon>
+<ivy-icon name="scissor"></ivy-icon>
+<ivy-icon name="search"></ivy-icon>
+<ivy-icon name="select"></ivy-icon>
+<ivy-icon name="sell"></ivy-icon>
+<ivy-icon name="semi-select"></ivy-icon>
+<ivy-icon name="service"></ivy-icon>
+<ivy-icon name="setting"></ivy-icon>
+<ivy-icon name="set-up"></ivy-icon>
+<ivy-icon name="share"></ivy-icon>
+<ivy-icon name="ship"></ivy-icon>
+<ivy-icon name="shop"></ivy-icon>
+<ivy-icon name="shopping-bag"></ivy-icon>
+<ivy-icon name="shopping-cart"></ivy-icon>
+<ivy-icon name="shopping-cart-full"></ivy-icon>
+<ivy-icon name="circle-check"></ivy-icon>
+<ivy-icon name="circle-close"></ivy-icon>
+<ivy-icon name="circle-close-filled"></ivy-icon>
+<ivy-icon name="circle-plus"></ivy-icon>
+<ivy-icon name="circle-plus-filled"></ivy-icon>
+<ivy-icon name="clock"></ivy-icon>
+<ivy-icon name="close"></ivy-icon>
+<ivy-icon name="close-bold"></ivy-icon>
+<ivy-icon name="cloudy"></ivy-icon>
+<ivy-icon name="coffee"></ivy-icon>
+<ivy-icon name="coffee-cup"></ivy-icon>
+<ivy-icon name="coin"></ivy-icon>
+<ivy-icon name="cold-drink"></ivy-icon>
+<ivy-icon name="collection"></ivy-icon>
+<ivy-icon name="collection-tag"></ivy-icon>
+<ivy-icon name="comment"></ivy-icon>
+<ivy-icon name="compass"></ivy-icon>
+<ivy-icon name="connection"></ivy-icon>
+<ivy-icon name="coordinate"></ivy-icon>
+<ivy-icon name="copy-document"></ivy-icon>
+<ivy-icon name="cpu"></ivy-icon>
+<ivy-icon name="credit-card"></ivy-icon>
+<ivy-icon name="crop"></ivy-icon>
+<ivy-icon name="d-arrow-left"></ivy-icon>
+<ivy-icon name="d-arrow-right"></ivy-icon>
+<ivy-icon name="data-analysis"></ivy-icon>
+<ivy-icon name="data-board"></ivy-icon>
+<ivy-icon name="data-line"></ivy-icon>
+<ivy-icon name="d-caret"></ivy-icon>
+<ivy-icon name="delete"></ivy-icon>
+<ivy-icon name="delete-filled"></ivy-icon>
+<ivy-icon name="delete-location"></ivy-icon>
+<ivy-icon name="dessert"></ivy-icon>
+<ivy-icon name="discount"></ivy-icon>
+<ivy-icon name="dish"></ivy-icon>
+<ivy-icon name="dish-dot"></ivy-icon>
+<ivy-icon name="document"></ivy-icon>
+<ivy-icon name="document-add"></ivy-icon>
+<ivy-icon name="document-checked"></ivy-icon>
+<ivy-icon name="document-copy"></ivy-icon>
+<ivy-icon name="document-delete"></ivy-icon>
+<ivy-icon name="document-remove"></ivy-icon>
+<ivy-icon name="download"></ivy-icon>
+<ivy-icon name="drizzling"></ivy-icon>
+<ivy-icon name="edit"></ivy-icon>
+<ivy-icon name="edit-pen"></ivy-icon>
+<ivy-icon name="eleme"></ivy-icon>
+<ivy-icon name="eleme-filled"></ivy-icon>
+<ivy-icon name="element-plus"></ivy-icon>
+<ivy-icon name="expand"></ivy-icon>
+<ivy-icon name="failed"></ivy-icon>
+<ivy-icon name="female"></ivy-icon>
+<ivy-icon name="files"></ivy-icon>
+<ivy-icon name="film"></ivy-icon>
+<ivy-icon name="filter"></ivy-icon>
+<ivy-icon name="finished"></ivy-icon>
+<ivy-icon name="first-aid-kit"></ivy-icon>
+<ivy-icon name="flag"></ivy-icon>
+<ivy-icon name="fold"></ivy-icon>
+<ivy-icon name="folder"></ivy-icon>
+<ivy-icon name="folder-add"></ivy-icon>
+<ivy-icon name="folder-checked"></ivy-icon>
+<ivy-icon name="folder-delete"></ivy-icon>
+<ivy-icon name="folder-opened"></ivy-icon>
+<ivy-icon name="folder-remove"></ivy-icon>
+<ivy-icon name="food"></ivy-icon>
+<ivy-icon name="football"></ivy-icon>
+<ivy-icon name="fork-spoon"></ivy-icon>
+<ivy-icon name="fries"></ivy-icon>
+<ivy-icon name="full-screen"></ivy-icon>
+<ivy-icon name="goblet"></ivy-icon>
+<ivy-icon name="goblet-full"></ivy-icon>
+<ivy-icon name="goblet-square"></ivy-icon>
+<ivy-icon name="goblet-square-full"></ivy-icon>
+<ivy-icon name="gold-medal"></ivy-icon>
+<ivy-icon name="goods"></ivy-icon>
+<ivy-icon name="goods-filled"></ivy-icon>
+<ivy-icon name="grape"></ivy-icon>
+<ivy-icon name="grid"></ivy-icon>
+<ivy-icon name="guide"></ivy-icon>
+<ivy-icon name="handbag"></ivy-icon>
+<ivy-icon name="headset"></ivy-icon>
+<ivy-icon name="help"></ivy-icon>
+<ivy-icon name="help-filled"></ivy-icon>
+<ivy-icon name="hide"></ivy-icon>
+<ivy-icon name="histogram"></ivy-icon>
+<ivy-icon name="home-filled"></ivy-icon>
+<ivy-icon name="hot-water"></ivy-icon>
+<ivy-icon name="house"></ivy-icon>
+<ivy-icon name="ice-cream-round"></ivy-icon>
+<ivy-icon name="ice-cream-square"></ivy-icon>
+<ivy-icon name="add-location"></ivy-icon>
+<ivy-icon name="aim"></ivy-icon>
+<ivy-icon name="alarm-clock"></ivy-icon>
+<ivy-icon name="apple"></ivy-icon>
+<ivy-icon name="arrow-down"></ivy-icon>
+<ivy-icon name="arrow-down-bold"></ivy-icon>
+<ivy-icon name="arrow-left"></ivy-icon>
+<ivy-icon name="arrow-left-bold"></ivy-icon>
+<ivy-icon name="arrow-right"></ivy-icon>
+<ivy-icon name="arrow-right-bold"></ivy-icon>
+<ivy-icon name="arrow-up"></ivy-icon>
+<ivy-icon name="arrow-up-bold"></ivy-icon>
+<ivy-icon name="avatar"></ivy-icon>
+<ivy-icon name="back"></ivy-icon>
+<ivy-icon name="baseball"></ivy-icon>
+<ivy-icon name="basketball"></ivy-icon>
+<ivy-icon name="bell"></ivy-icon>
+<ivy-icon name="bell-filled"></ivy-icon>
+<ivy-icon name="bicycle"></ivy-icon>
+<ivy-icon name="bottom"></ivy-icon>
+<ivy-icon name="bottom-left"></ivy-icon>
+<ivy-icon name="bottom-right"></ivy-icon>
+<ivy-icon name="bowl"></ivy-icon>
+<ivy-icon name="box"></ivy-icon>
+<ivy-icon name="briefcase"></ivy-icon>
+<ivy-icon name="brush"></ivy-icon>
+<ivy-icon name="brush-filled"></ivy-icon>
+<ivy-icon name="burger"></ivy-icon>
+<ivy-icon name="calendar"></ivy-icon>
+<ivy-icon name="camera"></ivy-icon>
+<ivy-icon name="camera-filled"></ivy-icon>
+<ivy-icon name="caret-bottom"></ivy-icon>
+<ivy-icon name="caret-left"></ivy-icon>
+<ivy-icon name="caret-right"></ivy-icon>
+<ivy-icon name="caret-top"></ivy-icon>
+<ivy-icon name="cellphone"></ivy-icon>
+<ivy-icon name="chat-dot-round"></ivy-icon>
+<ivy-icon name="chat-dot-square"></ivy-icon>
+<ivy-icon name="chat-line-round"></ivy-icon>
+<ivy-icon name="chat-line-square"></ivy-icon>
+<ivy-icon name="chat-round"></ivy-icon>
+<ivy-icon name="chat-square"></ivy-icon>
+<ivy-icon name="check"></ivy-icon>
+<ivy-icon name="checked"></ivy-icon>
+<ivy-icon name="cherry"></ivy-icon>
+<ivy-icon name="chicken"></ivy-icon>
+<ivy-icon name="chrome-filled"></ivy-icon>
+<ivy-icon name="circle-check-filled"></ivy-icon>
 </div>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { onMounted } from 'vue';
 
-export default defineComponent({
-    mounted() {
+onMounted(() => {
         document.getElementById('icons').addEventListener('click', ev=>{
         const target = ev.target;
         const nodeName = target.nodeName;
         const tagName = nodeName.toLowerCase();
-        const icon = `<${tagName}></${tagName}>`;
-        
-            if (window.navigator.clipboard) {
-                window.navigator.clipboard
-                    .writeText(icon)
-                    .then(
-                        () => {
-                            alert(`已复制到粘贴板：${icon}`);
-                        },
-                        () => {
-                            alert(`复制到粘贴板失败：${icon}`);
-                        }
-                    )
-                    .catch(e => {
-                        throw e;
-                    });
-            }else{
-                alert('浏览器不支持，请切换到chrome浏览器')
-            }
-        
-    },false)
-    }
+        if(tagName !== 'ivy-icon') return;
+        const icon = `<${tagName} name="${target.getAttribute('name')}"></${tagName}>`;
+
+        if (window.navigator.clipboard) {
+            window.navigator.clipboard
+                .writeText(icon)
+                .then(
+                    () => {
+                        alert(`已复制到粘贴板：${icon}`);
+                    },
+                    () => {
+                        alert(`复制到粘贴板失败：${icon}`);
+                    }
+                )
+                .catch(e => {
+                    throw e;
+                });
+        } else {
+            alert('浏览器不支持，请切换到chrome浏览器')
+        }
+
+    }, false)
 })
+
 </script>
+<style scoped>
+.icons {
+    display:flex;
+    flex-wrap: wrap;
+}
+.icons > ivy-icon {
+    margin: 10px;
+    font-size: 20px;
+}
+</style>
