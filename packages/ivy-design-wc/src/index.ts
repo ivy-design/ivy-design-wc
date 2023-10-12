@@ -55,6 +55,7 @@ export const Radio = comp.Radio
 export const RadioGroup = comp.RadioGroup
 export const Checkbox = comp.Checkbox
 export const CheckboxGroup = comp.CheckboxGroup
+export const AspectRatio = comp.AspectRatio
 
 // console.log(components)
 
@@ -104,5 +105,6 @@ declare module 'vue' {
         RadioGroup: typeof comp.RadioGroup
         Checkbox: typeof comp.Checkbox
         CheckboxGroup: typeof comp.CheckboxGroup
+        AspectRatio: typeof comp.AspectRatio
     }
 }

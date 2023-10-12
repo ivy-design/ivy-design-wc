@@ -2,8 +2,8 @@
     "name": "@ivy-design/wc",
     "version": "1.0.0",
     "private": true,
-    "main": "dist/ivy-design-umd.js",
-    "module": "dist/ivy-design-es.js",
+    "main": "dist/ivy-design.js",
+    "module": "dist/ivy-design.mjs",
     "types": "types/index.d.ts",
     "files": [
         "dist",
