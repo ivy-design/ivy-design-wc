@@ -101,6 +101,15 @@ declare module 'vue' {
         Tip: typeof comp.Tip
         Select: typeof comp.Select
         Option: typeof comp.Option
+        Loading: typeof comp.Loading
+        Details: typeof comp.Details
+        Dialog: typeof comp.Dialog
+        Dropdown: typeof comp.Dropdown
+        DropdownMenu: typeof comp.DropdownMenu
+        DropdownItem: typeof comp.DropdownItem
+        Steps: typeof comp.Steps
+        Step: typeof comp.Step
+        Switch: typeof comp.Switch
         Radio: typeof comp.Radio
         RadioGroup: typeof comp.RadioGroup
         Checkbox: typeof comp.Checkbox
