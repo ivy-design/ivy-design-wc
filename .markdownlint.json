@@ -23,7 +23,8 @@
       "ivy-radio-group",
       "ivy-checkbox",
       "ivy-checkbox-group",
-      "ivy-aspect-ratio"
+      "ivy-aspect-ratio",
+      "ivy-icon"
     ]
   }
 }

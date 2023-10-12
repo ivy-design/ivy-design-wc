@@ -1,3 +1,4 @@
+import { Message } from './index'
 import { defineCustomElement } from 'vue'
 
 const components = import.meta.glob(['./components/**/*.ce.vue', '!./*.ce.vue'], {
@@ -56,6 +57,30 @@ export const RadioGroup = comp.RadioGroup
 export const Checkbox = comp.Checkbox
 export const CheckboxGroup = comp.CheckboxGroup
 export const AspectRatio = comp.AspectRatio
+export const Message = comp.Message
+export const Icon = comp.Icon
+
+interface MessageConfig {
+    content: string
+    duration?: number
+    type?: 'success' | 'info' | 'warning' | 'error'
+    onClose?: () => void
+}
+
+export const message = (config: MessageConfig | string) => {
+    let conf = {}
+    const type = Object.prototype.toString.call(config).slice(8, -1)
+
+    if (type === 'Object') {
+        conf = { ...config }
+    } else {
+        conf = {
+            content: config
+        }
+    }
+    const instance = new Message()(document.body as any).appendChild(instance.$el)
+    instance.setAttribute('content', conf.content)
+}
 
 // console.log(components)
 
@@ -72,6 +97,10 @@ export const registerComponents = (prefix = 'Ivy') => {
             customElements.define(name.join('-'), comp)
         })
     }
+}
+
+export const registerComponent = (name: string, component: keyof comp) => {
+    customElements.define(name, component)
 }
 
 declare module 'vue' {
@@ -115,5 +144,6 @@ declare module 'vue' {
         Checkbox: typeof comp.Checkbox
         CheckboxGroup: typeof comp.CheckboxGroup
         AspectRatio: typeof comp.AspectRatio
+        Message: typeof comp.Message
     }
 }
