@@ -1,26 +1,25 @@
 <script setup lang="ts">
 defineOptions({
-  name: "TabPane",
+    name: 'TabPane',
+    inheritAttrs: false
 })
 
 defineProps({
-  label: String,
-  index: String,
-  disabled: Boolean,
-  show: Boolean,
+    label: String,
+    index: String,
+    disabled: Boolean
 })
-
 </script>
 
 <template>
-  <slot></slot>
+    <slot></slot>
 </template>
 
 <style lang="scss">
 :host {
-  display: none;
+    display: none;
 }
 :host([show]) {
-  display: block;
+    display: block;
 }
 </style>

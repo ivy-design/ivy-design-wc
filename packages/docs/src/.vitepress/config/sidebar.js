@@ -138,6 +138,10 @@ const components = [
         text: "Image 图片",
         link: "/components/image",
       },
+      {
+        text: "Circle 环形进度条",
+        link: "/components/circle",
+      },
     ],
   },
   {

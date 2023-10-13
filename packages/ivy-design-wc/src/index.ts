@@ -1,4 +1,3 @@
-import { Message } from './index'
 import { defineCustomElement } from 'vue'
 
 const components = import.meta.glob(['./components/**/*.ce.vue', '!./*.ce.vue'], {
@@ -59,26 +58,28 @@ export const CheckboxGroup = comp.CheckboxGroup
 export const AspectRatio = comp.AspectRatio
 export const Message = comp.Message
 export const Icon = comp.Icon
+export const Circle = comp.Circle
 
 interface MessageConfig {
-    content: string
+    content?: string
     duration?: number
     type?: 'success' | 'info' | 'warning' | 'error'
     onClose?: () => void
 }
 
 export const message = (config: MessageConfig | string) => {
-    let conf = {}
+    let conf: MessageConfig = {}
     const type = Object.prototype.toString.call(config).slice(8, -1)
 
     if (type === 'Object') {
-        conf = { ...config }
+        conf = { ...(config as MessageConfig) }
     } else {
         conf = {
-            content: config
+            content: config as string
         }
     }
-    const instance = new Message()(document.body as any).appendChild(instance.$el)
+    const instance = new Message()
+    ;(document.body as any).appendChild(instance.$el)
     instance.setAttribute('content', conf.content)
 }
 
@@ -99,7 +100,7 @@ export const registerComponents = (prefix = 'Ivy') => {
     }
 }
 
-export const registerComponent = (name: string, component: keyof comp) => {
+export const registerComponent = (name: string, component: any) => {
     customElements.define(name, component)
 }
 
@@ -145,5 +146,7 @@ declare module 'vue' {
         CheckboxGroup: typeof comp.CheckboxGroup
         AspectRatio: typeof comp.AspectRatio
         Message: typeof comp.Message
+        Icon: typeof comp.Icon
+        Circle: typeof comp.Circle
     }
 }

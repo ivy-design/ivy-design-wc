@@ -24,7 +24,8 @@
       "ivy-checkbox",
       "ivy-checkbox-group",
       "ivy-aspect-ratio",
-      "ivy-icon"
+      "ivy-icon",
+      "ivy-circle"
     ]
   }
 }
