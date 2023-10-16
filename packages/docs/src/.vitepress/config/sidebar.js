@@ -142,6 +142,10 @@ const components = [
         text: "Circle 环形进度条",
         link: "/components/circle",
       },
+      {
+        text: "Pagination 分页",
+        link: "/components/pagination",
+      },
     ],
   },
   {

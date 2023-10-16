@@ -59,6 +59,7 @@ export const AspectRatio = comp.AspectRatio
 export const Message = comp.Message
 export const Icon = comp.Icon
 export const Circle = comp.Circle
+export const Pagination = comp.Pagination
 
 interface MessageConfig {
     content?: string
@@ -148,5 +149,6 @@ declare module 'vue' {
         Message: typeof comp.Message
         Icon: typeof comp.Icon
         Circle: typeof comp.Circle
+        Pagination: typeof comp.Pagination
     }
 }
