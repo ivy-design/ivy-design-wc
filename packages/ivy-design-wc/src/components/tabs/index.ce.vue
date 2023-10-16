@@ -91,7 +91,7 @@ onMounted(() => {
 })
 onUpdated(() => {
     nextTick(() => {
-        const children = tableInnerEl.value.children
+        const children = (tableInnerEl.value as HTMLElement).children
         for (let index = 0; index < children.length; index++) {
             const el = children[index]
             if (props.active === el.getAttribute('data-index')) {
@@ -101,11 +101,11 @@ onUpdated(() => {
             }
         }
 
-        const tableWrapInnerWidth = getComputedStyle(tableInnerEl.value)['width']
-        const tableWrapWidth = getComputedStyle(tabHeaderWrap.value)['width']
+        const tableWrapInnerWidth = getComputedStyle(tableInnerEl.value as HTMLElement)['width']
+        const tableWrapWidth = getComputedStyle(tabHeaderWrap.value as HTMLElement)['width']
 
         if (parseFloat(tableWrapWidth) < parseFloat(tableWrapInnerWidth)) {
-            tabHeaderWrap.value.style.flex = '0 0 calc(100% - 60px)'
+            ;(tabHeaderWrap.value as HTMLElement).style.flex = '0 0 calc(100% - 60px)'
             ;(btnLeft.value as any).style.display = 'inline-block'
             ;(btnRight.value as any).style.display = 'inline-block'
         }

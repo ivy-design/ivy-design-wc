@@ -31,7 +31,7 @@ const emit = defineEmits(['change', 'update:value'])
 
 const dropEl = ref<HTMLElement | null>(null)
 
-const value = ref(null)
+const value = ref<string | number | null>(null)
 
 const inputEl = ref<HTMLInputElement | null>(null)
 const handlerClick = (e: MouseEvent) => {
@@ -43,8 +43,8 @@ const handlerClick = (e: MouseEvent) => {
             value.value = optionValue
             emit('change', value.value)
 
-            inputEl.value.setAttribute('value', target.label)
-            getHostElement().setAttribute('value', value.value)
+            ;(inputEl.value as HTMLElement).setAttribute('value', target.label)
+            getHostElement().setAttribute('value', value.value as string)
         }
     }
     visible.value = false
@@ -84,7 +84,7 @@ onMounted(() => {
                 const optionValue = child.getAttribute('value')
 
                 if (optionValue === value.value) {
-                    inputEl.value.setAttribute('value', child.label)
+                    ;(inputEl.value as HTMLElement).setAttribute('value', child.label as string)
                     break
                 }
             }

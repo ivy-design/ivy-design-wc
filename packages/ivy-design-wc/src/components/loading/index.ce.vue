@@ -1,33 +1,33 @@
 <script lang="tsx">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed } from 'vue'
 import { genLoading } from '@/utils/icons'
 
 export default defineComponent({
-      name: "Loading",
-      inheritAttrs: false,
-      props:{
-            text: String,
-            loading: Boolean
-      },
-      setup(props) {
-          const isLoading = computed(() => {
-              return props.loading
-          })
-          return () => {
-              return [
-                <div class="loading" v-show={ isLoading.value }>
-                  <div part="icon" class="icon">
-                    <slot name="icon">
-                      { genLoading({class: 'icon-loading'}) }
-                    </slot>
-                  </div>
-                    {props.text ? <div class="text">{ props.text }</div> : null}
+    name: 'Loading',
+    inheritAttrs: false,
+    props: {
+        text: String,
+        loading: Boolean
+    },
+    setup(props) {
+        const isLoading = computed(() => {
+            return props.loading
+        })
+        return () => {
+            return [
+                <div class="loading" v-show={isLoading.value}>
+                    <div class="icon">
+                        <slot name="icon">{genLoading({ class: 'icon-loading' })}</slot>
+                    </div>
+                    {props.text ? <div class="text">{props.text}</div> : null}
                 </div>,
-                <div class="content" part="content"><slot></slot></div>
-              ]
-          }
-      }
-});
+                <div class="content">
+                    <slot></slot>
+                </div>
+            ]
+        }
+    }
+})
 </script>
 
 <style lang="scss">
@@ -39,7 +39,7 @@ export default defineComponent({
     position: relative;
     display: block;
 }
-.loading{
+.loading {
     background-color: var(--ivy-loading-mask-color);
     position: absolute;
     z-index: 10;
@@ -52,13 +52,13 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
 }
-.icon{
+.icon {
     line-height: 1em;
     font-size: 24px;
     animation: spin 1s linear infinite;
     transform-origin: center center;
 }
-.icon-loading{
+.icon-loading {
     display: block;
 }
 @keyframes spin {
@@ -69,7 +69,7 @@ export default defineComponent({
         transform: rotate(359deg);
     }
 }
-.text{
+.text {
     margin-top: var(--ivy-loading-text-margin-top);
     color: var(--ivy-loading-text-color);
     font-size: var(--ivy-loading-text-font-size);

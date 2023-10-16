@@ -17,7 +17,7 @@ const { el, getHostElement } = useHostElement()
 
 const getChildren = () => {
     const host = getHostElement()
-    const children = getElementsByTagName(host, 'ivy-checkbox')
+    const children = getElementsByTagName(host as HTMLElement, 'ivy-checkbox')
     return children
 }
 

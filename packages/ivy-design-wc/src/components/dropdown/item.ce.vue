@@ -4,12 +4,9 @@ defineOptions({
 })
 
 defineProps({
-    divided: Boolean,
+    divider: Boolean,
     disabled: Boolean,
-    command: {
-        type: [String, null],
-        default: null
-    }
+    command: String
 })
 </script>
 

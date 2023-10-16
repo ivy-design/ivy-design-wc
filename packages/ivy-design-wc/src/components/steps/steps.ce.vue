@@ -18,9 +18,11 @@ const currentIndex = toRef(props, 'current')
 
 const { el } = useHostElement()
 const init = () => {
-    let children = el.value.assignedElements().filter((c: HTMLElement) => c.tagName === 'IVY-STEP')
+    let children = (el.value as HTMLSlotElement)
+        .assignedElements()
+        .filter((c: any) => c.tagName === 'IVY-STEP')
     const current = parseInt(props.current)
-    children.forEach((el: any, index: Number) => {
+    children.forEach((el: any, index: number) => {
         el.index = index + 1
         if (index < current) {
             el.setAttribute('status', 'finish')

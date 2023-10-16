@@ -44,7 +44,7 @@ const maskClose = () => {
         visible.value = false
         emit('update:open', false)
         const host = getHostElement()
-        host.open = false
+        ;(host as any).open = false
         emit('close')
     }
 }

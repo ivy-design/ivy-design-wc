@@ -21,12 +21,12 @@ const props = defineProps({
 })
 const resize = () => {
     const host = getHostElement()
-    if (!host) host.style.height = 0
+    if (!host) (host as any).style.height = 0
     const rect = host.getBoundingClientRect()
     const [ratioX = 1, ratioY = 1] = props.ratio.split('/')
     const width = rect.width
     const height = (width / Number(ratioX)) * Number(ratioY)
-    host.style.height = `${height}px`
+    ;(host as any).style.height = `${height}px`
 }
 
 watch(

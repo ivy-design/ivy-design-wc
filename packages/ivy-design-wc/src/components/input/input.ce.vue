@@ -33,7 +33,7 @@ const props = defineProps({
     }
 })
 
-const value = ref(props.value)
+const value = ref<string | number>(props.value)
 const isComposition = ref(false)
 
 const emit = defineEmits(['change'])
@@ -51,16 +51,17 @@ const compositionEndHandler = (e: Event) => {
     if (!isComposition.value) changeHandler(e)
 }
 
-const input = ref(null)
+const input = ref<HTMLInputElement | null>(null)
 onMounted(() => {
     value.value = props.value
-    input.value = props.value
-    if (props.autoFocus) input.value.focus()
+    input.value?.setAttribute('value', props.value)
+    if (props.autoFocus) (input.value as HTMLInputElement).focus()
 })
 </script>
 
 <template>
     <input
+        ref="input"
         class="ivy-input-inner"
         :autoFocus="props.autoFocus"
         :type="props.type"
