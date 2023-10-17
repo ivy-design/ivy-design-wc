@@ -1,20 +1,4 @@
-<script lang="tsx">
-import { shallowRef, defineComponent, onMounted, computed, ref } from 'vue'
-
-interface Conf {
-    current: number
-    size: number
-    sizes: number[]
-    total: number
-    pageCount: number
-    maxSize: number
-}
-
-interface LayoutMap {
-    prev: Function
-    pager: Function
-    next: Function
-}
+import { onMounted, defineComponent, computed, shallowRef } from 'vue'
 
 export default defineComponent({
     name: 'Pagination',
@@ -48,7 +32,7 @@ export default defineComponent({
     },
     emits: ['current-change', 'size-change', 'prev-click', 'next-click'],
     setup(props, { emit }) {
-        const conf = shallowRef<Conf>({
+        const pager = shallowRef({
             current: 1,
             size: 10,
             sizes: [],
@@ -60,14 +44,14 @@ export default defineComponent({
         onMounted(() => {
             const size = parseInt(props.size)
             const total = parseInt(props.total)
-            conf.value.current = parseInt(props.current)
-            conf.value.size = size
-            conf.value.sizes = props.sizes
-                ? props.sizes.split(',').map((c) => parseInt(c.trim()))
+            pager.value.current = parseInt(props.current)
+            pager.value.size = size
+            pager.value.sizes = props.sizes
+                ? props.sizes.split(',').map((c) => parseInt(c.trim()) as number)
                 : []
-            conf.value.total = total
-            conf.value.pageCount = parseInt(props.pageCount)
-            conf.value.maxSize = Math.ceil(total / size)
+            pager.value.total = total
+            pager.value.pageCount = parseInt(props.pageCount)
+            pager.value.maxSize = Math.ceil(total / size)
 
             // this.currentPage = this.defaultPage
             // this.pager.current = parseInt(this.defaultPage)
@@ -75,6 +59,19 @@ export default defineComponent({
             // this.pager.sizes = this.sizes.split(',').map((c) => parseInt(c.trim())) || []
             // const maxPage = parseInt((this.pager.total / this.pager.size).toFixed(0))
             // this.pager.maxPage = this.pager.total % this.pager.size === 0 ? maxPage : maxPage + 1
+        })
+
+        const conf = computed(() => {
+            const size = parseInt(props.size)
+            const total = parseInt(props.total)
+            return {
+                current: parseInt(props.current),
+                size: size,
+                sizes: props.sizes.split(',').map((c) => parseInt(c.trim())) || [],
+                total: total,
+                pageCount: parseInt(props.pageCount),
+                maxSize: Math.ceil(total / size)
+            }
         })
 
         const layout = computed(() => {
@@ -99,19 +96,7 @@ export default defineComponent({
             emit('current-change', conf.value)
         }
 
-        const internalCurrent = ref(conf.value.current)
-        const getLayoutPager = computed(() => {
-            for
-            return [
-                1,
-                ...new Array(conf.value.pageCount).fill(
-                    internalCurrent.value * conf.value.pageCount
-                ),
-                conf.value.maxSize
-            ]
-        })
-
-        const layoutMap = ref<LayoutMap>({
+        const layoutMap = {
             prev: () => (
                 <div class="ivy-pager-btn is-prev" onClick={handlePrevPage}>
                     <slot name="prev">
@@ -121,20 +106,17 @@ export default defineComponent({
             ),
             pager: () => {
                 const start = 1
-                const count = conf.value.pageCount
+                const count = 7
                 return (
                     <div class="ivy-pager-box">
                         {new Array(count).fill(start).map((c, i) => {
                             const curPage: number = i + c
-
+                            const className = ['ivy-pager-item']
+                            if (conf.value.current === curPage) {
+                                className.push('is-active')
+                            }
                             return (
-                                <a
-                                    class={[
-                                        'ivy-pager-item',
-                                        { 'is-active': conf.value.current === curPage }
-                                    ]}
-                                    onClick={() => handleClick(curPage)}
-                                >
+                                <a class={className.join(' ')} onClick={() => handleClick(curPage)}>
                                     {curPage}
                                 </a>
                             )
@@ -149,46 +131,10 @@ export default defineComponent({
                     </slot>
                 </div>
             )
-        })
+        }
 
         return () => {
-            return layout.value.map((c) => (layoutMap.value[c as keyof LayoutMap] as Function)())
+            return layout.value.map((c) => (layoutMap[c] as Function)())
         }
     }
 })
-</script>
-
-<style lang="scss">
-:host {
-    display: flex;
-    align-items: center;
-    --ivy-pagination-color: var(--ivy-color-primary, #409eff);
-}
-.ivy-pager {
-    &-box {
-        display: inline-flex;
-        list-style: none;
-        margin: 0 8px;
-    }
-    &-item {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 4px;
-        margin: 0 4px;
-        cursor: pointer;
-        &:hover {
-            background-color: #f5f7fa;
-        }
-        &.is-active {
-            cursor: default;
-            color: var(--ivy-pagination-color);
-        }
-    }
-    &-btn {
-        cursor: pointer;
-    }
-}
-</style>
