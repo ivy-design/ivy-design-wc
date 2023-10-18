@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useHostElement } from '@/use/useHostElement'
+import { useHostElement } from '@/hooks/useHostElement'
 
 const { el, getHostElement } = useHostElement()
 
@@ -42,7 +42,6 @@ const handlerClick = (e: MouseEvent) => {
         if (optionValue !== value.value) {
             value.value = optionValue
             emit('change', value.value)
-
             ;(inputEl.value as HTMLElement).setAttribute('value', target.label)
             getHostElement().setAttribute('value', value.value as string)
         }

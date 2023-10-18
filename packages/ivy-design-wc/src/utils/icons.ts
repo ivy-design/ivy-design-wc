@@ -18,7 +18,18 @@ export const genArrowRight = (props: Record<string, any> = {}) =>
             d: 'M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z'
         })
     )
-
+export const genArrowLeft = (props: Record<string, any> = {}) =>
+    h(
+        'svg',
+        {
+            ...svgBaseProp,
+            class: props?.class ? `ivy-icon ${props.class}` : 'ivy-icon'
+        },
+        h('path', {
+            fill: 'currentColor',
+            d: 'M609.408 149.376 277.76 489.6a32 32 0 0 0 0 44.672l331.648 340.352a29.12 29.12 0 0 0 41.728 0 30.592 30.592 0 0 0 0-42.752L339.264 511.936l311.872-319.872a30.592 30.592 0 0 0 0-42.688 29.12 29.12 0 0 0-41.728 0z'
+        })
+    )
 export const genLoading = (props: Record<string, any> = {}) =>
     h(
         'svg',

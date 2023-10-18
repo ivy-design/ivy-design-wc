@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onBeforeUnmount, onMounted } from 'vue'
-import { useHostElement } from '@/use/useHostElement'
+import { useHostElement } from '@/hooks/useHostElement'
 
 defineOptions({
     name: 'Dropdown'

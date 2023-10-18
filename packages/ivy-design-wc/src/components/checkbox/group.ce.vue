@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import useHostElement from '@/use/useHostElement'
+import useHostElement from '@/hooks/useHostElement'
 import { getElementsByTagName } from '@/utils/dom'
 
 defineOptions({

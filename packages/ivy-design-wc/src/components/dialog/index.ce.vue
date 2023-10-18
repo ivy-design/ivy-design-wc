@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { watch } from 'vue'
-import { useHostElement } from '@/use/useHostElement'
+import { useHostElement } from '@/hooks/useHostElement'
 
 defineOptions({
     name: 'Dialog',

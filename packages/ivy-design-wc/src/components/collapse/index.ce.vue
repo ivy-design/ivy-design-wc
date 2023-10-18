@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { defineComponent, onMounted, provide, ref } from 'vue'
-import useIndex from '@/use/useIndex'
+import useIndex from '@/hooks/useIndex'
 
 export default defineComponent({
     name: `Collapse`,
@@ -21,9 +21,7 @@ export default defineComponent({
             if (!props.active) {
                 value.value = props.accordion ? null : []
             } else {
-                value.value = props.accordion
-                    ? props.active
-                    : (props.active as string).split(',')
+                value.value = props.accordion ? props.active : (props.active as string).split(',')
             }
         })
 
