@@ -50,7 +50,7 @@
 
 第一个为默认加载中的占位内容，第二个为自定义加载中的占位内容
 
-<ivy-image src="https://blog.jikun.dev/images/basic/filter.jpg" style="width: 300px;height: 200px;"></ivy-image>
+<ivy-image lazy src="https://blog.jikun.dev/images/basic/filter.jpg" style="width: 300px;height: 200px;"></ivy-image>
 <ivy-image src="https://blog.jikun.dev/images/basic/filter.jpg" style="width: 300px;height: 200px;">
 <ivy-icon name="refresh" size="28" spin slot="placeholder"></ivy-icon>
 </ivy-image>
@@ -85,6 +85,15 @@
   <ivy-icon name="picture" size="28" slot="error"></ivy-icon>
 </ivy-image>
 ```
+
+## Props
+
+| 属性名 | 说明                     | 类型      | 可选值                               | 默认值  |
+| ------ | ------------------------ | --------- | ------------------------------------ | ------- |
+| src    | 图片 url                 | `string`  | -                                    | `-      |
+| fit    | 显示方式，同 `objectFit` | `string`  | `fill/contain/cover/none/scale-down` | `fill`  |
+| alt    | 图片 alt                 | `string`  | -                                    | -       |
+| lazy   | 懒加载                   | `boolean` | -                                    | `false` |
 
 <style scoped>
 ivy-image+ivy-image{
