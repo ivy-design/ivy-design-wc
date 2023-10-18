@@ -60,6 +60,8 @@ export const Message = comp.Message
 export const Icon = comp.Icon
 export const Circle = comp.Circle
 export const Pagination = comp.Pagination
+export const Carousel = comp.Carousel
+export const CarouselItem = comp.CarouselItem
 
 interface MessageConfig {
     content?: string
@@ -150,5 +152,7 @@ declare module 'vue' {
         Icon: typeof comp.Icon
         Circle: typeof comp.Circle
         Pagination: typeof comp.Pagination
+        Carousel: typeof comp.Carousel
+        CarouselItem: typeof comp.CarouselItem
     }
 }

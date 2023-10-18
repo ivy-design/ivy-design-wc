@@ -101,7 +101,6 @@ export default defineComponent({
 
         const internalCurrent = ref(conf.value.current)
         const getLayoutPager = computed(() => {
-            for
             return [
                 1,
                 ...new Array(conf.value.pageCount).fill(

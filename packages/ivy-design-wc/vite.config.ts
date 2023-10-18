@@ -27,9 +27,11 @@ export default defineConfig({
                     return 'ivy-design.js'
                 }
             }
+        },
+        rollupOptions: {
+            output: {
+                exports: 'named'
+            }
         }
-        // rollupOptions: {
-        //     input: fileURLToPath(new URL('./src/index.ts', import.meta.url))
-        // }
     }
 })
