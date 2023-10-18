@@ -26,7 +26,10 @@
       "ivy-aspect-ratio",
       "ivy-icon",
       "ivy-circle",
-      "ivy-pagination"
+      "ivy-pagination",
+      "ivy-carousel",
+      "ivy-carousel-item",
+      "ivy-image"
     ]
   }
 }

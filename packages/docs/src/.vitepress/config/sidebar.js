@@ -146,6 +146,10 @@ const components = [
         text: "Pagination 分页",
         link: "/components/pagination",
       },
+      {
+        text: "Carousel 轮播图",
+        link: "/components/carousel",
+      },
     ],
   },
   {
