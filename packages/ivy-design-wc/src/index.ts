@@ -1,21 +1,101 @@
 import { defineCustomElement } from 'vue'
+import '@/assets/main.scss'
 
-const components = import.meta.glob(['./components/**/*.ce.vue', '!./*.ce.vue'], {
-    import: 'default'
-})
+import IvyButton from './components/button/index.ce.vue'
+import IvyGrid from './components/grid/index.ce.vue'
+import IvyGridItem from './components/grid/item.ce.vue'
+import IvyTooltip from './components/tooltip/index.ce.vue'
+import IvyCollapse from './components/collapse/index.ce.vue'
+import IvyCollapseItem from './components/collapse/item.ce.vue'
+import IvyDivider from './components/divider/index.ce.vue'
+import IvyCard from './components/card/index.ce.vue'
+import IvySpace from './components/space/index.ce.vue'
+import IvyEmpty from './components/empty/index.ce.vue'
+import IvyTimeline from './components/timeline/index.ce.vue'
+import IvyTimelineItem from './components/timeline/item.ce.vue'
+import IvyBreadcrumb from './components/breadcrumb/index.ce.vue'
+import IvyBreadcrumbItem from './components/breadcrumb/item.ce.vue'
+import IvyTag from './components/tag/index.ce.vue'
+import IvyBadge from './components/badge/index.ce.vue'
+import IvyRow from './components/layout/row.ce.vue'
+import IvyCol from './components/layout/col.ce.vue'
+import IvyResult from './components/result/index.ce.vue'
+import IvyProgress from './components/progress/index.ce.vue'
+import IvyDrawer from './components/drawer/index.ce.vue'
+import IvyInput from './components/input/index.ce.vue'
+import IvyTip from './components/tip/index.ce.vue'
+import IvySelect from './components/select/index.ce.vue'
+import IvyOption from './components/select/option.ce.vue'
+import IvyLoading from './components/loading/index.ce.vue'
+import IvyDetails from './components/details/index.ce.vue'
+import IvyDialog from './components/dialog/index.ce.vue'
+import IvyDropdown from './components/dropdown/index.ce.vue'
+import IvyDropdownMenu from './components/dropdown/menu.ce.vue'
+import IvyDropdownItem from './components/dropdown/item.ce.vue'
+import IvySteps from './components/steps/index.ce.vue'
+import IvyStep from './components/steps/step.ce.vue'
+import IvySwitch from './components/switch/index.ce.vue'
+import IvyRadio from './components/radio/index.ce.vue'
+import IvyRadioGroup from './components/radio/group.ce.vue'
+import IvyCheckbox from './components/checkbox/index.ce.vue'
+import IvyCheckboxGroup from './components/checkbox/group.ce.vue'
+import IvyAspectRatio from './components/aspect-ratio/index.ce.vue'
+import IvyMessage from './components/message/index.ce.vue'
+import IvyIcon from './components/icon/index.ce.vue'
+import IvyCircle from './components/circle/index.ce.vue'
+import IvyPagination from './components/pagination/index.ce.vue'
+import IvyCarousel from './components/carousel/index.ce.vue'
+import IvyCarouselItem from './components/carousel/item.ce.vue'
+import IvyImage from './components/image/index.ce.vue'
 
-function getComponents() {
-    const map: { [x: string]: any } = {}
-    for (const path in components) {
-        const component = components[path]
-        component().then((module: any) => {
-            map[module.name] = defineCustomElement(module)
-        })
-    }
-    return map
+const comp: Record<string, any> = {
+    Button: defineCustomElement(IvyButton),
+    Grid: defineCustomElement(IvyGrid),
+    GridItem: defineCustomElement(IvyGridItem),
+    Tooltip: defineCustomElement(IvyTooltip),
+    Collapse: defineCustomElement(IvyCollapse),
+    CollapseItem: defineCustomElement(IvyCollapseItem),
+    Divider: defineCustomElement(IvyDivider),
+    Card: defineCustomElement(IvyCard),
+    Space: defineCustomElement(IvySpace),
+    Empty: defineCustomElement(IvyEmpty),
+    Timeline: defineCustomElement(IvyTimeline),
+    TimelineItem: defineCustomElement(IvyTimelineItem),
+    Breadcrumb: defineCustomElement(IvyBreadcrumb),
+    BreadcrumbItem: defineCustomElement(IvyBreadcrumbItem),
+    Tag: defineCustomElement(IvyTag),
+    Badge: defineCustomElement(IvyBadge),
+    Row: defineCustomElement(IvyRow),
+    Col: defineCustomElement(IvyCol),
+    Result: defineCustomElement(IvyResult),
+    Progress: defineCustomElement(IvyProgress),
+    Drawer: defineCustomElement(IvyDrawer),
+    Input: defineCustomElement(IvyInput),
+    Tip: defineCustomElement(IvyTip),
+    Select: defineCustomElement(IvySelect),
+    Option: defineCustomElement(IvyOption),
+    Loading: defineCustomElement(IvyLoading),
+    Details: defineCustomElement(IvyDetails),
+    Dialog: defineCustomElement(IvyDialog),
+    Dropdown: defineCustomElement(IvyDropdown),
+    DropdownMenu: defineCustomElement(IvyDropdownMenu),
+    DropdownItem: defineCustomElement(IvyDropdownItem),
+    Steps: defineCustomElement(IvySteps),
+    Step: defineCustomElement(IvyStep),
+    Switch: defineCustomElement(IvySwitch),
+    Radio: defineCustomElement(IvyRadio),
+    RadioGroup: defineCustomElement(IvyRadioGroup),
+    Checkbox: defineCustomElement(IvyCheckbox),
+    CheckboxGroup: defineCustomElement(IvyCheckboxGroup),
+    AspectRatio: defineCustomElement(IvyAspectRatio),
+    Message: defineCustomElement(IvyMessage),
+    Icon: defineCustomElement(IvyIcon),
+    Circle: defineCustomElement(IvyCircle),
+    Pagination: defineCustomElement(IvyPagination),
+    Carousel: defineCustomElement(IvyCarousel),
+    CarouselItem: defineCustomElement(IvyCarouselItem),
+    Image: defineCustomElement(IvyImage)
 }
-
-const comp = getComponents()
 
 export const Button = comp.Button
 export const Grid = comp.Grid
@@ -62,6 +142,7 @@ export const Circle = comp.Circle
 export const Pagination = comp.Pagination
 export const Carousel = comp.Carousel
 export const CarouselItem = comp.CarouselItem
+export const Image = comp.Image
 
 interface MessageConfig {
     content?: string
@@ -70,7 +151,7 @@ interface MessageConfig {
     onClose?: () => void
 }
 
-export const message = (config: MessageConfig | string) => {
+const parseMessageConfig = (config: MessageConfig | string): MessageConfig => {
     let conf: MessageConfig = {}
     const type = Object.prototype.toString.call(config).slice(8, -1)
 
@@ -78,33 +159,73 @@ export const message = (config: MessageConfig | string) => {
         conf = { ...(config as MessageConfig) }
     } else {
         conf = {
+            type: 'info',
             content: config as string
         }
     }
-    const instance = new Message()
-    ;(document.body as any).appendChild(instance.$el)
-    instance.setAttribute('content', conf.content)
+    return conf
 }
 
-// console.log(components)
+export const message = (config: MessageConfig | string) => {
+    let parent = document.querySelector('.ivy-message-box')
+    if (!parent) {
+        parent = document.createElement('div')
+        parent.className = 'ivy-message-box'
+        parent.setAttribute(
+            'style',
+            'position: fixed; top: 0; left: 0; z-index: 9999999;width: 100%;height: 0;'
+        )
+        document.body.appendChild(parent)
+    }
+    const conf = parseMessageConfig(config)
 
-export const registerComponents = (prefix = 'Ivy') => {
-    for (const path in components) {
-        const component = components[path]
-        component().then((module: any) => {
-            const comp = defineCustomElement(module)
-            const name: string[] = []
-            ;`${prefix}${module.name}`.replace(/([A-Z])([a-z]+)/g, (val) => {
-                name.push(val.toLocaleLowerCase())
-                return val
-            })
-            customElements.define(name.join('-'), comp)
+    const instance: any = new comp.Message()
+    instance.setAttribute('type', conf.type || 'info')
+    instance.setAttribute('duration', conf.duration || 3000)
+    instance.setAttribute('content', conf.content || '')
+    ;(parent as any).appendChild(instance)
+    instance.setAttribute('content', conf.content)
+    return instance
+}
+
+message.success = (config: MessageConfig | string) => {
+    const conf = parseMessageConfig(config)
+
+    return message({ ...conf, type: 'success' })
+}
+message.error = (config: MessageConfig | string) => {
+    const conf = parseMessageConfig(config)
+    return message({ ...conf, type: 'error' })
+}
+message.warning = (config: MessageConfig | string) => {
+    const conf = parseMessageConfig(config)
+    return message({ ...conf, type: 'warning' })
+}
+message.info = (config: MessageConfig | string) => {
+    const conf = parseMessageConfig(config)
+    return message({ ...conf, type: 'info' })
+}
+
+export const registerComponents = async (prefix = 'Ivy') => {
+    for (const key in comp) {
+        const name: string[] = []
+        ;`${prefix}${key}`.replace(/([A-Z])([a-z]+)/g, (val) => {
+            name.push(val.toLocaleLowerCase())
+            return val
         })
+
+        customElements.define(name.join('-'), comp[key])
     }
 }
 
 export const registerComponent = (name: string, component: any) => {
     customElements.define(name, component)
+}
+
+export default {
+    registerComponents,
+    registerComponent,
+    ...comp
 }
 
 declare module 'vue' {
@@ -154,5 +275,6 @@ declare module 'vue' {
         Pagination: typeof comp.Pagination
         Carousel: typeof comp.Carousel
         CarouselItem: typeof comp.CarouselItem
+        Image: typeof comp.Image
     }
 }

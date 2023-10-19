@@ -32,6 +32,7 @@ export default defineConfig({
             output: {
                 exports: 'named'
             }
-        }
+        },
+        cssTarget: 'chrome61'
     }
 })

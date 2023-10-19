@@ -1,6 +1,8 @@
 <script setup lang="ts">
+// import { genSuccess } from '@/utils/icons'
+
 defineOptions({
-    name: 'IvyMessage',
+    name: 'Message',
     inheritAttrs: false
 })
 
@@ -65,7 +67,7 @@ const props = defineProps({
                 data-follow-stroke="#9b9b9b"
             />
         </symbol>
-        <symbol id="danger" fill="none" viewBox="0 0 48 48">
+        <symbol id="error" fill="none" viewBox="0 0 48 48">
             <path
                 stroke-linejoin="round"
                 stroke-width="3"
@@ -109,8 +111,81 @@ const props = defineProps({
     </svg>
     <div class="message">
         <svg class="icon">
-            <use :xlinkHref="`#${props.type === 'error' ? 'danger' : props.type}`"></use>
+            <use :href="`#${props.type}`"></use>
         </svg>
+
         <div class="message-content">{{ props.content }}</div>
     </div>
 </template>
+
+<style lang="scss">
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    animation: fadeInDown 0.3s ease-in-out;
+}
+.message {
+    display: inline-flex;
+    margin: 0 auto;
+    background-color: white;
+    pointer-events: all;
+    padding: 8px 12px;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    align-items: center;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 20%);
+}
+.icon {
+    margin-right: 8px;
+    font-size: 16px;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+:host([type='success']) .message {
+    background-color: var(--ivy-color-success-light-9, #f0f9eb);
+    color: var(--ivy-color-success, #67c23a);
+}
+:host([type='success']) .icon {
+    color: var(--ivy-color-success, #67c23a);
+}
+
+:host([type='warning']) .message {
+    background-color: var(--ivy-color-warning-light-9, #fdf6ec);
+    color: var(--ivy-color-warning, #e6a23c);
+}
+:host([type='warning']) .icon {
+    color: var(--ivy-color-warning, #e6a23c);
+}
+
+:host([type='info']) .message {
+    background-color: var(--ivy-color-info-light-9, #f4f4f5);
+    color: var(--ivy-color-info, #909399);
+}
+:host([type='info']) .icon {
+    color: var(--ivy-color-info, #909399);
+}
+
+:host([type='error']) .message {
+    background-color: var(--ivy-color-danger-light-9, #fef0f0);
+    color: var(--ivy-color-danger, #f56c6c);
+}
+:host([type='error']) .icon {
+    color: var(--ivy-color-danger, #f56c6c);
+}
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+</style>

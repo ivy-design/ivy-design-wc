@@ -6,9 +6,11 @@
 
 <script setup>
 import { onMounted } from 'vue';
+import { message } from '@ivy-design/wc'
 onMounted(()=>{
+    console.log(message)
     document.getElementById('btn').addEventListener('click', ()=>{
-        $ivy.message({content: '这是测试内容'})
+        message({type: 'success',content: '这是测试内容'})
     })
 })
 </script>
