@@ -218,7 +218,7 @@ const components = [
       },
       {
         text: "ContextMenu 右键菜单",
-        link: "/components/contentmenu",
+        link: "/components/contextmenu",
       },
       {
         text: "Details 详情",

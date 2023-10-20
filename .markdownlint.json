@@ -10,6 +10,7 @@
       "script",
       "style",
       "div",
+      "p",
       "ClientOnly",
       "ivy-button",
       "br",
