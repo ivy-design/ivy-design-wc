@@ -1,5 +1,5 @@
 import { defineCustomElement } from 'vue'
-import '@/assets/main.scss'
+import './assets/main.scss'
 
 import IvyButton from './components/button/index.ce.vue'
 import IvyGrid from './components/grid/index.ce.vue'
@@ -47,6 +47,8 @@ import IvyPagination from './components/pagination/index.ce.vue'
 import IvyCarousel from './components/carousel/index.ce.vue'
 import IvyCarouselItem from './components/carousel/item.ce.vue'
 import IvyImage from './components/image/index.ce.vue'
+import IvyDescription from './components/description/index.ce.vue'
+import IvyDescriptionItem from './components/description/item.ce.vue'
 
 const comp: Record<string, any> = {
     Button: defineCustomElement(IvyButton),
@@ -94,7 +96,9 @@ const comp: Record<string, any> = {
     Pagination: defineCustomElement(IvyPagination),
     Carousel: defineCustomElement(IvyCarousel),
     CarouselItem: defineCustomElement(IvyCarouselItem),
-    Image: defineCustomElement(IvyImage)
+    Image: defineCustomElement(IvyImage),
+    Description: defineCustomElement(IvyDescription),
+    DescriptionItem: defineCustomElement(IvyDescriptionItem)
 }
 
 export const Button = comp.Button
@@ -143,6 +147,8 @@ export const Pagination = comp.Pagination
 export const Carousel = comp.Carousel
 export const CarouselItem = comp.CarouselItem
 export const Image = comp.Image
+export const Description = comp.Description
+export const DescriptionItem = comp.DescriptionItem
 
 interface MessageConfig {
     content?: string
@@ -276,5 +282,7 @@ declare module 'vue' {
         Carousel: typeof comp.Carousel
         CarouselItem: typeof comp.CarouselItem
         Image: typeof comp.Image
+        Description: typeof comp.Description
+        DescriptionItem: typeof comp.DescriptionItem
     }
 }

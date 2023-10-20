@@ -124,6 +124,11 @@ $colors: (
     --ivy-color-transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 .ivy-message-box {
     ivy-message + ivy-message {
         margin-top: 24px;
