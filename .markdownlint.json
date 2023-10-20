@@ -29,7 +29,9 @@
       "ivy-pagination",
       "ivy-carousel",
       "ivy-carousel-item",
-      "ivy-image"
+      "ivy-image",
+      "ivy-description-item",
+      "ivy-description"
     ]
   }
 }
