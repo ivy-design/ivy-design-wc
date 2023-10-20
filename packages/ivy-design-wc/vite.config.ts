@@ -19,6 +19,7 @@ export default defineConfig({
         target: 'esnext',
         lib: {
             entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+
             name: 'ivy-design',
             fileName: (format) => {
                 if (format === 'es') {

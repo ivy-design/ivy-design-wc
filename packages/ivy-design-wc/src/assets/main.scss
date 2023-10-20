@@ -1,63 +1,90 @@
-$ivy-color-white: #ffffff;
-$ivy-color-primary: #409eff;
-$ivy-color-success: #67c23a;
-$ivy-color-warning: #e6a23c;
-$ivy-color-danger: #f56c6c;
-$ivy-color-info: #909399;
+@use 'sass:map';
+@use 'sass:math';
+
+$types: primary, success, warning, danger, error, info;
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+$colors: (
+    'white': #ffffff,
+    'black': #000000,
+    'primary': (
+        'base': #409eff
+    ),
+    'success': (
+        'base': #67c23a
+    ),
+    'warning': (
+        'base': #e6a23c
+    ),
+    'danger': (
+        'base': #f56c6c
+    ),
+    'error': (
+        'base': #f56c6c
+    ),
+    'info': (
+        'base': #909399
+    )
+);
+
+@mixin set-color-mix-level($type, $number, $mode: 'light', $mix-color: $color-white) {
+    $colors: map.deep-merge(
+        (
+            $type: (
+                '#{$mode}-#{$number}':
+                    mix(
+                        $mix-color,
+                        map.get($colors, $type, 'base'),
+                        math.percentage(math.div($number, 10))
+                    )
+            )
+        ),
+        $colors
+    ) !global;
+}
+
+@each $type in $types {
+    @for $i from 1 through 9 {
+        @include set-color-mix-level($type, $i, 'light', $color-white);
+    }
+}
+
+// --el-color-primary-dark-2
+@each $type in $types {
+    @include set-color-mix-level($type, 2, 'dark', $color-black);
+}
+
+@function joinVarName($list) {
+    $name: '--ivy';
+    @each $item in $list {
+        @if $item != '' {
+            $name: $name + '-' + $item;
+        }
+    }
+    @return $name;
+}
+
+@mixin set-css-var-value($name, $value) {
+    #{joinVarName($name)}: #{$value};
+}
 
 :root {
     --ivy-color-white: #ffffff;
     --ivy-color-black: #000000;
-    --ivy-color-primary: #409eff;
-    --ivy-color-primary-light-1: mix($ivy-color-white, $ivy-color-primary, 10%);
-    --ivy-color-primary-light-2: mix($ivy-color-white, $ivy-color-primary, 20%);
-    --ivy-color-primary-light-3: mix($ivy-color-white, $ivy-color-primary, 30%);
-    --ivy-color-primary-light-4: mix($ivy-color-white, $ivy-color-primary, 40%);
-    --ivy-color-primary-light-5: mix($ivy-color-white, $ivy-color-primary, 50%);
-    --ivy-color-primary-light-6: mix($ivy-color-white, $ivy-color-primary, 60%);
-    --ivy-color-primary-light-7: mix($ivy-color-white, $ivy-color-primary, 70%);
-    --ivy-color-primary-light-8: mix($ivy-color-white, $ivy-color-primary, 80%);
-    --ivy-color-primary-light-9: mix($ivy-color-white, $ivy-color-primary, 90%);
-    --ivy-color-success: #67c23a;
-    --ivy-color-success-light-1: mix($ivy-color-white, $ivy-color-success, 10%);
-    --ivy-color-success-light-2: mix($ivy-color-white, $ivy-color-success, 20%);
-    --ivy-color-success-light-3: mix($ivy-color-white, $ivy-color-success, 30%);
-    --ivy-color-success-light-4: mix($ivy-color-white, $ivy-color-success, 40%);
-    --ivy-color-success-light-5: mix($ivy-color-white, $ivy-color-success, 50%);
-    --ivy-color-success-light-6: mix($ivy-color-white, $ivy-color-success, 60%);
-    --ivy-color-success-light-7: mix($ivy-color-white, $ivy-color-success, 70%);
-    --ivy-color-success-light-8: mix($ivy-color-white, $ivy-color-success, 80%);
-    --ivy-color-success-light-9: mix($ivy-color-white, $ivy-color-success, 90%);
-    --ivy-color-warning: #e6a23c;
-    --ivy-color-warning-light-1: mix($ivy-color-white, $ivy-color-warning, 10%);
-    --ivy-color-warning-light-2: mix($ivy-color-white, $ivy-color-warning, 20%);
-    --ivy-color-warning-light-3: mix($ivy-color-white, $ivy-color-warning, 30%);
-    --ivy-color-warning-light-4: mix($ivy-color-white, $ivy-color-warning, 40%);
-    --ivy-color-warning-light-5: mix($ivy-color-white, $ivy-color-warning, 50%);
-    --ivy-color-warning-light-6: mix($ivy-color-white, $ivy-color-warning, 60%);
-    --ivy-color-warning-light-7: mix($ivy-color-white, $ivy-color-warning, 70%);
-    --ivy-color-warning-light-8: mix($ivy-color-white, $ivy-color-warning, 80%);
-    --ivy-color-warning-light-9: mix($ivy-color-white, $ivy-color-warning, 90%);
-    --ivy-color-danger: #f56c6c;
-    --ivy-color-danger-light-1: mix($ivy-color-white, $ivy-color-danger, 10%);
-    --ivy-color-danger-light-2: mix($ivy-color-white, $ivy-color-danger, 20%);
-    --ivy-color-danger-light-3: mix($ivy-color-white, $ivy-color-danger, 30%);
-    --ivy-color-danger-light-4: mix($ivy-color-white, $ivy-color-danger, 40%);
-    --ivy-color-danger-light-5: mix($ivy-color-white, $ivy-color-danger, 50%);
-    --ivy-color-danger-light-6: mix($ivy-color-white, $ivy-color-danger, 60%);
-    --ivy-color-danger-light-7: mix($ivy-color-white, $ivy-color-danger, 70%);
-    --ivy-color-danger-light-8: mix($ivy-color-white, $ivy-color-danger, 80%);
-    --ivy-color-danger-light-9: mix($ivy-color-white, $ivy-color-danger, 90%);
-    --ivy-color-info: #909399;
-    --ivy-color-info-light-1: mix($ivy-color-white, $ivy-color-info, 10%);
-    --ivy-color-info-light-2: mix($ivy-color-white, $ivy-color-info, 20%);
-    --ivy-color-info-light-3: mix($ivy-color-white, $ivy-color-info, 30%);
-    --ivy-color-info-light-4: mix($ivy-color-white, $ivy-color-info, 40%);
-    --ivy-color-info-light-5: mix($ivy-color-white, $ivy-color-info, 50%);
-    --ivy-color-info-light-6: mix($ivy-color-white, $ivy-color-info, 60%);
-    --ivy-color-info-light-7: mix($ivy-color-white, $ivy-color-info, 70%);
-    --ivy-color-info-light-8: mix($ivy-color-white, $ivy-color-info, 80%);
-    --ivy-color-info-light-9: mix($ivy-color-white, $ivy-color-info, 90%);
+    @each $type in ($types) {
+        $colorTmp: map.get($colors, $type, 'base');
+        @include set-css-var-value(('color', $type), $colorTmp);
+
+        @each $i in (1, 2, 3, 4, 5, 6, 7, 8, 9) {
+            $colorLight: map.get($colors, $type, 'light-#{$i}');
+            @include set-css-var-value(('color', $type, 'light', $i), $colorLight);
+        }
+
+        @include set-css-var-value(('color', $type, 'dart-2'), map.get($colors, $type, 'dark-2'));
+    }
+
     --ivy-text-color-primary: #303133;
     --ivy-text-color-regular: #606266;
     --ivy-text-color-secondary: #909399;
