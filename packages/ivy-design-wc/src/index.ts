@@ -51,6 +51,7 @@ import IvyDescription from './components/description/index.ce.vue'
 import IvyDescriptionItem from './components/description/item.ce.vue'
 import IvyTabs from './components/tabs/index.ce.vue'
 import IvyTabPane from './components/tabs/pane.ce.vue'
+import IvyContextmenu from './components/contextmenu/index.ce.vue'
 
 const comp: Record<string, any> = {
     Button: defineCustomElement(IvyButton),
@@ -102,7 +103,8 @@ const comp: Record<string, any> = {
     Description: defineCustomElement(IvyDescription),
     DescriptionItem: defineCustomElement(IvyDescriptionItem),
     Tabs: defineCustomElement(IvyTabs),
-    TabPane: defineCustomElement(IvyTabPane)
+    TabPane: defineCustomElement(IvyTabPane),
+    Contextmenu: defineCustomElement(IvyContextmenu)
 }
 
 export const Button = comp.Button
@@ -155,6 +157,7 @@ export const Description = comp.Description
 export const DescriptionItem = comp.DescriptionItem
 export const Tabs = comp.Tabs
 export const TabPane = comp.TabPane
+export const Contextmenu = comp.Contextmenu
 
 interface MessageConfig {
     content?: string
@@ -292,5 +295,6 @@ declare module 'vue' {
         DescriptionItem: typeof comp.DescriptionItem
         Tabs: typeof comp.Tabs
         TabPane: typeof comp.TabPane
+        Contextmenu: typeof comp.Contextmenu
     }
 }
