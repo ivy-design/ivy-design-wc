@@ -49,6 +49,8 @@ import IvyCarouselItem from './components/carousel/item.ce.vue'
 import IvyImage from './components/image/index.ce.vue'
 import IvyDescription from './components/description/index.ce.vue'
 import IvyDescriptionItem from './components/description/item.ce.vue'
+import IvyTabs from './components/tabs/index.ce.vue'
+import IvyTabPane from './components/tabs/pane.ce.vue'
 
 const comp: Record<string, any> = {
     Button: defineCustomElement(IvyButton),
@@ -98,7 +100,9 @@ const comp: Record<string, any> = {
     CarouselItem: defineCustomElement(IvyCarouselItem),
     Image: defineCustomElement(IvyImage),
     Description: defineCustomElement(IvyDescription),
-    DescriptionItem: defineCustomElement(IvyDescriptionItem)
+    DescriptionItem: defineCustomElement(IvyDescriptionItem),
+    Tabs: defineCustomElement(IvyTabs),
+    TabPane: defineCustomElement(IvyTabPane)
 }
 
 export const Button = comp.Button
@@ -149,6 +153,8 @@ export const CarouselItem = comp.CarouselItem
 export const Image = comp.Image
 export const Description = comp.Description
 export const DescriptionItem = comp.DescriptionItem
+export const Tabs = comp.Tabs
+export const TabPane = comp.TabPane
 
 interface MessageConfig {
     content?: string
@@ -284,5 +290,7 @@ declare module 'vue' {
         Image: typeof comp.Image
         Description: typeof comp.Description
         DescriptionItem: typeof comp.DescriptionItem
+        Tabs: typeof comp.Tabs
+        TabPane: typeof comp.TabPane
     }
 }

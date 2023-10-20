@@ -22,11 +22,9 @@ const visible = ref(false)
 
 const handlerClick = () => {
     if (props.disabled) return
-    console.log('handlerClick')
     if (!visible.value) {
         visible.value = true
     }
-    console.log('handlerClick', visible.value)
 }
 
 const handlerMenuItemClick = (e: Event) => {
@@ -34,9 +32,7 @@ const handlerMenuItemClick = (e: Event) => {
     const nodeName = target.nodeName.toLowerCase()
     if (nodeName !== 'ivy-dropdown-item') return
     const command = target.getAttribute('command')
-    console.log(command)
 
-    console.log('dropdown-item clicked', command)
     emit('command', command)
 
     visible.value = false

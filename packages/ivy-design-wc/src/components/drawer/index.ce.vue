@@ -33,7 +33,6 @@ const visible = ref(false)
 watch(
     () => props.open,
     (val) => {
-        console.log(val, 'watch open')
         visible.value = val
     }
 )

@@ -95,7 +95,6 @@ export default defineComponent({
         const handleClick = (pager: number) => {
             if (pager === conf.value.current) return
             conf.value.current = pager
-            console.log(conf.value.current, pager)
             emit('current-change', conf.value)
         }
 

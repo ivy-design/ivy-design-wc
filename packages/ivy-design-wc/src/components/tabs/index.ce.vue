@@ -69,7 +69,7 @@ onMounted(() => {
     const list = (slotEl.value as HTMLSlotElement)
         .assignedElements()
         .filter((c) => c.nodeName === 'IVY-TAB-PANE')
-    console.log(list, 'list')
+    // console.log(list, 'list')
     children.value = list.map((el: any, index) => {
         const elIndex = el.getAttribute('index')
 

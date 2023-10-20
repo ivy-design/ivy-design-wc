@@ -18,7 +18,7 @@ const isCheck = ref(props.checked)
 
 const changeHandler = (ev: any) => {
     const checked = ev.target.checked
-    console.log('changeHandler', checked)
+
     isCheck.value = checked
     const host = getHostElement()
     if (checked) {
