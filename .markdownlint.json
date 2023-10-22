@@ -32,7 +32,8 @@
       "ivy-carousel-item",
       "ivy-image",
       "ivy-description-item",
-      "ivy-description"
+      "ivy-description",
+      "ivy-rate"
     ]
   }
 }
