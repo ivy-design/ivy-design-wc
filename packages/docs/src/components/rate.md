@@ -38,18 +38,18 @@
 
 ## 颜色
 
-通过 `color` 可以设置图标的颜色。
+通过 `active-color` 可以设置图标的颜色。
 
 <ivy-rate value="2"></ivy-rate>
-<ivy-rate value="2" color="green"></ivy-rate>
-<ivy-rate value="2" color="red"></ivy-rate>
-<ivy-rate value="2" color="#888888"></ivy-rate>
+<ivy-rate value="2" active-color="green"></ivy-rate>
+<ivy-rate value="2" active-color="red"></ivy-rate>
+<ivy-rate value="2" active-color="blue"></ivy-rate>
 
 ```html
 <ivy-rate value="2"></ivy-rate>
-<ivy-rate value="2" color="green"></ivy-rate>
-<ivy-rate value="2" color="red"></ivy-rate>
-<ivy-rate value="2" color="#888888"></ivy-rate>
+<ivy-rate value="2" active-color="green"></ivy-rate>
+<ivy-rate value="2" active-color="red"></ivy-rate>
+<ivy-rate value="2" active-color="blue"></ivy-rate>
 ```
 
 ## 自定义事件

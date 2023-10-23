@@ -34,7 +34,7 @@ export default defineComponent({
     },
     emits: ['change'],
     setup(props, { emit }) {
-        const curIndex = ref(props.value ? parseInt(props.value) : 0)
+        const curIndex = ref(props.value ? parseInt(props.value) : 1)
 
         const handleMouseenter = (val: number) => {
             if (props.disabled) {
@@ -80,12 +80,12 @@ export default defineComponent({
                         return (
                             <div
                                 class="fox-rate__icon"
-                                style={{ ...getIconColor(index), fontSize: props.size }}
-                                onMouseenter={() => handleMouseenter(index)}
-                                onMouseleave={() => handleMouseleave(index)}
-                                onClick={() => handleClick(index)}
+                                style={{ ...getIconColor(index + 1), fontSize: props.size }}
+                                onMouseenter={() => handleMouseenter(index + 1)}
+                                onMouseleave={() => handleMouseleave(index + 1)}
+                                onClick={() => handleClick(index + 1)}
                             >
-                                {curIndex.value < index ? genStar() : genStarFilled()}
+                                {curIndex.value < index + 1 ? genStar() : genStarFilled()}
                             </div>
                         )
                     })}
