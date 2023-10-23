@@ -95,6 +95,10 @@ const components = [
     collapsible: true,
     items: [
       {
+        text: "Avatar 头像",
+        link: "/components/avatar",
+      },
+      {
         text: "Description 描述列表",
         link: "/components/description",
       },

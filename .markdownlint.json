@@ -34,7 +34,8 @@
       "ivy-description-item",
       "ivy-description",
       "ivy-rate",
-      "ivy-input"
+      "ivy-input",
+      "ivy-avatar"
     ]
   }
 }
