@@ -55,18 +55,22 @@ pnpm test:unit
 |  Dropdown   |                     下拉菜单 |
 |    Steps    |                       步骤条 |
 |   Switch    |                         开关 |
-|    radio    |                       单选框 |
-|  checkbox   |                       多选框 |
-| aspectRatio |             固定宽高比例容器 |
+|    Radio    |                       单选框 |
+|  Checkbox   |                       多选框 |
+| AspectRatio |             固定宽高比例容器 |
+|    Icon     |                         图标 |
+|   Circle    |                   圆形进度条 |
+|    Image    |                         图片 |
+| Description |                     描述列表 |
+| Contextmenu |                     邮件菜单 |
+|    rate     |                         评分 |
 
 ## 代办
 
 |   组件名称   | 组件描述 |
 | :----------: | :------: |
 |     tabs     |  标签页  |
-|    image     |   图片   |
 |   message    | 消息提醒 |
 | notification |  通知框  |
 |    table     |   表格   |
-|     rate     |   评分   |
 |    split     | 分割面板 |
