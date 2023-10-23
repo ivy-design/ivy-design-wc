@@ -33,7 +33,8 @@
       "ivy-image",
       "ivy-description-item",
       "ivy-description",
-      "ivy-rate"
+      "ivy-rate",
+      "ivy-input"
     ]
   }
 }

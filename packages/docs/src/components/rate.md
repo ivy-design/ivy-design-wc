@@ -56,10 +56,18 @@
 
 通过 `onchange` 事件可以在分值变化后执行操作
 
-<ivy-rate value="2" onchange="alert(`当前的value：${this.value}`)" ></ivy-rate>
+<ivy-rate value="2" @change="handleChange" trigger='click'></ivy-rate>
 
-```html
-<ivy-rate value="2" onchange="alert(`当前的value：${this.value}`)"></ivy-rate>
+```vue
+<template>
+  <ivy-rate value="2" @change="handleChange" trigger="click"></ivy-rate>
+</template>
+<script setup>
+const handleChange = (ev) => {
+  // 由于 vue 的限制，`ev.detail` 只能是一个数组
+  alert(`当前的value：${ev.detail[0]}`);
+};
+</script>
 ```
 
 其它的触发方式
@@ -67,9 +75,7 @@
 ```js
 <script>
 rate.addEventListener('change',function(ev){
-    console.log(this.value);
-    console.log(ev.target.value);
-    console.log(ev.detail);
+    console.log(ev.detail[0]);
 })
 </script>
 ```
@@ -83,3 +89,10 @@ rate.addEventListener('change',function(ev){
 | size         | 大小         | String | -      | -      |
 | color        | 未选中的颜色 | String | -      | -      |
 | active-color | 选中的颜色   | String | -      | -      |
+
+<script setup>
+const handleChange = ev => {
+    // 由于 vue 的限制，`ev.detail` 只能是一个数组
+    alert(`当前的value：${ev.detail[0]}`)
+}
+</script>
