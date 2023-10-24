@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import useHostElement from '@/hooks/useHostElement'
+
 // import { genSuccess } from '@/utils/icons'
 
 defineOptions({
@@ -17,7 +20,33 @@ const props = defineProps({
     content: {
         type: String,
         default: ''
+    },
+    duration: {
+        type: Number,
+        default: 3000
     }
+})
+
+const { el, getHostElement } = useHostElement()
+
+const visible = ref(false)
+const wrap = ref<HTMLElement>()
+
+onMounted(() => {
+    visible.value = true
+    const host = getHostElement()
+    console.log(wrap.value)
+    wrap.value?.addEventListener('transitionend', () => {
+        if (!visible.value) {
+            console.log('end')
+            host.remove()
+        } else {
+            console.log('start')
+            setTimeout(() => {
+                visible.value = false
+            }, props.duration)
+        }
+    })
 })
 </script>
 
@@ -25,6 +54,7 @@ const props = defineProps({
     <svg
         xmlns="http://www.w3.org/2000/svg"
         style="position: absolute; width: 0; height: 0px; overflow: hidden"
+        ref="el"
     >
         <symbol id="success" fill="none" viewBox="0 0 48 48">
             <path
@@ -109,13 +139,15 @@ const props = defineProps({
             />
         </symbol>
     </svg>
-    <div class="message">
-        <svg class="icon">
-            <use :href="`#${props.type}`"></use>
-        </svg>
+    <transition name="fade-down">
+        <div class="message" v-show="visible" ref="wrap">
+            <svg class="icon">
+                <use :href="`#${props.type}`"></use>
+            </svg>
 
-        <div class="message-content">{{ props.content }}</div>
-    </div>
+            <div class="message-content">{{ props.content }}</div>
+        </div>
+    </transition>
 </template>
 
 <style lang="scss">
@@ -124,7 +156,14 @@ const props = defineProps({
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    animation: fadeInDown 0.3s ease-in-out;
+    // animation: fadeInDown 0.3s ease-in-out;
+    pointer-events: none;
+    font-size: var(--ivy-font-size);
+    transition: all 0.3s;
+    font-family: var(--ivy-font-family);
+}
+:host + :host {
+    margin-top: 20px;
 }
 .message {
     display: inline-flex;
@@ -132,10 +171,11 @@ const props = defineProps({
     background-color: white;
     pointer-events: all;
     padding: 8px 12px;
-    border: 1px solid #cfcfcf;
+    border: 1px solid var(--ivy-border-color-light);
     border-radius: 4px;
     align-items: center;
-    box-shadow: 0 1px 6px rgb(0 0 0 / 20%);
+    box-shadow: var(--ivy-box-shadow-light);
+    position: relative;
 }
 .icon {
     margin-right: 8px;
@@ -184,6 +224,25 @@ const props = defineProps({
     }
 
     to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.fade-down {
+    &-enter-active,
+    &-leave-active {
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+
+    &-enter-from,
+    &-leave-to {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+
+    &-enter-to,
+    &-leave-from {
         opacity: 1;
         transform: translate3d(0, 0, 0);
     }

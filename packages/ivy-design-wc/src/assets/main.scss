@@ -71,6 +71,8 @@ $colors: (
 }
 
 :root {
+    --ivy-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+        'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
     --ivy-color-white: #ffffff;
     --ivy-color-black: #000000;
     @each $type in ($types) {
@@ -84,7 +86,6 @@ $colors: (
 
         @include set-css-var-value(('color', $type, 'dart-2'), map.get($colors, $type, 'dark-2'));
     }
-
     --ivy-text-color-primary: #303133;
     --ivy-text-color-regular: #606266;
     --ivy-text-color-secondary: #909399;
@@ -128,9 +129,4 @@ $colors: (
 *::before,
 *::after {
     box-sizing: border-box;
-}
-.ivy-message-box {
-    ivy-message + ivy-message {
-        margin-top: 24px;
-    }
 }
