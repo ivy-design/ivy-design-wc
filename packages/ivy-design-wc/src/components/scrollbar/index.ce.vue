@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
+import { useMutationObserver } from '@vueuse/core'
+import useHostElement from '@/hooks/useHostElement'
+import useExpose from '@/hooks/useExpose'
 
 defineOptions({
     name: 'Scrollbar',
@@ -27,7 +30,9 @@ const conf = computed(() => {
     }
 })
 
-const root = ref<HTMLElement | null>(null)
+const { el: root, getHostElement } = useHostElement()
+
+// const root = ref<HTMLElement | null>(null)
 const scrollbarView = ref<HTMLElement | null>(null)
 
 const scrollTop: number = ref(0)
@@ -59,26 +64,39 @@ const init = () => {
     }
     console.log(width, height, scrollbarViewWidth, scrollbarViewHeight)
 }
+
+const { setExpose } = useExpose()
+
+onMounted(() => {
+    setExpose('open', () => {
+        console.log(123)
+    })
+    init()
+    useMutationObserver(
+        scrollbarView.value,
+        (mutationList) => {
+            for (const mutation of mutationList) {
+                if (mutation.type === 'attributes') {
+                    console.log(123)
+                    init()
+                }
+            }
+        },
+        { attributes: true, childList: true, subtree: true, attributeFilter: ['style'] }
+    )
+})
 </script>
 
 <template>
-    <div ref="el" :style="{ height: this.height, maxHeight: this.maxHeight }">
+    <div ref="root" :style="{ height: props.height, maxHeight: props.maxHeight }">
         <div class="ivy-scrollbar__view" ref="scrollbarView">
             <slot></slot>
         </div>
-        <div
-            class="ivy-scrollbar__bar is-vertical"
-            style="{ height: `${this.scrollbarSizeY}px` }"
-            :data-show="this.statusY ? 'show' : ''"
-        >
-            <div class="el-scrollbar__thumb"></div>
+        <div class="ivy-scrollbar__bar is-vertical" :data-show="statusY ? 'show' : ''">
+            <div class="el-scrollbar__thumb" :style="{ height: `${scrollbarSizeY}px` }"></div>
         </div>
-        <div
-            class="ivy-scrollbar__bar is-horizontal"
-            :style="{ width: `${this.scrollbarSizeX}px` }"
-            data-show="this.statusX ? 'show' : ''"
-        >
-            <div class="el-scrollbar__thumb"></div>
+        <div class="ivy-scrollbar__bar is-horizontal" :data-show="statusX ? 'show' : ''">
+            <div class="el-scrollbar__thumb" :style="{ width: `${scrollbarSizeX}px` }"></div>
         </div>
     </div>
 </template>
@@ -98,23 +116,26 @@ const init = () => {
     position: absolute;
     right: 2px;
     bottom: 2px;
-    z-index: 1;
+    z-index: 10;
     border-radius: 4px;
     box-sizing: border-box;
     display: none;
+    &.is-vertical {
+        width: 8px;
+        top: 0;
+        height: 100%;
+    }
+    .is-horizontal {
+        height: 8px;
+        left: 0;
+        width: 100%;
+    }
 }
 .el-scrollbar__thumb {
     background-color: var(--ivy-scrollbar-thumb-background-color, #ddd);
     border-radius: 4px;
 }
-.ivy-scrollbar__bar.is-vertical {
-    width: 8px;
-    top: 0;
-}
-.ivy-scrollbar__bar.is-horizontal {
-    height: 8px;
-    left: 0;
-}
+
 .ivy-scrollbar__bar.is-vertical .el-scrollbar__thumb {
     width: 100%;
     height: 100px;

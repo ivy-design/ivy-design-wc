@@ -54,6 +54,7 @@ import IvyTabPane from './components/tabs/pane.ce.vue'
 import IvyContextmenu from './components/contextmenu/index.ce.vue'
 import IvyRate from './components/rate/index.ce.vue'
 import IvyAvatar from './components/avatar/index.ce.vue'
+import IvyScrollbar from './components/scrollbar/index.ce.vue'
 
 const comp: Record<string, any> = {
     Button: defineCustomElement(IvyButton),
@@ -108,7 +109,8 @@ const comp: Record<string, any> = {
     TabPane: defineCustomElement(IvyTabPane),
     Contextmenu: defineCustomElement(IvyContextmenu),
     Rate: defineCustomElement(IvyRate),
-    Avatar: defineCustomElement(IvyAvatar)
+    Avatar: defineCustomElement(IvyAvatar),
+    Scrollbar: defineCustomElement(IvyScrollbar)
 }
 
 export const Button = comp.Button
@@ -164,6 +166,7 @@ export const TabPane = comp.TabPane
 export const Contextmenu = comp.Contextmenu
 export const Rate = comp.Rate
 export const Avatar = comp.Avatar
+export const Scrollbar = comp.Scrollbar
 
 interface MessageConfig {
     content?: string
@@ -304,5 +307,6 @@ declare module 'vue' {
         Contextmenu: typeof comp.Contextmenu
         Rate: typeof comp.Rate
         Avatar: typeof comp.Avatar
+        Scrollbar: typeof comp.Scrollbar
     }
 }
