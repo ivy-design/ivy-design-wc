@@ -36,7 +36,9 @@
       "ivy-rate",
       "ivy-input",
       "ivy-avatar",
-      "ivy-scrollbar"
+      "ivy-scrollbar",
+      "ivy-table",
+      "ivy-table-column"
     ]
   }
 }

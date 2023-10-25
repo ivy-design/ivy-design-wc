@@ -33,12 +33,11 @@ export const useExpose = () => {
     function setExposes(key: Record<string, any>): void
     function setExposes(options: Record<string, any>) {
         const host = instance?.proxy?.$el.parentNode.host
-        console.dir(host)
+
         if (!host) {
             return false
         }
 
-        console.log(options)
         for (const key of Object.keys(options)) {
             // if existing attributes are exposed
             if (hasOwn(host, key)) {
