@@ -57,9 +57,11 @@ const getStyle = computed(() => {
 </script>
 
 <template>
-    <div class="ivy-mask" @click="maskClose" ref="maskRef"></div>
+    <transition name="fade">
+        <div class="ivy-mask" @click="maskClose" ref="maskRef"></div>
+    </transition>
     <div class="ivy-drawer" :style="getStyle">
-        <div class="ivy-drawer-header">
+        <div class="ivy-drawer-header" v-if="$props.header">
             {{ props.header }}
         </div>
 
@@ -74,9 +76,9 @@ const getStyle = computed(() => {
     position: fixed;
     left: 0;
     top: 0;
+    right: 0;
+    bottom: 0;
     z-index: 8000;
-    width: 100vw;
-    height: 100vh;
     display: none;
     overflow: hidden;
     transition: all 0.3s;
@@ -88,7 +90,7 @@ const getStyle = computed(() => {
     z-index: -1;
     width: 100%;
     height: 100%;
-    background-color: var(--ivy-mask-color, rgba(55, 55, 55, 0.6));
+    background-color: var(--ivy-overlay-color, rgba(55, 55, 55, 0.6));
 }
 .ivy-drawer {
     position: absolute;
@@ -99,7 +101,6 @@ const getStyle = computed(() => {
 .ivy-drawer-header {
     padding: 12px 16px;
     border-bottom: 1px solid var(--ivy-border-color, #dcdfe6);
-    display: none;
 }
 :host([show-header]) .ivy-drawer-header {
     display: block;
@@ -197,5 +198,18 @@ const getStyle = computed(() => {
     to {
         transform: translate3d(0, 0, 0);
     }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+    opacity: 1;
 }
 </style>

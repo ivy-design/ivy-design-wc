@@ -38,7 +38,8 @@
       "ivy-avatar",
       "ivy-scrollbar",
       "ivy-table",
-      "ivy-table-column"
+      "ivy-table-column",
+      "ivy-drawer"
     ]
   }
 }

@@ -4,10 +4,16 @@
 
 <ivy-button type="success" @click="click('drawer')">打开 Drawer</ivy-button>
 
-<ivy-drawer id="drawer" header="Drawer标题"></ivy-drawer>
+<ivy-drawer id="drawer" header="Drawer标题">
+    <p>dfadsfds</p>
+</ivy-drawer>
 
 ```html
-<ivy-button type="success" onclick="document.getElementById('drawer').open = true">打开 Drawer</ivy-button>
+<ivy-button
+  type="success"
+  onclick="document.getElementById('drawer').open = true"
+  >打开 Drawer</ivy-button
+>
 
 <ivy-drawer id="drawer" header="Drawer标题"></ivy-drawer>
 ```
@@ -19,7 +25,9 @@
 <ivy-drawer id="drawer1" title="Drawer标题" hide-title></ivy-drawer>
 
 ```html
-<ivy-button type="success" onclick="document.getElementById('drawer1').open()">打开 Drawer</ivy-button>
+<ivy-button type="success" onclick="document.getElementById('drawer1').open()"
+  >打开 Drawer</ivy-button
+>
 
 <ivy-drawer id="drawer1" title="Drawer标题" hide-title></ivy-drawer>
 ```
@@ -32,23 +40,40 @@
 <ivy-drawer id="drawer2" title="Drawer标题" hide-title style="z-index: 9000;"></ivy-drawer>
 
 ```html
-<ivy-button type="success" onclick="document.getElementById('drawer2').open()"> 打开 Drawer </ivy-button>
-<ivy-drawer id="drawer2" title="Drawer标题" hide-title style="z-index: 9000;"></ivy-drawer>
+<ivy-button type="success" onclick="document.getElementById('drawer2').open()">
+  打开 Drawer
+</ivy-button>
+<ivy-drawer
+  id="drawer2"
+  title="Drawer标题"
+  hide-title
+  style="z-index: 9000;"
+></ivy-drawer>
 ```
 
 ## 点击遮罩层是否关闭
 
 通过给组件设置`maskClosable`属性来设置点击遮罩层是否关闭本组件
 
-<ivy-button type="success" onclick="document.getElementById('drawer3').open()">打开 Drawer</ivy-button>
-<ivy-drawer id="drawer3" title="Drawer标题" hide-title maskClosable="false">
-<ivy-button type="primary" onclick="document.getElementById('drawer3').close()">关闭 Drawer</ivy-button>
+<ivy-button type="success" onclick="document.getElementById('drawer3').open = true">打开 Drawer</ivy-button>
+<ivy-drawer id="drawer3" title="Drawer 标题" .maskClosable="false">
+<ivy-button type="primary" onclick="document.getElementById('drawer3').open = false">关闭 Drawer</ivy-button>
 </ivy-drawer>
 
 ```html
-<ivy-button type="success" onclick="document.getElementById('drawer3').open()">打开 Drawer</ivy-button>
-<ivy-drawer id="drawer3" title="Drawer标题" hide-title maskClosable="false">
-    <ivy-button type="primary" onclick="document.getElementById('drawer3').close()">关闭 Drawer</ivy-button>
+<ivy-button
+  type="success"
+  onclick="document.getElementById('drawer3').open = true"
+>
+  打开 Drawer
+</ivy-button>
+<ivy-drawer id="drawer3" title="Drawer标题" .maskClosable="false">
+  <ivy-button
+    type="primary"
+    onclick="document.getElementById('drawer3').open = false"
+  >
+    关闭 Drawer
+  </ivy-button>
 </ivy-drawer>
 ```
 
