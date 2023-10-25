@@ -32,7 +32,7 @@ export default defineComponent({
 
 <style lang="scss">
 :host {
-    --ivy-loading-mask-color: rgba(255, 255, 255, 0.85);
+    --ivy-loading-mask-color: var(--ivy-mask-color);
     --ivy-loading-text-color: var(--ivy-text-color-regular, #606266);
     --ivy-loading-text-margin-top: 12px;
     --ivy-loading-text-font-size: 13px;
