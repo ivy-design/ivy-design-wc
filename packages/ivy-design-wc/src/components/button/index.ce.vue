@@ -19,12 +19,17 @@ export default defineComponent({
             default: 'medium',
             validator: (val: IvySize) => ['small', 'medium', 'large'].includes(val)
         },
-        loading: Boolean
+        loading: Boolean,
+        round: Boolean
     },
     setup(props) {
         return () => (
             <button
-                class={['ivy-button', `ivy-button--${props.type}`, { 'is-loading': props.loading }]}
+                class={[
+                    'ivy-button',
+                    `ivy-button--${props.type}`,
+                    { 'is-loading': props.loading, 'is-round': props.round }
+                ]}
             >
                 {props.loading ? genLoading({ class: 'ivy-loading' }) : null}
                 <slot></slot>
@@ -206,6 +211,10 @@ export default defineComponent({
     & .ivy-loading {
         animation: rotating 2s linear infinite;
     }
+}
+
+.ivy-button.is-round {
+    border-radius: 9999990px;
 }
 @keyframes rotating {
     0% {
