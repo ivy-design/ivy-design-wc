@@ -7,7 +7,7 @@ export const useExpose = () => {
     function setExpose<T>(key: string, value: T): void
     function setExpose<T>(key: string, value: T) {
         const host = instance?.proxy?.$el.parentNode.host
-        console.dir(host)
+
         if (!host) {
             return false
         }
@@ -15,7 +15,6 @@ export const useExpose = () => {
         if (typeof key === 'string') {
             exposed[key as string] = value
         }
-        console.log(exposed)
         for (const key of Object.keys(exposed)) {
             // if existing attributes are exposed
             if (hasOwn(host, key)) {
