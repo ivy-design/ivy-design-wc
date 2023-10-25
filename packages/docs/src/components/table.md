@@ -26,7 +26,7 @@
 
 <div style="display:flex;align-items:center;">切换状态：<ivy-switch id="iSwitch" checked></ivy-switch></div>
 
-<ivy-table id="table1" loading>
+<ivy-table id="table1" loading loading-text="Loading...">
     <ivy-table-column label="姓名" prop="name" width="100px"></ivy-table-column>
     <ivy-table-column label="日期" prop="date" min-width="120px"></ivy-table-column>
     <ivy-table-column label="地址" prop="address"></ivy-table-column>
@@ -45,23 +45,28 @@
   ></ivy-table-column>
   <ivy-table-column label="地址" prop="address"></ivy-table-column>
 </ivy-table>
-<script>
-  document.getElementById("iSwitch").addEventListener("change", (ev) => {
-    const checked = ev.detail;
-    if (checked) {
-      document.getElementById("table1").setAttribute("loading", "");
-    } else {
-      document.getElementById("table1").removeAttribute("loading");
-    }
+<script setup>
+  import { onMounted } from "vue";
+  onMounted(() => {
+    document.getElementById("iSwitch").addEventListener("change", (ev) => {
+      const checked = ev.detail[0];
+      if (checked) {
+        document.getElementById("table1").setAttribute("loading", "");
+      } else {
+        document.getElementById("table1").removeAttribute("loading");
+      }
+    });
   });
 </script>
 ```
 
 ## Table Props
 
-| 名称        | 说明           | 类型        | 可选值 | 默认值 |
-| ----------- | -------------- | ----------- | ------ | ------ |
-| data-source | table 的数据源 | json 字符串 | -      | -      |
+| 名称         | 说明             | 类型      | 可选值 | 默认值 |
+| ------------ | ---------------- | --------- | ------ | ------ |
+| border       | 边框             | `boolean` | -      | -      |
+| loading      | 加载状态         | `boolean` | -      | -      |
+| loading-text | 加载中的提示文字 | `string`  | -      | -      |
 
 ## TableColumn Props
 
@@ -76,7 +81,7 @@
 import { onMounted } from 'vue';
 onMounted(()=>{
     document.getElementById('iSwitch').addEventListener('change', ev=>{
-        const checked = ev.detail;
+        const checked = ev.detail[0];
         if(checked){
             document.getElementById('table1').setAttribute('loading', "")
         }else{

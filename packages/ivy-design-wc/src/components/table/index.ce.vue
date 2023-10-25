@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import useExpose from '@/hooks/useExpose'
+import { genLoading } from '@/utils/icons'
 
 defineOptions({
     name: 'Table',
     inheritAttrs: false
 })
+
+const props = defineProps({
+    loading: Boolean,
+    loadingText: String
+})
+
 const root = ref<HTMLDivElement>()
 const rootRect = ref<DOMRect>()
 const getRootWidth = () => {
@@ -119,11 +126,22 @@ onMounted(() => {
             </table>
         </div>
     </div>
+    <transition name="fade">
+        <div class="loading" v-show="props.loading">
+            <div class="loading-inner">
+                <slot name="loading">
+                    <gen-loading class="loading-icon" />
+                    <p v-if="props.loadingText">{{ props.loadingText }}</p>
+                </slot>
+            </div>
+        </div>
+    </transition>
 </template>
 
 <style lang="scss">
 :host {
     display: block;
+    position: relative;
 }
 .table {
     font-size: var(--ivy-font-size);
@@ -135,5 +153,49 @@ onMounted(() => {
         padding: 4px 8px;
         box-sizing: border-box;
     }
+}
+
+.loading {
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--ivy-mask-color);
+    &-inner {
+        text-align: center;
+        color: var(--ivy-text-color-regular);
+    }
+    &-icon {
+        line-height: 1em;
+        font-size: 24px;
+        animation: spin 1s linear infinite;
+        transform-origin: center center;
+    }
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(359deg);
+    }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+    opacity: 1;
 }
 </style>
