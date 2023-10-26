@@ -11,7 +11,7 @@ export default defineComponent({
     props: {
         initialIndex: {
             type: String,
-            default: '1'
+            default: '0'
         },
         autoplay: {
             type: Boolean,
@@ -44,19 +44,19 @@ export default defineComponent({
     },
     emits: ['change'],
     setup(props, { emit }) {
-        const current = ref(1)
+        const current = ref(0)
         const size = ref(0)
 
         const handlePrev = () => {
             if (current.value === 0) {
-                current.value = size.value
+                current.value = size.value - 1
                 return
             }
             current.value = current.value - 1
         }
 
         const handleNext = () => {
-            if (current.value === size.value) {
+            if (current.value >= size.value - 1) {
                 current.value = 0
                 return
             }
@@ -64,13 +64,17 @@ export default defineComponent({
         }
 
         const handleCurrentChange = (ev: Event) => {
-            const target = ev.target as HTMLElement
-            const clickable = target.dataset.clickable
-            if (clickable) {
-                const index = Number(target.dataset.index)
-                current.value = index
-                emit('change', index)
-                emit('change', index)
+            const type = ev.type as any
+
+            if (type === props.trigger || (type === 'mousemove' && props.trigger === 'hover')) {
+                const target = ev.target as HTMLElement
+                const clickable = target.dataset.clickable
+
+                if (clickable === 'true') {
+                    const index = Number(target.dataset.index)
+                    current.value = index
+                    emit('change', index)
+                }
             }
         }
 
@@ -81,18 +85,19 @@ export default defineComponent({
             current.value = Number(props.initialIndex)
             const slotTmp = slotEl.value?.assignedElements() ?? []
             size.value = slotTmp.length
-            if (size.value > 1) {
-                const cloneFinal = slotTmp[size.value - 1].cloneNode(true)
-                const cloneFirst = slotTmp[0].cloneNode(true)
-                slots.value = [cloneFinal, ...slotTmp, cloneFirst]
-            } else {
-                slots.value = [...slotTmp]
-            }
+            // if (size.value > 1) {
+            //     const cloneFinal = slotTmp[size.value - 1].cloneNode(true)
+            //     const cloneFirst = slotTmp[0].cloneNode(true)
+            //     slots.value = [cloneFinal, ...slotTmp, cloneFirst]
+            // } else {
+            //     slots.value = [...slotTmp]
+            // }
+            slots.value = [...slotTmp]
         })
 
         const calcInitialTranslate = () => {
             if (size.value > 1) {
-                return `translateX(-${Number(props.initialIndex || 1) * 100}%)`
+                return `translateX(-${(Number(current.value || 0) / size.value) * 100}%)`
             }
             return 'translateX(0)'
         }
@@ -100,25 +105,27 @@ export default defineComponent({
         return () => {
             return (
                 <>
-                    <div
-                        class="carousel-wrap"
-                        style={{
-                            width: `${slots.value.length}00%`,
-                            transform: calcInitialTranslate()
-                        }}
-                    >
-                        {slots.value.map((c: any) => {
-                            return (
-                                <div
-                                    class="carousel-item"
-                                    style={{ flex: `0 0 calc(1/${slots.value.length}*100%` }}
-                                    innerHTML={c.innerHTML as string}
-                                ></div>
-                            )
-                        })}
-                    </div>
-                    <div class="carousel-wrap__hide">
-                        <slot ref={(el: HTMLSlotElement) => (slotEl.value = el)}></slot>
+                    <div class="carousel">
+                        <div
+                            class="carousel-wrap"
+                            style={{
+                                width: `${slots.value.length}00%`,
+                                transform: calcInitialTranslate()
+                            }}
+                        >
+                            {slots.value.map((c: any) => {
+                                return (
+                                    <div
+                                        class="carousel-item"
+                                        style={{ flex: `0 0 calc(1/${slots.value.length}*100%` }}
+                                        innerHTML={c.innerHTML as string}
+                                    ></div>
+                                )
+                            })}
+                        </div>
+                        <div class="carousel-wrap__hide">
+                            <slot ref={(el: HTMLSlotElement) => (slotEl.value = el)}></slot>
+                        </div>
                     </div>
                     <div class="carousel-trigger">
                         <div class="carousel-trigger-item" onClick={handlePrev}>
@@ -131,8 +138,25 @@ export default defineComponent({
                             {genArrowRight()}
                         </div>
                     </div>
-                    <div onClick={handleCurrentChange} class="carousel-indicator">
-                        <slot name="indicator"></slot>
+                    <div
+                        onClick={handleCurrentChange}
+                        onMousemove={handleCurrentChange}
+                        class="carousel-indicator"
+                    >
+                        <slot name="indicator">
+                            {new Array(size.value).fill(0).map((_, i) => {
+                                return (
+                                    <div
+                                        class={[
+                                            'carousel-indicator-item',
+                                            { 'is-active': current.value === i }
+                                        ]}
+                                        data-index={i}
+                                        data-clickable={current.value === i ? 'false' : 'true'}
+                                    ></div>
+                                )
+                            })}
+                        </slot>
                     </div>
                 </>
             )
@@ -150,6 +174,9 @@ export default defineComponent({
 }
 
 .carousel {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     &-wrap {
         height: 100%;
         min-width: 100%;
@@ -161,6 +188,7 @@ export default defineComponent({
     }
     &-item {
         display: block;
+        height: 100%;
     }
     &-trigger {
         &-item {
@@ -189,15 +217,15 @@ export default defineComponent({
         transform: translateX(-50%);
         &-item {
             display: inline-flex;
-            width: 10px;
+            width: 16px;
             height: 3px;
             background-color: gray;
             margin: 0 10px;
             border-radius: 1px;
-            &:hover {
+            &:not(.is-active:hover) {
                 cursor: pointer;
             }
-            &[data-active] {
+            &.is-active {
                 background-color: #409eff;
             }
         }

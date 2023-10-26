@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { toRef } from 'vue'
 defineOptions({
-    name: 'TimelineItem'
+    name: 'TimelineItem',
+    inheritAttrs: false
 })
 const props = defineProps({
     timestamp: String,

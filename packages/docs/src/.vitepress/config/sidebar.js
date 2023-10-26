@@ -107,10 +107,6 @@ const components = [
         link: "/components/description",
       },
       {
-        text: "Tab 标签页",
-        link: "/components/tab",
-      },
-      {
         text: "Table 表格",
         link: "/components/table",
       },
@@ -213,6 +209,10 @@ const components = [
       {
         text: "Dropdown 下拉菜单",
         link: "/components/dropdown",
+      },
+      {
+        text: "Tabs 标签页",
+        link: "/components/tab",
       },
     ],
   },
