@@ -1,44 +1,48 @@
-<script lang="tsx">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { genLoading } from '@/utils/icons'
 import type { IvySize, IvyType } from '@/utils/typescript'
 
 export type ivyButtonType = IvyType | 'default'
 
-export default defineComponent({
+defineOptions({
     name: 'Button',
-    props: {
-        type: {
-            type: String,
-            default: 'default',
-            validator: (val: ivyButtonType) =>
-                ['default', 'primary', 'success', 'warning', 'danger', 'info'].includes(val)
-        },
-        size: {
-            type: String,
-            default: 'medium',
-            validator: (val: IvySize) => ['small', 'medium', 'large'].includes(val)
-        },
-        loading: Boolean,
-        round: Boolean
+    inheritAttrs: false
+})
+
+const props = defineProps({
+    type: {
+        type: String,
+        default: 'default',
+        validator: (val: ivyButtonType) =>
+            ['default', 'primary', 'success', 'warning', 'danger', 'info'].includes(val)
     },
-    setup(props) {
-        return () => (
-            <button
-                class={[
-                    'ivy-button',
-                    `ivy-button--${props.type}`,
-                    { 'is-loading': props.loading, 'is-round': props.round }
-                ]}
-            >
-                {props.loading ? genLoading({ class: 'ivy-loading' }) : null}
-                <slot></slot>
-            </button>
-        )
+    size: {
+        type: String,
+        default: 'medium',
+        validator: (val: IvySize) => ['small', 'medium', 'large'].includes(val)
     },
-    methods: {}
+    loading: Boolean,
+    round: Boolean,
+    disabled: Boolean
 })
 </script>
+
+<template>
+    <button
+        :class="[
+            'ivy-button',
+            `ivy-button--${props.type}`,
+            {
+                'is-loading': props.loading,
+                'is-round': props.round,
+                'is-disabled': props.disabled
+            }
+        ]"
+    >
+        <genLoading v-if="props.loading" class="ivy-loading" />
+        <slot></slot>
+    </button>
+</template>
 
 <style lang="scss">
 :host {
@@ -67,6 +71,7 @@ export default defineComponent({
     margin-right: 0;
 }
 .ivy-button {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,7 +102,7 @@ export default defineComponent({
         background-color: var(--ivy-button-active-background-color);
         border-color: var(--ivy-button-active-border-color);
     }
-    &:disabled {
+    &.is-disabled {
         background-color: var(--ivy-button-disabled-background-color);
         border-color: var(--ivy-button-disabled-border-color);
         color: var(--ivy-button-disabled-text-color);
@@ -196,15 +201,16 @@ export default defineComponent({
     position: relative;
     pointer-events: none;
     &::before {
+        display: block;
         box-sizing: border-box;
         z-index: 1;
         pointer-events: none;
         content: ' ';
         position: absolute;
+        width: calc(100% + 2px);
+        height: calc(100% + 2px);
         left: -1px;
         top: -1px;
-        right: -1px;
-        bottom: -1px;
         border-radius: inherit;
         background-color: var(--ivy-mask-color-extra-light, rgba(255, 255, 255, 0.3));
     }
