@@ -1,8 +1,9 @@
 <script lang="tsx">
-import { type PropType, onMounted, ref, defineComponent } from 'vue'
+import { type PropType, onMounted, ref, defineComponent, computed, Transition } from 'vue'
 import { genArrowRight, genArrowLeft } from '../../utils/icons'
 
-type Trigger = 'hover' | 'click' | 'never'
+type Arrow = 'hover' | 'click'
+type Trigger = 'hover' | 'always' | 'never'
 type IndicatorPosition = 'none' | 'outside' | 'inside'
 
 export default defineComponent({
@@ -34,10 +35,17 @@ export default defineComponent({
         },
         indicatorCustom: Boolean,
         trigger: {
+            type: String as PropType<Arrow>,
+            default: 'hover',
+            validator: (val: Arrow) => {
+                return ['hover', 'click'].includes(val)
+            }
+        },
+        arrow: {
             type: String as PropType<Trigger>,
             default: 'hover',
             validator: (val: Trigger) => {
-                return ['hover', 'click', 'never'].includes(val)
+                return ['hover', 'always', 'never'].includes(val)
             }
         },
         pauseOnHover: Boolean
@@ -101,11 +109,34 @@ export default defineComponent({
             }
             return 'translateX(0)'
         }
+        const isHover = ref(false)
+        const showArrow = computed(() => {
+            if (props.arrow === 'never') {
+                return false
+            } else if (props.arrow === 'always') {
+                return true
+            } else {
+                return true && isHover.value
+            }
+        })
+
+        const handleMouseenterHelper = () => {
+            if (props.trigger !== 'hover') return
+            isHover.value = true
+        }
+        const handleMouseleaveHelper = () => {
+            if (props.trigger !== 'hover') return
+            isHover.value = false
+        }
 
         return () => {
             return (
                 <>
-                    <div class="carousel">
+                    <div
+                        class="carousel"
+                        onMouseenter={handleMouseenterHelper}
+                        onMouseleave={handleMouseleaveHelper}
+                    >
                         <div
                             class="carousel-wrap"
                             style={{
@@ -127,17 +158,26 @@ export default defineComponent({
                             <slot ref={(el: HTMLSlotElement) => (slotEl.value = el)}></slot>
                         </div>
                     </div>
-                    <div class="carousel-trigger">
-                        <div class="carousel-trigger-item" onClick={handlePrev}>
-                            {genArrowLeft()}
-                        </div>
+
+                    <Transition name="fade">
                         <div
-                            class="carousel-trigger-item carousel-trigger-item-right"
-                            onClick={handleNext}
+                            v-show={showArrow.value}
+                            class="carousel-trigger"
+                            onMouseenter={handleMouseenterHelper}
+                            onMouseleave={handleMouseleaveHelper}
                         >
-                            {genArrowRight()}
+                            <div class="carousel-trigger-item" onClick={handlePrev}>
+                                {genArrowLeft()}
+                            </div>
+                            <div
+                                class="carousel-trigger-item carousel-trigger-item-right"
+                                onClick={handleNext}
+                            >
+                                {genArrowRight()}
+                            </div>
                         </div>
-                    </div>
+                    </Transition>
+
                     <div
                         onClick={handleCurrentChange}
                         onMousemove={handleCurrentChange}
@@ -230,5 +270,17 @@ export default defineComponent({
             }
         }
     }
+}
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+    opacity: 1;
 }
 </style>
