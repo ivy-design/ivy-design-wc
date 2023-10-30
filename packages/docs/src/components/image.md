@@ -7,10 +7,10 @@
 可通过 `fit` 确定图片如何适应到容器框，同原生 `object-fit`。
 
 <ivy-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" style="height: 100px;width: 100px;" fit="fit"></ivy-image>
-<ivy-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" style="height: 100px;width: 100px;" fit="contain" class="ml-10"></ivy-image>
-<ivy-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" style="height: 100px;width: 100px;" fit="cover" class="ml-10"></ivy-image>
-<ivy-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" style="height: 100px;width: 100px;" fit="none" class="ml-10"></ivy-image>
-<ivy-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" style="height: 100px;width: 100px;" fit="scale-down" class="ml-10"></ivy-image>
+<ivy-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" style="height: 100px;width: 100px;" fit="contain" class="margin-left"></ivy-image>
+<ivy-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" style="height: 100px;width: 100px;" fit="cover" class="margin-left"></ivy-image>
+<ivy-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" style="height: 100px;width: 100px;" fit="none" class="margin-left"></ivy-image>
+<ivy-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" style="height: 100px;width: 100px;" fit="scale-down" class="margin-left"></ivy-image>
 
 ```html
 <ivy-image
@@ -22,25 +22,25 @@
   src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
   style="height: 100px;width: 100px;"
   fit="contain"
-  class="ml-10"
+  class="margin-left"
 ></ivy-image>
 <ivy-image
   src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
   style="height: 100px;width: 100px;"
   fit="cover"
-  class="ml-10"
+  class="margin-left"
 ></ivy-image>
 <ivy-image
   src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
   style="height: 100px;width: 100px;"
   fit="none"
-  class="ml-10"
+  class="margin-left"
 ></ivy-image>
 <ivy-image
   src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
   style="height: 100px;width: 100px;"
   fit="scale-down"
-  class="ml-10"
+  class="margin-left"
 ></ivy-image>
 ```
 
