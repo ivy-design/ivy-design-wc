@@ -57,6 +57,7 @@ import IvyAvatar from './components/avatar/index.ce.vue'
 import IvyScrollbar from './components/scrollbar/index.ce.vue'
 import IvyTable from './components/table/index.ce.vue'
 import IvyTableColumn from './components/table/column.ce.vue'
+import IvyCopyToClipboard from './components/copy-to-clipboard/index.ce.vue'
 
 const comp: Record<string, any> = {
     Button: defineCustomElement(IvyButton),
@@ -114,7 +115,8 @@ const comp: Record<string, any> = {
     Avatar: defineCustomElement(IvyAvatar),
     Scrollbar: defineCustomElement(IvyScrollbar),
     Table: defineCustomElement(IvyTable),
-    TableColumn: defineCustomElement(IvyTableColumn)
+    TableColumn: defineCustomElement(IvyTableColumn),
+    CopyToClipboard: defineCustomElement(IvyCopyToClipboard)
 }
 
 export const Button = comp.Button
@@ -173,6 +175,7 @@ export const Avatar = comp.Avatar
 export const Scrollbar = comp.Scrollbar
 export const Table = comp.Table
 export const TableColumn = comp.TableColumn
+export const CopyToClipboard = comp.CopyToClipboard
 
 interface MessageConfig {
     content?: string
@@ -316,5 +319,6 @@ declare module 'vue' {
         Scrollbar: typeof comp.Scrollbar
         Table: typeof comp.Table
         TableColumn: typeof comp.TableColumn
+        CopyToClipboard: typeof comp.CopyToClipboard
     }
 }
