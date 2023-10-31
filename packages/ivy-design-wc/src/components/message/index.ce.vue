@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import useHostElement from '@/hooks/useHostElement'
+import { curMessageIndex } from '@/utils/utils'
+import useBroadCastChannel from '@/hooks/useBroadCastChannel'
 
 // import { genSuccess } from '@/utils/icons'
 
@@ -32,13 +34,57 @@ const { el, getHostElement } = useHostElement()
 const visible = ref(false)
 const wrap = ref<HTMLElement>()
 
+const curIndex = ref(curMessageIndex.value)
+console.log('setup', curIndex.value, curMessageIndex.value)
+
+const { initBroadcastChannel, postMessage, closeBroadcastChannel } =
+    useBroadCastChannel('ivy-message')
+
+const calcTop = () => {
+    const compHeight = curIndex.value > 0 ? curIndex.value * 40 : 0
+    const gapHeight = (curIndex.value + 1) * 20
+    return compHeight + gapHeight
+}
+
+const broadCastCallback = (data: any, host: HTMLElement) => {
+    console.info(111111, data, curIndex.value, curMessageIndex.value)
+    if (data === curIndex.value) {
+        console.log('current', data, curIndex.value, curMessageIndex.value)
+        closeBroadcastChannel()
+        curMessageIndex.value = curMessageIndex.value > 0 ? curMessageIndex.value - 1 : 0
+    } else {
+        console.log('other', data, curIndex.value, curMessageIndex.value)
+        if (curIndex.value > data) {
+            curIndex.value = curIndex.value > 0 ? curIndex.value - 1 : 0
+        }
+        const top = calcTop()
+        console.log('top', top)
+        host.style.top = `${top}px`
+    }
+    console.info(data, curIndex.value, curMessageIndex.value)
+}
+
 onMounted(() => {
     visible.value = true
-    const host = getHostElement()
-    console.log(wrap.value)
+    const host = getHostElement() as HTMLElement
+    initBroadcastChannel((data: any) => broadCastCallback(data, host))
+
+    wrap.value?.addEventListener('transitionstart', () => {
+        if (visible.value) {
+            const top = calcTop()
+            host.style.top = `${top}px`
+            curMessageIndex.value = curIndex.value + 1
+        }
+    })
     wrap.value?.addEventListener('transitionend', () => {
         if (!visible.value) {
             console.log('end')
+            if (curMessageIndex.value > 1) {
+                postMessage(curIndex.value)
+            } else {
+                curMessageIndex.value = 0
+            }
+
             host.remove()
         } else {
             console.log('start')
@@ -155,16 +201,14 @@ onMounted(() => {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    // animation: fadeInDown 0.3s ease-in-out;
     pointer-events: none;
     font-size: var(--ivy-font-size);
     transition: all 0.3s;
     font-family: var(--ivy-font-family);
+    position: fixed;
+    transition: top 0.3s;
 }
-:host + :host {
-    margin-top: 20px;
-}
+
 .message {
     display: inline-flex;
     margin: 0 auto;
