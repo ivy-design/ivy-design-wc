@@ -9,7 +9,8 @@ export default defineComponent({
         summary: {
             type: String,
             default: '详细信息'
-        }
+        },
+        removeTransition: Boolean
     },
     setup(props) {
         const transitionAttrs = transition()
@@ -26,20 +27,28 @@ export default defineComponent({
 
                     <slot name="summary">{props.summary}</slot>
                 </div>
-                <Transition
-                    onBeforeEnter={transitionAttrs.onBeforeEnter}
-                    onEnter={transitionAttrs.onEnter}
-                    onAfterEnter={transitionAttrs.onAfterEnter}
-                    onBeforeLeave={transitionAttrs.onBeforeLeave}
-                    onLeave={transitionAttrs.onLeave}
-                    onAfterLeave={transitionAttrs.onAfterLeave}
-                >
+                {props.removeTransition ? (
                     <div class="details-content" v-show={visible.value}>
                         <div class="details-content-inner">
                             <slot></slot>
                         </div>
                     </div>
-                </Transition>
+                ) : (
+                    <Transition
+                        onBeforeEnter={transitionAttrs.onBeforeEnter}
+                        onEnter={transitionAttrs.onEnter}
+                        onAfterEnter={transitionAttrs.onAfterEnter}
+                        onBeforeLeave={transitionAttrs.onBeforeLeave}
+                        onLeave={transitionAttrs.onLeave}
+                        onAfterLeave={transitionAttrs.onAfterLeave}
+                    >
+                        <div class="details-content" v-show={visible.value}>
+                            <div class="details-content-inner">
+                                <slot></slot>
+                            </div>
+                        </div>
+                    </Transition>
+                )}
             </div>
         )
     }

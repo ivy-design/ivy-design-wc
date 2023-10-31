@@ -40,7 +40,8 @@
       "ivy-table",
       "ivy-table-column",
       "ivy-drawer",
-      "ivy-tooltip"
+      "ivy-tooltip",
+      "ivy-details"
     ]
   }
 }
