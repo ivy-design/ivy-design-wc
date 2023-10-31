@@ -59,6 +59,8 @@ import IvyTable from './components/table/index.ce.vue'
 import IvyTableColumn from './components/table/column.ce.vue'
 import IvyCopyToClipboard from './components/copy-to-clipboard/index.ce.vue'
 
+import { createMessage } from './utils/utils'
+
 const comp: Record<string, any> = {
     Button: defineCustomElement(IvyButton),
     Grid: defineCustomElement(IvyGrid),
@@ -177,68 +179,6 @@ export const Table = comp.Table
 export const TableColumn = comp.TableColumn
 export const CopyToClipboard = comp.CopyToClipboard
 
-interface MessageConfig {
-    content?: string
-    duration?: number
-    type?: 'success' | 'info' | 'warning' | 'error'
-    onClose?: () => void
-}
-
-const parseMessageConfig = (config: MessageConfig | string): MessageConfig => {
-    let conf: MessageConfig = {}
-    const type = Object.prototype.toString.call(config).slice(8, -1)
-
-    if (type === 'Object') {
-        conf = { ...(config as MessageConfig) }
-    } else {
-        conf = {
-            type: 'info',
-            content: config as string
-        }
-    }
-    return conf
-}
-
-export const message = (config: MessageConfig | string) => {
-    let parent = document.querySelector('.ivy-message-box')
-    if (!parent) {
-        parent = document.createElement('div')
-        parent.className = 'ivy-message-box'
-        parent.setAttribute(
-            'style',
-            'position: fixed; top: 0; left: 0; z-index: 9999999;width: 100%;height: 0;'
-        )
-        document.body.appendChild(parent)
-    }
-    const conf = parseMessageConfig(config)
-
-    const instance: any = new comp.Message()
-    instance.setAttribute('type', conf.type || 'info')
-    instance.setAttribute('duration', conf.duration || 3000)
-    instance.setAttribute('content', conf.content || '')
-    ;(parent as any).appendChild(instance)
-    instance.setAttribute('content', conf.content)
-    return instance
-}
-
-message.success = (config: MessageConfig | string) => {
-    const conf = parseMessageConfig(config)
-
-    return message({ ...conf, type: 'success' })
-}
-message.error = (config: MessageConfig | string) => {
-    const conf = parseMessageConfig(config)
-    return message({ ...conf, type: 'error' })
-}
-message.warning = (config: MessageConfig | string) => {
-    const conf = parseMessageConfig(config)
-    return message({ ...conf, type: 'warning' })
-}
-message.info = (config: MessageConfig | string) => {
-    const conf = parseMessageConfig(config)
-    return message({ ...conf, type: 'info' })
-}
-
 export const registerComponents = async (prefix = 'Ivy') => {
     for (const key in comp) {
         const name: string[] = []
@@ -250,6 +190,8 @@ export const registerComponents = async (prefix = 'Ivy') => {
         customElements.define(name.join('-'), comp[key])
     }
 }
+
+export const message = createMessage(Message)
 
 export const registerComponent = (name: string, component: any) => {
     customElements.define(name, component)
