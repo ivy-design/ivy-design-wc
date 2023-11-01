@@ -2,8 +2,8 @@
 import { h } from "vue";
 import Theme from "vitepress/theme";
 import "./style.css";
-import { registerComponents } from "@ivy-design/wc";
-import "@ivy-design/wc/dist/style.css";
+import { registerComponents } from "@ivy-design/ce";
+import "@ivy-design/ce/dist/style.css";
 
 export default {
   ...Theme,
@@ -12,8 +12,8 @@ export default {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
     });
   },
-  enhanceApp({ app, router, siteData }) {
+  enhanceApp(ctx) {
     // ...
-    registerComponents();
+    if (ct) registerComponents();
   },
 };

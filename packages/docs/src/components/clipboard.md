@@ -43,7 +43,7 @@
 ```
 
 <script setup>
-import { message } from '@ivy-design/wc'
+import { message } from '@ivy-design/ce'
 const clipboardCopy = (ev) => {
     console.log(ev)
     message.success("Copied! content is " + ev.detail)

@@ -11,6 +11,15 @@
         "package.json",
         "README.md"
     ],
+    "keywords": [
+        "front-end",
+        "component",
+        "vue",
+        "web-component",
+        "webComponent",
+        "web component",
+        "ivy-design"
+    ],
     "license": "MIT",
     "scripts": {
         "dev": "vite build -w",

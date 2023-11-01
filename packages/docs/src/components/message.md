@@ -22,7 +22,7 @@
 
 <script setup>
 import { onMounted } from 'vue';
-import { message } from '@ivy-design/wc'
+import { message } from '@ivy-design/ce'
 onMounted(()=>{
     console.log(message)
     document.getElementById('btn').addEventListener('click', ()=>{

@@ -31,3 +31,5 @@ types
 
 test-results/
 playwright-report/
+
+packages/docs/src/.vitepress/.temp/

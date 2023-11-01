@@ -10,19 +10,22 @@ export default defineConfig({
     nav,
     sidebar,
     outline: [2, 3],
-    outlineTitle: '章节目录',
+    outlineTitle: "章节目录",
     socialLinks: [
       { icon: "github", link: "https://github.com/vuejs/vitepress" },
     ],
-    search:{
-      provider: 'local'
-    }
+    search: {
+      provider: "local",
+    },
   },
-  vue:{
-    template:{
-      compilerOptions:{
-        isCustomElement: tag => tag.startsWith('ivy-')
-      }
-    }
-  }
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => tag.startsWith("ivy-"),
+      },
+    },
+  },
+  sitemap: {
+    hostname: "https://ce.ivy-design.press",
+  },
 });
