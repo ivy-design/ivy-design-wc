@@ -9,8 +9,9 @@
         "dist",
         "types",
         "package.json",
-        "../../README.md"
+        "README.md"
     ],
+    "license": "MIT",
     "scripts": {
         "dev": "vite build -w",
         "build": "run-p type-check build-only",
@@ -22,7 +23,6 @@
         "format": "prettier --write src/"
     },
     "dependencies": {
-        "@popperjs/core": "^2.11.8",
         "@vueuse/core": "^10.2.1",
         "vue": "^3.3.4"
     },
