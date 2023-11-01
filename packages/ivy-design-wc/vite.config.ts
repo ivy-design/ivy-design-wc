@@ -9,7 +9,13 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
     appType: 'custom',
     publicDir: false,
-    plugins: [vue(), vueJsx(), dts()],
+    plugins: [
+        vue(),
+        vueJsx(),
+        dts({
+            outDir: 'types'
+        })
+    ],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))

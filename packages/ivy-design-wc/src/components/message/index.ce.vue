@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import useHostElement from '@/hooks/useHostElement'
 import { curMessageIndex } from '@/utils/utils'
-import useBroadCastChannel from '@/hooks/useBroadCastChannel'
+import useBroadCastChannel from '@/hooks/useBroadcastChannel'
 
 // import { genSuccess } from '@/utils/icons'
 

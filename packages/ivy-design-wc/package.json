@@ -1,5 +1,5 @@
 {
-    "name": "@ivy-design/wc",
+    "name": "@ivy-design/ce",
     "version": "1.0.0",
     "private": true,
     "main": "dist/ivy-design.js",

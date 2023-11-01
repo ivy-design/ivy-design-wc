@@ -30,13 +30,13 @@ const conf = computed(() => {
     }
 })
 
-const { el: root, getHostElement } = useHostElement()
+const { el: root } = useHostElement()
 
 // const root = ref<HTMLElement | null>(null)
 const scrollbarView = ref<HTMLElement | null>(null)
 
-const scrollTop: number = ref(0)
-const maxScrollTop: number = ref(0)
+// const scrollTop: number = ref(0)
+// const maxScrollTop: number = ref(0)
 
 const statusX = ref(false)
 const statusY = ref(false)

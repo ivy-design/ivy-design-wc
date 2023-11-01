@@ -12,7 +12,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@ivy-design/wc": "workspace:*",
+    "@ivy-design/ce": "workspace:*",
     "vue": "^3.3.4"
   },
   "devDependencies": {
