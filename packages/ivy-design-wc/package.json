@@ -9,7 +9,7 @@
         "dist",
         "types",
         "package.json",
-        "README.md"
+        "../../README.md"
     ],
     "scripts": {
         "dev": "vite build -w",

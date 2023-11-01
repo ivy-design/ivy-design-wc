@@ -1,6 +1,27 @@
-# @ivy-design/wc
+# @ivy-design/ce
 
 使用 vue3 构建的 web component 组件库
+
+## 使用
+
+**安装**
+
+```bash
+pnpm add @ivy-design/ce
+```
+
+**使用**
+
+```js
+// 全部注册
+import { registerComponents } from "@ivy-design/wc";
+import "@ivy-design/wc/dist/style.css";
+registerComponents();
+// 单个组件注册
+import { registerComponent, Button } from "@ivy-design/wc";
+import "@ivy-design/wc/dist/style.css";
+registerComponent("ce-button", Button);
+```
 
 ## 参与开发
 
