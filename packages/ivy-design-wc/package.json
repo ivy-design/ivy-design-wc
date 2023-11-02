@@ -5,6 +5,12 @@
     "main": "dist/ivy-design.js",
     "module": "dist/ivy-design.mjs",
     "types": "types/index.d.ts",
+    "unpkg": "dist/ivy-design.js",
+    "jsdelivr": "dist/ivy-design.js",
+    "engines": {
+        "node": ">=18",
+        "pnpm": ">=8"
+    },
     "files": [
         "dist",
         "types",
@@ -20,6 +26,15 @@
         "web component",
         "ivy-design"
     ],
+    "author": {
+        "name": "Guo JiKun",
+        "email": "991603692@qq.com"
+    },
+    "homepage": "https://ce.ivy-design.press",
+    "bugs": {
+        "url": "https://github.com/ivy-design/ivy-design-wc/issues/new",
+        "email": "991603692@qq.com"
+    },
     "license": "MIT",
     "scripts": {
         "dev": "vite build -w",
