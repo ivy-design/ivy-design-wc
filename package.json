@@ -8,14 +8,14 @@
     "docs:dev": "pnpm --filter docs run dev",
     "docs:build": "pnpm --filter docs run build",
     "docs:preview": "pnpm --filter docs run preview",
-    "dev:comp": "pnpm --filter @ivy-design/wc run dev",
-    "build:comp": "pnpm --filter @ivy-design/wc run build",
-    "preview:comp": "pnpm --filter @ivy-design/wc run preview",
-    "test:unit": "pnpm --filter @ivy-design/wc run test:unit",
-    "build-only": "pnpm --filter @ivy-design/wc run build-only",
-    "type-check": "pnpm --filter @ivy-design/wc run type-check",
-    "lint": "pnpm --filter @ivy-design/wc run lint",
-    "format": "pnpm --filter @ivy-design/wc run format"
+    "dev:comp": "pnpm --filter @ivy-design/ce run dev",
+    "build:comp": "pnpm --filter @ivy-design/ce run build",
+    "preview:comp": "pnpm --filter @ivy-design/ce run preview",
+    "test:unit": "pnpm --filter @ivy-design/ce run test:unit",
+    "build-only": "pnpm --filter @ivy-design/ce run build-only",
+    "type-check": "pnpm --filter @ivy-design/ce run type-check",
+    "lint": "pnpm --filter @ivy-design/ce run lint",
+    "format": "pnpm --filter @ivy-design/ce run format"
   },
   "keywords": [
     "front-end",
