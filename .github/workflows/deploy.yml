@@ -45,7 +45,7 @@ jobs:
         with:
           version: 8
           run_install: |
-            - recursive: true
+            - recursive: false
               args: [--frozen-lockfile]
       - name: Setup Pages
         uses: actions/configure-pages@v3
