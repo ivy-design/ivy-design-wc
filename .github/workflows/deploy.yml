@@ -64,5 +64,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-        outputs:
-          page_url: "https://ce.ivy-design.press"
