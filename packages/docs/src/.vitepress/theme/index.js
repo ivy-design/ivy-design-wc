@@ -14,6 +14,8 @@ export default {
   },
   enhanceApp(ctx) {
     // ...
-    if (ct) registerComponents();
+    if (!import.meta.env.SSR) {
+      registerComponents();
+    }
   },
 };
