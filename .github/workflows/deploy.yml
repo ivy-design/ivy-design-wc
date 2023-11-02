@@ -44,13 +44,10 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 8
-          run_install: |
-            - recursive: false
-              args: [--frozen-lockfile]
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      #- name: Install dependencies
-      #run: pnpm install # or pnpm install / yarn install / bun install
+      - name: Install dependencies
+        run: pnpm i && pnpm run build:comp# or pnpm install / yarn install / bun install
       - name: Build with VitePress
         run: |
           pnpm docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
@@ -72,3 +69,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+    outputs:
+      page_url: https://ce.ivy-design.press
