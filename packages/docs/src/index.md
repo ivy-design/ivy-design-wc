@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "ivy-design-wc"
+  name: "ivy-design"
   tagline: "使用 vue3 开发的web component组件库"
   actions:
     - theme: brand
@@ -21,4 +21,3 @@ features:
   - title: 通用
     details: 最终被编译成原生的 web component 组件，所以在所有的前端框架里面都可以使用。
 ---
-
