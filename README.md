@@ -14,12 +14,12 @@ pnpm add @ivy-design/ce
 
 ```js
 // 全部注册
-import { registerComponents } from "@ivy-design/wc";
-import "@ivy-design/wc/dist/style.css";
+import { registerComponents } from "@ivy-design/ce";
+import "@ivy-design/ce/dist/style.css";
 registerComponents();
 // 单个组件注册
-import { registerComponent, Button } from "@ivy-design/wc";
-import "@ivy-design/wc/dist/style.css";
+import { registerComponent, Button } from "@ivy-design/ce";
+import "@ivy-design/ce/dist/style.css";
 registerComponent("ce-button", Button);
 ```
 
