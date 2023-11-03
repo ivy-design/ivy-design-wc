@@ -14,13 +14,13 @@ pnpm add @ivy-design/ce
 
 ```js
 // 全部注册
-import { registerComponents } from "@ivy-design/wc";
-import "@ivy-design/wc/dist/style.css";
-registerComponents();
+import { registerComponents } from '@ivy-design/ce'
+import '@ivy-design/ce/dist/style.css'
+registerComponents()
 // 单个组件注册
-import { registerComponent, Button } from "@ivy-design/wc";
-import "@ivy-design/wc/dist/style.css";
-registerComponent("ce-button", Button);
+import { registerComponent, Button } from '@ivy-design/ce'
+import '@ivy-design/ce/dist/style.css'
+registerComponent('ce-button', Button)
 ```
 
 ## 参与开发
@@ -49,49 +49,53 @@ pnpm test:unit
 
 ## 现有组件
 
-|  组件名称   |                     组件描述 |
-| :---------: | ---------------------------: |
-|   Button    |                         按钮 |
-|    Space    |                         间隔 |
-|  Collapse   |                     折叠面板 |
-|   Divider   |                       分割线 |
-|    Card     |                         卡片 |
-|    Grid     |                         宫格 |
-|    Empty    |                       空状态 |
-|  Timeline   |                       时间轴 |
-| Breadcrumb  |                   面包屑导航 |
-|     Tag     |                         标签 |
-|    Badge    |                         徽章 |
-|     Row     |                           行 |
-|     Col     |                           列 |
-|   Result    |                         结果 |
-|   Drawer    |                         抽屉 |
-|    Input    |                       输入框 |
-|     Tip     |                         提示 |
-|   Select    |                     下拉选择 |
-|   Loading   |                         加载 |
-|   Details   | 详情-同原生的 `details` 标签 |
-|  Progress   |                       进度条 |
-|   Dialog    |                         弹框 |
-|  Dropdown   |                     下拉菜单 |
-|    Steps    |                       步骤条 |
-|   Switch    |                         开关 |
-|    Radio    |                       单选框 |
-|  Checkbox   |                       多选框 |
-| AspectRatio |             固定宽高比例容器 |
-|    Icon     |                         图标 |
-|   Circle    |                   圆形进度条 |
-|    Image    |                         图片 |
-| Description |                     描述列表 |
-| Contextmenu |                     邮件菜单 |
-|    rate     |                         评分 |
+|    组件名称     |                     组件描述 |
+| :-------------: | ---------------------------: |
+|     Button      |                         按钮 |
+|      Space      |                         间隔 |
+|    Collapse     |                     折叠面板 |
+|     Divider     |                       分割线 |
+|      Card       |                         卡片 |
+|      Grid       |                         宫格 |
+|      Empty      |                       空状态 |
+|    Timeline     |                       时间轴 |
+|   Breadcrumb    |                   面包屑导航 |
+|       Tag       |                         标签 |
+|      Badge      |                         徽章 |
+|       Row       |                           行 |
+|       Col       |                           列 |
+|     Result      |                         结果 |
+|     Drawer      |                         抽屉 |
+|      Input      |                       输入框 |
+|       Tip       |                         提示 |
+|     Select      |                     下拉选择 |
+|     Loading     |                         加载 |
+|     Details     | 详情-同原生的 `details` 标签 |
+|    Progress     |                       进度条 |
+|     Dialog      |                         弹框 |
+|    Dropdown     |                     下拉菜单 |
+|      Steps      |                       步骤条 |
+|     Switch      |                         开关 |
+|      Radio      |                       单选框 |
+|    Checkbox     |                       多选框 |
+|   AspectRatio   |             固定宽高比例容器 |
+|      Icon       |                         图标 |
+|     Circle      |                   圆形进度条 |
+|      Image      |                         图片 |
+|   Description   |                     描述列表 |
+|   Contextmenu   |                     邮件菜单 |
+|      rate       |                         评分 |
+|     Avatar      |                         头像 |
+|    Carousel     |                       轮播图 |
+| CopyToClipboard |                 复制到剪切板 |
 
 ## 代办
 
-|   组件名称   | 组件描述 |
-| :----------: | :------: |
-|     tabs     |  标签页  |
-|   message    | 消息提醒 |
-| notification |  通知框  |
-|    table     |   表格   |
-|    split     | 分割面板 |
+|   组件名称   |  组件描述  |
+| :----------: | :--------: |
+|     tabs     |   标签页   |
+|   message    |  消息提醒  |
+| notification |   通知框   |
+|    table     |    表格    |
+|    split     |  分割面板  |
+|  datePicker  | 日期选择器 |
