@@ -12,7 +12,7 @@ export default defineConfig({
     outline: [2, 3],
     outlineTitle: "章节目录",
     socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
+      { icon: "github", link: "https://github.com/ivy-design/ivy-design-wc" },
     ],
     search: {
       provider: "local",
