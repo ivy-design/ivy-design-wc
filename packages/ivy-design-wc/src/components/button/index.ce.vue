@@ -33,7 +33,6 @@ const props = defineProps({
             'ivy-button',
             `ivy-button--${props.type}`,
             {
-                'is-loading': props.loading,
                 'is-round': props.round,
                 'is-disabled': props.disabled
             }
@@ -42,6 +41,7 @@ const props = defineProps({
         <genLoading v-if="props.loading" class="ivy-loading" />
         <slot></slot>
     </button>
+    <div v-if="props.loading" class="is-loading"></div>
 </template>
 
 <style lang="scss">
@@ -66,12 +66,12 @@ const props = defineProps({
 
     --ivy-button-height: var(--ivy-size-medium, 32px);
     margin-right: 12px;
+    position: relative;
 }
 :host(:last-child) {
     margin-right: 0;
 }
 .ivy-button {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,6 +110,7 @@ const props = defineProps({
     }
     & .ivy-loading {
         margin-right: 8px;
+        animation: rotating 2s linear infinite;
     }
 
     &--primary {
@@ -197,26 +198,18 @@ const props = defineProps({
         --ivy-button-disabled-border-color: var(--ivy-color-info-light-5, #c8c9cc);
     }
 }
-.ivy-button.is-loading {
-    position: relative;
-    pointer-events: none;
-    &::before {
-        display: block;
-        box-sizing: border-box;
-        z-index: 1;
-        pointer-events: none;
-        content: ' ';
-        position: absolute;
-        width: calc(100% + 2px);
-        height: calc(100% + 2px);
-        left: -1px;
-        top: -1px;
-        border-radius: inherit;
-        background-color: var(--ivy-mask-color-extra-light, rgba(255, 255, 255, 0.3));
-    }
-    & .ivy-loading {
-        animation: rotating 2s linear infinite;
-    }
+.is-loading {
+    display: block;
+    box-sizing: border-box;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: var(--ivy-mask-color-extra-light, rgba(255, 255, 255, 0.3));
+
+    border-radius: 4px;
 }
 
 .ivy-button.is-round {
