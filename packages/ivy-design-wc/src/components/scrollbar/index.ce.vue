@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from 'vue'
-import { useMutationObserver } from '@vueuse/core'
-import useHostElement from '@/hooks/useHostElement'
+import { useMutationObserver, useThrottleFn, useElementHover } from '@vueuse/core'
+
 import useExpose from '@/hooks/useExpose'
 
 defineOptions({
@@ -30,10 +30,16 @@ const conf = computed(() => {
     }
 })
 
-const { el: root } = useHostElement()
+const root = ref()
+
+const isHovered = useElementHover(root, {
+    delayEnter: 10,
+    delayLeave: 10
+})
 
 // const root = ref<HTMLElement | null>(null)
 const scrollbarView = ref<HTMLElement | null>(null)
+const scrollWrap = ref<HTMLElement | null>(null)
 
 // const scrollTop: number = ref(0)
 // const maxScrollTop: number = ref(0)
@@ -65,6 +71,61 @@ const init = () => {
     console.log(width, height, scrollbarViewWidth, scrollbarViewHeight)
 }
 
+const isPress = ref(false)
+
+/**处理滚动条 */
+
+const initMap = ref({
+    x: 0,
+    y: 0
+})
+
+const scrollMap = ref({
+    x: 0,
+    y: 0
+})
+
+const verticalScrollbar = ref<HTMLElement | null>(null)
+const horizontalScrollbar = ref<HTMLElement | null>(null)
+
+const handleMousedown = (e: MouseEvent) => {
+    console.log(e)
+    isPress.value = true
+    initMap.value.x = e.x
+    initMap.value.y = e.y
+}
+
+const handleMouseup = (e: MouseEvent) => {
+    console.log(e)
+    isPress.value = false
+}
+
+const calcRealMove = (distance: number, isVertical = false) => {
+    const rootStyles = getComputedStyle(root.value as HTMLElement)
+    const width = rootStyles.getPropertyValue('width')
+    const height = rootStyles.getPropertyValue('height')
+    const scrollbarViewStyles = getComputedStyle(scrollbarView.value as HTMLElement)
+    const scrollbarViewWidth = scrollbarViewStyles.getPropertyValue('width')
+    const scrollbarViewHeight = scrollbarViewStyles.getPropertyValue('height')
+    if (isVertical) {
+        return (distance * parseFloat(scrollbarViewWidth)) / parseFloat(width)
+    } else {
+        return (distance * parseFloat(scrollbarViewHeight)) / parseFloat(height)
+    }
+}
+
+const handleMousemove = useThrottleFn((ev: any) => {
+    if (!isPress.value) {
+        return
+    }
+    const move = calcRealMove(ev.layerY)
+    console.log(ev, ev.offsetX, ev.offsetY, ev.layerX, ev.layerY, move)
+    scrollMap.value.y = ev.y - initMap.value.y + scrollMap.value.y
+    // initMap.value.y = 0
+    // scrollMap.value.y = ev.y - initMap.value.y + scrollMap.value.y
+    if (scrollbarView.value) scrollWrap.value.scrollTo(0, move)
+}, 10)
+
 const { setExpose } = useExpose()
 
 onMounted(() => {
@@ -89,15 +150,49 @@ onMounted(() => {
 
 <template>
     <div ref="root" :style="{ height: props.height, maxHeight: props.maxHeight }">
-        <div class="ivy-scrollbar__view" ref="scrollbarView">
-            <slot></slot>
+        <div
+            class="scrollbar__wrap"
+            :style="{ height: props.height, maxHeight: props.maxHeight }"
+            ref="scrollWrap"
+        >
+            <div class="scrollbar__view" ref="scrollbarView">
+                <slot></slot>
+            </div>
         </div>
-        <div class="ivy-scrollbar__bar is-vertical" :data-show="statusY ? 'show' : ''">
-            <div class="el-scrollbar__thumb" :style="{ height: `${scrollbarSizeY}px` }"></div>
-        </div>
-        <div class="ivy-scrollbar__bar is-horizontal" :data-show="statusX ? 'show' : ''">
-            <div class="el-scrollbar__thumb" :style="{ width: `${scrollbarSizeX}px` }"></div>
-        </div>
+
+        <transition name="fade">
+            <div
+                class="scrollbar__bar is-vertical"
+                ref="verticalScrollbar"
+                v-show="statusY && isHovered"
+            >
+                <div
+                    class="scrollbar__thumb"
+                    :style="{
+                        height: `${scrollbarSizeY}px`,
+                        transform: `translateY(${scrollMap.y}px)`
+                    }"
+                    @mousedown="handleMousedown"
+                    @mouseup="handleMouseup"
+                    @mousemove="handleMousemove"
+                ></div>
+            </div>
+        </transition>
+        <transition name="fade">
+            <div
+                class="scrollbar__bar is-horizontal"
+                ref="horizontalScrollbar"
+                v-show="statusX && isHovered"
+            >
+                <div
+                    class="scrollbar__thumb"
+                    :style="{ width: `${scrollbarSizeX}px` }"
+                    @mousedown="handleMousedown"
+                    @mouseup="handleMouseup"
+                    @mousemove="handleMousemove"
+                ></div>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -108,18 +203,21 @@ onMounted(() => {
     box-sizing: border-box;
     overflow: hidden;
 }
-.ivy-scrollbar__view {
+.scrollbar__wrap {
+    overflow: auto;
+    scrollbar-width: none;
+}
+.scrollbar__view {
     width: max-content;
     height: max-content;
 }
-.ivy-scrollbar__bar {
+.scrollbar__bar {
     position: absolute;
     right: 2px;
     bottom: 2px;
     z-index: 10;
     border-radius: 4px;
     box-sizing: border-box;
-    display: none;
     &.is-vertical {
         width: 8px;
         top: 0;
@@ -131,20 +229,26 @@ onMounted(() => {
         width: 100%;
     }
 }
-.el-scrollbar__thumb {
+.scrollbar__thumb {
     background-color: var(--ivy-scrollbar-thumb-background-color, #ddd);
     border-radius: 4px;
+    transform: translate(0, 0);
 }
 
-.ivy-scrollbar__bar.is-vertical .el-scrollbar__thumb {
+.scrollbar__bar.is-vertical .scrollbar__thumb {
     width: 100%;
     height: 100px;
 }
-.ivy-scrollbar__bar.is-horizontal .el-scrollbar__thumb {
+.scrollbar__bar.is-horizontal .scrollbar__thumb {
     height: 100%;
 }
 
-:host(:hover) .ivy-scrollbar__bar[data-show='show'] {
-    display: initial;
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.2s;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }
 </style>

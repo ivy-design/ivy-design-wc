@@ -35,6 +35,10 @@
         "url": "https://github.com/ivy-design/ivy-design-wc/issues/new",
         "email": "991603692@qq.com"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ivy-design/ivy-design-wc.git"
+    },
     "license": "MIT",
     "scripts": {
         "dev": "vite build -w",
