@@ -35,7 +35,6 @@ const visible = ref(false)
 const wrap = ref<HTMLElement>()
 
 const curIndex = ref(curMessageIndex.value)
-console.log('setup', curIndex.value, curMessageIndex.value)
 
 const { initBroadcastChannel, postMessage, closeBroadcastChannel } =
     useBroadCastChannel('ivy-message')
@@ -47,21 +46,11 @@ const calcTop = () => {
 }
 
 const broadCastCallback = (data: any, host: HTMLElement) => {
-    console.info(111111, data, curIndex.value, curMessageIndex.value)
-    if (data === curIndex.value) {
-        console.log('current', data, curIndex.value, curMessageIndex.value)
-        closeBroadcastChannel()
-        curMessageIndex.value = curMessageIndex.value > 0 ? curMessageIndex.value - 1 : 0
-    } else {
-        console.log('other', data, curIndex.value, curMessageIndex.value)
-        if (curIndex.value > data) {
-            curIndex.value = curIndex.value > 0 ? curIndex.value - 1 : 0
-        }
-        const top = calcTop()
-        console.log('top', top)
-        host.style.top = `${top}px`
+    if (curIndex.value > data) {
+        curIndex.value = curIndex.value > 0 ? curIndex.value - 1 : 0
     }
-    console.info(data, curIndex.value, curMessageIndex.value)
+    const top = calcTop()
+    host.style.top = `${top}px`
 }
 
 onMounted(() => {
@@ -78,16 +67,16 @@ onMounted(() => {
     })
     wrap.value?.addEventListener('transitionend', () => {
         if (!visible.value) {
-            console.log('end')
             if (curMessageIndex.value > 1) {
                 postMessage(curIndex.value)
+                closeBroadcastChannel()
+                curMessageIndex.value = curMessageIndex.value - 1
             } else {
                 curMessageIndex.value = 0
             }
 
             host.remove()
         } else {
-            console.log('start')
             setTimeout(() => {
                 visible.value = false
             }, props.duration)
