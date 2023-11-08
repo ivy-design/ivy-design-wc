@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { defineComponent, computed } from 'vue'
-import { genLoading } from '@/utils/icons'
+import { Loading } from '@/utils/icons'
 
 export default defineComponent({
     name: 'Loading',
@@ -17,7 +17,7 @@ export default defineComponent({
             return [
                 <div class="loading" v-show={isLoading.value}>
                     <div class="icon">
-                        <slot name="icon">{genLoading({ class: 'icon-loading' })}</slot>
+                        <slot name="icon">{Loading({ class: 'icon-loading' })}</slot>
                     </div>
                     {props.text ? <div class="text">{props.text}</div> : null}
                 </div>,

@@ -123,7 +123,7 @@ const handleMousemove = useThrottleFn((ev: any) => {
     scrollMap.value.y = ev.y - initMap.value.y + scrollMap.value.y
     // initMap.value.y = 0
     // scrollMap.value.y = ev.y - initMap.value.y + scrollMap.value.y
-    if (scrollbarView.value) scrollWrap.value.scrollTo(0, move)
+    if (scrollbarView.value) scrollWrap.value?.scrollTo(0, move)
 }, 10)
 
 const { setExpose } = useExpose()

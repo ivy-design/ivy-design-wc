@@ -41,7 +41,8 @@
       "ivy-table-column",
       "ivy-drawer",
       "ivy-tooltip",
-      "ivy-details"
+      "ivy-details",
+      "ivy-tree"
     ]
   }
 }

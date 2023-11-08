@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { computed, ref, defineComponent } from 'vue'
-import { genStar, genStarFilled } from '@/utils/icons'
+import { Star, StarFilled } from '@/utils/icons'
 
 export default defineComponent({
     name: 'Rate',
@@ -85,7 +85,7 @@ export default defineComponent({
                                 onMouseleave={() => handleMouseleave(index + 1)}
                                 onClick={() => handleClick(index + 1)}
                             >
-                                {curIndex.value < index + 1 ? genStar() : genStarFilled()}
+                                {curIndex.value < index + 1 ? Star() : StarFilled()}
                             </div>
                         )
                     })}

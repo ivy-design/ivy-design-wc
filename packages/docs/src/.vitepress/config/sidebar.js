@@ -154,6 +154,10 @@ const components = [
         text: "Carousel 轮播图",
         link: "/components/carousel",
       },
+      {
+        text: "Tree 树形控件",
+        link: "/components/tree",
+      },
     ],
   },
   {

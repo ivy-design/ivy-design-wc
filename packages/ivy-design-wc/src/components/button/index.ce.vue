@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { genLoading } from '@/utils/icons'
+import { Loading } from '@/utils/icons'
 import type { IvySize, IvyType } from '@/utils/typescript'
 
 export type ivyButtonType = IvyType | 'default'
@@ -38,7 +38,7 @@ const props = defineProps({
             }
         ]"
     >
-        <genLoading v-if="props.loading" class="ivy-loading" />
+        <Loading v-if="props.loading" class="ivy-loading" />
         <slot></slot>
     </button>
     <div v-if="props.loading" class="is-loading"></div>

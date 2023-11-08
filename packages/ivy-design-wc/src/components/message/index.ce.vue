@@ -4,7 +4,7 @@ import useHostElement from '@/hooks/useHostElement'
 import { curMessageIndex } from '@/utils/utils'
 import useBroadCastChannel from '@/hooks/useBroadcastChannel'
 
-// import { genSuccess } from '@/utils/icons'
+// import { Success } from '@/utils/icons'
 
 defineOptions({
     name: 'Message',

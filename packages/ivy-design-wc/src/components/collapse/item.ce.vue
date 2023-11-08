@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { transition } from '@/utils/collapse-transition'
-import { genArrowRight } from '@/utils/icons'
+import { ArrowRight } from '@/utils/icons'
 
 import { computed, defineComponent, inject, Transition } from 'vue'
 
@@ -35,7 +35,7 @@ export default defineComponent({
             <div class={['ivy-collapse-item', { 'ivy-collapse-item-active': isActive.value }]}>
                 <div class="ivy-collapse-item__header" onClick={handleChange}>
                     <span class={['ivy-icon-right', `ivy-collapse-arrow-${arrowPosition}`]}>
-                        <slot name="icon">{genArrowRight()}</slot>
+                        <slot name="icon">{ArrowRight()}</slot>
                     </span>
 
                     <span>

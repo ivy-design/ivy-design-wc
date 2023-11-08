@@ -6,7 +6,7 @@ const svgBaseProp = {
     class: 'ivy-icon',
     style: { ...svgBaseStyle }
 }
-export const genArrowRight = (props: Record<string, any> = {}) =>
+export const ArrowRight = (props: Record<string, any> = {}) =>
     h(
         'svg',
         {
@@ -18,7 +18,7 @@ export const genArrowRight = (props: Record<string, any> = {}) =>
             d: 'M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z'
         })
     )
-export const genArrowLeft = (props: Record<string, any> = {}) =>
+export const ArrowLeft = (props: Record<string, any> = {}) =>
     h(
         'svg',
         {
@@ -30,7 +30,7 @@ export const genArrowLeft = (props: Record<string, any> = {}) =>
             d: 'M609.408 149.376 277.76 489.6a32 32 0 0 0 0 44.672l331.648 340.352a29.12 29.12 0 0 0 41.728 0 30.592 30.592 0 0 0 0-42.752L339.264 511.936l311.872-319.872a30.592 30.592 0 0 0 0-42.688 29.12 29.12 0 0 0-41.728 0z'
         })
     )
-export const genLoading = (props: Record<string, any> = {}) =>
+export const Loading = (props: Record<string, any> = {}) =>
     h(
         'svg',
         { ...svgBaseProp, class: props?.class ? `ivy-icon ${props.class}` : 'ivy-icon' },
@@ -39,7 +39,7 @@ export const genLoading = (props: Record<string, any> = {}) =>
             d: 'M512 64a32 32 0 0 1 32 32v192a32 32 0 0 1-64 0V96a32 32 0 0 1 32-32zm0 640a32 32 0 0 1 32 32v192a32 32 0 1 1-64 0V736a32 32 0 0 1 32-32zm448-192a32 32 0 0 1-32 32H736a32 32 0 1 1 0-64h192a32 32 0 0 1 32 32zm-640 0a32 32 0 0 1-32 32H96a32 32 0 0 1 0-64h192a32 32 0 0 1 32 32zM195.2 195.2a32 32 0 0 1 45.248 0L376.32 331.008a32 32 0 0 1-45.248 45.248L195.2 240.448a32 32 0 0 1 0-45.248zm452.544 452.544a32 32 0 0 1 45.248 0L828.8 783.552a32 32 0 0 1-45.248 45.248L647.744 692.992a32 32 0 0 1 0-45.248zM828.8 195.264a32 32 0 0 1 0 45.184L692.992 376.32a32 32 0 0 1-45.248-45.248l135.808-135.808a32 32 0 0 1 45.248 0zm-452.544 452.48a32 32 0 0 1 0 45.248L240.448 828.8a32 32 0 0 1-45.248-45.248l135.808-135.808a32 32 0 0 1 45.248 0z'
         })
     )
-export const genSuccess = (props: Record<string, any> = {}) =>
+export const Success = (props: Record<string, any> = {}) =>
     h(
         'svg',
         { ...svgBaseProp, class: props?.class ? `ivy-icon ${props.class}` : 'ivy-icon' },
@@ -48,7 +48,7 @@ export const genSuccess = (props: Record<string, any> = {}) =>
             d: 'M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896zm-55.808 536.384-99.52-99.584a38.4 38.4 0 1 0-54.336 54.336l126.72 126.72a38.272 38.272 0 0 0 54.336 0l262.4-262.464a38.4 38.4 0 1 0-54.272-54.336L456.192 600.384z'
         })
     )
-export const genWarning = (props: Record<string, any> = {}) =>
+export const Warning = (props: Record<string, any> = {}) =>
     h(
         'svg',
         { ...svgBaseProp, class: props?.class ? `ivy-icon ${props.class}` : 'ivy-icon' },
@@ -57,7 +57,7 @@ export const genWarning = (props: Record<string, any> = {}) =>
             d: 'M512 64a32 32 0 0 1 32 32v192a32 32 0 0 1-64 0V96a32 32 0 0 1 32-32zm0 640a32 32 0 0 1 32 32v192a32 32 0 1 1-64 0V736a32 32 0 0 1 32-32zm448-192a32 32 0 0 1-32 32H736a32 32 0 1 1 0-64h192a32 32 0 0 1 32 32zm-640 0a32 32 0 0 1-32 32H96a32 32 0 0 1 0-64h192a32 32 0 0 1 32 32zM195.2 195.2a32 32 0 0 1 45.248 0L376.32 331.008a32 32 0 0 1-45.248 45.248L195.2 240.448a32 32 0 0 1 0-45.248zm452.544 452.544a32 32 0 0 1 45.248 0L828.8 783.552a32 32 0 0 1-45.248 45.248L647.744 692.992a32 32 0 0 1 0-45.248zM828.8 195.264a32 32 0 0 1 0 45.184L692.992 376.32a32 32 0 0 1-45.248-45.248l135.808-135.808a32 32 0 0 1 45.248 0zm-452.544 452.48a32 32 0 0 1 0 45.248L240.448 828.8a32 32 0 0 1-45.248-45.248l135.808-135.808a32 32 0 0 1 45.248 0z'
         })
     )
-export const genError = (props: Record<string, any> = {}) =>
+export const Error = (props: Record<string, any> = {}) =>
     h(
         'svg',
         { ...svgBaseProp, class: props?.class ? `ivy-icon ${props.class}` : 'ivy-icon' },
@@ -66,7 +66,7 @@ export const genError = (props: Record<string, any> = {}) =>
             d: 'M512 64a32 32 0 0 1 32 32v192a32 32 0 0 1-64 0V96a32 32 0 0 1 32-32zm0 640a32 32 0 0 1 32 32v192a32 32 0 1 1-64 0V736a32 32 0 0 1 32-32zm448-192a32 32 0 0 1-32 32H736a32 32 0 1 1 0-64h192a32 32 0 0 1 32 32zm-640 0a32 32 0 0 1-32 32H96a32 32 0 0 1 0-64h192a32 32 0 0 1 32 32zM195.2 195.2a32 32 0 0 1 45.248 0L376.32 331.008a32 32 0 0 1-45.248 45.248L195.2 240.448a32 32 0 0 1 0-45.248zm452.544 452.544a32 32 0 0 1 45.248 0L828.8 783.552a32 32 0 0 1-45.248 45.248L647.744 692.992a32 32 0 0 1 0-45.248zM828.8 195.264a32 32 0 0 1 0 45.184L692.992 376.32a32 32 0 0 1-45.248-45.248l135.808-135.808a32 32 0 0 1 45.248 0zm-452.544 452.48a32 32 0 0 1 0 45.248L240.448 828.8a32 32 0 0 1-45.248-45.248l135.808-135.808a32 32 0 0 1 45.248 0z'
         })
     )
-export const genInfo = (props: Record<string, any> = {}) =>
+export const Info = (props: Record<string, any> = {}) =>
     h(
         'svg',
         { ...svgBaseProp, class: props?.class ? `ivy-icon ${props.class}` : 'ivy-icon' },
@@ -76,7 +76,7 @@ export const genInfo = (props: Record<string, any> = {}) =>
         })
     )
 
-export const genStar = (props: Record<string, any> = {}) =>
+export const Star = (props: Record<string, any> = {}) =>
     h(
         'svg',
         { ...svgBaseProp, class: props?.class ? `ivy-icon ${props.class}` : 'ivy-icon' },
@@ -86,7 +86,7 @@ export const genStar = (props: Record<string, any> = {}) =>
         })
     )
 
-export const genStarFilled = (props: Record<string, any> = {}) =>
+export const StarFilled = (props: Record<string, any> = {}) =>
     h(
         'svg',
         { ...svgBaseProp, class: props?.class ? `ivy-icon ${props.class}` : 'ivy-icon' },
@@ -95,3 +95,11 @@ export const genStarFilled = (props: Record<string, any> = {}) =>
             d: 'M283.84 867.84 512 747.776l228.16 119.936a6.4 6.4 0 0 0 9.28-6.72l-43.52-254.08 184.512-179.904a6.4 6.4 0 0 0-3.52-10.88l-255.104-37.12L517.76 147.904a6.4 6.4 0 0 0-11.52 0L392.192 379.072l-255.104 37.12a6.4 6.4 0 0 0-3.52 10.88L318.08 606.976l-43.584 254.08a6.4 6.4 0 0 0 9.28 6.72z'
         })
     )
+
+export const CaretRight = (props: Record<string, any> = {}) => {
+    return (
+        <svg {...svgBaseProp} class={props?.class ? `ivy-icon ${props.class}` : 'ivy-icon'}>
+            <path d="M384 192v640l384-320.064z" fill="currentColor"></path>
+        </svg>
+    )
+}

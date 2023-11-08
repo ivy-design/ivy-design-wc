@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import useExpose from '@/hooks/useExpose'
-import { genLoading } from '@/utils/icons'
+import { Loading } from '@/utils/icons'
 
 defineOptions({
     name: 'Table',

@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { type PropType, onMounted, ref, defineComponent, computed, Transition } from 'vue'
-import { genArrowRight, genArrowLeft } from '../../utils/icons'
+import { ArrowRight, ArrowLeft } from '../../utils/icons'
 
 type Arrow = 'hover' | 'click'
 type Trigger = 'hover' | 'always' | 'never'
@@ -167,13 +167,13 @@ export default defineComponent({
                             onMouseleave={handleMouseleaveHelper}
                         >
                             <div class="carousel-trigger-item" onClick={handlePrev}>
-                                {genArrowLeft()}
+                                {ArrowLeft()}
                             </div>
                             <div
                                 class="carousel-trigger-item carousel-trigger-item-right"
                                 onClick={handleNext}
                             >
-                                {genArrowRight()}
+                                {ArrowRight()}
                             </div>
                         </div>
                     </Transition>
