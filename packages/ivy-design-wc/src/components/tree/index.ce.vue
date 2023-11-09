@@ -17,7 +17,8 @@ const props = defineProps({
     propChildren: {
         type: String,
         default: 'children'
-    }
+    },
+    expandAll: Boolean
 })
 
 const keyMap = ref({
@@ -30,13 +31,19 @@ type DataSources = Array<{
 }>
 
 const dataSources = ref<DataSources>([]) // 数据源
-// const checkedKeys = ref([]) // 选中的 key
+const checkedKeys = ref<Array<string | number | Symbol>>([]) // 选中的 key
+const expandKeys = ref<Array<string | number | Symbol>>([]) // 展开的 key
 
 const parseData = (data: DataSources) => {
     return data.map((item) => {
         const { [props.propChildren]: children } = item
         if (children) {
-            item.isOpen = false
+            if (expandKeys.value.includes(item[props.nodeKey as string])) {
+                item.isOpen = true
+            } else {
+                item.isOpen = false
+            }
+            // item.isOpen = false
             item.isLeaf = false
             item.children = parseData(children)
         } else {
@@ -48,13 +55,20 @@ const parseData = (data: DataSources) => {
 }
 
 const { setExposes } = useExpose()
+
+const setData = (data: DataSources) => {
+    dataSources.value = parseData(data)
+}
 onMounted(() => {
     setExposes({
         setCheckedKeys: (keys: string[]) => {
             console.log(keys)
+            checkedKeys.value = keys
         },
-        setData(data: DataSources) {
-            dataSources.value = parseData(data)
+        setData,
+        setExpandKeys(keys: string[]) {
+            expandKeys.value = keys
+            setData(dataSources.value)
         }
     })
 })
@@ -75,20 +89,22 @@ onMounted(() => {
 :host {
     display: block;
     --ivy-tree-font-size: 14px;
-    --ivy-tree-line-height: 1.5;
+    --ivy-tree-line-height: calc(1.8 * var(--ivy-tree-font-size));
 }
 .tree {
     font-size: var(--ivy-tree-font-size);
     line-height: var(--ivy-tree-line-height);
+    box-sizing: border-box;
     &-item {
         cursor: default;
+        box-sizing: border-box;
         &__label {
             display: flex;
             align-items: center;
         }
         &__icon {
-            display: inline-flex;
-            font-size: 14px;
+            display: flex;
+            font-size: var(--ivy-tree-font-size);
             width: 1em;
             height: 1em;
             transition: transform 0.3s;

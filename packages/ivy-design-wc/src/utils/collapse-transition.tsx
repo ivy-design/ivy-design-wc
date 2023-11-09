@@ -70,11 +70,13 @@ class CollapseTransition {
                 reset(el)
             },
 
-            onEnterCancelled(el: RendererElement) {
+            onEnterCancelled(el: any) {
+                removeClass(el, 'collapse-transition')
                 reset(el)
             },
 
-            onLeaveCancelled(el: RendererElement) {
+            onLeaveCancelled(el: any) {
+                removeClass(el, 'collapse-transition')
                 reset(el)
             }
         }
@@ -148,6 +150,6 @@ export const transition = function () {
 
 export default function (props: any, { attrs, slots }: SetupContext) {
     const Tr = new CollapseTransition()
-    console.log(Tr)
+    // console.log(Tr)
     return <Transition {...Tr} {...props} {...attrs} v-slots={slots}></Transition>
 }

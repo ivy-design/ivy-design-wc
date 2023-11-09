@@ -62,11 +62,17 @@ const data = [
       },
 ]
 
+const expendedKeys = [2]
+
 const el1 = ref()
 const setElData = (el, data) => {
     el.value.setData(data)
 }
+const setElExpendedKeys = (el, data) => {
+    el.value.setExpandKeys(data)
+}
 onMounted(()=>{
     setElData(el1, data)
+    setElExpendedKeys(el1, expendedKeys)
 })
 </script>
