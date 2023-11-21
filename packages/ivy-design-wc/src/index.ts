@@ -59,6 +59,8 @@ import IvyTable from './components/table/index.ce.vue'
 import IvyTableColumn from './components/table/column.ce.vue'
 import IvyCopyToClipboard from './components/copy-to-clipboard/index.ce.vue'
 import IvyTree from './components/tree/index.ce.vue'
+import IvyLink from './components/link/index.ce.vue'
+import IvyText from './components/text/index.ce.vue'
 
 import { createMessage } from './utils/utils'
 
@@ -120,7 +122,9 @@ const comp: Record<string, any> = {
     Table: defineCustomElement(IvyTable),
     TableColumn: defineCustomElement(IvyTableColumn),
     CopyToClipboard: defineCustomElement(IvyCopyToClipboard),
-    Tree: defineCustomElement(IvyTree)
+    Tree: defineCustomElement(IvyTree),
+    Link: defineCustomElement(IvyLink),
+    Text: defineCustomElement(IvyText)
 }
 
 export const Button = comp.Button
@@ -181,6 +185,8 @@ export const Table = comp.Table
 export const TableColumn = comp.TableColumn
 export const CopyToClipboard = comp.CopyToClipboard
 export const Tree = comp.Tree
+export const Link = comp.Link
+export const Text = comp.Text
 
 export const registerComponents = async (prefix = 'Ivy') => {
     for (const key in comp) {
@@ -266,5 +272,7 @@ declare module 'vue' {
         TableColumn: typeof comp.TableColumn
         CopyToClipboard: typeof comp.CopyToClipboard
         Tree: typeof comp.Tree
+        Link: typeof comp.Link
+        Text: typeof comp.Text
     }
 }
