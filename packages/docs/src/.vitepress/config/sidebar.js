@@ -21,48 +21,58 @@ const guide = [
   },
 ];
 
+const basic = [
+  {
+    text: "Icon 图标",
+    link: "/components/icon",
+  },
+  {
+    text: "Button 按钮",
+    link: "/components/button",
+  },
+  {
+    text: "Space 间距",
+    link: "/components/space",
+  },
+  {
+    text: "Grid 宫格布局",
+    link: "/components/grid-layout.md",
+  },
+  {
+    text: "Row/Col 栅格",
+    link: "/components/grid",
+  },
+  {
+    text: "Split 分割面板",
+    link: "/components/split",
+  },
+  {
+    text: "Divider 分割线",
+    link: "/components/divider",
+  },
+  {
+    text: "AspectRatio 比例容器",
+    link: "/components/aspect-ratio",
+  },
+  {
+    text: "Scrollbar 滚动条",
+    link: "/components/scrollbar",
+  },
+  {
+    text: "Link 链接",
+    link: "/components/link",
+  },
+  {
+    text: "Text 文字",
+    link: "/components/text",
+  },
+];
+
 const components = [
   {
     text: "基础/布局",
     collapsible: true,
-    items: [
-      {
-        text: "Icon 图标",
-        link: "/components/icon",
-      },
-      {
-        text: "Button 按钮",
-        link: "/components/button",
-      },
-      {
-        text: "Space 间距",
-        link: "/components/space",
-      },
-      {
-        text: "Grid 宫格布局",
-        link: "/components/grid-layout.md",
-      },
-      {
-        text: "Row/Col 栅格",
-        link: "/components/grid",
-      },
-      {
-        text: "Split 分割面板",
-        link: "/components/split",
-      },
-      {
-        text: "Divider 分割线",
-        link: "/components/divider",
-      },
-      {
-        text: "AspectRatio 比例容器",
-        link: "/components/aspect-ratio",
-      },
-      {
-        text: "Scrollbar 滚动条",
-        link: "/components/scrollbar",
-      },
-    ],
+    items: basic,
   },
   {
     text: "表单",

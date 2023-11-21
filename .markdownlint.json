@@ -42,7 +42,10 @@
       "ivy-drawer",
       "ivy-tooltip",
       "ivy-details",
-      "ivy-tree"
+      "ivy-tree",
+      "ivy-link",
+      "ivy-tag",
+      "ivy-text"
     ]
   }
 }
