@@ -59,6 +59,19 @@
 </ivy-text>
 ```
 
+## 可用的 CSS 变量
+
+通过暴露的 CSS 变量可以修改其组件的部分样式
+
+::: details 点击代开
+
+```css
+:host {
+  --ivy-text-color: var(--ivy-text-color-regular, #606266);
+  --ivy-text-font-size: var(--ivy-font-size, 14px);
+}
+```
+
 ## Props
 
 | 属性名     | 说明           | 类型      | 可选值                                | 默认值 |
