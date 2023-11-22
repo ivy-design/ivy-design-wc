@@ -1,202 +1,198 @@
-import { defineCustomElement } from 'vue'
 import './assets/main.scss'
 
-import IvyButton from './components/button/index.ce.vue'
-import IvyGrid from './components/grid/index.ce.vue'
-import IvyGridItem from './components/grid/item.ce.vue'
-import IvyTooltip from './components/tooltip/index.ce.vue'
-import IvyCollapse from './components/collapse/index.ce.vue'
-import IvyCollapseItem from './components/collapse/item.ce.vue'
-import IvyDivider from './components/divider/index.ce.vue'
-import IvyCard from './components/card/index.ce.vue'
-import IvySpace from './components/space/index.ce.vue'
-import IvyEmpty from './components/empty/index.ce.vue'
-import IvyTimeline from './components/timeline/index.ce.vue'
-import IvyTimelineItem from './components/timeline/item.ce.vue'
-import IvyBreadcrumb from './components/breadcrumb/index.ce.vue'
-import IvyBreadcrumbItem from './components/breadcrumb/item.ce.vue'
-import IvyTag from './components/tag/index.ce.vue'
-import IvyBadge from './components/badge/index.ce.vue'
-import IvyRow from './components/layout/row.ce.vue'
-import IvyCol from './components/layout/col.ce.vue'
-import IvyResult from './components/result/index.ce.vue'
-import IvyProgress from './components/progress/index.ce.vue'
-import IvyDrawer from './components/drawer/index.ce.vue'
-import IvyInput from './components/input/index.ce.vue'
-import IvyTip from './components/tip/index.ce.vue'
-import IvySelect from './components/select/index.ce.vue'
-import IvyOption from './components/select/option.ce.vue'
-import IvyLoading from './components/loading/index.ce.vue'
-import IvyDetails from './components/details/index.ce.vue'
-import IvyDialog from './components/dialog/index.ce.vue'
-import IvyDropdown from './components/dropdown/index.ce.vue'
-import IvyDropdownMenu from './components/dropdown/menu.ce.vue'
-import IvyDropdownItem from './components/dropdown/item.ce.vue'
-import IvySteps from './components/steps/index.ce.vue'
-import IvyStep from './components/steps/step.ce.vue'
-import IvySwitch from './components/switch/index.ce.vue'
-import IvyRadio from './components/radio/index.ce.vue'
-import IvyRadioGroup from './components/radio/group.ce.vue'
-import IvyCheckbox from './components/checkbox/index.ce.vue'
-import IvyCheckboxGroup from './components/checkbox/group.ce.vue'
-import IvyAspectRatio from './components/aspect-ratio/index.ce.vue'
-import IvyMessage from './components/message/index.ce.vue'
-import IvyIcon from './components/icon/index.ce.vue'
-import IvyCircle from './components/circle/index.ce.vue'
-import IvyPagination from './components/pagination/index.ce.vue'
-import IvyCarousel from './components/carousel/index.ce.vue'
-import IvyCarouselItem from './components/carousel/item.ce.vue'
-import IvyImage from './components/image/index.ce.vue'
-import IvyDescription from './components/description/index.ce.vue'
-import IvyDescriptionItem from './components/description/item.ce.vue'
-import IvyTabs from './components/tabs/index.ce.vue'
-import IvyTabPane from './components/tabs/pane.ce.vue'
-import IvyContextmenu from './components/contextmenu/index.ce.vue'
-import IvyRate from './components/rate/index.ce.vue'
-import IvyAvatar from './components/avatar/index.ce.vue'
-import IvyScrollbar from './components/scrollbar/index.ce.vue'
-import IvyTable from './components/table/index.ce.vue'
-import IvyTableColumn from './components/table/column.ce.vue'
-import IvyCopyToClipboard from './components/copy-to-clipboard/index.ce.vue'
-import IvyTree from './components/tree/index.ce.vue'
-import IvyLink from './components/link/index.ce.vue'
-import IvyText from './components/text/index.ce.vue'
+import { Button } from './components/button/index'
+import { Grid, GridItem } from './components/grid/index'
+
+import { Tooltip } from './components/tooltip/index'
+import { Collapse, CollapseItem } from './components/collapse/index'
+
+import { Divider } from './components/divider/index'
+import { Card } from './components/card/index'
+import { Space } from './components/space/index'
+import { Empty } from './components/empty/index'
+import { Timeline, TimelineItem } from './components/timeline/index'
+
+import { Breadcrumb, BreadcrumbItem } from './components/breadcrumb/index'
+
+import { Tag } from './components/tag/index'
+import { Badge } from './components/badge/index'
+import { Row, Col } from './components/layout/index'
+
+import { Result } from './components/result/index'
+import { Progress } from './components/progress/index'
+import { Drawer } from './components/drawer/index'
+import { Input } from './components/input/index'
+import { Tip } from './components/tip/index'
+import { Select, Option } from './components/select/index'
+
+import { Loading } from './components/loading/index'
+import { Details } from './components/details/index'
+import { Dialog } from './components/dialog/index'
+import { Dropdown, DropdownMenu, DropdownItem } from './components/dropdown/index'
+
+import { Steps, Step } from './components/steps/index'
+
+import { Switch } from './components/switch/index'
+import { Radio, RadioGroup } from './components/radio/index'
+
+import { Checkbox, CheckboxGroup } from './components/checkbox/index'
+
+import { AspectRatio } from './components/aspect-ratio/index'
+import { Message } from './components/message/index'
+import { Icon } from './components/icon/index'
+import { Circle } from './components/circle/index'
+import { Pagination } from './components/pagination/index'
+import { Carousel, CarouselItem } from './components/carousel/index'
+
+import { Image } from './components/image/index'
+import { Description, DescriptionItem } from './components/description/index'
+
+import { Tabs, TabPane } from './components/tabs/index'
+
+import { Contextmenu } from './components/contextmenu/index'
+import { Rate } from './components/rate/index'
+import { Avatar } from './components/avatar/index'
+import { Scrollbar } from './components/scrollbar/index'
+import { Table, TableColumn } from './components/table/index'
+
+import { CopyToClipboard } from './components/copy-to-clipboard/index'
+import { Tree } from './components/tree/index'
+import { Link } from './components/link/index'
+import { Text } from './components/text/index'
 
 import { createMessage } from './utils/utils'
 
 const comp: Record<string, any> = {
-    Button: defineCustomElement(IvyButton),
-    Grid: defineCustomElement(IvyGrid),
-    GridItem: defineCustomElement(IvyGridItem),
-    Tooltip: defineCustomElement(IvyTooltip),
-    Collapse: defineCustomElement(IvyCollapse),
-    CollapseItem: defineCustomElement(IvyCollapseItem),
-    Divider: defineCustomElement(IvyDivider),
-    Card: defineCustomElement(IvyCard),
-    Space: defineCustomElement(IvySpace),
-    Empty: defineCustomElement(IvyEmpty),
-    Timeline: defineCustomElement(IvyTimeline),
-    TimelineItem: defineCustomElement(IvyTimelineItem),
-    Breadcrumb: defineCustomElement(IvyBreadcrumb),
-    BreadcrumbItem: defineCustomElement(IvyBreadcrumbItem),
-    Tag: defineCustomElement(IvyTag),
-    Badge: defineCustomElement(IvyBadge),
-    Row: defineCustomElement(IvyRow),
-    Col: defineCustomElement(IvyCol),
-    Result: defineCustomElement(IvyResult),
-    Progress: defineCustomElement(IvyProgress),
-    Drawer: defineCustomElement(IvyDrawer),
-    Input: defineCustomElement(IvyInput),
-    Tip: defineCustomElement(IvyTip),
-    Select: defineCustomElement(IvySelect),
-    Option: defineCustomElement(IvyOption),
-    Loading: defineCustomElement(IvyLoading),
-    Details: defineCustomElement(IvyDetails),
-    Dialog: defineCustomElement(IvyDialog),
-    Dropdown: defineCustomElement(IvyDropdown),
-    DropdownMenu: defineCustomElement(IvyDropdownMenu),
-    DropdownItem: defineCustomElement(IvyDropdownItem),
-    Steps: defineCustomElement(IvySteps),
-    Step: defineCustomElement(IvyStep),
-    Switch: defineCustomElement(IvySwitch),
-    Radio: defineCustomElement(IvyRadio),
-    RadioGroup: defineCustomElement(IvyRadioGroup),
-    Checkbox: defineCustomElement(IvyCheckbox),
-    CheckboxGroup: defineCustomElement(IvyCheckboxGroup),
-    AspectRatio: defineCustomElement(IvyAspectRatio),
-    Message: defineCustomElement(IvyMessage),
-    Icon: defineCustomElement(IvyIcon),
-    Circle: defineCustomElement(IvyCircle),
-    Pagination: defineCustomElement(IvyPagination),
-    Carousel: defineCustomElement(IvyCarousel),
-    CarouselItem: defineCustomElement(IvyCarouselItem),
-    Image: defineCustomElement(IvyImage),
-    Description: defineCustomElement(IvyDescription),
-    DescriptionItem: defineCustomElement(IvyDescriptionItem),
-    Tabs: defineCustomElement(IvyTabs),
-    TabPane: defineCustomElement(IvyTabPane),
-    Contextmenu: defineCustomElement(IvyContextmenu),
-    Rate: defineCustomElement(IvyRate),
-    Avatar: defineCustomElement(IvyAvatar),
-    Scrollbar: defineCustomElement(IvyScrollbar),
-    Table: defineCustomElement(IvyTable),
-    TableColumn: defineCustomElement(IvyTableColumn),
-    CopyToClipboard: defineCustomElement(IvyCopyToClipboard),
-    Tree: defineCustomElement(IvyTree),
-    Link: defineCustomElement(IvyLink),
-    Text: defineCustomElement(IvyText)
+    Button,
+    Grid,
+    GridItem,
+    Tooltip,
+    Collapse,
+    CollapseItem,
+    Divider,
+    Card,
+    Space,
+    Empty,
+    Timeline,
+    TimelineItem,
+    Breadcrumb,
+    BreadcrumbItem,
+    Tag,
+    Badge,
+    Row,
+    Col,
+    Result,
+    Progress,
+    Drawer,
+    Input,
+    Tip,
+    Select,
+    Option,
+    Loading,
+    Details,
+    Dialog,
+    Dropdown,
+    DropdownMenu,
+    DropdownItem,
+    Steps,
+    Step,
+    Switch,
+    Radio,
+    RadioGroup,
+    Checkbox,
+    CheckboxGroup,
+    AspectRatio,
+    Message,
+    Icon,
+    Circle,
+    Pagination,
+    Carousel,
+    CarouselItem,
+    Image,
+    Description,
+    DescriptionItem,
+    Tabs,
+    TabPane,
+    Contextmenu,
+    Rate,
+    Avatar,
+    Scrollbar,
+    Table,
+    TableColumn,
+    CopyToClipboard,
+    Tree,
+    Link,
+    Text
 }
 
-export const Button = comp.Button
-export const Grid = comp.Grid
-export const GridItem = comp.GridItem
-export const Tooltip = comp.Tooltip
-export const Collapse = comp.Collapse
-export const CollapseItem = comp.CollapseItem
-export const Divider = comp.Divider
-export const Card = comp.Card
-export const Space = comp.Space
-export const Empty = comp.Empty
-export const Timeline = comp.Timeline
-export const TimelineItem = comp.TimelineItem
-export const Breadcrumb = comp.Breadcrumb
-export const BreadcrumbItem = comp.BreadcrumbItem
-export const Tag = comp.Tag
-export const Badge = comp.Badge
-export const Row = comp.Row
-export const Col = comp.Col
-export const Result = comp.Result
-export const Progress = comp.Progress
-export const Drawer = comp.Drawer
-export const Input = comp.Input
-export const Tip = comp.Tip
-export const Select = comp.Select
-export const Option = comp.Option
-export const Loading = comp.Loading
-export const Details = comp.Details
-export const Dialog = comp.Dialog
-export const Dropdown = comp.Dropdown
-export const DropdownMenu = comp.DropdownMenu
-export const DropdownItem = comp.DropdownItem
-export const Steps = comp.Steps
-export const Step = comp.Step
-export const Switch = comp.Switch
-export const Radio = comp.Radio
-export const RadioGroup = comp.RadioGroup
-export const Checkbox = comp.Checkbox
-export const CheckboxGroup = comp.CheckboxGroup
-export const AspectRatio = comp.AspectRatio
-export const Message = comp.Message
-export const Icon = comp.Icon
-export const Circle = comp.Circle
-export const Pagination = comp.Pagination
-export const Carousel = comp.Carousel
-export const CarouselItem = comp.CarouselItem
-export const Image = comp.Image
-export const Description = comp.Description
-export const DescriptionItem = comp.DescriptionItem
-export const Tabs = comp.Tabs
-export const TabPane = comp.TabPane
-export const Contextmenu = comp.Contextmenu
-export const Rate = comp.Rate
-export const Avatar = comp.Avatar
-export const Scrollbar = comp.Scrollbar
-export const Table = comp.Table
-export const TableColumn = comp.TableColumn
-export const CopyToClipboard = comp.CopyToClipboard
-export const Tree = comp.Tree
-export const Link = comp.Link
-export const Text = comp.Text
+// export const Button = comp.Button
+// export const Grid = comp.Grid
+// export const GridItem = comp.GridItem
+// export const Tooltip = comp.Tooltip
+// export const Collapse = comp.Collapse
+// export const CollapseItem = comp.CollapseItem
+// export const Divider = comp.Divider
+// export const Card = comp.Card
+// export const Space = comp.Space
+// export const Empty = comp.Empty
+// export const Timeline = comp.Timeline
+// export const TimelineItem = comp.TimelineItem
+// export const Breadcrumb = comp.Breadcrumb
+// export const BreadcrumbItem = comp.BreadcrumbItem
+// export const Tag = comp.Tag
+// export const Badge = comp.Badge
+// export const Row = comp.Row
+// export const Col = comp.Col
+// export const Result = comp.Result
+// export const Progress = comp.Progress
+// export const Drawer = comp.Drawer
+// export const Input = comp.Input
+// export const Tip = comp.Tip
+// export const Select = comp.Select
+// export const Option = comp.Option
+// export const Loading = comp.Loading
+// export const Details = comp.Details
+// export const Dialog = comp.Dialog
+// export const Dropdown = comp.Dropdown
+// export const DropdownMenu = comp.DropdownMenu
+// export const DropdownItem = comp.DropdownItem
+// export const Steps = comp.Steps
+// export const Step = comp.Step
+// export const Switch = comp.Switch
+// export const Radio = comp.Radio
+// export const RadioGroup = comp.RadioGroup
+// export const Checkbox = comp.Checkbox
+// export const CheckboxGroup = comp.CheckboxGroup
+// export const AspectRatio = comp.AspectRatio
+// export const Message = comp.Message
+// export const Icon = comp.Icon
+// export const Circle = comp.Circle
+// export const Pagination = comp.Pagination
+// export const Carousel = comp.Carousel
+// export const CarouselItem = comp.CarouselItem
+// export const Image = comp.Image
+// export const Description = comp.Description
+// export const DescriptionItem = comp.DescriptionItem
+// export const Tabs = comp.Tabs
+// export const TabPane = comp.TabPane
+// export const Contextmenu = comp.Contextmenu
+// export const Rate = comp.Rate
+// export const Avatar = comp.Avatar
+// export const Scrollbar = comp.Scrollbar
+// export const Table = comp.Table
+// export const TableColumn = comp.TableColumn
+// export const CopyToClipboard = comp.CopyToClipboard
+// export const Tree = comp.Tree
+// export const Link = comp.Link
+// export const Text = comp.Text
 
 export const registerComponents = async (prefix = 'Ivy') => {
     for (const key in comp) {
-        const name: string[] = []
-        ;`${prefix}${key}`.replace(/([A-Z])([a-z]+)/g, (val) => {
-            name.push(val.toLocaleLowerCase())
-            return val
+        const name: string = `${prefix}${key}`.replace(/([A-Z])([a-z]+)/g, (val, _, p, offset) => {
+            return offset > 0 ? `-${val.toLowerCase()}` : `${val.toLowerCase()}`
         })
 
-        customElements.define(name.join('-'), comp[key])
+        customElements.define(name, comp[key])
     }
 }
 
