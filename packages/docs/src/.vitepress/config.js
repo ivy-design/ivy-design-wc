@@ -4,6 +4,7 @@ import sidebar from "./config/sidebar";
 import nav from "./config/nav";
 
 export default defineConfig({
+  mpa: true,
   title: "ivy-design",
   description: "使用 vue3 开发的web component组件库",
   themeConfig: {
