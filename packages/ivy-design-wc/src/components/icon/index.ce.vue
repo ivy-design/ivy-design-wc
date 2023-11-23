@@ -25,7 +25,6 @@ const styles = computed(() => {
 </script>
 
 <template>
-    <!-- <span :class="className"></span> -->
     <svg class="ivy-icon" :style="styles">
         <use :href="`${svg}#ivy-icon-${props.name}`"></use>
     </svg>

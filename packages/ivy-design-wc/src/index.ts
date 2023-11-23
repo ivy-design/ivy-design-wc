@@ -125,67 +125,6 @@ const comp: Record<string, any> = {
     Text
 }
 
-// export const Button = comp.Button
-// export const Grid = comp.Grid
-// export const GridItem = comp.GridItem
-// export const Tooltip = comp.Tooltip
-// export const Collapse = comp.Collapse
-// export const CollapseItem = comp.CollapseItem
-// export const Divider = comp.Divider
-// export const Card = comp.Card
-// export const Space = comp.Space
-// export const Empty = comp.Empty
-// export const Timeline = comp.Timeline
-// export const TimelineItem = comp.TimelineItem
-// export const Breadcrumb = comp.Breadcrumb
-// export const BreadcrumbItem = comp.BreadcrumbItem
-// export const Tag = comp.Tag
-// export const Badge = comp.Badge
-// export const Row = comp.Row
-// export const Col = comp.Col
-// export const Result = comp.Result
-// export const Progress = comp.Progress
-// export const Drawer = comp.Drawer
-// export const Input = comp.Input
-// export const Tip = comp.Tip
-// export const Select = comp.Select
-// export const Option = comp.Option
-// export const Loading = comp.Loading
-// export const Details = comp.Details
-// export const Dialog = comp.Dialog
-// export const Dropdown = comp.Dropdown
-// export const DropdownMenu = comp.DropdownMenu
-// export const DropdownItem = comp.DropdownItem
-// export const Steps = comp.Steps
-// export const Step = comp.Step
-// export const Switch = comp.Switch
-// export const Radio = comp.Radio
-// export const RadioGroup = comp.RadioGroup
-// export const Checkbox = comp.Checkbox
-// export const CheckboxGroup = comp.CheckboxGroup
-// export const AspectRatio = comp.AspectRatio
-// export const Message = comp.Message
-// export const Icon = comp.Icon
-// export const Circle = comp.Circle
-// export const Pagination = comp.Pagination
-// export const Carousel = comp.Carousel
-// export const CarouselItem = comp.CarouselItem
-// export const Image = comp.Image
-// export const Description = comp.Description
-// export const DescriptionItem = comp.DescriptionItem
-// export const Tabs = comp.Tabs
-// export const TabPane = comp.TabPane
-// export const Contextmenu = comp.Contextmenu
-// export const Rate = comp.Rate
-// export const Avatar = comp.Avatar
-// export const Scrollbar = comp.Scrollbar
-// export const Table = comp.Table
-// export const TableColumn = comp.TableColumn
-// export const CopyToClipboard = comp.CopyToClipboard
-// export const Tree = comp.Tree
-// export const Link = comp.Link
-// export const Text = comp.Text
-
 export const registerComponents = async (prefix = 'Ivy') => {
     for (const key in comp) {
         const name: string = `${prefix}${key}`.replace(/([A-Z])([a-z]+)/g, (val, _, p, offset) => {

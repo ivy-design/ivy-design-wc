@@ -1,9 +1,22 @@
 import { fileURLToPath, URL } from 'node:url'
+import { readdirSync } from 'node:fs'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import dts from 'vite-plugin-dts'
+import { c } from 'vitest/dist/reporters-5f784f42.js'
+
+const genInput = () => {
+    const target: any = {}
+    const dir = readdirSync('./src/components')
+    dir.forEach((name) => {
+        target[`components/${name}`] = fileURLToPath(
+            new URL(`./src/components/${name}/index.ts`, import.meta.url)
+        )
+    })
+    return target
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -22,24 +35,34 @@ export default defineConfig({
         }
     },
     build: {
-        target: 'esnext',
+        target: 'es2017',
         lib: {
             entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
-
             name: 'ivy-design',
             fileName: (format) => {
-                if (format === 'es') {
-                    return 'ivy-design.mjs'
-                } else {
-                    return 'ivy-design.js'
-                }
+                if (format === 'es') return 'ivy-design.js'
+                return 'ivy-design.cjs'
             }
         },
         rollupOptions: {
+            // treeshake: false,
+            // input: {
+            //     'ivy-design': fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+            //     ...genInput()
+            // },
             output: {
+                // interop: 'auto',
+                // format: 'es',
+                // entryFileNames: '[name].js',
+                // assetFileNames: (assetInfo) => {
+                //     if (assetInfo.name === 'ivy-design.css') return 'style.css'
+
+                //     return 'assets/[name][extname]'
+                // },
                 exports: 'named'
             }
         },
+
         cssTarget: 'chrome61'
     }
 })
