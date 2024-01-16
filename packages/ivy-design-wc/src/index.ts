@@ -59,6 +59,7 @@ import { CopyToClipboard } from './components/copy-to-clipboard/index'
 import { Tree } from './components/tree/index'
 import { Link } from './components/link/index'
 import { Text } from './components/text/index'
+import { Affix } from './components/affix/index'
 
 import { createMessage } from './utils/utils'
 
@@ -122,7 +123,8 @@ const comp: Record<string, any> = {
     CopyToClipboard,
     Tree,
     Link,
-    Text
+    Text,
+    Affix
 }
 
 export const registerComponents = async (prefix = 'Ivy') => {
@@ -209,5 +211,6 @@ declare module 'vue' {
         Tree: typeof comp.Tree
         Link: typeof comp.Link
         Text: typeof comp.Text
+        Affix: typeof comp.Affix
     }
 }

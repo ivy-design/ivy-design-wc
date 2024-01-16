@@ -4,7 +4,6 @@ import { hasOwn } from '@/utils'
 export const useExpose = () => {
     const instance = getCurrentInstance()
 
-    function setExpose<T>(key: string, value: T): void
     function setExpose<T>(key: string, value: T) {
         const host = instance?.proxy?.$el.parentNode.host
 
@@ -30,7 +29,6 @@ export const useExpose = () => {
             })
         }
     }
-    function setExposes(key: Record<string, any>): void
     function setExposes(options: Record<string, any>) {
         const host = instance?.proxy?.$el.parentNode.host
 
