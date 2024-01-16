@@ -213,6 +213,10 @@ const components = [
     collapsible: true,
     items: [
       {
+        text: "Affix 固钉",
+        link: "/components/affix",
+      },
+      {
         text: "Breadcrumb 面包屑",
         link: "/components/breadcrumb",
       },

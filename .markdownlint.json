@@ -45,7 +45,8 @@
       "ivy-tree",
       "ivy-link",
       "ivy-tag",
-      "ivy-text"
+      "ivy-text",
+      "ivy-affix"
     ]
   }
 }
