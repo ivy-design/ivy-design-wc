@@ -40,7 +40,6 @@ const defaultConfig: MessageBoxOptions = {
     confirmButtonText: '确认',
     callback: () => {},
     showInput: false,
-
     inputPlaceholder: '',
     inputValue: '',
     inputType: 'text',
@@ -50,7 +49,6 @@ const defaultConfig: MessageBoxOptions = {
 const msgBox = (opts: MessageBoxOptions) => {
     return new Promise(() => {
         const conf = { ...defaultConfig, ...opts }
-        console.log(conf)
 
         const el: any = new MessageBox()
         el.title = conf.title
@@ -68,9 +66,7 @@ const msgBox = (opts: MessageBoxOptions) => {
         el.inputValidator = conf.inputValidator
         el.inputErrorMessage = conf.inputErrorMessage
 
-        console.log(el)
         document.body.appendChild(el)
-
         el.open()
     })
 }

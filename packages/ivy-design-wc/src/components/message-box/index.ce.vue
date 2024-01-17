@@ -47,7 +47,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 export interface Emits {
-    (e: 'confirm'): void
+    (e: 'confirm', value?: string): void
     (e: 'cancel'): void
     (e: 'remove'): void
 }
@@ -60,15 +60,20 @@ const open = () => {
 }
 
 function close() {
-    props.callback && props.callback('cancel', props.callbackParams)
+    props.callback && props.callback('cancel')
     emit('cancel')
     visible.value = false
 }
 
 function confirm() {
     if (props.showInput && isError.value) return
-    props.callback && props.callback('confirm', props.callbackParams)
-    emit('confirm')
+    if (props.showInput) {
+        props.callback && props.callback('confirm', promptValue.value)
+        emit('confirm', promptValue.value)
+    } else {
+        props.callback && props.callback('confirm')
+        emit('confirm')
+    }
     visible.value = false
 }
 
@@ -79,11 +84,12 @@ const handleTransitionend = () => {
     }
 }
 
+const promptValue = ref('')
 const isError = ref(false)
 const errorMessage = ref(props.inputErrorMessage as string)
 const handlePromptInput = (ev: CustomEvent) => {
     const val = ev.detail[0]
-    console.log(val)
+    promptValue.value = val
     if (props.inputValidator && isFunction(props.inputValidator)) {
         const flag = props.inputValidator(val)
         const type = getType(flag)
@@ -104,6 +110,7 @@ const { setExposes } = useExpose()
 
 onMounted(() => {
     errorMessage.value = props.inputErrorMessage as string
+    promptValue.value = props.inputValue as string
     setExposes({
         open
     })
@@ -131,6 +138,7 @@ onMounted(() => {
                 </div>
                 <div v-if="props.showInput" class="input-wrapper">
                     <ivy-input
+                        :value="props.inputValue"
                         :placeholder="props.inputPlaceholder"
                         @change="handlePromptInput"
                     ></ivy-input>
