@@ -68,7 +68,23 @@ const createMessage = (Message: CustomElementConstructor) => {
 
 const curNotificationIndex = ref(0)
 
-export { createMessage, curMessageIndex, curNotificationIndex }
+const getType = <T>(val: T): string => {
+    return Object.prototype.toString.call(val).slice(8, -1).toLowerCase()
+}
+
+const isArray = <T>(val: T): boolean => {
+    if ('isArray' in Array) {
+        return Array.isArray(val)
+    } else {
+        return getType(val) === 'array'
+    }
+}
+
+const isFunction = <T>(val: T): boolean => {
+    return getType(val) === 'function'
+}
+
+export { createMessage, curMessageIndex, curNotificationIndex, getType, isArray, isFunction }
 export default {
     createMessage,
     curMessageIndex,

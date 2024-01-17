@@ -61,6 +61,8 @@ import { Link } from './components/link/index'
 import { Text } from './components/text/index'
 import { Affix } from './components/affix/index'
 
+import { MessageBox, msgBox } from './components/message-box/index'
+
 import { createMessage } from './utils/utils'
 
 const comp: Record<string, any> = {
@@ -124,10 +126,11 @@ const comp: Record<string, any> = {
     Tree,
     Link,
     Text,
-    Affix
+    Affix,
+    MessageBox
 }
 
-export const registerComponents = async (prefix = 'Ivy') => {
+const registerComponents = async (prefix = 'Ivy') => {
     for (const key in comp) {
         const name: string = `${prefix}${key}`.replace(/([A-Z])([a-z]+)/g, (val, _, p, offset) => {
             return offset > 0 ? `-${val.toLowerCase()}` : `${val.toLowerCase()}`
@@ -137,11 +140,26 @@ export const registerComponents = async (prefix = 'Ivy') => {
     }
 }
 
-export const message = createMessage(Message)
+const message = createMessage(Message)
 
-export const registerComponent = (name: string, component: any) => {
+const registerComponent = (name: string, component: any) => {
     customElements.define(name, component)
 }
+
+const $alert = msgBox.alert
+const $confirm = msgBox.confirm
+const $ivy = {
+    message,
+    msgBox,
+    alert: $alert,
+    confirm: $confirm
+}
+
+// const $prompt = msgBox.prompt
+// const $notify = msgBox.notify
+// const $message = msgBox.message
+
+export { message, msgBox, registerComponents, registerComponent, $ivy, $alert, $confirm }
 
 export default {
     registerComponents,
@@ -212,5 +230,6 @@ declare module 'vue' {
         Link: typeof comp.Link
         Text: typeof comp.Text
         Affix: typeof comp.Affix
+        MessageBox: typeof comp.MessageBox
     }
 }

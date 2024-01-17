@@ -5,7 +5,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import dts from 'vite-plugin-dts'
-import { c } from 'vitest/dist/reporters-5f784f42.js'
 
 const genInput = () => {
     const target: any = {}
@@ -23,7 +22,13 @@ export default defineConfig({
     appType: 'custom',
     publicDir: false,
     plugins: [
-        vue(),
+        vue({
+            template: {
+                compilerOptions: {
+                    isCustomElement: (tag) => tag.startsWith('ivy-')
+                }
+            }
+        }),
         vueJsx(),
         dts({
             outDir: 'types'
