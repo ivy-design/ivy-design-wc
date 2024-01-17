@@ -23,12 +23,20 @@ const guide = [
 
 const basic = [
   {
-    text: "Icon 图标",
-    link: "/components/icon",
+    text: "AspectRatio 比例容器",
+    link: "/components/aspect-ratio",
   },
   {
     text: "Button 按钮",
     link: "/components/button",
+  },
+  {
+    text: "Divider 分割线",
+    link: "/components/divider",
+  },
+  {
+    text: "Icon 图标",
+    link: "/components/icon",
   },
   {
     text: "Space 间距",
@@ -45,14 +53,6 @@ const basic = [
   {
     text: "Split 分割面板",
     link: "/components/split",
-  },
-  {
-    text: "Divider 分割线",
-    link: "/components/divider",
-  },
-  {
-    text: "AspectRatio 比例容器",
-    link: "/components/aspect-ratio",
   },
   {
     text: "Scrollbar 滚动条",
@@ -79,28 +79,28 @@ const components = [
     collapsible: true,
     items: [
       {
-        text: "Input 输入框",
-        link: "/components/input",
+        text: "Checkbox 多选框",
+        link: "/components/checkbox",
       },
       {
-        text: "Select 选择框",
-        link: "/components/select",
+        text: "Input 输入框",
+        link: "/components/input",
       },
       {
         text: "Radio 单选框",
         link: "/components/radio",
       },
       {
-        text: "Checkbox 多选框",
-        link: "/components/checkbox",
+        text: "Rate 评分",
+        link: "/components/rate",
+      },
+      {
+        text: "Select 选择框",
+        link: "/components/select",
       },
       {
         text: "Switch 开关",
         link: "/components/switch",
-      },
-      {
-        text: "Rate 评分",
-        link: "/components/rate",
       },
     ],
   },
@@ -117,6 +117,42 @@ const components = [
         link: "/components/description",
       },
       {
+        text: "Badge 徽标",
+        link: "/components/badge",
+      },
+      {
+        text: "Card 卡片",
+        link: "/components/card",
+      },
+      {
+        text: "Carousel 轮播图",
+        link: "/components/carousel",
+      },
+      {
+        text: "Circle 环形进度条",
+        link: "/components/circle",
+      },
+      {
+        text: "Collapse 折叠面板",
+        link: "/components/collapse",
+      },
+      {
+        text: "Empty 空状态",
+        link: "/components/empty",
+      },
+      {
+        text: "Image 图片",
+        link: "/components/image",
+      },
+      {
+        text: "Pagination 分页",
+        link: "/components/pagination",
+      },
+      {
+        text: "Progress 进度条",
+        link: "/components/progress",
+      },
+      {
         text: "Table 表格",
         link: "/components/table",
       },
@@ -125,44 +161,8 @@ const components = [
         link: "/components/tag",
       },
       {
-        text: "Badge 徽标",
-        link: "/components/badge",
-      },
-      {
-        text: "Empty 空状态",
-        link: "/components/empty",
-      },
-      {
         text: "Timeline 时间线",
         link: "/components/timeline",
-      },
-      {
-        text: "Card 卡片",
-        link: "/components/card",
-      },
-      {
-        text: "Progress 进度条",
-        link: "/components/progress",
-      },
-      {
-        text: "Collapse 折叠面板",
-        link: "/components/collapse",
-      },
-      {
-        text: "Image 图片",
-        link: "/components/image",
-      },
-      {
-        text: "Circle 环形进度条",
-        link: "/components/circle",
-      },
-      {
-        text: "Pagination 分页",
-        link: "/components/pagination",
-      },
-      {
-        text: "Carousel 轮播图",
-        link: "/components/carousel",
       },
       {
         text: "Tree 树形控件",
@@ -175,36 +175,40 @@ const components = [
     collapsible: true,
     items: [
       {
-        text: "Tip 提示信息",
-        link: "/components/tip",
-      },
-      {
-        text: "Message 消息提示",
-        link: "/components/message",
-      },
-      {
-        text: "Tooltip 文字提示",
-        link: "/components/tooltip",
-      },
-      {
         text: "Dialog 对话框",
         link: "/components/dialog",
-      },
-      {
-        text: "Notification 通知框",
-        link: "/components/notification",
       },
       {
         text: "Drawer 抽屉",
         link: "/components/drawer",
       },
       {
+        text: "Loading 加载",
+        link: "/components/loading",
+      },
+      {
+        text: "Message 消息提示",
+        link: "/components/message",
+      },
+      {
+        text: "MessageBox 消息弹出框",
+        link: "/components/message-box",
+      },
+      {
+        text: "Notification 通知框",
+        link: "/components/notification",
+      },
+      {
         text: "Result 结果",
         link: "/components/result",
       },
       {
-        text: "Loading 加载",
-        link: "/components/loading",
+        text: "Tip 提示信息",
+        link: "/components/tip",
+      },
+      {
+        text: "Tooltip 文字提示",
+        link: "/components/tooltip",
       },
     ],
   },
@@ -221,12 +225,12 @@ const components = [
         link: "/components/breadcrumb",
       },
       {
-        text: "Steps 步骤条",
-        link: "/components/steps",
-      },
-      {
         text: "Dropdown 下拉菜单",
         link: "/components/dropdown",
+      },
+      {
+        text: "Steps 步骤条",
+        link: "/components/steps",
       },
       {
         text: "Tabs 标签页",
