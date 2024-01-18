@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "run-p docs:dev dev:comp",
+    "dev": "run-p dev:comp docs:dev",
     "docs:dev": "pnpm --filter docs run dev",
     "docs:build": "pnpm --filter docs run build",
     "docs:preview": "pnpm --filter docs run preview",
@@ -17,7 +17,8 @@
     "lint": "pnpm --filter @ivy-design/ce run lint",
     "format": "pnpm --filter @ivy-design/ce run format",
     "publish": "pnpm --filter @ivy-design/ce  publish --access public --no-git-checks --registry  https://registry.npmjs.org/",
-    "publish:preview": "pnpm --filter @ivy-design/ce  publish --access public --dry-run --no-git-checks --registry  https://registry.npmjs.org/"
+    "publish:preview": "pnpm --filter @ivy-design/ce  publish --access public --dry-run --no-git-checks --registry  https://registry.npmjs.org/",
+    "npm": "run-s build-only publish"
   },
   "keywords": [
     "front-end",
