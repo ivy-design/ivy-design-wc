@@ -16,7 +16,8 @@
     "type-check": "pnpm --filter @ivy-design/ce run type-check",
     "lint": "pnpm --filter @ivy-design/ce run lint",
     "format": "pnpm --filter @ivy-design/ce run format",
-    "publish": "pnpm --filter @ivy-design/ce  publish --access --registry=https://registry.npmjs.org/"
+    "publish": "pnpm --filter @ivy-design/ce  publish --access public --no-git-checks --registry  https://registry.npmjs.org/",
+    "publish:preview": "pnpm --filter @ivy-design/ce  publish --access public --dry-run --no-git-checks --registry  https://registry.npmjs.org/"
   },
   "keywords": [
     "front-end",
