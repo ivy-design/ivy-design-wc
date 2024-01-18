@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import comp from './index.ce.vue'
-import paneCeVue from './pane.ce.vue'
+import comp from './index.vue'
+import paneCeVue from './pane.vue'
 
 const Tabs = defineCustomElement(comp)
 const registerTabsComponent = (prefix = 'Ivy') => {

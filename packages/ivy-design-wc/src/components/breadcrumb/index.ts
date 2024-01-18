@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import comp from './index.ce.vue'
-import item from './item.ce.vue'
+import comp from './index.vue'
+import item from './item.vue'
 
 const Breadcrumb = defineCustomElement(comp)
 const registerBreadcrumbComponent = (prefix = 'Ivy') => {

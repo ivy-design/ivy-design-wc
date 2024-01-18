@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import row from './row.ce.vue'
-import col from './col.ce.vue'
+import row from './row.vue'
+import col from './col.vue'
 
 const Row = defineCustomElement(row)
 const registerRowComponent = (prefix = 'Ivy') => {

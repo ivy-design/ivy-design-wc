@@ -1,6 +1,6 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import Comp from './index.ce.vue'
+import Comp from './index.vue'
 
 const Dialog = defineCustomElement(Comp)
 
