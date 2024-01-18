@@ -1,12 +1,12 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import indexCeVue from './index.ce.vue'
+import Comp from './index.ce.vue'
 
-const Dialog = defineCustomElement(indexCeVue)
+const Dialog = defineCustomElement(Comp)
 
 const registerComponent = (prefix = 'Ivy') => {
-    const key = `${prefix}${indexCeVue.name}`
-    install(key, indexCeVue)
+    const key = `${prefix}${Comp.name}`
+    install(key, Comp)
 }
 
 export { Dialog, registerComponent as registerDialogComponent }
