@@ -15,7 +15,8 @@
     "build-only": "pnpm --filter @ivy-design/ce run build-only",
     "type-check": "pnpm --filter @ivy-design/ce run type-check",
     "lint": "pnpm --filter @ivy-design/ce run lint",
-    "format": "pnpm --filter @ivy-design/ce run format"
+    "format": "pnpm --filter @ivy-design/ce run format",
+    "publish": "pnpm --filter @ivy-design/ce  publish --access --registry=https://registry.npmjs.org/"
   },
   "keywords": [
     "front-end",

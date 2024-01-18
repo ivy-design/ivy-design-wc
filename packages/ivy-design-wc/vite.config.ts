@@ -45,8 +45,8 @@ export default defineConfig({
             entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
             name: 'ivy-design',
             fileName: (format) => {
-                if (format === 'es') return 'ivy-design.js'
-                return 'ivy-design.cjs'
+                if (format === 'es') return 'ivy-design.mjs'
+                return 'ivy-design.js'
             }
         },
         rollupOptions: {
