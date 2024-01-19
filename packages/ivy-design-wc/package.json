@@ -53,6 +53,7 @@
     },
     "dependencies": {
         "@vueuse/core": "^10.6.1",
+        "dayjs": "^1.11.10",
         "vue": "^3.3.8"
     },
     "devDependencies": {
