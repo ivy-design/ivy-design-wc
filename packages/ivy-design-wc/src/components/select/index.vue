@@ -31,7 +31,7 @@ const emit = defineEmits(['change', 'update:value'])
 
 const dropEl = ref<HTMLElement | null>(null)
 
-const value = ref<string | number | null>(null)
+const curValue = ref<string | number | null>(null)
 
 const inputEl = ref<HTMLInputElement | null>(null)
 const handlerClick = (e: MouseEvent) => {
@@ -39,21 +39,21 @@ const handlerClick = (e: MouseEvent) => {
     const tagName = target.nodeName.toLowerCase()
     if (tagName === 'ivy-option') {
         const optionValue = target.getAttribute('value')
-        if (optionValue !== value.value) {
-            value.value = optionValue
-            emit('change', value.value)
+        if (optionValue !== curValue.value) {
+            curValue.value = optionValue
+            emit('change', curValue.value)
             ;(inputEl.value as HTMLElement).setAttribute('value', target.label)
-            getHostElement().setAttribute('value', value.value as string)
+            getHostElement().setAttribute('value', curValue.value as string)
         }
     }
-    visible.value = false
+    curVisible.value = false
 }
 
-const visible = ref(false)
+const curVisible = ref(false)
 const handlerInputClick = () => {
     if (!props.disabled) {
-        if (!visible.value) {
-            visible.value = true
+        if (!curVisible.value) {
+            curVisible.value = true
         }
     }
 }
@@ -64,16 +64,16 @@ const handlerHideDrop = (e: MouseEvent) => {
 
     const isContains = hostElement.contains(target)
     if (!isContains) {
-        visible.value = false
+        curVisible.value = false
     }
 }
 
 const handlerScroll = () => {
-    visible.value = false
+    curVisible.value = false
 }
 
 onMounted(() => {
-    value.value = props.value
+    curValue.value = props.value
     nextTick(() => {
         const children = getHostElement().children
 
@@ -82,7 +82,7 @@ onMounted(() => {
             if (child.nodeName.toLowerCase() === 'ivy-option') {
                 const optionValue = child.getAttribute('value')
 
-                if (optionValue === value.value) {
+                if (optionValue === curValue.value) {
                     ;(inputEl.value as HTMLElement).setAttribute('value', child.label as string)
                     break
                 }
