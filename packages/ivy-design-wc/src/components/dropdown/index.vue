@@ -67,13 +67,13 @@ onBeforeUnmount(() => {
     <div class="content" @click="handlerClick">
         <slot></slot>
     </div>
-    <Transition>
+    <transition name="dropdown">
         <div class="dropdown-wrap" ref="el" v-show="visible">
             <div class="dropdown-scroll" @click="handlerMenuItemClick">
                 <slot name="dropdown"></slot>
             </div>
         </div>
-    </Transition>
+    </transition>
 </template>
 
 <style lang="scss">
@@ -139,5 +139,22 @@ onBeforeUnmount(() => {
 .select-option-scroll::-webkit-scrollbar-track {
     background-color: rgba(144, 147, 153, 0.3);
     border-radius: 2px;
+}
+.dropdown {
+    &-enter-active,
+    &-leave-active {
+        transform-origin: top center;
+        transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    &-enter-from,
+    &-leave-to {
+        transform: scaleY(0);
+    }
+
+    &-enter-to,
+    &-leave-from {
+        transform: scaleY(1);
+    }
 }
 </style>
