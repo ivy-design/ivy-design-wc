@@ -134,18 +134,18 @@ onMounted(() => {
     })
     init()
     useMutationObserver(
-        scrollbarView.value,
+        scrollWrap.value,
         (mutationList) => {
-            for (const mutation of mutationList) {
-                if (mutation.type === 'attributes') {
-                    console.log(123)
-                    init()
-                }
-            }
+            console.log(123)
+            init()
         },
-        { attributes: true, childList: true, subtree: true, attributeFilter: ['style'] }
+        { attributes: true, childList: true, subtree: true, attributeFilter: ['style', 'class'] }
     )
 })
+
+const handleScroll = useThrottleFn(() => {
+    console.log(scrollWrap.value?.scrollTop)
+}, 10)
 </script>
 
 <template>
@@ -154,6 +154,7 @@ onMounted(() => {
             class="scrollbar__wrap"
             :style="{ height: props.height, maxHeight: props.maxHeight }"
             ref="scrollWrap"
+            @scroll="handleScroll"
         >
             <div class="scrollbar__view" ref="scrollbarView">
                 <slot></slot>
@@ -206,6 +207,9 @@ onMounted(() => {
 .scrollbar__wrap {
     overflow: auto;
     scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 .scrollbar__view {
     width: max-content;
