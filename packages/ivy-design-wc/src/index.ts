@@ -63,6 +63,8 @@ import { Affix } from './components/affix/index'
 
 import { MessageBox, msgBox } from './components/message-box/index'
 import { TimeSelect } from './components/time-select/index'
+import { DatePicker } from './components/date-picker/index'
+import { TimePicker } from './components/time-picker/index'
 
 import { createMessage } from './utils/utils'
 
@@ -129,7 +131,9 @@ const comp: Record<string, any> = {
     Text,
     Affix,
     MessageBox,
-    TimeSelect
+    TimeSelect,
+    DatePicker,
+    TimePicker
 }
 
 const registerComponents = async (prefix = 'Ivy') => {
@@ -234,5 +238,7 @@ declare module 'vue' {
         Affix: typeof comp.Affix
         MessageBox: typeof comp.MessageBox
         TimeSelect: typeof comp.TimeSelect
+        DatePicker: typeof comp.DatePicker
+        TimePicker: typeof comp.TimePicker
     }
 }
