@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import comp from './index.ce.vue'
-import groupCeVue from './group.ce.vue'
+import comp from './index.vue'
+import groupCeVue from './group.vue'
 
 const Checkbox = defineCustomElement(comp)
 

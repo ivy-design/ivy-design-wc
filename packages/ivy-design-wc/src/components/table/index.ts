@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import comp from './index.ce.vue'
-import columnCeVue from './column.ce.vue'
+import comp from './index.vue'
+import columnCeVue from './column.vue'
 
 const Table = defineCustomElement(comp)
 const registerTableComponent = (prefix = 'Ivy') => {

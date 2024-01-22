@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { CloseIcon } from '../../utils/icons'
+import { CloseIcon, Success, Warning, Error, Info } from '@/utils/icons'
 import useExpose from '@/hooks/useExpose'
 import { useHost } from '@/hooks/useHostElement'
 import { getType, isFunction } from '@/utils/utils'
@@ -10,11 +10,12 @@ defineOptions({
     inheritAttrs: false
 })
 
+export type Actions = 'confirm' | 'cancel' | 'close'
+export type MessageBoxOptionsType = 'info' | 'success' | 'warning' | 'error'
 interface Props {
-    mode: 'alert' | 'confirm' | 'prompt' | null
     title: string
     message: string
-    type: string
+    type: MessageBoxOptionsType
     showClose: boolean
     showConfirmButton: boolean
     showCancelButton: boolean
@@ -22,7 +23,7 @@ interface Props {
     cancelButtonText: string
     confirmButtonType: string
     cancelButtonType: string
-    callback: Function
+    callback?: (action: Actions, val?: string) => void
     callbackParams: any
     showInput: boolean
     inputPattern: RegExp
@@ -34,16 +35,13 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    mode: null,
-    type: 'info',
     showClose: true,
     showConfirmButton: true,
     showCancelButton: false,
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     confirmButtonType: 'primary',
-    cancelButtonType: 'default',
-    callback: () => {}
+    cancelButtonType: 'default'
 })
 
 export interface Emits {
@@ -84,7 +82,7 @@ const handleTransitionend = () => {
     }
 }
 
-const promptValue = ref('')
+const promptValue = ref()
 const isError = ref(false)
 const errorMessage = ref(props.inputErrorMessage as string)
 const handlePromptInput = (ev: CustomEvent) => {
@@ -130,8 +128,14 @@ onMounted(() => {
                 </i>
             </div>
             <div class="message-box-body">
-                <div>
-                    <div></div>
+                <div style="display: flex; align-content: center">
+                    <div v-if="props.type" class="icon-wrap">
+                        <Success class="icon-success" v-if="props.type === 'success'" />
+                        <Warning class="icon-warning" v-else-if="props.type === 'warning'" />
+                        <Error class="icon-error" v-else-if="props.type === 'error'" />
+                        <Info class="icon-info" v-else-if="props.type === 'info'" />
+                        <span v-else></span>
+                    </div>
                     <div>
                         <p>{{ props.message }}</p>
                     </div>
@@ -244,6 +248,24 @@ onMounted(() => {
         padding: 12px 16px;
         display: flex;
         justify-content: flex-end;
+    }
+}
+.icon {
+    &-wrap {
+        font-size: 18px;
+        padding-right: 8px;
+    }
+    &-success {
+        color: var(--ivy-color-success);
+    }
+    &-warning {
+        color: var(--ivy-color-warning);
+    }
+    &-error {
+        color: var(--ivy-color-danger);
+    }
+    &-info {
+        color: var(--ivy-color-info);
     }
 }
 .overlay {

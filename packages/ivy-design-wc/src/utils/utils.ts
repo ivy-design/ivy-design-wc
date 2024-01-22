@@ -1,5 +1,21 @@
 import { ref } from 'vue'
 
+export const getType = <T>(val: T): string => {
+    return Object.prototype.toString.call(val).slice(8, -1).toLowerCase()
+}
+
+export const isArray = <T>(val: T): boolean => {
+    if ('isArray' in Array) {
+        return Array.isArray(val)
+    } else {
+        return getType(val) === 'array'
+    }
+}
+
+export const isFunction = <T>(val: T): boolean => {
+    return getType(val) === 'function'
+}
+
 export interface MessageConfig {
     content?: string
     duration?: number
@@ -11,9 +27,9 @@ const curMessageIndex = ref(0)
 const createMessage = (Message: CustomElementConstructor) => {
     const parseMessageConfig = (config: MessageConfig | string): MessageConfig => {
         let conf: MessageConfig = {}
-        const type = Object.prototype.toString.call(config).slice(8, -1)
+        const type = getType(config)
 
-        if (type === 'Object') {
+        if (type === 'object') {
             conf = { ...(config as MessageConfig) }
         } else {
             conf = {
@@ -42,6 +58,7 @@ const createMessage = (Message: CustomElementConstructor) => {
         instance.setAttribute('content', conf.content || '')
         ;(parent as any).appendChild(instance)
         instance.setAttribute('content', conf.content)
+        instance.open()
         return instance
     }
 
@@ -68,23 +85,7 @@ const createMessage = (Message: CustomElementConstructor) => {
 
 const curNotificationIndex = ref(0)
 
-const getType = <T>(val: T): string => {
-    return Object.prototype.toString.call(val).slice(8, -1).toLowerCase()
-}
-
-const isArray = <T>(val: T): boolean => {
-    if ('isArray' in Array) {
-        return Array.isArray(val)
-    } else {
-        return getType(val) === 'array'
-    }
-}
-
-const isFunction = <T>(val: T): boolean => {
-    return getType(val) === 'function'
-}
-
-export { createMessage, curMessageIndex, curNotificationIndex, getType, isArray, isFunction }
+export { createMessage, curMessageIndex, curNotificationIndex }
 export default {
     createMessage,
     curMessageIndex,

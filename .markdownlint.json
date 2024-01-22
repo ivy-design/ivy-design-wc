@@ -46,7 +46,10 @@
       "ivy-link",
       "ivy-tag",
       "ivy-text",
-      "ivy-affix"
+      "ivy-affix",
+      "ivy-time-select",
+      "ivy-date-picker",
+      "ivy-time-picker"
     ]
   }
 }

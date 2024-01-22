@@ -1,6 +1,6 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import comp from './index.ce.vue'
+import comp from './index.vue'
 
 const MessageBox = defineCustomElement(comp)
 
@@ -19,7 +19,7 @@ export interface MessageBoxOptions {
     showCancelButton?: boolean
     cancelButtonText?: string
     confirmButtonText?: string
-    callback?: (action: 'confirm' | 'cancel') => void
+    callback?: (action: 'confirm' | 'cancel' | 'close', val?: string) => void
     showInput?: boolean
     inputPattern?: RegExp
     inputPlaceholder?: string
@@ -31,7 +31,6 @@ export interface MessageBoxOptions {
 }
 
 const defaultConfig: MessageBoxOptions = {
-    type: 'info',
     title: '',
     message: '',
     showClose: true,

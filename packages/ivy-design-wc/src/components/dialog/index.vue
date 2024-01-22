@@ -70,7 +70,7 @@ watch(
         <div class="ivy-mask" v-if="props.showMask === 'true'" @click="handlerMaskClose"></div>
     </transition>
     <transition name="fade">
-        <div class="ivy-modal" ref="el">
+        <div class="ivy-modal" ref="el" v-if="props.open">
             <div class="ivy-modal-header">
                 <slot name="header">{{ props.header }}</slot>
             </div>
@@ -130,7 +130,9 @@ watch(
     border-radius: var(--border-radius, 8px);
     position: relative;
     animation: zoomIn 0.3s forwards;
-    box-shadow: 0 12px 32px 4px rgba(0, 0, 0, 0.04), 0px 8px 20px rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 12px 32px 4px rgba(0, 0, 0, 0.04),
+        0px 8px 20px rgba(0, 0, 0, 0.08);
     border: 1px solid var(--ivy-border-color, #dcdfe6);
 }
 .ivy-modal-header {

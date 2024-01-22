@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import comp from './index.ce.vue'
-import stepCeVue from './step.ce.vue'
+import comp from './index.vue'
+import stepCeVue from './step.vue'
 
 const Steps = defineCustomElement(comp)
 const registerStepsComponent = (prefix = 'Ivy') => {

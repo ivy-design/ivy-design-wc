@@ -1,6 +1,6 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import comp from './index.ce.vue'
+import comp from './index.vue'
 
 const Result = defineCustomElement(comp)
 

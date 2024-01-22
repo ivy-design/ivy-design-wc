@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import index from './index.ce.vue'
-import item from './item.ce.vue'
+import index from './index.vue'
+import item from './item.vue'
 
 const Carousel = defineCustomElement(index)
 const registerCarouselComponent = (prefix = 'Ivy') => {

@@ -30,6 +30,16 @@
 <ivy-input readonly style="width: 224px;" placeholder="请输入"></ivy-input>
 ```
 
+## 一键清空
+
+使用 `clearable` 属性即可得到一个可一键清空的输入框
+
+<ivy-input  placeholder="请输入" clearable></ivy-input>
+
+```html
+<ivy-input placeholder="请输入" clearable></ivy-input>
+```
+
 ## Props
 
 | 参数        | 说明         | 类型    | 可选值                                         | 默认值 |
@@ -40,3 +50,4 @@
 | disabled    | 是否禁用     | boolean | -                                              | false  |
 | readonly    | 是否只读     | boolean | -                                              | false  |
 | autoFocus   | 自动获取焦点 | boolean | -                                              | false  |
+| clearable   | 显示清除按钮 | boolean | -                                              | false  |

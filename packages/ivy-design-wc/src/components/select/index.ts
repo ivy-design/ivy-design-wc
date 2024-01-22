@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import comp from './index.ce.vue'
-import optionCeVue from './option.ce.vue'
+import comp from './index.vue'
+import optionCeVue from './option.vue'
 
 const Select = defineCustomElement(comp)
 const registerSelectComponent = (prefix = 'Ivy') => {

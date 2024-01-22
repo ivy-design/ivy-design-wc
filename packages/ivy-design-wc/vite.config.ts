@@ -27,7 +27,8 @@ export default defineConfig({
                 compilerOptions: {
                     isCustomElement: (tag) => tag.startsWith('ivy-')
                 }
-            }
+            },
+            customElement: true
         }),
         vueJsx(),
         dts({

@@ -1,7 +1,7 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import comp from './index.ce.vue'
-import itemCeVue from './item.ce.vue'
+import comp from './index.vue'
+import itemCeVue from './item.vue'
 
 const Grid = defineCustomElement(comp)
 const registerGridComponent = (prefix = 'Ivy') => {

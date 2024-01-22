@@ -102,6 +102,10 @@ const components = [
         text: "Switch 开关",
         link: "/components/switch",
       },
+      {
+        text: "TimeSelect 时间选择",
+        link: "/components/time-select",
+      },
     ],
   },
   {
