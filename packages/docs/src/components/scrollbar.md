@@ -9,7 +9,7 @@
 <ivy-button @click="handleClick">测试</ivy-button>
 
 <ivy-scrollbar height="500px" ref="a1">
-    <div style="height: 40px;background-color:gray;"></div>
+    <div style="height: 30px;background-color:gray;"></div>
     <p>测试内容</p>
     <p>测试内容</p>
     <p>测试内容</p>
@@ -50,8 +50,14 @@
     <p>测试内容</p>
     <p>测试内容</p>
     <p>测试内容</p>
-    <div style="height: 40px;background-color:gray;"></div>
+    <div style="height: 30px;background-color:gray;"></div>
 </ivy-scrollbar>
+
+## Props
+
+## Event
+
+## Methods
 
 <script setup>
 import { ref } from 'vue'
