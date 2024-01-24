@@ -95,7 +95,6 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-    console.log('onBeforeUnmount')
     window.removeEventListener('click', handlerHideDrop)
     window.removeEventListener('scroll', handlerScroll)
 })
