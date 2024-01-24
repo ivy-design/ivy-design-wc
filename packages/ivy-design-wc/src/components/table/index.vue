@@ -79,7 +79,6 @@ const initCol = () => {
     const t = calcColWidth(tmp as Array<Record<string, any>>)
 
     _data_col_.value = [...t]
-    console.log(_data_col_.value, t)
 }
 
 const _data_row_ = ref([])

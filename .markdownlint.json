@@ -6,6 +6,7 @@
   "MD030": { "ul_multi": 3, "ul_single": 3, "ol_multi": 1, "ol_single": 1 },
   "MD033": {
     "allowed_elements": [
+      "img",
       "input",
       "script",
       "style",
@@ -54,7 +55,8 @@
       "ivy-option",
       "ivy-dropdown",
       "ivy-dropdown-menu",
-      "ivy-dropdown-item"
+      "ivy-dropdown-item",
+      "ivy-result"
     ]
   }
 }
