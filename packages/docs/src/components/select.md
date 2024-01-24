@@ -1,5 +1,9 @@
 # Select 下拉选择器
 
+:::warning
+依赖组件 `scrollbar`，请务必导入 `scrollbar` 组件
+:::
+
 ## 常规用法
 
 <button @click="handlerClick">获取 select 选中的值</button>

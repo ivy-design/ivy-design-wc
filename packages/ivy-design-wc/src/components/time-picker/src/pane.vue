@@ -8,15 +8,15 @@ import { onMounted, ref } from 'vue'
 
 const emit = defineEmits(['change'])
 
-const hourList = Array.from({ length: 24 }, (_, i) => i)
-const minuteList = Array.from({ length: 60 }, (_, i) => i)
-const secondList = Array.from({ length: 60 }, (_, i) => i)
+const hourList = Array.from({ length: 24 }, (_, i) => (i < 10 ? `0${i}` : `${i}`))
+const minuteList = Array.from({ length: 60 }, (_, i) => (i < 10 ? `0${i}` : `${i}`))
+const secondList = Array.from({ length: 60 }, (_, i) => (i < 10 ? `0${i}` : `${i}`))
 
 const curHour = ref<string | number | null>(null)
 const curMinute = ref<string | number | null>(null)
 const curSecond = ref<string | number | null>(null)
 
-const handleChange = (value: number, type: string) => {
+const handleChange = (value: string, type: string) => {
     if (type === 'hour') {
         curHour.value = value
     } else if (type === 'minute') {
@@ -38,7 +38,7 @@ onMounted(() => {
 
 <template>
     <div class="pane">
-        <div class="pane-list custom-scroll">
+        <ivy-scrollbar class="pane-list">
             <div
                 v-for="hour in hourList"
                 :key="hour"
@@ -47,8 +47,8 @@ onMounted(() => {
             >
                 {{ hour }}
             </div>
-        </div>
-        <div class="pane-list custom-scroll">
+        </ivy-scrollbar>
+        <ivy-scrollbar class="pane-list">
             <div
                 v-for="minute in minuteList"
                 :key="minute"
@@ -57,8 +57,8 @@ onMounted(() => {
             >
                 {{ minute }}
             </div>
-        </div>
-        <div class="pane-list custom-scroll">
+        </ivy-scrollbar>
+        <ivy-scrollbar class="pane-list">
             <div
                 v-for="second in secondList"
                 :key="second"
@@ -67,6 +67,6 @@ onMounted(() => {
             >
                 {{ second }}
             </div>
-        </div>
+        </ivy-scrollbar>
     </div>
 </template>

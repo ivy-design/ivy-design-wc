@@ -130,6 +130,10 @@ const handleClear = () => {
     emit('clear')
 }
 
+const handlePaneChange = (val: any) => {
+    console.log(val)
+}
+
 const setDefaultValue = () => {
     if (props.value && dateList.value.find((item) => item.value === props.value)) {
         ;(inputEl.value as HTMLInputElement).value = props.value
@@ -164,7 +168,7 @@ onBeforeUnmount(() => {
     </div>
     <transition name="dropdown">
         <div class="dropdown" ref="targetRef" v-show="visible">
-            <Pane />
+            <Pane @change="handlePaneChange" />
         </div>
     </transition>
 </template>
@@ -245,51 +249,37 @@ onBeforeUnmount(() => {
 .dropdown {
     position: absolute;
     width: fit-content;
+    background-color: var(--ivy-color-white);
     min-width: 240px;
     left: 0;
     top: calc(var(--ivy-time-select-height) + 2px);
     border-radius: 2px;
     z-index: 10;
     box-shadow: var(--ivy-box-shadow);
-}
-
-.custom-scroll {
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: #fff;
     max-height: 274px;
-
-    &::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-        background-color: #fff;
-        border-radius: 2px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: rgba(144, 147, 153, 1);
-        border-radius: 2px;
-    }
-    &::-webkit-scrollbar-track {
-        background-color: rgba(144, 147, 153, 0.3);
-        border-radius: 2px;
-    }
+    padding: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid var(--ivy-border-color);
+    border-radius: var(--ivy-border-radius);
 }
 
 .pane {
     display: flex;
     justify-content: flex-start;
-    padding: 10px 0;
-    border-bottom: 1px solid #f5f5f5;
+    max-height: 258px;
+    overflow: hidden;
+    font-size: 14px;
     &-list {
         flex: 0 1 80px;
         max-width: 140px;
+        padding: 0 12px;
     }
     .item {
         display: block;
-        height: 30px;
-        line-height: 30px;
+        height: 28px;
+        line-height: 28px;
         text-align: center;
-        border-radius: 4px;
+        border-radius: 2px;
         cursor: pointer;
         &:hover {
             background-color: #f5f5f5;

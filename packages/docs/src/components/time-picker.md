@@ -1,5 +1,9 @@
 # TimePicker 时间选择器
 
+:::warning
+依赖组件 `scrollbar`，请务必导入 `scrollbar` 组件
+:::
+
 ## 常规用法
 
 <ivy-time-picker></ivy-time-picker>
