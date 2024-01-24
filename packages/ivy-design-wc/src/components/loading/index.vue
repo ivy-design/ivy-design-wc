@@ -1,34 +1,39 @@
-<script lang="tsx">
-import { defineComponent, computed } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { Loading } from '@/utils/icons'
 
-export default defineComponent({
+defineOptions({
     name: 'Loading',
-    inheritAttrs: false,
-    props: {
-        text: String,
-        loading: Boolean
-    },
-    setup(props) {
-        const isLoading = computed(() => {
-            return props.loading
-        })
-        return () => {
-            return [
-                <div class="loading" v-show={isLoading.value}>
-                    <div class="icon">
-                        <slot name="icon">{Loading({ class: 'icon-loading' })}</slot>
-                    </div>
-                    {props.text ? <div class="text">{props.text}</div> : null}
-                </div>,
-                <div class="content">
-                    <slot></slot>
-                </div>
-            ]
-        }
-    }
+    inheritAttrs: false
+})
+
+interface Props {
+    text: string
+    loading: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    loading: false
+})
+
+const isLoad = computed(() => {
+    return props.loading
 })
 </script>
+
+<template>
+    <div class="loading" v-show="isLoad">
+        <div class="icon">
+            <slot name="icon">
+                <Loading class="icon-loading" />
+            </slot>
+        </div>
+        <div class="text" v-if="props.text">{{ props.text }}</div>
+    </div>
+    <div class="content">
+        <slot></slot>
+    </div>
+</template>
 
 <style lang="scss">
 :host {
