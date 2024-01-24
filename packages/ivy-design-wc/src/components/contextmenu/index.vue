@@ -114,18 +114,20 @@ onBeforeUnmount(() => {
 }
 .zoom-in-enter-active,
 .zoom-in-leave-active {
-    transition: transform 0.3s;
+    transition:
+        transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        opacity 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .zoom-in-enter-from,
 .zoom-in-leave-to {
     opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale(0, 0);
 }
 
 .zoom-in-leave-from,
 .zoom-in-enter-to {
     opacity: 1;
-    transform: scale3d(1, 1, 1);
+    transform: scale(1, 1);
 }
 </style>

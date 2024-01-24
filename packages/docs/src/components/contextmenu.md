@@ -8,7 +8,7 @@
 
 示例如下：
 
-<ivy-contextmenu @command="menuClick">
+<ivy-contextmenu @command="menuClick" style="border: 1px solid #cdcdcd;">
 
 <p>这里是显示右键菜单的区域</p>
 <p>这里是显示右键菜单的区域</p>
@@ -20,10 +20,10 @@
 <div slot="menu" data-command="item" command="cute">剪切</div>
 <div slot="menu" data-command="item" command="paste">粘贴</div>
 <div slot="menu" data-command="line"></div>
-<div slot="menu" data-command="item">这里是右键菜单</div>
-<div slot="menu" data-command="item">这里是右键菜单</div>
-<div slot="menu" data-command="item">这里是右键菜单</div>
-<div slot="menu" data-command="item">这里是右键菜单</div>
+<div slot="menu" data-command="item" command="print">打印</div>
+<div slot="menu" data-command="item" command="saveAs">另存为</div>
+<div slot="menu" data-command="item" command="translate">翻译</div>
+<div slot="menu" data-command="item" command="snip">截图</div>
 </ivy-contextmenu>
 
 ```html
@@ -38,10 +38,10 @@
   <div slot="menu" data-command="item" command="cute">剪切</div>
   <div slot="menu" data-command="item" command="paste">粘贴</div>
   <div slot="menu" data-command="line"></div>
-  <div slot="menu" data-command="item">这里是右键菜单</div>
-  <div slot="menu" data-command="item">这里是右键菜单</div>
-  <div slot="menu" data-command="item">这里是右键菜单</div>
-  <div slot="menu" data-command="item">这里是右键菜单</div>
+  <div slot="menu" data-command="item" command="print">打印</div>
+  <div slot="menu" data-command="item" command="saveAs">另存为</div>
+  <div slot="menu" data-command="item" command="translate">翻译</div>
+  <div slot="menu" data-command="item" command="snip">截图</div>
 </ivy-contextmenu>
 <script setup>
   const menuClick = (ev) => {

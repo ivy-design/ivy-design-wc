@@ -51,7 +51,10 @@
       "ivy-date-picker",
       "ivy-time-picker",
       "ivy-select",
-      "ivy-option"
+      "ivy-option",
+      "ivy-dropdown",
+      "ivy-dropdown-menu",
+      "ivy-dropdown-item"
     ]
   }
 }
