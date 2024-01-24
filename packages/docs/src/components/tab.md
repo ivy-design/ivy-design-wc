@@ -22,12 +22,12 @@
 </ivy-tabs>
 
 ```html
-<ivys-tab>
-    <ivy-tab-pane label="用户管理"> 用户管理 </ivy-tab-pane>
-    <ivy-tab-pane label="配置管理"> 配置管理 </ivy-tab-pane>
-    <ivy-tab-pane label="角色管理"> 角色管理 </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
-</ivys-tab>
+<ivy-tabs>
+  <ivy-tab-pane label="用户管理"> 用户管理 </ivy-tab-pane>
+  <ivy-tab-pane label="配置管理"> 配置管理 </ivy-tab-pane>
+  <ivy-tab-pane label="角色管理"> 角色管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+</ivy-tabs>
 ```
 
 ## 标识 name
@@ -39,29 +39,32 @@
 <ivy-button type="success" onclick="document.getElementById('tab3').setAttribute('active', 'd')">跳转到-权限管理</ivy-button>
 &nbsp;
 <ivy-tabs active="b" id="tab3">
-    <ivy-tab-pane label="用户管理" index="a">
-        用户管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="配置管理" index="b">
-        配置管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="角色管理" index="c">
-        角色管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理" index="d">
-        权限管理
-    </ivy-tab-pane>
+<ivy-tab-pane label="用户管理" index="a">
+用户管理
+</ivy-tab-pane>
+<ivy-tab-pane label="配置管理" index="b">
+配置管理
+</ivy-tab-pane>
+<ivy-tab-pane label="角色管理" index="c">
+角色管理
+</ivy-tab-pane>
+<ivy-tab-pane label="权限管理" index="d">
+权限管理
+</ivy-tab-pane>
 </ivy-tabs>
-
 
 ```html
 <ivy-tabs active="b" id="tab3">
-    <ivy-tab-pane label="用户管理" index="a"> 用户管理 </ivy-tab-pane>
-    <ivy-tab-pane label="配置管理" index="b"> 配置管理 </ivy-tab-pane>
-    <ivy-tab-pane label="角色管理" index="c"> 角色管理 </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理" index="d"> 权限管理 </ivy-tab-pane>
+  <ivy-tab-pane label="用户管理" index="a"> 用户管理 </ivy-tab-pane>
+  <ivy-tab-pane label="配置管理" index="b"> 配置管理 </ivy-tab-pane>
+  <ivy-tab-pane label="角色管理" index="c"> 角色管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理" index="d"> 权限管理 </ivy-tab-pane>
 </ivy-tabs>
-<ivy-button type="success" onclick="document.getElementById('tab3').setAttribute('active', 'd')">跳转到-权限管理</ivy-button>
+<ivy-button
+  type="success"
+  onclick="document.getElementById('tab3').setAttribute('active', 'd')"
+  >跳转到-权限管理</ivy-button
+>
 ```
 
 ## 其他
@@ -112,45 +115,19 @@
 
 ```html
 <ivy-tabs active="2" id="tab1">
-    <ivy-tab-pane label="用户管理">
-        用户管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="配置管理">
-        配置管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="角色管理">
-        角色管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理">
-        权限管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理">
-        权限管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理">
-        权限管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理">
-        权限管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理">
-        权限管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理">
-        权限管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理">
-        权限管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理">
-        权限管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理">
-        权限管理
-    </ivy-tab-pane>
-    <ivy-tab-pane label="权限管理">
-        权限管理
-    </ivy-tab-pane>
+  <ivy-tab-pane label="用户管理"> 用户管理 </ivy-tab-pane>
+  <ivy-tab-pane label="配置管理"> 配置管理 </ivy-tab-pane>
+  <ivy-tab-pane label="角色管理"> 角色管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
 </ivy-tabs>
 ```
 

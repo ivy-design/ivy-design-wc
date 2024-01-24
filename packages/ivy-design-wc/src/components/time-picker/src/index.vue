@@ -4,13 +4,14 @@ import dayjs, { type Dayjs } from 'dayjs'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useHost } from '@/hooks/useHostElement'
 import { CloseIcon as Close } from '@/utils/icons'
+import Pane from './pane.vue'
 
 defineOptions({
-    name: 'TimeSelect',
+    name: 'TimePicker',
     inheritAttrs: false
 })
 
-const { triggerRef, targetRef, arrowRef } = usePopper()
+const { triggerRef, targetRef } = usePopper()
 
 export interface Props {
     start: string
@@ -129,6 +130,10 @@ const handleClear = () => {
     emit('clear')
 }
 
+const handlePaneChange = (val: any) => {
+    console.log(val)
+}
+
 const setDefaultValue = () => {
     if (props.value && dateList.value.find((item) => item.value === props.value)) {
         ;(inputEl.value as HTMLInputElement).value = props.value
@@ -162,19 +167,8 @@ onBeforeUnmount(() => {
         </div>
     </div>
     <transition name="dropdown">
-        <div class="select-option-wrap" ref="targetRef" v-show="visible">
-            <div class="select-arrow" ref="arrowRef"></div>
-            <ivy-scrollbar class="select-option-scroll" max-height="274px" @click="handlerClick">
-                <div
-                    v-for="item in dateList"
-                    :key="item.value"
-                    :data-value="item.value"
-                    class="option-item"
-                    :data-disabled="item.disabled === true"
-                >
-                    {{ item.value }}
-                </div>
-            </ivy-scrollbar>
+        <div class="dropdown" ref="targetRef" v-show="visible">
+            <Pane @change="handlePaneChange" />
         </div>
     </transition>
 </template>
@@ -252,73 +246,72 @@ onBeforeUnmount(() => {
     }
 }
 
-.select-option-wrap {
+.dropdown {
     position: absolute;
-    width: 100%;
+    width: fit-content;
+    background-color: var(--ivy-color-white);
     min-width: 240px;
     left: 0;
     top: calc(var(--ivy-time-select-height) + 2px);
     border-radius: 2px;
-    overflow: hidden;
     z-index: 10;
-    padding: 6px 0;
+    box-shadow: var(--ivy-box-shadow);
+    max-height: 274px;
+    padding: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid var(--ivy-border-color);
+    border-radius: var(--ivy-border-radius);
 }
 
-.select-option-scroll {
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid var(--ivy-border-color, #dcdfe6);
-    box-shadow: var(
-        --ivy-box-shadow,
-        0px 12px 32px 4px rgba(0, 0, 0, 0.04),
-        0px 8px 20px rgba(0, 0, 0, 0.08)
-    );
-}
-
-.select-arrow {
-    height: 6px;
-    width: 6px;
-    position: absolute;
-}
-
-.option-item {
-    display: block;
-    padding: 0 12px;
-    line-height: 34px;
-    height: 34px;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-    font-size: var(--ivy-time-select-font-size);
-    &[data-disabled='true'] {
-        color: #a8abb2;
-        cursor: not-allowed;
+.pane {
+    display: flex;
+    justify-content: flex-start;
+    max-height: 258px;
+    overflow: hidden;
+    font-size: 14px;
+    &-list {
+        flex: 0 1 80px;
+        max-width: 140px;
+        padding: 0 12px;
+    }
+    .item {
+        display: block;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        border-radius: 2px;
+        cursor: pointer;
+        &:hover {
+            background-color: #f5f5f5;
+        }
+        &-checked {
+            background-color: var(--ivy-color-primary, #409eff);
+            color: #fff;
+            &:hover {
+                background-color: var(--ivy-color-primary, #409eff);
+            }
+        }
     }
 }
 
-.option-item:hover {
-    background-color: #f4f4f5;
-}
-
-.option-item[disabled] {
-    cursor: not-allowed;
-    color: #a8abb2;
-    background-color: transparent;
-    pointer-events: none;
-}
 .dropdown {
     &-enter-active,
     &-leave-active {
         transform-origin: top center;
-        transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+        transition:
+            transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
+            opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
 
     &-enter-from,
     &-leave-to {
-        transform: scaleY(0);
+        opacity: 0;
+        transform: scaleY(0.2);
     }
 
     &-enter-to,
     &-leave-from {
+        opacity: 1;
         transform: scaleY(1);
     }
 }

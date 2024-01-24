@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
-import { useMutationObserver, useThrottleFn, useElementHover } from '@vueuse/core'
-
+import { computed, ref, onMounted, reactive } from 'vue'
+import { useThrottleFn, useElementHover, useEventListener, useResizeObserver } from '@vueuse/core'
+import { getType } from '@/utils/utils'
 import useExpose from '@/hooks/useExpose'
 
 defineOptions({
@@ -37,126 +37,213 @@ const isHovered = useElementHover(root, {
     delayLeave: 10
 })
 
-// const root = ref<HTMLElement | null>(null)
-const scrollbarView = ref<HTMLElement | null>(null)
 const scrollWrap = ref<HTMLElement | null>(null)
-
-// const scrollTop: number = ref(0)
-// const maxScrollTop: number = ref(0)
-
-const statusX = ref(false)
-const statusY = ref(false)
-
-const scrollbarSizeX = ref(0)
-const scrollbarSizeY = ref(0)
-
-const init = () => {
+const scrollWrapSize = reactive({
+    width: 0,
+    height: 0
+})
+const getScrollWrapSize = () => {
     const rootStyles = getComputedStyle(root.value as HTMLElement)
     const width = rootStyles.getPropertyValue('width')
     const height = rootStyles.getPropertyValue('height')
-    const scrollbarViewStyles = getComputedStyle(scrollbarView.value as HTMLElement)
-    const scrollbarViewWidth = scrollbarViewStyles.getPropertyValue('width')
-    const scrollbarViewHeight = scrollbarViewStyles.getPropertyValue('height')
-    if (parseFloat(scrollbarViewHeight) > parseFloat(height)) {
-        statusY.value = true
-        scrollbarSizeY.value = Math.max(
-            parseFloat(height) / (parseFloat(scrollbarViewHeight) / parseFloat(height)),
+    scrollWrapSize.width = parseFloat(width)
+    scrollWrapSize.height = parseFloat(height)
+}
+
+const scrollView = ref<HTMLElement | null>(null)
+const scrollViewSize = reactive({
+    width: 0,
+    height: 0
+})
+const getScrollViewSize = () => {
+    const rootStyles = getComputedStyle(scrollView.value as HTMLElement)
+    const width = rootStyles.getPropertyValue('width')
+    const height = rootStyles.getPropertyValue('height')
+    scrollViewSize.width = parseFloat(width)
+    scrollViewSize.height = parseFloat(height)
+}
+
+const scrollbarSize = reactive({
+    horizontal: 0,
+    vertical: 0
+})
+const calcScrollbarSize = () => {
+    // wA = scrollWrapSize.width / scrollViewSize.width * scrollWrapSize.width
+    if (scrollWrapSize.width < scrollViewSize.width) {
+        scrollbarSize.horizontal = Math.max(
+            (scrollWrapSize.width / scrollViewSize.width) * scrollWrapSize.width,
             conf.value.minSize
         )
-        console.log(scrollbarSizeY.value)
-    }
-    if (parseFloat(scrollbarViewWidth) > parseFloat(width)) {
-        statusX.value = true
-    }
-    console.log(width, height, scrollbarViewWidth, scrollbarViewHeight)
-}
-
-const isPress = ref(false)
-
-/**处理滚动条 */
-
-const initMap = ref({
-    x: 0,
-    y: 0
-})
-
-const scrollMap = ref({
-    x: 0,
-    y: 0
-})
-
-const verticalScrollbar = ref<HTMLElement | null>(null)
-const horizontalScrollbar = ref<HTMLElement | null>(null)
-
-const handleMousedown = (e: MouseEvent) => {
-    console.log(e)
-    isPress.value = true
-    initMap.value.x = e.x
-    initMap.value.y = e.y
-}
-
-const handleMouseup = (e: MouseEvent) => {
-    console.log(e)
-    isPress.value = false
-}
-
-const calcRealMove = (distance: number, isVertical = false) => {
-    const rootStyles = getComputedStyle(root.value as HTMLElement)
-    const width = rootStyles.getPropertyValue('width')
-    const height = rootStyles.getPropertyValue('height')
-    const scrollbarViewStyles = getComputedStyle(scrollbarView.value as HTMLElement)
-    const scrollbarViewWidth = scrollbarViewStyles.getPropertyValue('width')
-    const scrollbarViewHeight = scrollbarViewStyles.getPropertyValue('height')
-    if (isVertical) {
-        return (distance * parseFloat(scrollbarViewWidth)) / parseFloat(width)
     } else {
-        return (distance * parseFloat(scrollbarViewHeight)) / parseFloat(height)
+        scrollbarSize.horizontal = 0
+    }
+
+    if (scrollWrapSize.height < scrollViewSize.height) {
+        scrollbarSize.vertical = Math.max(
+            (scrollWrapSize.height / scrollViewSize.height) * scrollWrapSize.height,
+            conf.value.minSize
+        )
+    } else {
+        scrollbarSize.vertical = 0
     }
 }
+
+const scrollMove = reactive({
+    x: 0,
+    y: 0
+})
+
+const handleWrapSizeChange = () => {
+    getScrollWrapSize()
+    getScrollViewSize()
+    calcScrollbarSize()
+}
+
+// 鼠标左键处于按下状态
+const isPress = ref(false)
+// 方向
+const direction = ref<'vertical' | 'horizontal'>()
+
+// 缓存鼠标位置
+const prevMousePosition = reactive({
+    x: 0,
+    y: 0
+})
+
+const handleMousedown = useThrottleFn((ev: MouseEvent) => {
+    isPress.value = true
+    prevMousePosition.x = ev.clientX
+    prevMousePosition.y = ev.clientY
+    const target = ev.target as HTMLElement
+    const dataset = target.dataset
+    direction.value = dataset.direction as 'vertical' | 'horizontal'
+}, 10)
+
+const handleMouseup = useThrottleFn(() => {
+    isPress.value = false
+    prevMousePosition.x = 0
+    prevMousePosition.y = 0
+    direction.value = undefined
+}, 10)
 
 const handleMousemove = useThrottleFn((ev: any) => {
-    if (!isPress.value) {
-        return
+    if (!isPress.value) return
+    if (!direction.value) return
+    if (direction.value === 'vertical') {
+        const { clientY } = ev
+        const tmp = clientY - prevMousePosition.y
+
+        prevMousePosition.y = clientY
+
+        scrollMove.y = scrollMove.y + tmp
+
+        const max = scrollWrapSize.height - scrollbarSize.vertical
+        if (scrollMove.y < 0) {
+            scrollMove.y = 0
+        } else if (scrollMove.y > max) {
+            scrollMove.y = max
+        }
+        const movingDistance =
+            (scrollMove.y / (scrollWrapSize.height - scrollbarSize.vertical)) *
+            (scrollViewSize.height - scrollWrapSize.height)
+        ;(scrollWrap.value as HTMLElement).scrollTop = movingDistance
+    } else if (direction.value === 'horizontal') {
+        // 水平
+        const { clientX } = ev
+        const tmp = clientX - prevMousePosition.x
+        prevMousePosition.x = clientX
+        scrollMove.x = scrollMove.x + tmp
+
+        const max = scrollWrapSize.width - scrollbarSize.horizontal
+        if (scrollMove.x < 0) {
+            scrollMove.x = 0
+        } else if (scrollMove.x > max) {
+            scrollMove.x = max
+        }
+        const movingDistance =
+            (scrollMove.x / (scrollWrapSize.width - scrollbarSize.horizontal)) *
+            (scrollViewSize.width - scrollWrapSize.width)
+        ;(scrollWrap.value as HTMLElement).scrollLeft = movingDistance
     }
-    const move = calcRealMove(ev.layerY)
-    console.log(ev, ev.offsetX, ev.offsetY, ev.layerX, ev.layerY, move)
-    scrollMap.value.y = ev.y - initMap.value.y + scrollMap.value.y
-    // initMap.value.y = 0
-    // scrollMap.value.y = ev.y - initMap.value.y + scrollMap.value.y
-    if (scrollbarView.value) scrollWrap.value?.scrollTo(0, move)
 }, 10)
 
 const { setExpose } = useExpose()
 
+interface ScrollToConf {
+    top?: number
+    left?: number
+}
+const exposeScrollTo = (conf: ScrollToConf | number, isHorizontal: boolean = false) => {
+    const type = getType(conf)
+    if (type === 'object') {
+        const tmp = conf as ScrollToConf
+        if (tmp.top) {
+            scrollWrap.value!.scrollTop = tmp.top
+        } else if (tmp.left) {
+            scrollWrap.value!.scrollLeft = tmp.left
+        }
+    } else if (type === 'number') {
+        if (isHorizontal) {
+            ;(scrollWrap.value as HTMLDivElement).scrollLeft = conf as number
+        } else {
+            ;(scrollWrap.value as HTMLDivElement).scrollTop = conf as number
+        }
+    } else {
+        throw new Error('参数类型错误')
+    }
+}
+
 onMounted(() => {
-    setExpose('open', () => {
-        console.log(123)
+    setExpose('scrollTo', exposeScrollTo)
+    useEventListener(document, 'mouseup', handleMouseup)
+    useEventListener(document, 'mousemove', handleMousemove)
+    handleWrapSizeChange()
+
+    useResizeObserver(scrollView.value, () => {
+        handleWrapSizeChange()
     })
-    init()
-    useMutationObserver(
-        scrollWrap.value,
-        (mutationList) => {
-            console.log(123)
-            init()
-        },
-        { attributes: true, childList: true, subtree: true, attributeFilter: ['style', 'class'] }
-    )
 })
 
+// 计算滚动条的位置
+const calculateScrollbarPosition = (type = 'vertical') => {
+    if (type === 'vertical') {
+        const diff = scrollViewSize.height - scrollWrapSize.height
+        return (
+            ((scrollWrap.value?.scrollTop as number) / diff) *
+            (scrollWrapSize.height - scrollbarSize.vertical)
+        )
+    } else {
+        return (
+            ((scrollWrap.value?.scrollLeft as number) /
+                (scrollViewSize.width - scrollWrapSize.width)) *
+            (scrollWrapSize.width - scrollbarSize.horizontal)
+        )
+    }
+}
+
 const handleScroll = useThrottleFn(() => {
-    console.log(scrollWrap.value?.scrollTop)
+    if (scrollbarSize.horizontal) {
+        scrollMove.x = calculateScrollbarPosition('horizontal')
+    }
+    if (scrollbarSize.vertical) {
+        scrollMove.y = calculateScrollbarPosition('vertical')
+    }
 }, 10)
 </script>
 
 <template>
-    <div ref="root" :style="{ height: props.height, maxHeight: props.maxHeight }">
+    <div class="root" ref="root" :style="{ height: props.height, maxHeight: props.maxHeight }">
         <div
             class="scrollbar__wrap"
-            :style="{ height: props.height, maxHeight: props.maxHeight }"
+            :style="{
+                height: props.height,
+                maxHeight: props.maxHeight,
+                userSelect: isPress ? 'none' : 'auto'
+            }"
             ref="scrollWrap"
             @scroll="handleScroll"
         >
-            <div class="scrollbar__view" ref="scrollbarView">
+            <div class="scrollbar__view" ref="scrollView">
                 <slot></slot>
             </div>
         </div>
@@ -164,33 +251,32 @@ const handleScroll = useThrottleFn(() => {
         <transition name="fade">
             <div
                 class="scrollbar__bar is-vertical"
-                ref="verticalScrollbar"
-                v-show="statusY && isHovered"
+                v-show="scrollbarSize.vertical && (isHovered || isPress)"
             >
                 <div
                     class="scrollbar__thumb"
                     :style="{
-                        height: `${scrollbarSizeY}px`,
-                        transform: `translateY(${scrollMap.y}px)`
+                        height: `${scrollbarSize.vertical}px`,
+                        transform: `translateY(${scrollMove.y}px)`
                     }"
+                    data-direction="vertical"
                     @mousedown="handleMousedown"
-                    @mouseup="handleMouseup"
-                    @mousemove="handleMousemove"
                 ></div>
             </div>
         </transition>
         <transition name="fade">
             <div
                 class="scrollbar__bar is-horizontal"
-                ref="horizontalScrollbar"
-                v-show="statusX && isHovered"
+                v-show="scrollbarSize.horizontal && (isHovered || isPress)"
             >
                 <div
                     class="scrollbar__thumb"
-                    :style="{ width: `${scrollbarSizeX}px` }"
+                    :style="{
+                        width: `${scrollbarSize.horizontal}px`,
+                        transform: `translateX(${scrollMove.x}px)`
+                    }"
+                    data-direction="horizontal"
                     @mousedown="handleMousedown"
-                    @mouseup="handleMouseup"
-                    @mousemove="handleMousemove"
                 ></div>
             </div>
         </transition>
@@ -199,10 +285,16 @@ const handleScroll = useThrottleFn(() => {
 
 <style lang="scss">
 :host {
+    --ivy-scrollbar-thumb-color: var(--ivy-text-color-secondary);
+    --ivy-scrollbar-color: transparent;
+    --ivy-scrollbar-size: 8px;
     display: block;
     position: relative;
     box-sizing: border-box;
     overflow: hidden;
+}
+.root {
+    display: block;
 }
 .scrollbar__wrap {
     overflow: auto;
@@ -212,9 +304,13 @@ const handleScroll = useThrottleFn(() => {
     }
 }
 .scrollbar__view {
-    width: max-content;
-    height: max-content;
+    width: fit-content;
+    min-width: 100%;
+    & slot {
+        display: block;
+    }
 }
+
 .scrollbar__bar {
     position: absolute;
     right: 2px;
@@ -222,26 +318,31 @@ const handleScroll = useThrottleFn(() => {
     z-index: 10;
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: var(--ivy-scrollbar-color);
     &.is-vertical {
-        width: 8px;
+        width: var(--ivy-scrollbar-size);
         top: 0;
         height: 100%;
     }
-    .is-horizontal {
-        height: 8px;
+    &.is-horizontal {
+        height: var(--ivy-scrollbar-size);
         left: 0;
         width: 100%;
     }
 }
 .scrollbar__thumb {
-    background-color: var(--ivy-scrollbar-thumb-background-color, #ddd);
+    background-color: var(--ivy-scrollbar-thumb-color);
     border-radius: 4px;
     transform: translate(0, 0);
+    opacity: 0.5;
+    &:hover,
+    &:active {
+        opacity: 0.7;
+    }
 }
 
 .scrollbar__bar.is-vertical .scrollbar__thumb {
     width: 100%;
-    height: 100px;
 }
 .scrollbar__bar.is-horizontal .scrollbar__thumb {
     height: 100%;
@@ -249,7 +350,7 @@ const handleScroll = useThrottleFn(() => {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.2s;
+    transition: opacity 0.2s ease-in-out;
 }
 .fade-enter-from,
 .fade-leave-to {

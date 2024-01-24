@@ -92,6 +92,8 @@ pnpm test:unit
 | Link            | 链接                    |
 | Affix           | 固钉                    |
 | MessageBox      | 消息弹出框              |
+| TimeSelect      | 时间选择                |
+| Scrollbar       | 滚动条                  |
 
 ## 代办
 

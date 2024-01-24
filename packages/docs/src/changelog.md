@@ -1,5 +1,47 @@
 # 更新日志
 
+## v1.4.0 版本
+
+Feats：
+
+- 增加 `scrollbar` 组件
+- `select` 和 `timeSelect` 组件下拉框中的滚动条替换为 `scrollbar` 组件
+- 优化 `contextmenu` 右键菜单动画效果
+
+Fixed：
+
+- 修复 `details` 组件隐藏动画时箭头仍有动画
+- 修复 `table` 组件中 loading 图标加载错误
+- 修复 `card` 组件的 vue 警告
+
+Refactor：
+
+- `Loading` 组件更改为 setup 写法
+
+## v1.3.0 版本
+
+Feats：
+
+- 增加 `TimeSelect` 组件
+- `Dropdown` 和 `Select` 组件增加下拉动画
+- `Input` 组件增加 `clearable` 属性
+- 内部的 icon 改为 tsx 写法
+
+Fixed：
+
+- 修复 messageBox 组件 type 属性无效
+  Chore：
+
+- 更改 vite 中 vue 插件配置，将 .vue 后缀默认为自定义元素
+- 增加 utils 下函数的单元测试
+
+## v1.2.0 版本
+
+Features：
+
+新增 Affix 组件
+新增 MessageBox 组件
+
 ## v1.1.0 版本
 
 功能：

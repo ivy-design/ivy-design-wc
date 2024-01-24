@@ -79,7 +79,6 @@ const initCol = () => {
     const t = calcColWidth(tmp as Array<Record<string, any>>)
 
     _data_col_.value = [...t]
-    console.log(_data_col_.value, t)
 }
 
 const _data_row_ = ref([])
@@ -130,7 +129,7 @@ onMounted(() => {
         <div class="loading" v-show="props.loading">
             <div class="loading-inner">
                 <slot name="loading">
-                    <gen-loading class="loading-icon" />
+                    <Loading class="loading-icon" />
                     <p v-if="props.loadingText">{{ props.loadingText }}</p>
                 </slot>
             </div>

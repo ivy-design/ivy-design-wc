@@ -46,7 +46,7 @@
 
 ## Custom
 
-<ivy-result type="custom" header="操作成功" description="Please check and modify the following information before resubmitting.">
+<ivy-result  header="操作成功" description="Please check and modify the following information before resubmitting.">
     <img src="/images/icon-1.svg" slot="icon" />
     <div slot="extra">
         <ivy-button>返回上一页</ivy-button>

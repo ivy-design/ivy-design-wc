@@ -23,8 +23,12 @@ export default defineComponent({
         return () => (
             <div class="details">
                 <div class="details-summary" onClick={handlerClick}>
-                    {ArrowRight({ class: `details-icon ${visible.value ? 'is-open' : ''}` })}
-
+                    <ArrowRight
+                        class={[
+                            'details-icon',
+                            { 'is-open': visible.value, 'has-transition': !props.removeTransition }
+                        ]}
+                    />
                     <slot name="summary">{props.summary}</slot>
                 </div>
                 {props.removeTransition ? (
@@ -82,8 +86,10 @@ export default defineComponent({
     }
     &-icon {
         display: inline-block;
-        transition: transform 0.3s ease-in-out;
         margin-right: 10px;
+        &.has-transition {
+            transition: transform 0.3s ease-in-out;
+        }
         &.is-open {
             transform: rotate(90deg);
         }
@@ -99,7 +105,9 @@ export default defineComponent({
     }
 }
 .collapse-transition {
-    transition: 0.3s height ease-in-out, 0.3s padding-top ease-in-out,
+    transition:
+        0.3s height ease-in-out,
+        0.3s padding-top ease-in-out,
         0.3s padding-bottom ease-in-out;
 }
 </style>

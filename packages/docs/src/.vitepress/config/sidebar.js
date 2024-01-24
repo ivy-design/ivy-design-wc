@@ -83,6 +83,10 @@ const components = [
         link: "/components/checkbox",
       },
       {
+        text: "DatePicker 日期选择",
+        link: "/components/date-picker",
+      },
+      {
         text: "Input 输入框",
         link: "/components/input",
       },
@@ -101,6 +105,10 @@ const components = [
       {
         text: "Switch 开关",
         link: "/components/switch",
+      },
+      {
+        text: "TimePicker 时间选择器",
+        link: "/components/time-picker",
       },
       {
         text: "TimeSelect 时间选择",

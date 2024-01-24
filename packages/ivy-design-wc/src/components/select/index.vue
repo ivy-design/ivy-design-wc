@@ -95,7 +95,6 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-    console.log('onBeforeUnmount')
     window.removeEventListener('click', handlerHideDrop)
     window.removeEventListener('scroll', handlerScroll)
 })
@@ -116,9 +115,9 @@ onBeforeUnmount(() => {
         <div class="select-option-wrap" ref="dropEl" v-show="curVisible">
             <div class="select-arrow"></div>
             <div class="select-option-scroll">
-                <div class="select-option" @click="handlerClick">
+                <ivy-scrollbar max-height="258px" @click="handlerClick">
                     <slot></slot>
-                </div>
+                </ivy-scrollbar>
             </div>
         </div>
     </transition>
@@ -194,8 +193,6 @@ onBeforeUnmount(() => {
 }
 
 .select-option-scroll {
-    overflow-x: hidden;
-    overflow-y: auto;
     background-color: #fff;
     max-height: 274px;
     border-radius: 4px;
@@ -215,21 +212,6 @@ onBeforeUnmount(() => {
     position: absolute;
 }
 
-.select-option-scroll::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #fff;
-    border-radius: 2px;
-}
-
-.select-option-scroll::-webkit-scrollbar-thumb {
-    background-color: rgba(144, 147, 153, 1);
-    border-radius: 2px;
-}
-.select-option-scroll::-webkit-scrollbar-track {
-    background-color: rgba(144, 147, 153, 0.3);
-    border-radius: 2px;
-}
 .dropdown {
     &-enter-active,
     &-leave-active {

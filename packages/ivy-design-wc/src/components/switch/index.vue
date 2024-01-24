@@ -60,7 +60,9 @@ onMounted(() => {
     height: 20px;
     background: var(--ivy-switch-off-color);
     border-radius: 10px;
-    transition: border-color 0.3s, background-color 0.3s;
+    transition:
+        border-color 0.3s,
+        background-color 0.3s;
     cursor: pointer;
 }
 .ivy-switch::after {
