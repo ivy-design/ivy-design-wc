@@ -66,6 +66,8 @@ import { TimeSelect } from './components/time-select/index'
 import { DatePicker } from './components/date-picker/index'
 import { TimePicker } from './components/time-picker/index'
 
+import { Split } from './components/split/index'
+
 import { createMessage } from './utils/utils'
 
 const comp: Record<string, any> = {
@@ -133,7 +135,8 @@ const comp: Record<string, any> = {
     MessageBox,
     TimeSelect,
     DatePicker,
-    TimePicker
+    TimePicker,
+    Split
 }
 
 const registerComponents = async (prefix = 'Ivy') => {
@@ -240,5 +243,6 @@ declare module 'vue' {
         TimeSelect: typeof comp.TimeSelect
         DatePicker: typeof comp.DatePicker
         TimePicker: typeof comp.TimePicker
+        Split: typeof comp.Split
     }
 }

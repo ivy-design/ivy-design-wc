@@ -6,18 +6,19 @@
 
 左右分割用法。
 
-<ivy-split style="height: 100px;">
-    <div slot="left">
+<ivy-split style="height: 100px;" value="200px">
+    <div slot="start">
         <p>左侧面板</p>
     </div>
-    <div slot="right">右侧面板</div>
+    <div slot="end">右侧面板</div>
 </ivy-split>
 
-
 ```html
-<ivy-split>
-    <div slot="left">左侧面板</div>
-    <div slot="right">右侧面板</div>
+<ivy-split style="height: 100px;">
+  <div slot="start">
+    <p>左侧面板</p>
+  </div>
+  <div slot="end">右侧面板</div>
 </ivy-split>
 ```
 
@@ -25,15 +26,15 @@
 
 上下分割用法。
 
-<ivy-split vertical="vertical">
-    <div slot="top">左侧面板</div>
-    <div slot="bottom">右侧面板</div>
+<ivy-split vertical>
+    <div slot="start">顶部面板</div>
+    <div slot="end">底部面板</div>
 </ivy-split>
 
 ```html
-<ivy-split>
-    <div slot="left">左侧面板</div>
-    <div slot="right">右侧面板</div>
+<ivy-split vertical>
+  <div slot="start">顶部面板</div>
+  <div slot="end">底部面板</div>
 </ivy-split>
 ```
 

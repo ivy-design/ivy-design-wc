@@ -58,7 +58,8 @@
       "ivy-dropdown-item",
       "ivy-result",
       "ivy-tabs",
-      "ivy-tab-pane"
+      "ivy-tab-pane",
+      "ivy-split"
     ]
   }
 }
