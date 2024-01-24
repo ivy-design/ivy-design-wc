@@ -130,7 +130,7 @@ onMounted(() => {
         <div class="loading" v-show="props.loading">
             <div class="loading-inner">
                 <slot name="loading">
-                    <gen-loading class="loading-icon" />
+                    <Loading class="loading-icon" />
                     <p v-if="props.loadingText">{{ props.loadingText }}</p>
                 </slot>
             </div>
