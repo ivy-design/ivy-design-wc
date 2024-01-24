@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, reactive } from 'vue'
-import { useMutationObserver, useThrottleFn, useElementHover, useEventListener } from '@vueuse/core'
-
+import { useThrottleFn, useElementHover, useEventListener, useResizeObserver } from '@vueuse/core'
+import { getType } from '@/utils/utils'
 import useExpose from '@/hooks/useExpose'
 
 defineOptions({
@@ -101,6 +101,8 @@ const handleWrapSizeChange = () => {
 
 // 鼠标左键处于按下状态
 const isPress = ref(false)
+// 方向
+const direction = ref<'vertical' | 'horizontal'>()
 
 // 缓存鼠标位置
 const prevMousePosition = reactive({
@@ -112,58 +114,94 @@ const handleMousedown = useThrottleFn((ev: MouseEvent) => {
     isPress.value = true
     prevMousePosition.x = ev.clientX
     prevMousePosition.y = ev.clientY
+    const target = ev.target as HTMLElement
+    const dataset = target.dataset
+    direction.value = dataset.direction as 'vertical' | 'horizontal'
 }, 10)
 
 const handleMouseup = useThrottleFn(() => {
     isPress.value = false
     prevMousePosition.x = 0
     prevMousePosition.y = 0
+    direction.value = undefined
 }, 10)
 
 const handleMousemove = useThrottleFn((ev: any) => {
     if (!isPress.value) return
-    const { clientX, clientY } = ev
-    const tmp = {
-        x: clientX - prevMousePosition.x,
-        y: clientY - prevMousePosition.y
-    }
-    prevMousePosition.x = clientX
-    prevMousePosition.y = clientY
+    if (!direction.value) return
+    if (direction.value === 'vertical') {
+        const { clientY } = ev
+        const tmp = clientY - prevMousePosition.y
 
-    scrollMove.y = scrollMove.y + tmp.y
+        prevMousePosition.y = clientY
 
-    const max = scrollWrapSize.height - scrollbarSize.vertical
-    if (scrollMove.y < 0) {
-        scrollMove.y = 0
-    } else if (scrollMove.y > max) {
-        scrollMove.y = max
+        scrollMove.y = scrollMove.y + tmp
+
+        const max = scrollWrapSize.height - scrollbarSize.vertical
+        if (scrollMove.y < 0) {
+            scrollMove.y = 0
+        } else if (scrollMove.y > max) {
+            scrollMove.y = max
+        }
+        const movingDistance =
+            (scrollMove.y / (scrollWrapSize.height - scrollbarSize.vertical)) *
+            (scrollViewSize.height - scrollWrapSize.height)
+        ;(scrollWrap.value as HTMLElement).scrollTop = movingDistance
+    } else if (direction.value === 'horizontal') {
+        // 水平
+        const { clientX } = ev
+        const tmp = clientX - prevMousePosition.x
+        prevMousePosition.x = clientX
+        scrollMove.x = scrollMove.x + tmp
+
+        const max = scrollWrapSize.width - scrollbarSize.horizontal
+        if (scrollMove.x < 0) {
+            scrollMove.x = 0
+        } else if (scrollMove.x > max) {
+            scrollMove.x = max
+        }
+        const movingDistance =
+            (scrollMove.x / (scrollWrapSize.width - scrollbarSize.horizontal)) *
+            (scrollViewSize.width - scrollWrapSize.width)
+        ;(scrollWrap.value as HTMLElement).scrollLeft = movingDistance
     }
-    const movingDistance =
-        (scrollMove.y / (scrollWrapSize.height - scrollbarSize.vertical)) *
-        (scrollViewSize.height - scrollWrapSize.height)
-    ;(scrollWrap.value as HTMLElement).scrollTop = movingDistance
 }, 10)
 
 const { setExpose } = useExpose()
 
-onMounted(() => {
-    setExpose('scroll', (value: number, type = 'vertical') => {
-        if (type === 'vertical') {
-            scrollWrap.value!.scrollTop = value
-        } else {
-            scrollWrap.value!.scrollLeft = value
+interface ScrollToConf {
+    top?: number
+    left?: number
+}
+const exposeScrollTo = (conf: ScrollToConf | number, isHorizontal: boolean = false) => {
+    const type = getType(conf)
+    if (type === 'object') {
+        const tmp = conf as ScrollToConf
+        if (tmp.top) {
+            scrollWrap.value!.scrollTop = tmp.top
+        } else if (tmp.left) {
+            scrollWrap.value!.scrollLeft = tmp.left
         }
-    })
+    } else if (type === 'number') {
+        if (isHorizontal) {
+            ;(scrollWrap.value as HTMLDivElement).scrollLeft = conf as number
+        } else {
+            ;(scrollWrap.value as HTMLDivElement).scrollTop = conf as number
+        }
+    } else {
+        throw new Error('参数类型错误')
+    }
+}
+
+onMounted(() => {
+    setExpose('scrollTo', exposeScrollTo)
     useEventListener(document, 'mouseup', handleMouseup)
     useEventListener(document, 'mousemove', handleMousemove)
     handleWrapSizeChange()
-    useMutationObserver(
-        scrollWrap.value,
-        () => {
-            handleWrapSizeChange()
-        },
-        { attributes: true, childList: true, subtree: true, attributeFilter: ['style', 'class'] }
-    )
+
+    useResizeObserver(scrollView.value, () => {
+        handleWrapSizeChange()
+    })
 })
 
 // 计算滚动条的位置
@@ -221,6 +259,7 @@ const handleScroll = useThrottleFn(() => {
                         height: `${scrollbarSize.vertical}px`,
                         transform: `translateY(${scrollMove.y}px)`
                     }"
+                    data-direction="vertical"
                     @mousedown="handleMousedown"
                 ></div>
             </div>
@@ -236,6 +275,7 @@ const handleScroll = useThrottleFn(() => {
                         width: `${scrollbarSize.horizontal}px`,
                         transform: `translateX(${scrollMove.x}px)`
                     }"
+                    data-direction="horizontal"
                     @mousedown="handleMousedown"
                 ></div>
             </div>
@@ -245,6 +285,9 @@ const handleScroll = useThrottleFn(() => {
 
 <style lang="scss">
 :host {
+    --ivy-scrollbar-thumb-color: var(--ivy-text-color-secondary);
+    --ivy-scrollbar-color: transparent;
+    --ivy-scrollbar-size: 8px;
     display: block;
     position: relative;
     box-sizing: border-box;
@@ -261,9 +304,13 @@ const handleScroll = useThrottleFn(() => {
     }
 }
 .scrollbar__view {
-    width: max-content;
-    height: max-content;
+    width: fit-content;
+    min-width: 100%;
+    & slot {
+        display: block;
+    }
 }
+
 .scrollbar__bar {
     position: absolute;
     right: 2px;
@@ -271,26 +318,31 @@ const handleScroll = useThrottleFn(() => {
     z-index: 10;
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: var(--ivy-scrollbar-color);
     &.is-vertical {
-        width: 8px;
+        width: var(--ivy-scrollbar-size);
         top: 0;
         height: 100%;
     }
-    .is-horizontal {
-        height: 8px;
+    &.is-horizontal {
+        height: var(--ivy-scrollbar-size);
         left: 0;
         width: 100%;
     }
 }
 .scrollbar__thumb {
-    background-color: var(--ivy-scrollbar-thumb-background-color, #ddd);
+    background-color: var(--ivy-scrollbar-thumb-color);
     border-radius: 4px;
     transform: translate(0, 0);
+    opacity: 0.5;
+    &:hover,
+    &:active {
+        opacity: 0.7;
+    }
 }
 
 .scrollbar__bar.is-vertical .scrollbar__thumb {
     width: 100%;
-    height: 100px;
 }
 .scrollbar__bar.is-horizontal .scrollbar__thumb {
     height: 100%;
@@ -298,7 +350,7 @@ const handleScroll = useThrottleFn(() => {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.2s;
+    transition: opacity 0.2s ease-in-out;
 }
 .fade-enter-from,
 .fade-leave-to {
