@@ -164,19 +164,17 @@ onBeforeUnmount(() => {
     <transition name="dropdown">
         <div class="select-option-wrap" ref="targetRef" v-show="visible">
             <div class="select-arrow" ref="arrowRef"></div>
-            <div class="select-option-scroll">
-                <div class="select-option" @click="handlerClick">
-                    <div
-                        v-for="item in dateList"
-                        :key="item.value"
-                        :data-value="item.value"
-                        class="option-item"
-                        :data-disabled="item.disabled === true"
-                    >
-                        {{ item.value }}
-                    </div>
+            <ivy-scrollbar class="select-option-scroll" max-height="274px" @click="handlerClick">
+                <div
+                    v-for="item in dateList"
+                    :key="item.value"
+                    :data-value="item.value"
+                    class="option-item"
+                    :data-disabled="item.disabled === true"
+                >
+                    {{ item.value }}
                 </div>
-            </div>
+            </ivy-scrollbar>
         </div>
     </transition>
 </template>
@@ -263,13 +261,11 @@ onBeforeUnmount(() => {
     border-radius: 2px;
     overflow: hidden;
     z-index: 10;
+    padding: 6px 0;
 }
 
 .select-option-scroll {
-    overflow-x: hidden;
-    overflow-y: auto;
     background-color: #fff;
-    max-height: 274px;
     border-radius: 4px;
     border: 1px solid var(--ivy-border-color, #dcdfe6);
     box-shadow: var(
@@ -277,24 +273,8 @@ onBeforeUnmount(() => {
         0px 12px 32px 4px rgba(0, 0, 0, 0.04),
         0px 8px 20px rgba(0, 0, 0, 0.08)
     );
-    &::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-        background-color: #fff;
-        border-radius: 2px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: rgba(144, 147, 153, 1);
-        border-radius: 2px;
-    }
-    &::-webkit-scrollbar-track {
-        background-color: rgba(144, 147, 153, 0.3);
-        border-radius: 2px;
-    }
 }
-.select-option {
-    margin: 6px 0;
-}
+
 .select-arrow {
     height: 6px;
     width: 6px;
