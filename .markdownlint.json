@@ -49,7 +49,9 @@
       "ivy-affix",
       "ivy-time-select",
       "ivy-date-picker",
-      "ivy-time-picker"
+      "ivy-time-picker",
+      "ivy-select",
+      "ivy-option"
     ]
   }
 }
