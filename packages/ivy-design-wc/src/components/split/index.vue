@@ -207,6 +207,7 @@ onMounted(() => {
     box-sizing: border-box;
     height: 100%;
     width: 100%;
+    font-size: inherit;
     &-trigger {
         cursor: col-resize;
         box-sizing: border-box;
