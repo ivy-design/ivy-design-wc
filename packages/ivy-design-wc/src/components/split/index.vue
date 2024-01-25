@@ -8,7 +8,8 @@ defineOptions({
 })
 
 interface Props {
-    value?: string
+    value?: number
+    unit?: 'px' | '%'
     vertical?: boolean
     min?: string
     max?: string
@@ -17,13 +18,20 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    value: '50%',
+    value: 50,
+    unit: '%',
     vertical: false,
     min: '40px',
-    max: '50%',
     size: 0,
-    triggerSize: '2px'
+    triggerSize: '4px'
 })
+
+interface Emits {
+    (e: 'moveStart'): void
+    (e: 'moving', value: number): void
+    (e: 'moveEnd'): void
+}
+const emit = defineEmits<Emits>()
 
 const pressed = ref(false)
 
@@ -59,60 +67,69 @@ const getMinSize = computed(() => {
     }
 })
 
-const drag = ref(false)
-
 const handleDragStart = useThrottleFn((ev: MouseEvent) => {
-    console.log(ev)
-    drag.value = true
-
     pressed.value = true
     prevMousePosition.x = ev.clientX
     prevMousePosition.y = ev.clientY
+    emit('moveStart')
 }, 10)
-
+const startSizeRange = computed(() => {
+    const minSize = parseFloat(props.min)
+    const triggerSize = parseFloat(props.triggerSize)
+    if (props.vertical) {
+        return {
+            max: wrapRect.height - minSize - triggerSize,
+            min: minSize
+        }
+    }
+    return {
+        max: wrapRect.width - minSize - triggerSize,
+        min: minSize
+    }
+})
 const handleDragMove = useThrottleFn((e: MouseEvent) => {
     if (!pressed.value) return
     if (props.vertical) {
         const { clientY } = e
         const tmp = clientY - prevMousePosition.y
         prevMousePosition.y = clientY
-        const numberValue = parseFloat(curValue.value)
-        curValue.value = numberValue + tmp + 'px'
+        const newVal = curValue.value + tmp
+        if (startSizeRange.value.max < newVal) {
+            curValue.value = startSizeRange.value.max
+        } else if (startSizeRange.value.min > newVal) {
+            curValue.value = startSizeRange.value.min
+        } else {
+            curValue.value = newVal
+        }
     } else {
         const { clientX } = e
         const tmp = clientX - prevMousePosition.x
         prevMousePosition.x = clientX
-        const numberValue = parseFloat(curValue.value)
-        curValue.value = numberValue + tmp + 'px'
+        const newVal = curValue.value + tmp
+        if (startSizeRange.value.max < newVal) {
+            curValue.value = startSizeRange.value.max
+        } else if (startSizeRange.value.min > newVal) {
+            curValue.value = startSizeRange.value.min
+        } else {
+            curValue.value = newVal
+        }
     }
+    emit('moving', curValue.value)
 }, 10)
 
-const handleDragEnd = useThrottleFn((e: MouseEvent) => {
-    console.log(e)
-    drag.value = false
+const handleDragEnd = useThrottleFn(() => {
     pressed.value = false
     prevMousePosition.x = 0
     prevMousePosition.y = 0
+    emit('moveEnd')
 }, 10)
-
-/**单位是否为 px */
-const isPx = (val: string) => {
-    return val.endsWith('px')
-}
 
 /**计算开始块的大小 */
 const curValue = ref(props.value)
-console.log(curValue.value, 'curValue.value')
+
 const getSplitStartSize = computed(() => {
-    const flag = isPx(curValue.value as string)
-    if (flag) {
-        console.log('flag', curValue.value)
-        return {
-            flex: `0 0 ${curValue.value}`
-        }
-    }
     return {
-        flex: `0 0 calc((${curValue.value} - ${props.triggerSize}) / 2)`
+        flex: `0 0 ${curValue.value}px`
     }
 })
 
@@ -121,6 +138,24 @@ const wrapRect = reactive({
     width: 0,
     height: 0
 })
+
+const initStartSize = () => {
+    const val = typeof props.value === 'string' ? parseFloat(props.value as string) : props.value
+    if (props.unit === 'px') {
+        curValue.value = val
+    } else {
+        let realMaxSize = 0
+        const triggerSize = parseFloat(props.triggerSize)
+
+        if (props.vertical) {
+            realMaxSize = wrapRect.height - triggerSize
+            curValue.value = (realMaxSize * val) / 100
+        } else {
+            realMaxSize = wrapRect.width - triggerSize
+            curValue.value = (realMaxSize * val) / 100
+        }
+    }
+}
 const getWrapRect = () => {
     if (!wrapEl.value) return
     const { width, height } = wrapEl.value.getBoundingClientRect()
@@ -130,17 +165,23 @@ const getWrapRect = () => {
 
 const init = () => {
     getWrapRect()
+    initStartSize()
+}
+
+const handleResize = () => {
+    getWrapRect()
 }
 
 onMounted(() => {
-    useResizeObserver(wrapEl.value, init)
+    init()
+    useResizeObserver(wrapEl.value, handleResize)
     useEventListener(document, 'mouseup', handleDragEnd)
     useEventListener(document, 'mousemove', handleDragMove)
 })
 </script>
 
 <template>
-    <div ref="wrapEl" :class="['split', { 'is-vertical': props.vertical }]">
+    <div ref="wrapEl" :class="['split', { 'is-vertical': props.vertical, 'is-move': pressed }]">
         <div class="split-start" :style="{ ...getMinSize, ...getSplitStartSize }">
             <slot name="start"></slot>
         </div>
@@ -164,12 +205,17 @@ onMounted(() => {
     border: 1px solid var(--ivy-split-border-color);
     position: relative;
     box-sizing: border-box;
+    height: 100%;
+    width: 100%;
     &-trigger {
         cursor: col-resize;
         box-sizing: border-box;
         background-color: var(--ivy-split-border-color);
     }
 
+    &.is-move {
+        user-select: none;
+    }
     &-end {
         flex: auto;
     }
