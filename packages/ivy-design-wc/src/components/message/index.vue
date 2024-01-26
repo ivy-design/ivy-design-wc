@@ -5,6 +5,7 @@ import { curMessageIndex } from '@/utils/utils'
 import useBroadCastChannel from '@/hooks/useBroadcastChannel'
 import { Success, Warning, Error, Info } from '@/utils/icons'
 import useExpose from '@/hooks/useExpose'
+import { useEventListener } from '@vueuse/core'
 
 const { setExpose } = useExpose()
 
@@ -60,15 +61,33 @@ onMounted(() => {
     setExpose('open', open)
     const host = getHostElement() as HTMLElement
     initBroadcastChannel((data: any) => broadCastCallback(data, host))
-
-    wrap.value?.addEventListener('transitionstart', () => {
+    useEventListener(wrap.value, 'transitionstart', () => {
         if (visible.value) {
             const top = calcTop()
             host.style.top = `${top}px`
             curMessageIndex.value = curIndex.value + 1
         }
     })
-    wrap.value?.addEventListener('transitionend', () => {
+    useEventListener(wrap.value, 'transitioncancel', () => {
+        if (!visible.value) {
+            if (curMessageIndex.value > 1) {
+                postMessage(curIndex.value)
+                closeBroadcastChannel()
+                curMessageIndex.value = curMessageIndex.value - 1
+            } else {
+                curMessageIndex.value = 0
+            }
+
+            host.remove()
+        } else {
+            console.log('visible', visible.value)
+            const timer = setTimeout(() => {
+                visible.value = false
+                clearTimeout(timer)
+            }, props.duration)
+        }
+    })
+    useEventListener(wrap.value, 'transitionend', () => {
         if (!visible.value) {
             if (curMessageIndex.value > 1) {
                 postMessage(curIndex.value)

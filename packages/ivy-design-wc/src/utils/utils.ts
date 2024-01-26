@@ -16,6 +16,12 @@ export const isFunction = <T>(val: T): boolean => {
     return getType(val) === 'function'
 }
 
+export const isFunc = isFunction
+
+export const isObject = <T>(val: T): boolean => {
+    return getType(val) === 'object'
+}
+
 export interface MessageConfig {
     content?: string
     duration?: number
