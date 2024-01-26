@@ -26,6 +26,7 @@ interface Props {
     position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
     showClose?: boolean
     offset?: number
+    useHtmlString: boolean
     onClose?: () => void
 }
 
@@ -96,9 +97,12 @@ const getTransitionName = computed(() => {
                         <Close />
                     </div>
                 </div>
-                <div class="ivy-notification-body">
-                    {{ props.message }}
-                </div>
+                <div
+                    class="ivy-notification-body"
+                    v-if="props.useHtmlString"
+                    v-html="props.message"
+                ></div>
+                <div v-else class="ivy-notification-body">{{ props.message }}</div>
             </div>
         </div>
     </transition>

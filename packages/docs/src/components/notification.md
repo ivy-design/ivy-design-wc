@@ -48,6 +48,14 @@ Ivy Design 为 Notification 组件准备了四种通知类型：`success`, `warn
 
 <ivy-button @click="hideClose"> 隐藏关闭按钮 </ivy-button>
 
+## 使用 HTML 片段作为正文内容
+
+`message` 支持传入 HTML 字符串来作为正文内容。
+
+将 `useHtmlString` 属性设置为 `true`，`message` 属性就会被当作 HTML 片段处理。
+
+<ivy-button @click="useHtml"> 使用 HTML 字符串 </ivy-button>
+
 ## 可用的 CSS 变量
 
 :::details 点击查看
@@ -66,15 +74,16 @@ Ivy Design 为 Notification 组件准备了四种通知类型：`success`, `warn
 
 ### 属性
 
-| 名称       | 说明                            | 类型     | 可选值                        | 默认值    |
-| ---------- | ------------------------------- | -------- | ----------------------------- | --------- |
-| type       | 通知的类型                      | string   | `success/info/warning/error`  | -         |
-| title      | 通知的标题                      | string   | -                             | '通知'    |
-| message    | 正文内容                        | string   | -                             | -         |
-| show-close | 是否显示右上角关闭按钮          | boolean  | -                             | true      |
-| duration   | 显示时间(ms)。 0 则不会自动关闭 | number   | -                             | 4500      |
-| onClose    | 关闭时的回调函数                | Function | -                             | -         |
-| position   | 关闭时的回调函数                | string   | `(top\|bottom)-(left\|right)` | top-right |
+| 名称          | 说明                            | 类型     | 可选值                        | 默认值    |
+| ------------- | ------------------------------- | -------- | ----------------------------- | --------- |
+| type          | 通知的类型                      | string   | `success/info/warning/error`  | -         |
+| title         | 通知的标题                      | string   | -                             | '通知'    |
+| message       | 正文内容                        | string   | -                             | -         |
+| useHtmlString | message 作为 HTML 处理          | boolean  | -                             | false     |
+| show-close    | 是否显示右上角关闭按钮          | boolean  | -                             | true      |
+| duration      | 显示时间(ms)。 0 则不会自动关闭 | number   | -                             | 4500      |
+| onClose       | 关闭时的回调函数                | Function | -                             | -         |
+| position      | 关闭时的回调函数                | string   | `(top\|bottom)-(left\|right)` | top-right |
 
 ## Methods
 
@@ -132,6 +141,15 @@ const hideClose = () => {
         showClose: false,
         title: "通知",
         message: "这是通知的内容部分"
+    })
+}
+
+const useHtml = () => {
+    $notify({
+        showClose: false,
+        title: "通知",
+        useHtmlString: true,
+        message: `<p>我是使用<b style="color: red;margin: 0 8px"><i>html</i></b>字符串来作为正文内容</p>`
     })
 }
 </script>

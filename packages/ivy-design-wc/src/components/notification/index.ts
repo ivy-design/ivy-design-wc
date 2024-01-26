@@ -18,6 +18,7 @@ export interface NotificationProps {
     position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
     showClose?: boolean
     offset?: number
+    useHtmlString?: boolean
     onClose?: () => void
 }
 
@@ -25,7 +26,8 @@ const defaultConfig: NotificationProps = {
     duration: 4500,
     position: 'top-right',
     showClose: true,
-    offset: 0
+    offset: 0,
+    useHtmlString: false
 }
 
 const setAttrs = (el: any, attrs: any) => {
