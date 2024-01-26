@@ -94,15 +94,15 @@ pnpm test:unit
 | MessageBox      | 消息弹出框              |
 | TimeSelect      | 时间选择                |
 | Scrollbar       | 滚动条                  |
+| split           | 分割面板                |
+| notification    | 通知框                  |
 
 ## 代办
 
-| 组件名称     | 组件描述   |
-| :----------- | :--------- |
-| tabs         | 标签页     |
-| message      | 消息提醒   |
-| notification | 通知框     |
-| table        | 表格       |
-| split        | 分割面板   |
-| datePicker   | 日期选择器 |
-| timePicker   | 时间选择器 |
+| 组件名称   | 组件描述   |
+| :--------- | :--------- |
+| tabs       | 标签页     |
+| message    | 消息提醒   |
+| table      | 表格       |
+| datePicker | 日期选择器 |
+| timePicker | 时间选择器 |

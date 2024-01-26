@@ -120,7 +120,12 @@ onMounted(() => {
         <div class="overlay" v-if="visible"></div>
     </transition>
     <transition name="animated">
-        <div class="message-box" v-if="visible" @transitionend="handleTransitionend">
+        <div
+            class="message-box"
+            v-if="visible"
+            @transitionend="handleTransitionend"
+            @transitioncancel="handleTransitionend"
+        >
             <div class="message-box-header">
                 <p class="message-box-title">{{ props.title }}</p>
                 <i v-if="props.showClose" class="message-box-close" @click="close">
