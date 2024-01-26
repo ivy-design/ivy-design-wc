@@ -1,3 +1,19 @@
+<script setup lang="ts">
+defineOptions({
+    name: 'Radio',
+    inheritAttrs: false
+})
+interface Props {
+    label: string
+    disabled: boolean
+    checked: boolean
+}
+const props = withDefaults(defineProps<Props>(), {
+    disabled: false,
+    checked: false
+})
+</script>
+
 <template>
     <div class="ivy-radio" :disabled="props.disabled" :checked="props.checked">
         <span class="ivy-radio-input">
@@ -8,24 +24,6 @@
         </span>
     </div>
 </template>
-
-<script setup lang="ts">
-defineOptions({
-    name: 'Radio'
-})
-
-const props = defineProps({
-    label: {
-        type: String,
-        default: ''
-    },
-    disabled: Boolean,
-    checked: {
-        type: Boolean,
-        default: false
-    }
-})
-</script>
 
 <style lang="scss">
 :host {
