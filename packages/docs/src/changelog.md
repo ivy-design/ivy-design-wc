@@ -1,5 +1,16 @@
 # 更新日志
 
+## v1.5.0 版本
+
+Feats：
+
+- 增加 `Notification` 组件
+- 增加 `Split` 组件
+
+Chore：
+
+- 尝试修复自定发布 npm action 错误
+
 ## v1.4.0 版本
 
 Feats：
