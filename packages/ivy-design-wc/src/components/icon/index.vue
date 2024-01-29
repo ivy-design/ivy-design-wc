@@ -15,10 +15,7 @@ const props = defineProps({
 })
 
 const getStyle = () => {
-    let style: Record<string, StyleValue> = {
-        color: 'inherit',
-        'font-size': 'inherit'
-    }
+    let style: Record<string, StyleValue> = {}
     if (props.color) style.color = props.color
     if (props.size) style['font-size'] = props.size
     return style
