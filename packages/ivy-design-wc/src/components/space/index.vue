@@ -32,9 +32,10 @@ export default defineComponent({
         const children = ref<any>([])
         onMounted(() => {
             slot.value.assignedNodes().forEach((c: Element) => {
-                if (c.nodeType === 1) {
+                console.log(c)
+                if (c.nodeType === Node.ELEMENT_NODE) {
                     children.value.push(c.outerHTML)
-                } else if (c.nodeType === 3 && !/^\s+$/.test(c.nodeValue as string)) {
+                } else if (c.nodeType === Node.TEXT_NODE && !/^\s+$/.test(c.nodeValue as string)) {
                     children.value.push(c.nodeValue)
                 }
             })
@@ -65,14 +66,15 @@ export default defineComponent({
             }
         )
 
-        return () => [
-            <slot hidden ref={(el: HTMLSlotElement) => (slot.value = el)}></slot>,
+        return () => (
             <div class={['space', { 'is-wrap': props.wrap }]} style={spaceStyle.value}>
-                {children.value.map((c: any) => {
-                    return <div class="space__item" innerHTML={c}></div>
-                })}
+                <slot ref={(el: HTMLSlotElement) => (slot.value = el)}>
+                    {children.value.map((c: any) => {
+                        return <div class="space-item" innerHTML={c}></div>
+                    })}
+                </slot>
             </div>
-        ]
+        )
     }
 })
 </script>
@@ -80,12 +82,18 @@ export default defineComponent({
 <style lang="scss">
 :host {
     display: inline-block;
+    font-size: inherit;
 }
 .space {
     display: flex;
     gap: 12px;
+    font-size: inherit;
     &.is-wrap {
         flex-wrap: wrap;
+    }
+    &-item {
+        flex: 0 0 auto;
+        font-size: inherit;
     }
 }
 </style>

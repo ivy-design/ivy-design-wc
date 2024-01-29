@@ -41,9 +41,9 @@ Avatar 组件可以用来代表人物或对象， 支持使用图片、图标或
 支持使用图片，图标或者文字作为 Avatar。
 
 <ivy-space size="custom" gap="24px">
-<ivy-avatar content="User"></ivy-avatar>
-<ivy-avatar  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></ivy-avatar>
-<ivy-avatar><ivy-icon name="user" size="24px"></ivy-icon></ivy-avatar>
+  <ivy-avatar content="User"></ivy-avatar>
+  <ivy-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></ivy-avatar>
+  <ivy-avatar><ivy-icon name="user" size="20px"></ivy-icon></ivy-avatar>
 </ivy-space>
 
 ```html
@@ -52,7 +52,7 @@ Avatar 组件可以用来代表人物或对象， 支持使用图片、图标或
   <ivy-avatar
     src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
   ></ivy-avatar>
-  <ivy-avatar><ivy-icon name="user" size="24px"></ivy-icon></ivy-avatar>
+  <ivy-avatar><ivy-icon name="user" size="20px"></ivy-icon></ivy-avatar>
 </ivy-space>
 ```
 
