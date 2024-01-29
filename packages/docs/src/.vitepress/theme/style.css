@@ -13,6 +13,10 @@ textarea {
   :root {
     --vp-layout-max-width: 1900px;
   }
+  html,
+  body {
+    font-size: 16px;
+  }
   #VPContent .VPDoc.has-aside .content-container {
     max-width: 1200px;
   }

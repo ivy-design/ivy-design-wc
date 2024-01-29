@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import svg from '@/assets/fonts/iconfont.svg'
+import { onMounted } from 'vue'
+import { useHost } from '@/hooks/useHostElement'
+import type { StyleValue } from 'vue'
 
 defineOptions({
     name: 'Icon',
@@ -13,35 +14,42 @@ const props = defineProps({
     size: String
 })
 
-const styles = computed(() => {
-    let style = {
+const getStyle = () => {
+    let style: Record<string, StyleValue> = {
         color: 'inherit',
-        fontSize: 'inherit'
+        'font-size': 'inherit'
     }
     if (props.color) style.color = props.color
-    if (props.size) style.fontSize = props.size
+    if (props.size) style['font-size'] = props.size
     return style
+}
+
+const getClass = () => {
+    const target = ['ivy-icon']
+    if (props.name) target.push(`ivy-icon-${props.name}`)
+    return target
+}
+const { host } = useHost()
+onMounted(() => {
+    if (!host.value) return
+    const classList = getClass()
+
+    host.value.classList.add(...classList)
+    const styles = getStyle()
+    for (let key in styles) {
+        host.value.style.setProperty(key, styles[key] as string)
+    }
 })
 </script>
 
 <template>
-    <svg class="ivy-icon" :style="styles">
-        <use :href="`${svg}#ivy-icon-${props.name}`"></use>
-    </svg>
+    <slot> </slot>
 </template>
 
 <style>
 :host {
     display: inline-flex;
     font-size: inherit;
-}
-.ivy-icon {
-    width: 1em;
-    height: 1em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    stroke: currentColor;
-    overflow: hidden;
 }
 
 :host([spin]) .ivy-icon {
