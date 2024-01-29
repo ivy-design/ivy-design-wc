@@ -69,7 +69,7 @@ watch(
     <transition name="fade">
         <div class="ivy-mask" v-if="props.showMask === 'true'" @click="handlerMaskClose"></div>
     </transition>
-    <transition name="fade">
+    <transition name="zoom-in">
         <div class="ivy-modal" ref="el" v-if="props.open">
             <div class="ivy-modal-header">
                 <slot name="header">{{ props.header }}</slot>
@@ -129,10 +129,7 @@ watch(
     background-color: #ffffff;
     border-radius: var(--border-radius, 8px);
     position: relative;
-    animation: zoomIn 0.3s forwards;
-    box-shadow:
-        0 12px 32px 4px rgba(0, 0, 0, 0.04),
-        0px 8px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--ivy-box-shadow);
     border: 1px solid var(--ivy-border-color, #dcdfe6);
 }
 .ivy-modal-header {
@@ -207,14 +204,23 @@ watch(
 .ivy-modal-close:hover::after {
     background-color: #444;
 }
-@keyframes zoomIn {
-    from {
+
+.zoom-in {
+    &-enter-active,
+    &-leave-active {
+        transition: all 0.3s;
+    }
+
+    &-enter-from,
+    &-leave-to {
         opacity: 0;
         transform: scale3d(0.3, 0.3, 0.3);
     }
 
-    50% {
+    &-enter-to,
+    &-leave-from {
         opacity: 1;
+        transform: scale3d(1, 1, 1);
     }
 }
 </style>
