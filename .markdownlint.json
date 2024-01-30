@@ -59,7 +59,14 @@
       "ivy-result",
       "ivy-tabs",
       "ivy-tab-pane",
-      "ivy-split"
+      "ivy-split",
+      "ivy-switch",
+      "ivy-badge",
+      "ivy-timeline",
+      "ivy-timeline-item",
+      "ivy-steps",
+      "ivy-step",
+      "ivy-tip"
     ]
   }
 }

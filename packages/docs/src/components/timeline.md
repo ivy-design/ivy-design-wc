@@ -5,21 +5,21 @@
 只设置时间和描述
 
 <ivy-timeline>
-    <ivy-timeline-item timestamp="2020-8-12">
-    本周美国大选公布结果
-    </ivy-timeline-item>
-    <ivy-timeline-item timestamp="2020-9-12">
-    本周美国大选公布结果
-    </ivy-timeline-item>
-    <ivy-timeline-item timestamp="2020-10-12">
-    本周美国大选公布结果
-    </ivy-timeline-item>
-    <ivy-timeline-item timestamp="2020-11-12">
-    本周美国大选公布结果
-    </ivy-timeline-item>
-    <ivy-timeline-item timestamp="2020-12-12">
-    本周美国大选公布结果
-    </ivy-timeline-item>
+  <ivy-timeline-item timestamp="2020-8-12">
+  本周美国大选公布结果
+  </ivy-timeline-item>
+  <ivy-timeline-item timestamp="2020-9-12">
+  本周美国大选公布结果
+  </ivy-timeline-item>
+  <ivy-timeline-item timestamp="2020-10-12">
+  本周美国大选公布结果
+  </ivy-timeline-item>
+  <ivy-timeline-item timestamp="2020-11-12">
+  本周美国大选公布结果
+  </ivy-timeline-item>
+  <ivy-timeline-item timestamp="2020-12-12">
+  本周美国大选公布结果
+  </ivy-timeline-item>
 </ivy-timeline>
 
 ```html

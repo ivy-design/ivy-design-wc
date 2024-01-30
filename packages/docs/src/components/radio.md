@@ -27,9 +27,9 @@
 在 `Radio` 上添加 `disabled` 属性可以禁用组件
 
 <ivy-radio-group  value="1">
-<ivy-radio label="1">苹果</ivy-radio>
-<ivy-radio label="2" disabled>橘子</ivy-radio>
-<ivy-radio label="3">香蕉</ivy-radio>
+  <ivy-radio label="1">苹果</ivy-radio>
+  <ivy-radio label="2" disabled>橘子</ivy-radio>
+  <ivy-radio label="3">香蕉</ivy-radio>
 </ivy-radio-group>
 
 ```html
@@ -45,9 +45,9 @@
 在 `RadioGroup` 上添加 `disabled` 属性可以禁用组件
 
 <ivy-radio-group disabled value="1">
-<ivy-radio label="1">苹果</ivy-radio>
-<ivy-radio label="2">橘子</ivy-radio>
-<ivy-radio label="3">香蕉</ivy-radio>
+  <ivy-radio label="1">苹果</ivy-radio>
+  <ivy-radio label="2">橘子</ivy-radio>
+  <ivy-radio label="3">香蕉</ivy-radio>
 </ivy-radio-group>
 
 ```html

@@ -1,28 +1,30 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useHostElement } from '@/hooks/useHostElement'
+import { useHost } from '@/hooks/useHostElement'
 import { getElementsByTagName } from '@/utils/dom'
 
 defineOptions({
-    name: 'RadioGroup'
+    name: 'RadioGroup',
+    inheritAttrs: false
 })
 
-const props = defineProps({
-    value: {
-        type: String,
-        default: ''
-    },
-    disabled: Boolean
+interface Props {
+    value: string
+    disabled: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    value: '',
+    disabled: false
 })
 
 const emit = defineEmits(['beforeChange', 'change'])
 
 const value = ref(props.value)
-const { el, getHostElement } = useHostElement()
+const { host } = useHost()
 
 const getChildren = () => {
-    const host = getHostElement()
-    return getElementsByTagName(host as HTMLElement, 'ivy-radio')
+    return getElementsByTagName(host.value as HTMLElement, 'ivy-radio')
 }
 
 const setChecked = () => {
@@ -31,7 +33,8 @@ const setChecked = () => {
         if (props.disabled) {
             child.disabled = true
         }
-        child.checked = child.label === value.value
+        const label = child.label || child.getAttribute('label')
+        child.checked = label === value.value
     })
 }
 
@@ -50,7 +53,7 @@ const handlerClick = (ev: Event) => {
         emit('beforeChange', label)
         value.value = label
         setChecked()
-        ;(getHostElement() as any).value = label
+        ;(host.value as any).value = label
         emit('change', label)
     }
 }

@@ -107,6 +107,7 @@ ReactDOM.render(<ivy-button>button</ivy-button>, document.body);
 | Scrollbar       | 滚动条                       |
 | split           | 分割面板                     |
 | notification    | 通知框                       |
+| pagination      | 分页器                       |
 
 ## 未完成组件
 
