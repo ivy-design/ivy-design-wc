@@ -1,5 +1,20 @@
 # 更新日志
 
+## v1.6.0 版本
+
+Feats：
+
+- 增加 `pagination` 组件
+- `Icon` 组件实现改为字体图标
+
+Fixed：
+
+- 修复文档在 1920 宽度下标题显示异常
+
+Refactor：
+
+- `Radio` 组件定义 Props 时使用 TS interface 定义
+
 ## v1.5.0 版本
 
 Feats：
