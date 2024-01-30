@@ -35,7 +35,7 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 8
-      - run: pnpm
+      - run: pnpm i
       - run: pnpm run publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
