@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Rect } from '@popperjs/core'
+import { nextTick } from 'vue'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 defineOptions({
@@ -7,6 +9,8 @@ defineOptions({
 })
 
 const visible = ref(false)
+const contextmenu = ref<HTMLElement | null>(null)
+const wrapper = ref<HTMLElement | null>(null)
 
 const emit = defineEmits(['command'])
 
@@ -15,14 +19,21 @@ const handleClose = () => {
 }
 
 const point = ref({ x: 0, y: 0 })
-const handleOpen = (position = { x: 0, y: 0 }) => {
-    point.value.x = position.x
-    point.value.y = position.y
-    visible.value = true
-}
 
 const handleContextmenu = (event: any) => {
-    handleOpen({ x: event.layerX, y: event.layerY })
+    let { layerX: x, layerY: y } = event
+    visible.value = true
+    nextTick(() => {
+        const { width: wrapWidth = 0 } = wrapper.value?.getBoundingClientRect() as Rect
+        const styles = getComputedStyle(contextmenu.value as HTMLElement)
+        const width = parseFloat(styles.getPropertyValue('width'))
+
+        if (wrapWidth < width + x) {
+            x = x - width
+        }
+        point.value.x = x
+        point.value.y = y
+    })
 }
 
 const handleScroll = () => {
@@ -54,10 +65,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="contextmenu" @contextmenu.stop.prevent="handleContextmenu">
+    <div class="contextmenu" ref="wrapper" @contextmenu.stop.prevent="handleContextmenu">
         <slot></slot>
         <transition name="zoom-in">
             <div
+                ref="contextmenu"
                 v-show="visible"
                 class="contextmenu__wrap"
                 :style="{ top: `${point.y}px`, left: `${point.x}px` }"
@@ -114,6 +126,7 @@ onBeforeUnmount(() => {
 }
 .zoom-in-enter-active,
 .zoom-in-leave-active {
+    transform-origin: top center;
     transition:
         transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
         opacity 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
