@@ -97,13 +97,13 @@ pnpm test:unit
 | split           | 分割面板                |
 | notification    | 通知框                  |
 | pagination      | 分页器                  |
+| tabs            | 标签页                  |
+| message         | 消息提醒                |
 
 ## 代办
 
 | 组件名称   | 组件描述   |
 | :--------- | :--------- |
-| tabs       | 标签页     |
-| message    | 消息提醒   |
 | table      | 表格       |
 | datePicker | 日期选择器 |
 | timePicker | 时间选择器 |

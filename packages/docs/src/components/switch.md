@@ -40,34 +40,36 @@
 
 <ivy-switch style="--ivy-switch-on-color: #67c23a; --ivy-switch-off-color: #f56c6c;"></ivy-switch>
 
-
 ```html
-<ivy-switch style="--ivy-switch-on-color: #67c23a; --ivy-switch-off-color: #f56c6c;"></ivy-switch>
+<ivy-switch
+  style="--ivy-switch-on-color: #67c23a; --ivy-switch-off-color: #f56c6c;"
+></ivy-switch>
 ```
-
 
 ## 可用的 CSS 变量
 
 :::details 点击查看代码
+
 ```css
 :hsot {
-    --ivy-switch-on-color: var(--ivy-color-primary, #409eff);
-    --ivy-switch-off-color: var(--ivy-border-color, #dcdfe6);
+  --ivy-switch-on-color: var(--ivy-color-primary, #409eff);
+  --ivy-switch-off-color: var(--ivy-border-color, #dcdfe6);
 }
 ```
+
 :::
 
 ## Props
 
-| 参数     | 说明             | 类型    | 可选值 | 默认值 |
-| -------- | ---------------- | ------- | ------ | ------ |
-| checked  | 是否选中         | boolean | —      | false  |
-| disabled | 是否禁用         | boolean | —      | false  |
+| 参数     | 说明     | 类型    | 可选值 | 默认值 |
+| -------- | -------- | ------- | ------ | ------ |
+| checked  | 是否选中 | boolean | —      | false  |
+| disabled | 是否禁用 | boolean | —      | false  |
 
 ## Events
 
-| 事件名称 | 说明          | 回调参数 |
-| -------- |-------------| -------- |
+| 事件名称 | 说明                   | 回调参数 |
+| -------- | ---------------------- | -------- |
 | change   | 开关状态发生变化后调用 | checked  |
 
 <script setup>
