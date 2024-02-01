@@ -4,6 +4,8 @@ import dayjs, { type Dayjs } from 'dayjs'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useHost } from '@/hooks/useHostElement'
 import { CloseIcon as Close } from '@/utils/icons'
+import CompDate from './date.vue'
+import { genDateList } from './utils'
 
 defineOptions({
     name: 'DatePicker',
@@ -12,71 +14,24 @@ defineOptions({
 
 const { triggerRef, targetRef, arrowRef } = usePopper()
 
+export type PropType = 'date' | 'month' | 'year'
+
 export interface Props {
-    start: string
-    end: string
-    step: string
-    placeholder: string
-    disabled: boolean
+    type: PropType
     format: string
     value: string
-    minTime: string
-    maxTime: string
     clearable: boolean
+    disabled: boolean
+    placeholder: string
 }
 const props = withDefaults(defineProps<Props>(), {
-    start: '09:00',
-    end: '17:00',
-    step: '00:30',
-    placeholder: '请选择时间',
-    format: 'HH:mm'
+    type: 'date',
+    format: 'YYYY-MM-DD',
+    clearable: false,
+    disabled: false
 })
 
-const isDisabled = (cur: Dayjs, min: Dayjs, max: Dayjs) => {
-    if (min || max) {
-        return cur.isBefore(min) || cur.isAfter(max)
-    } else {
-        return false
-    }
-}
 const inputEl = ref<HTMLInputElement>()
-
-const dateList = computed(() => {
-    const target = []
-    const curDate = dayjs().format('YYYY-MM-DD')
-    const start = dayjs(curDate + ' ' + props.start)
-    let cloneStart = start.clone()
-    const end = dayjs(curDate + ' ' + props.end)
-    const step = dayjs(curDate + ' ' + props.step)
-    const minTime = dayjs(curDate + ' ' + props.minTime)
-    const maxTime = dayjs(curDate + ' ' + props.maxTime)
-
-    while (cloneStart.isBefore(end)) {
-        cloneStart = cloneStart.add(step.hour(), 'hour').add(step.minute(), 'minute')
-        target.push({
-            value: cloneStart.format(props.format),
-            disabled: isDisabled(cloneStart, minTime, maxTime)
-        })
-    }
-    const lastIndex = target.length - 1
-    if (target[lastIndex].value === end.format(props.format)) {
-        target.pop()
-    }
-
-    const result = [
-        {
-            value: start.format(props.format),
-            disabled: isDisabled(start, minTime, maxTime)
-        },
-        ...target,
-        {
-            value: end.format(props.format),
-            disabled: isDisabled(end, minTime, maxTime)
-        }
-    ]
-
-    return result
-})
 
 const visible = ref(false)
 const { host } = useHost()
@@ -129,16 +84,21 @@ const handleClear = () => {
     emit('clear')
 }
 
-const setDefaultValue = () => {
-    if (props.value && dateList.value.find((item) => item.value === props.value)) {
-        ;(inputEl.value as HTMLInputElement).value = props.value
-    }
+const setDefaultValue = () => {}
+
+const dateList = ref<Array<{ value: number; type: string }>>([])
+const cur = ref()
+
+const init = () => {
+    cur.value = props.value ? dayjs(props.value) : dayjs()
+
+    dateList.value = genDateList(cur.value.year, cur.value.year)
 }
 
 onMounted(() => {
     window.addEventListener('click', handlerHideDrop)
     window.addEventListener('scroll', handlerScroll)
-    setDefaultValue()
+    init()
 })
 
 onBeforeUnmount(() => {
@@ -162,20 +122,10 @@ onBeforeUnmount(() => {
         </div>
     </div>
     <transition name="dropdown">
-        <div class="select-option-wrap" ref="targetRef" v-show="visible">
-            <div class="select-arrow" ref="arrowRef"></div>
-            <div class="select-option-scroll">
-                <div class="select-option" @click="handlerClick">
-                    <div
-                        v-for="item in dateList"
-                        :key="item.value"
-                        :data-value="item.value"
-                        class="option-item"
-                        :data-disabled="item.disabled === true"
-                    >
-                        {{ item.value }}
-                    </div>
-                </div>
+        <div class="wrap" ref="targetRef" v-show="visible">
+            <div class="wrap-arrow" ref="arrowRef"></div>
+            <div class="wrap-inner">
+                <CompDate :data="dateList" />
             </div>
         </div>
     </transition>
@@ -254,10 +204,9 @@ onBeforeUnmount(() => {
     }
 }
 
-.select-option-wrap {
+.wrap {
     position: absolute;
-    width: 100%;
-    min-width: 240px;
+    width: 340px;
     left: 0;
     top: calc(var(--ivy-time-select-height) + 2px);
     border-radius: 2px;
@@ -265,11 +214,11 @@ onBeforeUnmount(() => {
     z-index: 10;
 }
 
-.select-option-scroll {
-    overflow-x: hidden;
-    overflow-y: auto;
+.wrap-inner {
+    overflow: hidden;
     background-color: #fff;
-    max-height: 274px;
+    height: 274px;
+    padding: 0 12px;
     border-radius: 4px;
     border: 1px solid var(--ivy-border-color, #dcdfe6);
     box-shadow: var(
@@ -277,54 +226,45 @@ onBeforeUnmount(() => {
         0px 12px 32px 4px rgba(0, 0, 0, 0.04),
         0px 8px 20px rgba(0, 0, 0, 0.08)
     );
-    &::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-        background-color: #fff;
-        border-radius: 2px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: rgba(144, 147, 153, 1);
-        border-radius: 2px;
-    }
-    &::-webkit-scrollbar-track {
-        background-color: rgba(144, 147, 153, 0.3);
-        border-radius: 2px;
-    }
 }
-.select-option {
-    margin: 6px 0;
+ul {
+    padding: 0;
+    margin: 0;
 }
-.select-arrow {
-    height: 6px;
-    width: 6px;
-    position: absolute;
+li {
+    list-style: none;
+}
+.box {
+    font-size: var(--ivy-font-size);
+}
+.year {
+    display: flex;
+    flex-wrap: wrap;
+    &-item {
+        flex: 0 0 calc(100% / 7);
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        cursor: pointer;
+        display: inline-flex;
+        justify-content: center;
+        &.is-current {
+            &:hover {
+                .year-item-inner {
+                    background-color: #f5f7fa;
+                }
+            }
+        }
+        &-inner {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+        }
+    }
 }
 
-.option-item {
-    display: block;
-    padding: 0 12px;
-    line-height: 34px;
-    height: 34px;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-    font-size: var(--ivy-time-select-font-size);
-    &[data-disabled='true'] {
-        color: #a8abb2;
-        cursor: not-allowed;
-    }
-}
-
-.option-item:hover {
-    background-color: #f4f4f5;
-}
-
-.option-item[disabled] {
-    cursor: not-allowed;
-    color: #a8abb2;
-    background-color: transparent;
-    pointer-events: none;
-}
 .dropdown {
     &-enter-active,
     &-leave-active {
