@@ -68,6 +68,7 @@ import { TimePicker } from './components/time-picker/index'
 
 import { Split } from './components/split/index'
 import { Notification, notify } from './components/notification/index'
+import { Tour, createTour } from './components/tour/index'
 
 import { createMessage } from './utils/utils'
 
@@ -138,7 +139,8 @@ const comp: Record<string, any> = {
     DatePicker,
     TimePicker,
     Split,
-    Notification
+    Notification,
+    Tour
 }
 
 const registerComponents = async (prefix = 'Ivy') => {
@@ -249,5 +251,6 @@ declare module 'vue' {
         TimePicker: typeof comp.TimePicker
         Split: typeof comp.Split
         Notification: typeof comp.Notification
+        Tour: typeof comp.Tour
     }
 }

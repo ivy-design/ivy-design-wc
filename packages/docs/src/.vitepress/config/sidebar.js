@@ -173,6 +173,10 @@ const components = [
         link: "/components/tag",
       },
       {
+        text: "Tour 漫游式引导",
+        link: "/components/tour",
+      },
+      {
         text: "Timeline 时间线",
         link: "/components/timeline",
       },
