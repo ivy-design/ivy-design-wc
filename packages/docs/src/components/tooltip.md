@@ -158,6 +158,24 @@
 </ivy-tooltip>
 ```
 
+## 可用的 css 变量
+
+:::details 点击展开
+
+```css
+:host {
+  --ivy-tooltip-color: var(--ivy-text-color-primary);
+  --ivy-tooltip-background-color: #fff;
+  --ivy-tooltip-font-size: 13px;
+  --ivy-tooltip-z-index: 1000;
+  --ivy-tooltip-arrow-color: #fff;
+  --ivy-tooltip-arrow-size: 8px;
+  --ivy-tooltip-arrow-border-color: var(--ivy-border-color);
+}
+```
+
+:::
+
 ## Props
 
 | 参数      | 说明             | 类型   | 可选值               | 默认值  |
