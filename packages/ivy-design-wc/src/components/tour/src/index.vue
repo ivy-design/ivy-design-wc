@@ -1,8 +1,8 @@
 <script setup lang="tsx">
-import { onMounted, ref, reactive, computed, nextTick } from 'vue'
+import { onMounted, ref, reactive, computed } from 'vue'
 import { getType } from '@/utils/index'
 import { useExpose } from '@/hooks/useExpose'
-import { useHost } from '@/hooks/useHostElement'
+import { useAppendTo } from '@/hooks/useAppendTo'
 
 defineOptions({
     name: 'Tour',
@@ -129,7 +129,7 @@ const path = computed(() => {
 })
 
 const { setExposes } = useExpose()
-const { host } = useHost()
+const { appendTo } = useAppendTo()
 onMounted(() => {
     const rect = document.body.getBoundingClientRect()
     client.width = rect.width
@@ -137,7 +137,7 @@ onMounted(() => {
     setExposes({
         open: openTour
     })
-    if (props.appendToBody) document.body.appendChild(host.value)
+    if (props.appendToBody) appendTo()
     console.log('client', client, props.steps)
 })
 </script>
@@ -146,15 +146,7 @@ onMounted(() => {
     <div class="ivy-tour" v-show="visible">
         <div class="ivy-tour__mask">
             <svg style="width: 100%; height: 100%">
-                <path
-                    :d="path"
-                    style="
-                        fill: rgba(0, 0, 0, 0.5);
-                        pointer-events: auto;
-                        cursor: auto;
-                        transition: all 0.3s ease;
-                    "
-                ></path>
+                <path :d="path" class="ivy-tour__mask-path"></path>
             </svg>
         </div>
         <div
@@ -222,6 +214,12 @@ onMounted(() => {
         inset: 0;
         z-index: 9999990;
         pointer-events: none;
+        &-path {
+            fill: rgba(0, 0, 0, 0.5);
+            pointer-events: auto;
+            cursor: auto;
+            transition: all 0.3s ease;
+        }
     }
     &__dialog {
         position: fixed;
@@ -268,14 +266,14 @@ onMounted(() => {
         }
 
         &--body {
-            padding: 16px;
+            padding: 12px 16px;
         }
 
         &--footer {
             display: flex;
             justify-content: space-between;
             min-width: 260px;
-            padding: 12px 16px;
+            margin-top: 12px;
             align-items: center;
             &-no {
                 display: flex;
