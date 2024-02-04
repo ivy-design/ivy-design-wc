@@ -3,6 +3,10 @@ import { onMounted, ref, reactive, computed } from 'vue'
 import { getType } from '@/utils/index'
 import { useExpose } from '@/hooks/useExpose'
 import { useAppendTo } from '@/hooks/useAppendTo'
+import { CloseIcon as Close } from '@/utils/icons'
+import { usePopper } from '@/hooks/usePopper'
+import { type Placement } from '@floating-ui/vue'
+import { nextTick } from 'vue'
 
 defineOptions({
     name: 'Tour',
@@ -14,7 +18,7 @@ interface Step {
     title: string
     allowHtmlString: boolean
     content: string
-    placement: 'top' | 'left' | 'right' | 'bottom'
+    placement: Placement
 }
 
 interface Props {
@@ -27,13 +31,10 @@ const props = withDefaults(defineProps<Props>(), {
     appendToBody: false
 })
 
-const dialogRef = ref<HTMLElement | null>(null)
-const getDialogRect = () => {
-    if (dialogRef.value) {
-        return dialogRef.value.getBoundingClientRect()
-    }
-    return { width: 0, height: 0 }
-}
+const { createPopper, visible, referenceEl, floatEl, floatArrow, placement } = usePopper()
+
+const { floatingStyles, update, middlewareData, finalPlacement } = createPopper()
+
 const getElRect = (el: HTMLElement | string) => {
     let targetEl: any = el
     if (getType(el) === 'string') {
@@ -47,13 +48,8 @@ const getElRect = (el: HTMLElement | string) => {
     return targetEl.getBoundingClientRect() || null
 }
 
-const visible = ref(false)
 const index = ref(0)
 const curStep = ref<Step | null>(props.steps[index.value] as Step)
-const position = reactive({
-    top: 0,
-    left: 0
-})
 
 const openTour = () => {
     visible.value = true
@@ -69,24 +65,17 @@ const closeTour = () => {
 }
 
 const getStep = () => {
-    const rect = getElRect(curStep.value?.target as any)
-    const dialogRect = getDialogRect()
-
-    let placement = curStep.value?.placement || 'top'
-
-    if (placement === 'top') {
-        position.left = rect.left - dialogRect.width / 2 + rect.width / 2
-        position.top = rect.top - dialogRect.height - 8
-    } else if (placement === 'right') {
-        position.left = rect.right + 8
-        position.top = rect.top - dialogRect.height / 2 + rect.height / 2
-    } else if (placement === 'bottom') {
-        position.left = rect.left - dialogRect.width / 2 + rect.width / 2
-        position.top = rect.bottom + 8
-    } else if (placement === 'left') {
-        position.left = rect.left - dialogRect.width - 8
-        position.top = rect.top - dialogRect.height / 2 + rect.height / 2
+    placement.value = curStep.value?.placement || 'bottom'
+    console.log('placement.value', placement.value)
+    referenceEl.value = {
+        getBoundingClientRect() {
+            return getElRect(curStep.value?.target as any)
+        },
+        contextElement: document.querySelector(curStep.value?.target as string) as HTMLElement
     }
+    nextTick(() => {
+        update()
+    })
 }
 
 const prevStep = () => {
@@ -150,46 +139,59 @@ onMounted(() => {
             </svg>
         </div>
         <div
-            ref="dialogRef"
+            ref="floatEl"
             class="ivy-tour__dialog"
-            :data-placement="curStep?.placement || 'top'"
-            :style="{ top: `${position.top}px`, left: `${position.left}px` }"
+            :data-placement="finalPlacement"
+            :style="floatingStyles"
+            v-if="referenceEl"
         >
-            <div class="ivy-tour__dialog--body">
-                <span>{{ curStep?.title }}</span>
-                <div v-if="curStep?.allowHtmlString" innerHTML="{curStep.value?.content}"></div>
-                <div v-else>{{ curStep?.content }}</div>
-            </div>
-            <div class="ivy-tour__dialog--footer">
-                <div class="ivy-tour__dialog--footer-no">
-                    <template v-for="(it, i) in props.steps" :key="i">
-                        <div
-                            class="ivy-tour__dialog--footer-no-item is-active"
-                            v-if="i === index"
-                        ></div>
-                        <div class="ivy-tour__dialog--footer-no-item" v-else></div>
-                    </template>
+            <div
+                ref="floatArrow"
+                :data-placement="finalPlacement"
+                class="ivy-tour__dialog--arrow"
+                :style="{
+                    left: middlewareData.arrow?.x != null ? `${middlewareData.arrow.x}px` : '',
+                    top: middlewareData.arrow?.y != null ? `${middlewareData.arrow.y}px` : ''
+                }"
+            ></div>
+            <div class="ivy-tour__dialog--inner">
+                <div class="ivy-tour__dialog--body">
+                    <span class="ivy-tour__dialog--title">{{ curStep?.title }}</span>
+                    <div v-if="curStep?.allowHtmlString" innerHTML="{curStep.value?.content}"></div>
+                    <div v-else>{{ curStep?.content }}</div>
                 </div>
-                <div>
-                    <button class="ivy-tour__dialog-btn" v-show="index > 0" @click="prevStep">
-                        上一步
-                    </button>
-                    <button
-                        class="ivy-tour__dialog-btn"
-                        v-show="index < props.steps.length - 1"
-                        @click="nextStep"
-                    >
-                        下一步
-                    </button>
-                    <button
-                        class="ivy-tour__dialog-btn is-finish"
-                        v-show="index === props.steps.length - 1"
-                        @click="closeTour"
-                    >
-                        结束
-                    </button>
+                <div class="ivy-tour__dialog--footer">
+                    <div class="ivy-tour__dialog--footer-no">
+                        <template v-for="(it, i) in props.steps" :key="i">
+                            <div
+                                class="ivy-tour__dialog--footer-no-item is-active"
+                                v-if="i === index"
+                            ></div>
+                            <div class="ivy-tour__dialog--footer-no-item" v-else></div>
+                        </template>
+                    </div>
+                    <div>
+                        <button class="ivy-tour__dialog-btn" v-show="index > 0" @click="prevStep">
+                            上一步
+                        </button>
+                        <button
+                            class="ivy-tour__dialog-btn"
+                            v-show="index < props.steps.length - 1"
+                            @click="nextStep"
+                        >
+                            下一步
+                        </button>
+                        <button
+                            class="ivy-tour__dialog-btn is-finish"
+                            v-show="index === props.steps.length - 1"
+                            @click="closeTour"
+                        >
+                            结束
+                        </button>
+                    </div>
                 </div>
             </div>
+            <div class="ivy-tour__close" @click="closeTour"><Close /></div>
         </div>
     </div>
 </template>
@@ -222,21 +224,19 @@ onMounted(() => {
         }
     }
     &__dialog {
-        position: fixed;
         z-index: 9999991;
         width: var(--ivy-tour-width);
-        padding: var(--ivy-tour-padding-primary);
+
         font-size: var(--ivy-tour-font-size);
         color: var(--ivy-tour-color);
         background-color: var(--ivy-tour-bg-color);
         border-radius: var(--ivy-tour-border-radius);
         border: 1px solid var(--ivy-tour-border-color);
-        transition:
-            top 0.3s,
-            left 0.3s;
-        &::before {
+
+        &--arrow {
+            position: absolute;
+
             box-sizing: border-box;
-            content: '';
             display: inline-block;
             position: absolute;
             z-index: 1;
@@ -245,28 +245,36 @@ onMounted(() => {
             transform: rotate(-45deg);
             border: 1px solid transparent;
             background-color: white;
+
+            &[data-placement^='top'] {
+                bottom: -4px;
+            }
+
+            &[data-placement^='bottom'] {
+                top: -4px;
+            }
+            &[data-placement^='right'] {
+                right: -4px;
+            }
+            &[data-placement^='left'] {
+                left: -4px;
+            }
         }
 
-        &[data-placement='top']::before {
-            bottom: -4px;
-            left: calc(50% - 6px);
-        }
-
-        &[data-placement='bottom']::before {
-            top: -4px;
-            left: calc(50% - 6px);
-        }
-        &[data-placement='right']::before {
-            left: -4px;
-            top: calc(50% - 6px);
-        }
-        &[data-placement='left']::before {
-            right: -4px;
-            top: calc(50% - 6px);
+        &--inner {
+            padding: var(--ivy-tour-padding-primary);
         }
 
         &--body {
-            padding: 12px 16px;
+            // padding: 12px 16px;
+            font-size: var(--ivy-tour-font-size);
+        }
+
+        &--title {
+            font-size: var(--ivy-tour-title-font-size);
+            color: var(--ivy-tour-title-text-color);
+            font-weight: var(--ivy-tour-title-font-weight);
+            line-height: var(--ivy-tour-font-line-height);
         }
 
         &--footer {
@@ -320,6 +328,17 @@ onMounted(() => {
                 border-color: var(--ivy-color-primary);
                 color: white;
             }
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        cursor: pointer;
+        font-size: var(--ivy-tour-title-font-size);
+        &:hover {
+            color: var(--ivy-color-primary);
         }
     }
 }

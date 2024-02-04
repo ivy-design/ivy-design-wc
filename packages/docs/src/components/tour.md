@@ -23,18 +23,20 @@ const steps = ref([
     {
         target: '.a1',
         title: '第一步',
-        content: "这是提示的第一个"
+        content: "这是提示的第一个",
+        placement: 'top-end'
     },
     {
         target: '.a2',
         title: '第二步',
         content: "这是提示的第一个",
-        placement: 'bottom'
+        placement: 'bottom-end'
     },
     {
         target: '.a3',
         title: '最后',
-        content: "这是提示的第一个"
+        content: "这是提示的第一个",
+        placement: 'top'
     }
 ])
 const targetEl = ref()
