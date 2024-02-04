@@ -1,5 +1,5 @@
 import { defineCustomElement } from 'vue'
-import { install } from '@/utils/index'
+import { install, setPropToCustomElement } from '@/utils/index'
 import comp from './src/index.vue'
 
 const Notification = defineCustomElement(comp)
@@ -30,17 +30,11 @@ const defaultConfig: NotificationProps = {
     useHtmlString: false
 }
 
-const setAttrs = (el: any, attrs: any) => {
-    Object.keys(attrs).forEach((key) => {
-        el[key] = attrs[key]
-    })
-}
-
 const notify = (opts: NotificationProps) => {
     const conf = { ...defaultConfig, ...opts }
 
     const el: any = new Notification()
-    setAttrs(el, conf)
+    setPropToCustomElement(el, conf)
     document.body.appendChild(el)
     el.open()
     return el

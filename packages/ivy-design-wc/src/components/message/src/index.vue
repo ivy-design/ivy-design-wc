@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useHost } from '@/hooks/useHostElement'
-import { curMessageIndex } from '@/utils/utils'
+import { curMessageIndex } from './utils'
 import useBroadCastChannel from '@/hooks/useBroadcastChannel'
 import { Success, Warning, Error, Info } from '@/utils/icons'
 import useExpose from '@/hooks/useExpose'

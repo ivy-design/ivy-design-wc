@@ -1,5 +1,5 @@
 import { defineCustomElement } from 'vue'
-import { install } from '@/utils/index'
+import { install, setPropToCustomElement } from '@/utils/index'
 import comp from './index.vue'
 
 const MessageBox = defineCustomElement(comp)
@@ -50,20 +50,7 @@ const msgBox = (opts: MessageBoxOptions) => {
         const conf = { ...defaultConfig, ...opts }
 
         const el: any = new MessageBox()
-        el.title = conf.title
-        el.type = conf.type
-        el.message = conf.message
-        el.showClose = conf.showClose
-        el.showCancelButton = conf.showCancelButton
-        el.cancelButtonText = conf.cancelButtonText
-        el.confirmButtonText = conf.confirmButtonText
-        el.callback = conf.callback
-        el.showInput = conf.showInput
-        el.inputPlaceholder = conf.inputPlaceholder
-        el.inputValue = conf.inputValue
-        el.inputType = conf.inputType
-        el.inputValidator = conf.inputValidator
-        el.inputErrorMessage = conf.inputErrorMessage
+        setPropToCustomElement(el, conf)
 
         document.body.appendChild(el)
         el.open()
