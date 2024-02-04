@@ -4,6 +4,7 @@ import {
     arrow,
     offset,
     flip,
+    shift,
     type VirtualElement,
     type FloatingElement,
     type Placement,
@@ -28,8 +29,9 @@ export const usePopper = (conf: UseFloatingOptions = {}) => {
             placement,
             middleware: [
                 offset(10),
-                flip(),
                 ...(middleware as any),
+                shift(),
+                flip(),
                 arrow({ element: floatArrow })
             ],
             ...other

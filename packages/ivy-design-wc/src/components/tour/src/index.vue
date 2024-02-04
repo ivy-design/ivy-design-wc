@@ -6,7 +6,6 @@ import { useAppendTo } from '@/hooks/useAppendTo'
 import { CloseIcon as Close } from '@/utils/icons'
 import { usePopper } from '@/hooks/usePopper'
 import { type Placement } from '@floating-ui/vue'
-import { nextTick } from 'vue'
 
 defineOptions({
     name: 'Tour',
@@ -16,7 +15,7 @@ defineOptions({
 interface Step {
     target: HTMLElement | string
     title: string
-    allowHtmlString: boolean
+    allowHtml: boolean
     content: string
     placement: Placement
 }
@@ -30,6 +29,8 @@ const props = withDefaults(defineProps<Props>(), {
     steps: () => [],
     appendToBody: false
 })
+
+const emit = defineEmits(['finish', 'close', 'change'])
 
 const { createPopper, visible, referenceEl, floatEl, floatArrow, placement } = usePopper()
 
@@ -53,29 +54,37 @@ const curStep = ref<Step | null>(props.steps[index.value] as Step)
 
 const openTour = () => {
     visible.value = true
-    requestAnimationFrame(() => {
-        getStep()
-    })
+
+    getStep()
 }
 
-const closeTour = () => {
+const close = () => {
     visible.value = false
     index.value = 0
     curStep.value = props.steps[0] as Step
 }
 
+const closeTour = () => {
+    close()
+    emit('close')
+}
+
+const finishTour = () => {
+    close()
+    emit('finish')
+}
+
 const getStep = () => {
     placement.value = curStep.value?.placement || 'bottom'
-    console.log('placement.value', placement.value)
     referenceEl.value = {
         getBoundingClientRect() {
             return getElRect(curStep.value?.target as any)
         },
         contextElement: document.querySelector(curStep.value?.target as string) as HTMLElement
     }
-    nextTick(() => {
-        update()
-    })
+
+    update()
+    emit('change', index.value)
 }
 
 const prevStep = () => {
@@ -102,7 +111,7 @@ const client = reactive({
 })
 
 const path = computed(() => {
-    const targetRect = getElRect(curStep.value?.target as any) || {
+    const targetRect = referenceEl.value?.getBoundingClientRect() || {
         left: 0,
         top: 0,
         width: 0,
@@ -127,7 +136,6 @@ onMounted(() => {
         open: openTour
     })
     if (props.appendToBody) appendTo()
-    console.log('client', client, props.steps)
 })
 </script>
 
@@ -157,7 +165,7 @@ onMounted(() => {
             <div class="ivy-tour__dialog--inner">
                 <div class="ivy-tour__dialog--body">
                     <span class="ivy-tour__dialog--title">{{ curStep?.title }}</span>
-                    <div v-if="curStep?.allowHtmlString" innerHTML="{curStep.value?.content}"></div>
+                    <div v-if="curStep?.allowHtml" innerHTML="{curStep.value?.content}"></div>
                     <div v-else>{{ curStep?.content }}</div>
                 </div>
                 <div class="ivy-tour__dialog--footer">
@@ -184,7 +192,7 @@ onMounted(() => {
                         <button
                             class="ivy-tour__dialog-btn is-finish"
                             v-show="index === props.steps.length - 1"
-                            @click="closeTour"
+                            @click="finishTour"
                         >
                             结束
                         </button>
@@ -198,7 +206,7 @@ onMounted(() => {
 
 <style lang="scss">
 :host {
-    --ivy-tour-width: 520px;
+    --ivy-tour-width: 420px;
     --ivy-tour-padding-primary: 16px;
     --ivy-tour-font-line-height: var(--ivy-font-line-height-primary);
     --ivy-tour-title-font-size: 16px;
@@ -233,6 +241,8 @@ onMounted(() => {
         border-radius: var(--ivy-tour-border-radius);
         border: 1px solid var(--ivy-tour-border-color);
 
+        transition: transform 0.3s ease;
+
         &--arrow {
             position: absolute;
 
@@ -254,10 +264,10 @@ onMounted(() => {
                 top: -4px;
             }
             &[data-placement^='right'] {
-                right: -4px;
+                left: -4px;
             }
             &[data-placement^='left'] {
-                left: -4px;
+                right: -4px;
             }
         }
 
@@ -266,7 +276,6 @@ onMounted(() => {
         }
 
         &--body {
-            // padding: 12px 16px;
             font-size: var(--ivy-tour-font-size);
         }
 
