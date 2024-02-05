@@ -99,6 +99,7 @@ pnpm test:unit
 | pagination      | 分页器                  |
 | tabs            | 标签页                  |
 | message         | 消息提醒                |
+| tour            | 漫游式引导              |
 
 ## 代办
 

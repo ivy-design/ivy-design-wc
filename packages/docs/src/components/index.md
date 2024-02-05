@@ -110,6 +110,7 @@ ReactDOM.render(<ivy-button>button</ivy-button>, document.body);
 | pagination      | 分页器                       |
 | tabs            | 标签页                       |
 | message         | 消息提醒                     |
+| tour            | 漫游式引导                   |
 
 ## 未完成组件
 

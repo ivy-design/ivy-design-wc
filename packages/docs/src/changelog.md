@@ -1,5 +1,27 @@
 # 更新日志
 
+## v1.7.0 版本
+
+Feats：
+
+- 增加 `tabs` 组件和对应文档
+- 增加 `tour` 组件和对应文档
+- 使用 floating-ui 重构浮层，涉及组件 `tooltip`、`tour`、`contextmenu`
+- 增加 `Circle` 组件和文档
+
+Build：
+
+- 运行在开发环境时不再生成 types 类型文件
+
+CI：
+
+- 增加 issue 提 bug 时模板
+- 增加自动发布到 npm
+
+Test：
+
+- 增加 hooks 中的 useIndex 单元测试
+
 ## v1.6.0 版本
 
 Feats：
