@@ -80,7 +80,6 @@ onMounted(() => {
 
             host.remove()
         } else {
-            console.log('visible', visible.value)
             const timer = setTimeout(() => {
                 visible.value = false
                 clearTimeout(timer)
@@ -99,7 +98,6 @@ onMounted(() => {
 
             host.remove()
         } else {
-            console.log('visible', visible.value)
             const timer = setTimeout(() => {
                 visible.value = false
                 clearTimeout(timer)

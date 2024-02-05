@@ -17,7 +17,6 @@ export const usePopper = (conf: UseFloatingOptions = {}) => {
     const floatEl = ref<FloatingElement>()
     const floatArrow = ref()
     const placement = ref<Placement>('bottom')
-    const { middleware = [], ...other } = conf
 
     const createPopper = () => {
         const {
@@ -27,14 +26,8 @@ export const usePopper = (conf: UseFloatingOptions = {}) => {
             placement: finalPlacement
         } = useFloating(referenceEl, floatEl, {
             placement,
-            middleware: [
-                offset(10),
-                ...(middleware as any),
-                shift(),
-                flip(),
-                arrow({ element: floatArrow })
-            ],
-            ...other
+            middleware: [offset(10), shift(), flip(), arrow({ element: floatArrow })],
+            ...conf
         })
         return { floatingStyles, update, middlewareData, finalPlacement }
     }

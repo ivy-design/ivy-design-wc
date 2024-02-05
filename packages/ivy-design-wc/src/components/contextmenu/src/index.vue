@@ -1,66 +1,74 @@
 <script setup lang="ts">
-import type { Rect } from '@popperjs/core'
-import { nextTick } from 'vue'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted } from 'vue'
+import usePopper from '@/hooks/usePopper'
+import { shift, type VirtualElement } from '@floating-ui/vue'
+import { useEventListener } from '@vueuse/core'
+import { useHost } from '@/hooks/useHostElement'
 
 defineOptions({
     name: 'Contextmenu',
     inheritAttrs: false
 })
 
-const visible = ref(false)
-const contextmenu = ref<HTMLElement | null>(null)
 const wrapper = ref<HTMLElement | null>(null)
 
-const emit = defineEmits(['command'])
+const {
+    visible,
+    referenceEl,
+    floatEl: contextmenu,
+    createPopper
+} = usePopper({
+    middleware: [shift()]
+})
+const { floatingStyles } = createPopper()
 
 const handleClose = () => {
     visible.value = false
 }
 
-const point = ref({ x: 0, y: 0 })
-
 const handleContextmenu = (event: any) => {
-    let { layerX: x, layerY: y } = event
-    visible.value = true
-    nextTick(() => {
-        const { width: wrapWidth = 0 } = wrapper.value?.getBoundingClientRect() as Rect
-        const styles = getComputedStyle(contextmenu.value as HTMLElement)
-        const width = parseFloat(styles.getPropertyValue('width'))
-
-        if (wrapWidth < width + x) {
-            x = x - width
+    let { clientX, clientY } = event
+    referenceEl.value = {
+        getBoundingClientRect: () => {
+            return {
+                width: 0,
+                height: 0,
+                x: clientX,
+                y: clientY,
+                top: clientY,
+                left: clientX,
+                right: clientX,
+                bottom: clientY
+            }
         }
-        point.value.x = x
-        point.value.y = y
-    })
+    } as VirtualElement
+    visible.value = true
 }
 
 const handleScroll = () => {
     handleClose()
 }
 
+const { host } = useHost()
 const handleCommand = (ev: any) => {
     const target: HTMLElement = ev.target
 
     const isCommandItem = target.dataset.command
     if (isCommandItem) {
         const command = target.getAttribute('command')
-        emit('command', command)
+        host.value?.dispatchEvent(
+            new CustomEvent('command', {
+                detail: command
+            })
+        )
         handleClose()
     }
 }
 
 onMounted(() => {
-    window.addEventListener('scroll', handleScroll)
-    window.addEventListener('click', handleScroll)
-    window.addEventListener('contextmenu', handleScroll)
-})
-
-onBeforeUnmount(() => {
-    window.removeEventListener('scroll', handleScroll)
-    window.removeEventListener('click', handleScroll)
-    window.removeEventListener('contextmenu', handleScroll)
+    useEventListener(window, 'scroll', handleScroll)
+    useEventListener(window, 'click', handleScroll)
+    useEventListener(window, 'contextmenu', handleScroll)
 })
 </script>
 
@@ -70,9 +78,9 @@ onBeforeUnmount(() => {
         <transition name="zoom-in">
             <div
                 ref="contextmenu"
-                v-show="visible"
+                v-if="visible"
                 class="contextmenu__wrap"
-                :style="{ top: `${point.y}px`, left: `${point.x}px` }"
+                :style="floatingStyles"
                 @click="handleCommand"
             >
                 <slot name="menu"> </slot>
@@ -85,6 +93,7 @@ onBeforeUnmount(() => {
 :host {
     display: block;
     position: relative;
+    box-sizing: border-box;
 }
 .contextmenu {
     position: relative;
@@ -94,8 +103,7 @@ onBeforeUnmount(() => {
     &__wrap {
         box-shadow: var(--ivy-box-shadow);
         position: absolute;
-        top: 0;
-        left: 0;
+
         background-color: var(--ivy-color-white);
         z-index: var(--ivy-contextmenu-z-index, 10);
         padding: 4px 0;
