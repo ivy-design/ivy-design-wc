@@ -70,3 +70,13 @@ export function removeClass(el: HTMLElement, cls: string) {
 export const getElementsByTagName = (el: HTMLElement, tagName: string) => {
     return Array.from(el.querySelectorAll(tagName))
 }
+
+/**给自定义元素设置 prototype */
+export const setPropToCustomElement = (el: any, props: Record<string, any> = {}) => {
+    Object.keys(props).forEach((key) => {
+        const val = props[key]
+        if (val !== undefined) {
+            el[key as string] = val
+        }
+    })
+}

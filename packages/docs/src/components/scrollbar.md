@@ -91,7 +91,7 @@
 
 ## 可用的 css 变量
 
-:::details 点击代开
+:::details 点击展开
 
 ```css
 :host {

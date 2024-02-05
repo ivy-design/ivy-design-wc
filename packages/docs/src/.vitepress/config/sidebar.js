@@ -71,12 +71,12 @@ const basic = [
 const components = [
   {
     text: "基础/布局",
-    collapsible: true,
+    collapsed: false,
     items: basic,
   },
   {
     text: "表单",
-    collapsible: true,
+    collapsed: false,
     items: [
       {
         text: "Checkbox 多选框",
@@ -118,7 +118,7 @@ const components = [
   },
   {
     text: "数据展示",
-    collapsible: true,
+    collapsed: false,
     items: [
       {
         text: "Avatar 头像",
@@ -173,6 +173,10 @@ const components = [
         link: "/components/tag",
       },
       {
+        text: "Tour 漫游式引导",
+        link: "/components/tour",
+      },
+      {
         text: "Timeline 时间线",
         link: "/components/timeline",
       },
@@ -184,7 +188,7 @@ const components = [
   },
   {
     text: "通知/反馈",
-    collapsible: true,
+    collapsed: false,
     items: [
       {
         text: "Dialog 对话框",
@@ -226,7 +230,7 @@ const components = [
   },
   {
     text: "导航",
-    collapsible: true,
+    collapsed: false,
     items: [
       {
         text: "Affix 固钉",
@@ -252,7 +256,7 @@ const components = [
   },
   {
     text: "其它",
-    collapsible: true,
+    collapsed: false,
     items: [
       {
         text: "Clipboard 复制到剪切板",

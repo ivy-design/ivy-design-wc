@@ -1,56 +1,44 @@
-import { ref, shallowRef } from 'vue'
-import { createPopper, type Instance } from '@popperjs/core'
+import { ref } from 'vue'
+import {
+    useFloating,
+    arrow,
+    offset,
+    flip,
+    shift,
+    type VirtualElement,
+    type FloatingElement,
+    type Placement,
+    type UseFloatingOptions
+} from '@floating-ui/vue'
 
-export default (conf = {}) => {
+export const usePopper = (conf: UseFloatingOptions = {}) => {
     const visible = ref(false)
-    const triggerRef = ref<Element | null>(null)
-    const targetRef = ref<HTMLElement | null>(null)
-    const arrowRef = ref<HTMLElement | null>(null)
+    const referenceEl = ref<VirtualElement>()
+    const floatEl = ref<FloatingElement>()
+    const floatArrow = ref()
+    const placement = ref<Placement>('bottom')
 
-    const Instance = shallowRef<Instance | null>(null)
-
-    const initPopper = () => {
-        Instance.value = createPopper(
-            triggerRef.value as Element,
-            targetRef.value as HTMLElement,
-
-            {
-                placement: 'bottom',
-                modifiers: [
-                    {
-                        name: 'offset',
-                        options: {
-                            offset: [0, 8]
-                        }
-                    },
-                    {
-                        name: 'arrow',
-                        options: {
-                            element: arrowRef.value
-                        }
-                    },
-                    {
-                        name: 'computeStyles',
-                        options: {
-                            gpuAcceleration: true
-                        }
-                    }
-                ],
-                ...conf
-            }
-        )
-    }
-
-    const updatePopper = () => {
-        Instance.value?.update()
+    const createPopper = () => {
+        const {
+            floatingStyles,
+            update,
+            middlewareData,
+            placement: finalPlacement
+        } = useFloating(referenceEl, floatEl, {
+            placement,
+            middleware: [offset(10), shift(), flip(), arrow({ element: floatArrow })],
+            ...conf
+        })
+        return { floatingStyles, update, middlewareData, finalPlacement }
     }
 
     return {
         visible,
-        triggerRef,
-        targetRef,
-        arrowRef,
-        initPopper,
-        updatePopper
+        referenceEl,
+        floatEl,
+        floatArrow,
+        createPopper,
+        placement
     }
 }
+export default usePopper

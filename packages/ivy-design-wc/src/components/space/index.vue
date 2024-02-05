@@ -32,7 +32,6 @@ export default defineComponent({
         const children = ref<any>([])
         onMounted(() => {
             slot.value.assignedNodes().forEach((c: Element) => {
-                console.log(c)
                 if (c.nodeType === Node.ELEMENT_NODE) {
                     children.value.push(c.outerHTML)
                 } else if (c.nodeType === Node.TEXT_NODE && !/^\s+$/.test(c.nodeValue as string)) {

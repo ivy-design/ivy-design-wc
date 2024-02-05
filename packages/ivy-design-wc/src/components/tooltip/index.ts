@@ -1,6 +1,6 @@
 import { defineCustomElement } from 'vue'
 import { install } from '@/utils/index'
-import comp from './index.vue'
+import comp from './src/index.vue'
 
 const Tooltip = defineCustomElement(comp)
 

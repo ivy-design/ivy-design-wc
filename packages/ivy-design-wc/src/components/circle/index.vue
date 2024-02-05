@@ -1,39 +1,47 @@
 <script setup lang="ts">
-import { computed, type PropType } from 'vue'
+import { computed } from 'vue'
 
-export type IvyCircleStatus = 'success' | 'danger'
+export type IvyCircleStatus = 'success' | 'danger' | 'process'
 
 defineOptions({
     name: 'Circle',
     inheritAttrs: false
 })
 
-const props = defineProps({
-    value: {
-        type: [String, Number],
-        required: true
-    },
+interface Props {
+    value: string | number
+    status: IvyCircleStatus
+    color: string
+    strokeWidth: number | string
+    size: number | string
+}
 
-    status: {
-        type: String as PropType<IvyCircleStatus>,
-        validator(value: IvyCircleStatus) {
-            return ['success', 'danger'].includes(value)
-        }
-    },
-    color: String,
-    strokeWidth: {
-        type: Number,
-        default: 6
-    },
-    width: {
-        type: Number,
-        default: 126
+const props = withDefaults(defineProps<Props>(), {
+    value: 0,
+    status: 'process',
+    strokeWidth: 6,
+    size: 126
+})
+
+const size = computed(() => {
+    try {
+        return parseFloat(props.size as string) as number
+    } catch (e) {
+        return props.size as number
+    }
+})
+
+const strokeWidth = computed(() => {
+    try {
+        return parseFloat(props.strokeWidth as string) as number
+    } catch (e) {
+        return props.strokeWidth as number
     }
 })
 
 const getCircleWidth = computed(() => {
-    const multiple = props.width / 100
-    const r = props.strokeWidth / multiple
+    const multiple = size.value / 100
+    const r = strokeWidth.value / multiple
     return r.toFixed(2)
 })
 
@@ -64,7 +72,7 @@ const getColor = computed(() => {
         } else if (props.status === 'danger') {
             return '#F56C6C'
         } else {
-            return '#409eff'
+            return 'var(--ivy-circle-color)'
         }
     }
 })
@@ -74,8 +82,8 @@ const getColor = computed(() => {
     <div
         class="ivy-circle"
         :style="{
-            width: `${props.width}px`,
-            height: `${props.width}px`
+            width: `${size}px`,
+            height: `${size}px`
         }"
     >
         <svg viewBox="0 0 100 100">
@@ -96,6 +104,9 @@ const getColor = computed(() => {
                 :style="gets"
             ></path>
         </svg>
+        <div class="ivy-circle-content" :style="{ borderWidth: `${size}px` }">
+            <div class="ivy-circle-content-inner"><slot></slot></div>
+        </div>
     </div>
 </template>
 
@@ -104,5 +115,22 @@ const getColor = computed(() => {
     --ivy-circle-color: var(--ivy-color-primary, #409eff);
     --ivy-circle-track-color: var(--ivy-color-border, #e5e9f2);
     display: inline-flex;
+}
+.ivy-circle {
+    position: relative;
+    &-content {
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-color: transparent;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        clip-path: circle(50%);
+    }
 }
 </style>

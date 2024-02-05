@@ -8,13 +8,17 @@
 
 示例如下：
 
-<ivy-contextmenu @command="menuClick" style="border: 1px solid #cdcdcd;">
+<ivy-contextmenu @command="menuClick" class="menu-wrap">
 
+<div>这里是显示右键菜单的区域</div>
 <p>这里是显示右键菜单的区域</p>
 <p>这里是显示右键菜单的区域</p>
 <p>这里是显示右键菜单的区域</p>
 <p>这里是显示右键菜单的区域</p>
 <p>这里是显示右键菜单的区域</p>
+<p>这里是显示右键菜单的区域</p>
+<p>这里是显示右键菜单的区域</p>
+<div>这里是显示右键菜单的区域</div>
 
 <div slot="menu" data-command="item" command="copy">复制</div>
 <div slot="menu" data-command="item" command="cute">剪切</div>
@@ -28,11 +32,15 @@
 
 ```html
 <ivy-contextmenu @command="menuClick">
+  <div>这里是显示右键菜单的区域</div>
   <p>这里是显示右键菜单的区域</p>
   <p>这里是显示右键菜单的区域</p>
   <p>这里是显示右键菜单的区域</p>
   <p>这里是显示右键菜单的区域</p>
   <p>这里是显示右键菜单的区域</p>
+  <p>这里是显示右键菜单的区域</p>
+  <p>这里是显示右键菜单的区域</p>
+  <div>这里是显示右键菜单的区域</div>
 
   <div slot="menu" data-command="item" command="copy">复制</div>
   <div slot="menu" data-command="item" command="cute">剪切</div>
@@ -44,25 +52,27 @@
   <div slot="menu" data-command="item" command="snip">截图</div>
 </ivy-contextmenu>
 <script setup>
+  import { message } from "@ivy-design/ce";
   const menuClick = (ev) => {
-    alert(`点击了菜单-${ev.detail[0]}`);
+    message.success(`点击了菜单：${ev.detail}`);
   };
 </script>
 ```
 
 <script setup>
+  import { message } from "@ivy-design/ce";
   const menuClick = (ev) => {
-    alert(`点击了菜单-${ev.detail[0]}`);
+    message.success(`点击了菜单：${ev.detail}`);
   };
 </script>
 
 <style scoped>
 .menu-wrap{
-    display: inline-block;
+    display: block;
     background-color: #fff;
     border: 1px solid #cacaca;
     list-style: none;
-    padding: 4px 0;
+    padding: 12px;
     border-radius: 4px;
 }
 .menu-wrap-item{

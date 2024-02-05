@@ -18,10 +18,8 @@ const genInput = () => {
 }
 
 // https://vitejs.dev/config/
-export default defineConfig({
-    appType: 'custom',
-    publicDir: false,
-    plugins: [
+export default defineConfig(({ mode }) => {
+    const plugins = [
         vue({
             template: {
                 compilerOptions: {
@@ -30,45 +28,54 @@ export default defineConfig({
             },
             customElement: true
         }),
-        vueJsx(),
-        dts({
-            outDir: 'types'
-        })
-    ],
-    resolve: {
-        alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
-        }
-    },
-    build: {
-        target: 'es2017',
-        lib: {
-            entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
-            name: 'ivy-design',
-            fileName: (format) => {
-                if (format === 'es') return 'ivy-design.mjs'
-                return 'ivy-design.js'
+        vueJsx()
+    ]
+    if (mode !== 'dev') {
+        plugins.push(
+            dts({
+                outDir: 'types'
+            })
+        )
+    }
+    return {
+        appType: 'custom',
+        publicDir: false,
+        plugins: plugins,
+        resolve: {
+            alias: {
+                '@': fileURLToPath(new URL('./src', import.meta.url))
             }
         },
-        rollupOptions: {
-            // treeshake: false,
-            // input: {
-            //     'ivy-design': fileURLToPath(new URL('./src/index.ts', import.meta.url)),
-            //     ...genInput()
-            // },
-            output: {
-                // interop: 'auto',
-                // format: 'es',
-                // entryFileNames: '[name].js',
-                // assetFileNames: (assetInfo) => {
-                //     if (assetInfo.name === 'ivy-design.css') return 'style.css'
-
-                //     return 'assets/[name][extname]'
+        build: {
+            target: 'es2017',
+            lib: {
+                entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+                name: 'ivy-design',
+                fileName: (format) => {
+                    if (format === 'es') return 'ivy-design.mjs'
+                    return 'ivy-design.js'
+                }
+            },
+            rollupOptions: {
+                // treeshake: false,
+                // input: {
+                //     'ivy-design': fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+                //     ...genInput()
                 // },
-                exports: 'named'
-            }
-        },
+                output: {
+                    // interop: 'auto',
+                    // format: 'es',
+                    // entryFileNames: '[name].js',
+                    // assetFileNames: (assetInfo) => {
+                    //     if (assetInfo.name === 'ivy-design.css') return 'style.css'
 
-        cssTarget: 'chrome61'
+                    //     return 'assets/[name][extname]'
+                    // },
+                    exports: 'named'
+                }
+            },
+
+            cssTarget: 'chrome61'
+        }
     }
 })

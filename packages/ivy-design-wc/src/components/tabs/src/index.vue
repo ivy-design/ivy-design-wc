@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { onMounted, onUpdated, ref, nextTick } from 'vue'
+import { onMounted, ref, nextTick } from 'vue'
+import { useExpose } from '@/hooks/useExpose'
+import { ArrowRight, ArrowLeft } from '@/utils/icons'
 
 defineOptions({
     name: 'Tabs',
@@ -10,6 +12,7 @@ const props = defineProps({
     active: String
 })
 
+const current = ref('0')
 const btnLeft = ref<HTMLElement>()
 const btnRight = ref<HTMLElement>()
 const tabHeaderWrap = ref<HTMLElement>()
@@ -42,101 +45,139 @@ const scrollRight = () => {
 
 const emit = defineEmits(['tab-click'])
 
-const w = ref(0)
-const x = ref(0)
-const headerItemClick = (ev: any) => {
-    const target = ev.target
-    const index = target.getAttribute('data-index')
-
-    children.value.forEach((el) => {
+const setTabBodyShow = (index: string) => {
+    const list = getChildren()
+    list.forEach((el) => {
         if (el.getAttribute('index') === index) {
-            ;(el as any).show = true
-            const rect = target.getBoundingClientRect()
-
-            w.value = rect.width
-            x.value = (target as any).offsetLeft
+            ;(el as any).setAttribute('show', 'true')
         } else {
-            ;(el as any).show = false
+            ;(el as any).removeAttribute('show')
         }
     })
+}
+
+const w = ref('0px')
+const x = ref('0px')
+const headerItemClick = (ev: any) => {
+    const target = ev.target
+    const index = target.dataset.index
+    const disabled = target.classList.contains('is-disabled')
+    if (disabled) return
+    current.value = index
+    setTabBodyShow(index)
+
+    setActive()
+
     emit('tab-click', index)
 }
 
 const slotEl = ref<HTMLSlotElement>()
-const children = ref<any[]>([])
+const headerList = ref<any[]>([])
 
-onMounted(() => {
-    const list = (slotEl.value as HTMLSlotElement)
+/**获取 tab-pane 元素集合 */
+const getChildren = () => {
+    if (!slotEl.value) return []
+    return (slotEl.value as HTMLSlotElement)
         .assignedElements()
         .filter((c) => c.nodeName === 'IVY-TAB-PANE')
+}
+
+const showBtn = ref(false)
+const showOperateBtn = () => {
+    nextTick(() => {
+        const { width: wrapWidth = 0 } = (
+            tabHeaderWrap.value as HTMLElement
+        ).getBoundingClientRect()
+        const { width = 0 } = (tableInnerEl.value as HTMLElement).getBoundingClientRect()
+
+        showBtn.value = wrapWidth < width
+    })
+}
+
+/**设置活动的 header */
+const setActive = () => {
+    nextTick(() => {
+        const itemList = tableInnerEl.value?.querySelectorAll('.ivy-tab-wrap-item')
+        itemList?.forEach((el: any) => {
+            if (el.dataset.index === current.value) {
+                const rect = getComputedStyle(el)
+                w.value = rect.getPropertyValue('width')
+                x.value = el.offsetLeft
+            }
+        })
+    })
+}
+
+/**暴露在自定义元素上的方法 */
+const jumpTo = (val: string) => {
+    current.value = val
+    setTabBodyShow(current.value)
+    setActive()
+}
+const { setExposes } = useExpose()
+onMounted(() => {
+    setExposes({
+        setActive: jumpTo
+    })
+    current.value = props.active || '0'
+    const list = getChildren()
     // console.log(list, 'list')
-    children.value = list.map((el: any, index) => {
+    headerList.value = list.map((el: any, index) => {
         const elIndex = el.getAttribute('index')
 
         if (!elIndex) {
             el.index = index.toString()
         }
         if (props.active === el.getAttribute('index') || (!props.active && index === 0)) {
-            ;(el as any).show = true
-            const rect = el.getBoundingClientRect()
-
-            w.value = rect.width
-            x.value = (el as any).offsetLeft
+            ;(el as any).setAttribute('show', null)
         } else {
-            ;(el as any).show = false
+            ;(el as any).removeAttribute('show')
         }
 
-        return el
+        return {
+            label: el.getAttribute('label'),
+            index: el.getAttribute('index') || index.toString(),
+            disabled: el.getAttribute('disabled') !== null
+        }
     })
-})
-onUpdated(() => {
-    // nextTick(() => {
-    //     const children = (tableInnerEl.value as HTMLElement).children
-    //     for (let index = 0; index < children.length; index++) {
-    //         const el = children[index]
-    //         if (props.active === el.getAttribute('data-index')) {
-    //             const rect = el.getBoundingClientRect()
-    //             w.value = rect.width
-    //             x.value = (el as any).offsetLeft
-    //         }
-    //     }
-    //     const tableWrapInnerWidth = getComputedStyle(tableInnerEl.value as HTMLElement)['width']
-    //     const tableWrapWidth = getComputedStyle(tabHeaderWrap.value as HTMLElement)['width']
-    //     if (parseFloat(tableWrapWidth) < parseFloat(tableWrapInnerWidth)) {
-    //         ;(tabHeaderWrap.value as HTMLElement).style.flex = '0 0 calc(100% - 60px)'
-    //         ;(btnLeft.value as any).style.display = 'inline-block'
-    //         ;(btnRight.value as any).style.display = 'inline-block'
-    //     }
-    // })
+    showOperateBtn()
+    setActive()
 })
 </script>
 
 <template>
     <div class="ivy-tab-header">
         <div
+            v-show="showBtn"
             class="ivy-tab-header-arrow ivy-tab-header-arrow-left"
             ref="btnLeft"
             @click="scrollLeft"
-        ></div>
+        >
+            <ArrowLeft />
+        </div>
         <div class="ivy-tab-wrap" ref="tabHeaderWrap">
             <div class="ivy-tab-wrap-inner" ref="tableInnerEl">
                 <div
-                    v-for="item in children"
+                    v-for="item in headerList"
                     :key="item.index"
-                    class="ivy-tab-wrap-item"
+                    :class="['ivy-tab-wrap-item', { 'is-disabled': item.disabled }]"
                     :data-index="item.index"
                     @click="headerItemClick"
                 >
                     {{ item.label }}
                 </div>
-                <div class="ivy-tab-wrap-line" :style="{ width: `${w}px`, left: `${x}px` }"></div>
+
+                <div class="ivy-tab-wrap-line" :style="{ width: `${w}`, left: `${x}px` }"></div>
             </div>
         </div>
         <div
+            v-show="showBtn"
             class="ivy-tab-header-arrow ivy-tab-header-arrow-right"
             ref="btnRight"
             @click="scrollRight"
-        ></div>
+        >
+            <ArrowRight />
+        </div>
     </div>
     <div>
         <slot ref="slotEl"></slot>
@@ -145,6 +186,8 @@ onUpdated(() => {
 
 <style lang="scss">
 :host {
+    --ivy-tabs-active-color: var(--ivy-color-primary, #409eff);
+    --ivy-tabs-header-color: var(--ivy-text-color-primary, #303133);
     display: block;
 }
 
@@ -169,40 +212,23 @@ onUpdated(() => {
     flex: 0 0 30px;
     width: 30px;
     cursor: pointer;
-    display: none;
     position: relative;
+    color: var(--ivy-tabs-header-color);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
-.ivy-tab-header-arrow::before {
-    content: '';
-    display: block;
-    width: 6px;
-    height: 6px;
-    border: 1px solid transparent;
-    position: absolute;
-    top: 18px;
-    right: 8px;
-    transform: rotateZ(-45deg);
-    pointer-events: none;
-}
-.ivy-tab-header-arrow-right::before {
-    border-right-color: #303133;
-    border-bottom-color: #303133;
-}
-.ivy-tab-header-arrow-left::before {
-    border-top-color: #303133;
-    border-left-color: #303133;
-    left: 8px;
-}
+
 .ivy-tab-header-arrow:hover .ivy-tab-header-arrow-right::before {
-    border-right-color: var(--ivy-color-primary, #409eff);
-    border-bottom-color: var(--ivy-color-primary, #409eff);
+    border-right-color: var(--ivy-tabs-active-color);
+    border-bottom-color: var(--ivy-tabs-active-color);
 }
 .ivy-tab-header-arrow:hover .ivy-tab-header-arrow-left::before {
-    border-top-color: var(--ivy-color-primary, #409eff);
-    border-left-color: var(--ivy-color-primary, #409eff);
+    border-top-color: var(--ivy-tabs-active-color);
+    border-left-color: var(--ivy-tabs-active-color);
 }
 .ivy-tab-wrap {
-    flex: 0 0 100%;
+    flex: auto;
     overflow: hidden;
     display: inline-flex;
     position: relative;
@@ -226,6 +252,10 @@ onUpdated(() => {
     position: relative;
     cursor: pointer;
     word-break: keep-all;
+    &.is-disabled {
+        cursor: not-allowed;
+        color: #c0c4cc;
+    }
 }
 .ivy-tab-wrap-item-first {
     padding-left: 0;
@@ -239,6 +269,8 @@ onUpdated(() => {
     left: 0;
     height: 1px;
     background-color: var(--ivy-color-primary, #409eff);
-    transition: left 0.3s, width 0.3s;
+    transition:
+        left 0.3s,
+        width 0.3s;
 }
 </style>

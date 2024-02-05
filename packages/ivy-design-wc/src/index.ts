@@ -38,7 +38,7 @@ import { Radio, RadioGroup } from './components/radio/index'
 import { Checkbox, CheckboxGroup } from './components/checkbox/index'
 
 import { AspectRatio } from './components/aspect-ratio/index'
-import { Message } from './components/message/index'
+import { Message, createMessage } from './components/message/index'
 import { Icon } from './components/icon/index'
 import { Circle } from './components/circle/index'
 import { Pagination } from './components/pagination/index'
@@ -68,10 +68,9 @@ import { TimePicker } from './components/time-picker/index'
 
 import { Split } from './components/split/index'
 import { Notification, notify } from './components/notification/index'
+import { Tour, createTour } from './components/tour/index'
 
-import { createMessage } from './utils/utils'
-
-const comp: Record<string, any> = {
+const comp: Record<string, CustomElementConstructor> = {
     Button,
     Grid,
     GridItem,
@@ -138,7 +137,8 @@ const comp: Record<string, any> = {
     DatePicker,
     TimePicker,
     Split,
-    Notification
+    Notification,
+    Tour
 }
 
 const registerComponents = async (prefix = 'Ivy') => {
@@ -167,10 +167,6 @@ const $ivy = {
     confirm: $confirm,
     notify: $notify
 }
-
-// const $prompt = msgBox.prompt
-// const $notify = msgBox.notify
-// const $message = msgBox.message
 
 export { message, msgBox, registerComponents, registerComponent, $ivy, $alert, $confirm, $notify }
 
@@ -249,5 +245,6 @@ declare module 'vue' {
         TimePicker: typeof comp.TimePicker
         Split: typeof comp.Split
         Notification: typeof comp.Notification
+        Tour: typeof comp.Tour
     }
 }
