@@ -11,7 +11,9 @@
       "script",
       "style",
       "div",
+      "Badge",
       "p",
+      "hr",
       "ClientOnly",
       "ivy-button",
       "br",
@@ -68,7 +70,8 @@
       "ivy-step",
       "ivy-tip",
       "ivy-tour-step",
-      "ivy-tour"
+      "ivy-tour",
+      "ivy-card"
     ]
   }
 }
