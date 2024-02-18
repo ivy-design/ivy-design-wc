@@ -4,7 +4,8 @@ layout: home
 
 hero:
   name: "ivy-design"
-  tagline: "使用 vue3 开发的web component组件库"
+  text: Web Component
+  tagline: "由 Vite 和 Vue 驱动的面向未来的原生组件库"
   actions:
     - theme: brand
       text: 快速开始
