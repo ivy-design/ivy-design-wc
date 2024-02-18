@@ -1,5 +1,9 @@
 # Icon 图标
 
+:::tip 注意
+图标来自 [element-plus/element-plus-icons](https://github.com/element-plus/element-plus-icons)
+:::
+
 ## 基础用法
 
 通过 `name` 来设置不同的图标
