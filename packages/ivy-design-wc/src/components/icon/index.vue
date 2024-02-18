@@ -49,7 +49,7 @@ onMounted(() => {
     font-size: inherit;
 }
 
-:host([spin]) .ivy-icon {
+:host([spin]) {
     animation: spin 1.8s linear infinite;
 }
 
