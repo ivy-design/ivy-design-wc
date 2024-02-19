@@ -71,7 +71,8 @@
       "ivy-tip",
       "ivy-tour-step",
       "ivy-tour",
-      "ivy-card"
+      "ivy-card",
+      "ivy-textarea"
     ]
   }
 }
