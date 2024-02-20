@@ -31,7 +31,7 @@ const form = [
   { text: "Rate 评分", link: "/components/rate" },
   { text: "Select 选择框", link: "/components/select" },
   { text: "Switch 开关", link: "/components/switch" },
-  { text: "Textarea 文本域", link: "/components/textarea" },
+  // { text: "Textarea 文本域", link: "/components/textarea" },
   { text: "TimePicker 时间选择器", link: "/components/time-picker" },
   { text: "TimeSelect 时间选择", link: "/components/time-select" },
 ];
