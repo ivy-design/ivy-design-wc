@@ -48,6 +48,8 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Install dependencies
         run: pnpm i --no-frozen-lockfile # or pnpm install / yarn install / bun install
+      - name: Build Lib
+        run: pnpm run build:comp
       - name: Build with VitePress
         run: |
           pnpm docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
