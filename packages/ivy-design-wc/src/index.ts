@@ -69,6 +69,7 @@ import { TimePicker } from './components/time-picker/index'
 import { Split } from './components/split/index'
 import { Notification, notify } from './components/notification/index'
 import { Tour, createTour } from './components/tour/index'
+import { Textarea } from './components/textarea/index'
 
 const comp: Record<string, CustomElementConstructor> = {
     Button,
@@ -138,7 +139,8 @@ const comp: Record<string, CustomElementConstructor> = {
     TimePicker,
     Split,
     Notification,
-    Tour
+    Tour,
+    Textarea
 }
 
 const registerComponents = async (prefix = 'Ivy') => {
@@ -246,5 +248,6 @@ declare module 'vue' {
         Split: typeof comp.Split
         Notification: typeof comp.Notification
         Tour: typeof comp.Tour
+        Textarea: typeof comp.Textarea
     }
 }
