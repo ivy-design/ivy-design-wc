@@ -79,6 +79,7 @@ const other = [
   { text: "Clipboard 复制到剪切板", link: "/components/clipboard" },
   { text: "ContextMenu 右键菜单", link: "/components/contextmenu" },
   { text: "Details 详情", link: "/components/details" },
+  { text: "Command 命令", link: "/components/command" },
 ];
 
 const components = [

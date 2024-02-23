@@ -70,6 +70,14 @@ import { Split } from './components/split/index'
 import { Notification, notify } from './components/notification/index'
 import { Tour, createTour } from './components/tour/index'
 import { Textarea } from './components/textarea/index'
+import {
+    Command,
+    CommandDialog,
+    CommandGroup,
+    CommandItem,
+    CommandSeparator,
+    CommandList
+} from './components/command/index'
 
 const comp: Record<string, CustomElementConstructor> = {
     Button,
@@ -140,7 +148,13 @@ const comp: Record<string, CustomElementConstructor> = {
     Split,
     Notification,
     Tour,
-    Textarea
+    Textarea,
+    Command,
+    CommandDialog,
+    CommandGroup,
+    CommandItem,
+    CommandSeparator,
+    CommandList
 }
 
 const registerComponents = async (prefix = 'Ivy') => {
@@ -249,5 +263,11 @@ declare module 'vue' {
         Notification: typeof comp.Notification
         Tour: typeof comp.Tour
         Textarea: typeof comp.Textarea
+        Command: typeof comp.Command
+        CommandDialog: typeof comp.CommandDialog
+        CommandGroup: typeof comp.CommandGroup
+        CommandItem: typeof comp.CommandItem
+        CommandSeparator: typeof comp.CommandSeparator
+        CommandList: typeof comp.CommandList
     }
 }

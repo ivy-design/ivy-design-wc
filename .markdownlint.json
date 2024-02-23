@@ -72,7 +72,13 @@
       "ivy-tour-step",
       "ivy-tour",
       "ivy-card",
-      "ivy-textarea"
+      "ivy-textarea",
+      "ivy-command",
+      "ivy-command-dialog",
+      "ivy-command-list",
+      "ivy-command-group",
+      "ivy-command-item",
+      "ivy-command-separator"
     ]
   }
 }
