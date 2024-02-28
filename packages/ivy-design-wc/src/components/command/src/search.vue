@@ -26,9 +26,12 @@ const handleChange = (e: CustomEvent) => {
 
 <template>
     <div class="box">
-        <ivy-input @change="handleChange"></ivy-input>
-        <div><Close /></div>
+        <div style="flex: auto">
+            <ivy-input @change="handleChange"></ivy-input>
+        </div>
+        <div class="close"><Close /></div>
     </div>
+    <div class="separator"></div>
 </template>
 
 <style lang="scss">
@@ -37,5 +40,17 @@ const handleChange = (e: CustomEvent) => {
 }
 .box {
     display: flex;
+    padding: 6px 16px 12px;
+}
+.close {
+    flex: 0 0 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.separator {
+    height: 1px;
+    background-color: var(--ivy-command-border-color);
 }
 </style>
