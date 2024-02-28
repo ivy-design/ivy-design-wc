@@ -68,7 +68,7 @@
       "ivy-timeline-item",
       "ivy-steps",
       "ivy-step",
-      "ivy-tip",
+      "ivy-alert",
       "ivy-tour-step",
       "ivy-tour",
       "ivy-card",

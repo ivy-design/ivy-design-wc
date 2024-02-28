@@ -78,7 +78,7 @@ ReactDOM.render(<ivy-button>button</ivy-button>, document.body);
 | Result          | 结果                         |
 | Drawer          | 抽屉                         |
 | Input           | 输入框                       |
-| Tip             | 提示                         |
+| Alert           | 提示                         |
 | Select          | 下拉选择                     |
 | Loading         | 加载                         |
 | Details         | 详情-同原生的 `details` 标签 |

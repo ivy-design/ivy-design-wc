@@ -22,7 +22,7 @@ import { Result } from './components/result/index'
 import { Progress } from './components/progress/index'
 import { Drawer } from './components/drawer/index'
 import { Input } from './components/input/index'
-import { Tip } from './components/tip/index'
+import { Alert } from './components/alert/index'
 import { Select, Option } from './components/select/index'
 
 import { Loading } from './components/loading/index'
@@ -102,7 +102,7 @@ const comp: Record<string, CustomElementConstructor> = {
     Progress,
     Drawer,
     Input,
-    Tip,
+    Alert,
     Select,
     Option,
     Loading,
@@ -216,7 +216,7 @@ declare module 'vue' {
         Progress: typeof comp.Progress
         Drawer: typeof comp.Drawer
         Input: typeof comp.Input
-        Tip: typeof comp.Tip
+        Alert: typeof comp.Alert
         Select: typeof comp.Select
         Option: typeof comp.Option
         Loading: typeof comp.Loading
