@@ -4,16 +4,19 @@ defineOptions({
 })
 
 interface Props {
-    disabled: Boolean
-    icon: String
-    label: String
-    shortcutKeys: String
+    disabled: boolean
+    icon: string
+    label: string
+    shortcutKeys: string
+    hide: boolean
 }
-const props = withDefaults(defineProps<Props>(), {})
+const props = withDefaults(defineProps<Props>(), {
+    hide: false
+})
 </script>
 
 <template>
-    <div class="command-item">
+    <div class="command-item" v-if="!props.hide">
         <div class="command-item-content">
             <slot name="icon" parts="icon"></slot>
             <slot name="label" parts="label">{{ props.label }}</slot>
@@ -28,6 +31,7 @@ const props = withDefaults(defineProps<Props>(), {})
     display: block;
 }
 .command-item {
+    font-size: var(--ivy-command-font-size);
     display: flex;
     align-items: center;
     gap: 12px;

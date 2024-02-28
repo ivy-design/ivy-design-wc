@@ -6,6 +6,7 @@ import group from './src/group.vue'
 import separator from './src/separator.vue'
 import dialog from './src/dialog.vue'
 import list from './src/list.vue'
+import search from './src/search.vue'
 
 const Command = defineCustomElement(index)
 const registerCommandComponent = (prefix = 'Ivy') => {
@@ -43,6 +44,12 @@ const registerCommandListComponent = (prefix = 'Ivy') => {
     install(key, list)
 }
 
+const CommandSearch = defineCustomElement(search)
+const registerCommandSearchComponent = (prefix = 'Ivy') => {
+    const key = `${prefix}${search.name}`
+    install(key, search)
+}
+
 export {
     Command,
     registerCommandComponent,
@@ -55,7 +62,9 @@ export {
     CommandDialog,
     registerCommandDialogComponent,
     CommandList,
-    registerCommandListComponent
+    registerCommandListComponent,
+    CommandSearch,
+    registerCommandSearchComponent
 }
 
 export default (prefix = 'Ivy') => {
@@ -65,4 +74,5 @@ export default (prefix = 'Ivy') => {
     registerCommandSeparatorComponent(prefix)
     registerCommandDialogComponent(prefix)
     registerCommandListComponent(prefix)
+    registerCommandSearchComponent(prefix)
 }

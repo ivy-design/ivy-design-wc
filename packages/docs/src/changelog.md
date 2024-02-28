@@ -1,5 +1,16 @@
 # 更新日志
 
+## v1.8.0 版本
+
+Feats：
+
+- 增加 `Command` 组件
+- 增加 `Textarea` 组件
+
+Refactor：
+
+- `Tip` 组件更名为 `Alert`
+
 ## v1.7.1 版本
 
 Feats：

@@ -78,7 +78,8 @@
       "ivy-command-list",
       "ivy-command-group",
       "ivy-command-item",
-      "ivy-command-separator"
+      "ivy-command-separator",
+      "ivy-command-search"
     ]
   }
 }

@@ -76,7 +76,8 @@ import {
     CommandGroup,
     CommandItem,
     CommandSeparator,
-    CommandList
+    CommandList,
+    CommandSearch
 } from './components/command/index'
 
 const comp: Record<string, CustomElementConstructor> = {
@@ -154,7 +155,8 @@ const comp: Record<string, CustomElementConstructor> = {
     CommandGroup,
     CommandItem,
     CommandSeparator,
-    CommandList
+    CommandList,
+    CommandSearch
 }
 
 const registerComponents = async (prefix = 'Ivy') => {
@@ -269,5 +271,6 @@ declare module 'vue' {
         CommandItem: typeof comp.CommandItem
         CommandSeparator: typeof comp.CommandSeparator
         CommandList: typeof comp.CommandList
+        CommandSearch: typeof comp.CommandSearch
     }
 }
