@@ -1,7 +1,52 @@
 <script setup lang="ts">
+import { ref, provide } from 'vue'
+import { useHost } from '@/hooks/useHostElement'
+import { inject } from 'vue'
+
 defineOptions({
     name: 'Command'
 })
+
+const commandItems = ref<any[]>([])
+const appendCommandItems = (item: any) => {
+    commandItems.value.push(item)
+}
+const removeCommandItems = (item: any) => {
+    const index = commandItems.value.indexOf(item)
+    if (index > -1) {
+        commandItems.value.splice(index, 1)
+    }
+}
+
+provide('appendCommandItems', appendCommandItems)
+provide('removeCommandItems', removeCommandItems)
+
+const dest = ref<any>(null)
+provide('dest', dest)
+
+const handleSearch = (val: any) => {
+    dest.value = val
+        ? commandItems.value.filter((item: any) => {
+              return item.toLowerCase().indexOf(val.toLowerCase()) !== -1
+          })
+        : null
+}
+provide('handleSearch', handleSearch)
+
+const handleClose: any = inject('handleClose', null)
+
+// const emit = defineEmits(['command'])
+
+const { host } = useHost()
+const handleClick = (item: any) => {
+    const event = new CustomEvent('command', {
+        detail: item
+    })
+    host.value?.dispatchEvent(event)
+    if (handleClose) handleClose?.()
+}
+
+provide('handleClick', handleClick)
 </script>
 
 <template>

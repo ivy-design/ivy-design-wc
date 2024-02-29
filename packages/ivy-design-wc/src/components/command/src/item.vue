@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { computed, onMounted } from 'vue'
+import { inject, ref } from 'vue'
+import { useHost } from '@/hooks/useHostElement'
+import { useEventListener } from '@vueuse/core'
+
 defineOptions({
     name: 'CommandItem'
 })
@@ -13,10 +18,36 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
     hide: false
 })
+
+const dest = inject('dest', ref<any>(null))
+
+const isShow = computed(() => {
+    if (dest.value === null) return true
+    return dest.value.some((item: any) => item === props.label)
+})
+
+const appendCommandItems: any = inject('appendCommandItems')
+appendCommandItems?.(props.label)
+
+const appendGroupItems: any = inject('appendGroupItems', null)
+if (appendGroupItems !== null) {
+    appendGroupItems?.(props.label)
+}
+
+const handleClick: any = inject('handleClick', null)
+
+const handleClickItem = () => {
+    if (props.disabled) return
+    handleClick?.(props.label)
+}
+const { host } = useHost()
+onMounted(() => {
+    useEventListener(host.value, 'click', handleClickItem)
+})
 </script>
 
 <template>
-    <div class="command-item" v-if="!props.hide">
+    <div class="command-item" v-if="isShow">
         <div class="command-item-content">
             <slot name="icon" parts="icon"></slot>
             <slot name="label" parts="label">{{ props.label }}</slot>
@@ -35,7 +66,7 @@ const props = withDefaults(defineProps<Props>(), {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 0 16px;
+    padding: 0 12px;
     line-height: 30px;
     height: 30px;
     cursor: pointer;

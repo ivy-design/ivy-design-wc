@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, provide } from 'vue'
 import { useExpose } from '@/hooks/useExpose'
 
 defineOptions({
@@ -17,6 +17,11 @@ const { setExpose } = useExpose()
 onMounted(() => {
     setExpose('open', handleOpen)
 })
+
+const handleClose = () => {
+    visible.value = false
+}
+provide('handleClose', handleClose)
 </script>
 
 <template>
