@@ -35,10 +35,10 @@ const handleClose = inject('handleClose', null)
     padding: 6px 12px 12px;
 }
 .close {
-    flex: 0 0 30px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-left: 8px;
 }
 
 .separator {
