@@ -8,6 +8,7 @@ defineOptions({
 })
 
 const visible = ref(false)
+provide('visible', visible)
 
 const handleOpen = () => {
     visible.value = true

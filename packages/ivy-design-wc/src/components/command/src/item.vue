@@ -49,7 +49,8 @@ onMounted(() => {
 <template>
     <div class="command-item" v-if="isShow">
         <div class="command-item-content">
-            <slot name="icon" parts="icon"></slot>
+            <slot name="icon" parts="icon"> </slot>
+
             <slot name="label" parts="label">{{ props.label }}</slot>
         </div>
 
@@ -82,6 +83,9 @@ onMounted(() => {
     }
     &-content {
         flex: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
     }
     &-s-key {
         background-color: var(--ivy-command-item-hover-background-color);

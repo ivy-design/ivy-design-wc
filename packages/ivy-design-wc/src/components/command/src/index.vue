@@ -44,6 +44,7 @@ const handleClick = (item: any) => {
     })
     host.value?.dispatchEvent(event)
     if (handleClose) handleClose?.()
+    dest.value = null
 }
 
 provide('handleClick', handleClick)
