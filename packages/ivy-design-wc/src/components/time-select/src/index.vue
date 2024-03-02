@@ -108,6 +108,8 @@ const emit = defineEmits<{
 const handlerClick = (e: MouseEvent) => {
     const target = e.target as any
     const val = target.dataset.value
+    const disabled = target.dataset.disabled
+    if (disabled === 'true') return
     if (!val) {
         visible.value = false
         return
