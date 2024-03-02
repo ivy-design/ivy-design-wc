@@ -7,6 +7,10 @@ Feats：
 - 增加 `Command` 组件
 - 增加 `Textarea` 组件
 
+Fixed：
+
+- 修复 `TimeSelect` 组件中的选项 `disabled = true` 时仍可选择问题
+
 Refactor：
 
 - `Tip` 组件更名为 `Alert`
