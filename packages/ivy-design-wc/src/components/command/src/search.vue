@@ -50,6 +50,9 @@ watch(visible, (val, oldVal) => {
     align-items: center;
     justify-content: center;
     margin-left: 8px;
+    &:hover {
+        color: var(--ivy-color-primary);
+    }
 }
 
 .separator {
