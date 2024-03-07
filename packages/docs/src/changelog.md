@@ -6,6 +6,7 @@ Feats：
 
 - 增加 `Command` 组件
 - 增加 `Textarea` 组件
+- `Pagination` 组件增加 `background` 属性
 
 Fixed：
 

@@ -30,8 +30,9 @@
 | size        | 每页显示条目个数                         | `boolean` | -      | 10     |
 | total       | 总条目数                                 | `boolean` | -      | 0      |
 | pager-count | 最大页码按钮数。当总页数超过该值时会折叠 | `string`  | -      | 7      |
-| prev-text   | 显示的上一页文字                         | `string`  | -      | Prev   |
-| next-text   | 显示的下一页文字                         | `string`  | -      | Next   |
+| prev-text   | 显示的上一页文字                         | `string`  | -      | -      |
+| next-text   | 显示的下一页文字                         | `string`  | -      | -      |
+| background  | 显示页码的背景                           | `boolean` | -      | -      |
 
 ## Events
 
