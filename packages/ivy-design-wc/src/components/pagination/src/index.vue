@@ -32,9 +32,7 @@ const props = withDefaults(defineProps<Props>(), {
     sizes: '',
     total: '0',
     layout: 'prev,pager,next',
-    pagerCount: '7',
-    prevText: 'Prev',
-    nextText: 'Next'
+    pagerCount: '7'
 })
 
 const emit = defineEmits(['current-change', 'size-change', 'prev-page', 'next-page'])
@@ -56,68 +54,40 @@ const genPageListWithEllipsis = () => {
     const midden = Math.floor(diff / 2)
 
     if (conf.offset >= diff) {
-        target.push({
-            value: 0,
-            status: 'prev'
-        })
+        target.push({ value: 0, status: 'prev' })
         let start = conf.offset - midden
         let end = conf.offset
         if (conf.offset + midden < conf.maxOffset) {
             end = conf.offset + midden
             for (let i = start; i <= end; i++) {
-                target.push({
-                    value: i,
-                    status: 'page'
-                })
+                target.push({ value: i, status: 'page' })
             }
-            target.push({
-                value: 0,
-                status: 'next'
-            })
+            target.push({ value: 0, status: 'next' })
         } else {
             start = conf.maxOffset - diff
             end = conf.maxOffset - 1
             for (let i = start; i <= end; i++) {
-                target.push({
-                    value: i,
-                    status: 'page'
-                })
+                target.push({ value: i, status: 'page' })
             }
         }
     } else {
         const end = conf.pagerCount - 1
         for (let i = 2; i < end; i++) {
-            target.push({
-                value: i,
-                status: 'page'
-            })
+            target.push({ value: i, status: 'page' })
         }
-        target.push({
-            value: 0,
-            status: 'next'
-        })
+        target.push({ value: 0, status: 'next' })
     }
 
     pageList.value = [
-        {
-            value: 1,
-            status: 'page'
-        },
+        { value: 1, status: 'page' },
         ...target,
-
-        {
-            value: conf.maxOffset,
-            status: 'page'
-        }
+        { value: conf.maxOffset, status: 'page' }
     ]
 }
 const genPageListWithoutEllipsis = () => {
     const target = []
     for (let i = 1; i <= conf.maxOffset; i++) {
-        target.push({
-            value: i,
-            status: 'page'
-        })
+        target.push({ value: i, status: 'page' })
     }
     pageList.value = target
 }
@@ -189,12 +159,14 @@ onMounted(() => {
 <style lang="scss">
 :host {
     --ivy-pagination-color: var(--ivy-color-primary, #409eff);
+    --ivy-pagination-font-size: var(--ivy-font-size, 14px);
     display: flex;
     align-items: center;
 }
 .ivy-pagination {
     display: flex;
     align-items: center;
+    font-size: var(--ivy-pagination-font-size);
     &-wrap {
         display: inline-flex;
         list-style: none;
@@ -220,38 +192,51 @@ onMounted(() => {
         &.is-prev,
         &.is-next {
             position: relative;
-            &::before {
-                content: '';
-                position: absolute;
-                z-index: 10;
-                font-family: 'Courier New', Courier, monospace;
-                display: flex;
-                width: 100%;
-                height: 100%;
-                justify-content: center;
-                align-items: center;
+            & svg {
+                display: none;
             }
         }
         &.is-prev {
+            & .more {
+                display: initial;
+            }
             &:hover {
-                &::before {
-                    background-color: var(--ivy-background-color);
-                    content: '<<';
+                & .more {
+                    display: none;
+                }
+                & .arrow {
+                    display: initial;
                 }
             }
         }
         &.is-next {
+            & .more {
+                display: initial;
+            }
             &:hover {
-                &::before {
-                    background-color: var(--ivy-background-color);
-                    content: '>>';
+                &:hover {
+                    & .more {
+                        display: none;
+                    }
+                    & .arrow {
+                        display: initial;
+                    }
                 }
+                // &::before {
+                //     background-color: var(--ivy-background-color);
+                //     content: '>>';
+                // }
             }
         }
     }
     &-prev,
     &-next {
+        display: inline-flex;
+        align-items: center;
         cursor: pointer;
+        &:hover {
+            color: var(--ivy-pagination-color);
+        }
         &.is-disabled {
             cursor: not-allowed;
             color: #c0c4cc;
