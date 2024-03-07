@@ -25,6 +25,7 @@ interface Props {
     pagerCount: string
     prevText: string
     nextText: string
+    background: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
     current: '1',
@@ -139,7 +140,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="ivy-pagination">
+    <div :class="['ivy-pagination', { 'is-background': props.background }]">
         <Prev
             class="ivy-pagination-prev"
             :text="props.prevText"
@@ -158,8 +159,12 @@ onMounted(() => {
 
 <style lang="scss">
 :host {
-    --ivy-pagination-color: var(--ivy-color-primary, #409eff);
+    --ivy-pagination-color: var(--ivy-text-color, #303133);
     --ivy-pagination-font-size: var(--ivy-font-size, 14px);
+    --ivy-pagination-background-color: var(--ivy-color-white, #fff);
+    --ivy-pagination-disabled-color: #c0c4cc;
+    --ivy-pagination-disabled-background-color: #f5f7fa;
+    --ivy-pagination-hover-color: var(--ivy-color-primary, #409eff);
     display: flex;
     align-items: center;
 }
@@ -167,10 +172,12 @@ onMounted(() => {
     display: flex;
     align-items: center;
     font-size: var(--ivy-pagination-font-size);
+    color: var(--ivy-pagination-color);
     &-wrap {
         display: inline-flex;
         list-style: none;
         margin: 0 8px;
+        padding: 0;
     }
     &-item {
         display: inline-flex;
@@ -181,12 +188,13 @@ onMounted(() => {
         border-radius: 4px;
         margin: 0 4px;
         cursor: pointer;
+        background-color: var(--ivy-pagination-background-color);
         &:hover {
-            background-color: #f5f7fa;
+            --ivy-pagination-background-color: #f5f7fa;
         }
         &.is-active {
             cursor: default;
-            color: var(--ivy-pagination-color);
+            color: var(--ivy-pagination-hover-color);
         }
 
         &.is-prev,
@@ -222,10 +230,6 @@ onMounted(() => {
                         display: initial;
                     }
                 }
-                // &::before {
-                //     background-color: var(--ivy-background-color);
-                //     content: '>>';
-                // }
             }
         }
     }
@@ -235,11 +239,21 @@ onMounted(() => {
         align-items: center;
         cursor: pointer;
         &:hover {
-            color: var(--ivy-pagination-color);
+            color: var(--ivy-pagination-hover-color);
         }
         &.is-disabled {
             cursor: not-allowed;
-            color: #c0c4cc;
+            color: var(--ivy-pagination-disabled-color);
+        }
+    }
+}
+
+.ivy-pagination.is-background {
+    --ivy-pagination-background-color: #f5f7fa;
+    .ivy-pagination-item {
+        &:hover {
+            color: white;
+            --ivy-pagination-background-color: var(--ivy-pagination-hover-color);
         }
     }
 }

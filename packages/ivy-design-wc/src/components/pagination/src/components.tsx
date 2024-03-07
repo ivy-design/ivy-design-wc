@@ -73,31 +73,31 @@ export const Pager: FunctionalComponent<PagerProps, PagerEvents> = (props, ctx) 
         ctx.emit('click', page, status)
     }
     return (
-        <div class="ivy-pagination-wrap">
+        <ul class="ivy-pagination-wrap">
             {props.data.map((c) => {
                 if (c.status === 'prev') {
                     return (
-                        <a
+                        <li
                             class="ivy-pagination-item is-prev"
                             onClick={() => handleClick(c.value, c.status)}
                         >
                             <More class="more" />
                             <DArrowLeft class="arrow" />
-                        </a>
+                        </li>
                     )
                 } else if (c.status === 'next') {
                     return (
-                        <a
+                        <li
                             class="ivy-pagination-item is-next"
                             onClick={() => handleClick(c.value, c.status)}
                         >
                             <More class="more" />
                             <DArrowRight class="arrow" />
-                        </a>
+                        </li>
                     )
                 } else {
                     return (
-                        <a
+                        <li
                             class={[
                                 'ivy-pagination-item',
                                 {
@@ -107,11 +107,11 @@ export const Pager: FunctionalComponent<PagerProps, PagerEvents> = (props, ctx) 
                             onClick={() => handleClick(c.value, c.status)}
                         >
                             {c.value}
-                        </a>
+                        </li>
                     )
                 }
             })}
-        </div>
+        </ul>
     )
 }
 Pager.props = ['data', 'current']

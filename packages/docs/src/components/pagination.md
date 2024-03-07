@@ -16,6 +16,12 @@
 
 <ivy-pagination total="700" prev-text="上一页" next-text="下一页"></ivy-pagination>
 
+## 带有背景色的分页
+
+设置 `background` 属性可以为分页按钮添加背景色。
+
+<ivy-pagination total="700" pager-count="9" background></ivy-pagination>
+
 ## Props
 
 | 属性名      | 说明                                     | 类型      | 可选值 | 默认值 |
