@@ -11,8 +11,6 @@ defineOptions({
     inheritAttrs: false
 })
 
-const { triggerRef, targetRef } = usePopper()
-
 export interface Props {
     start: string
     end: string
@@ -32,6 +30,10 @@ const props = withDefaults(defineProps<Props>(), {
     placeholder: '请选择时间',
     format: 'HH:mm'
 })
+
+const { createPopper, visible, referenceEl, floatEl, floatArrow } = usePopper()
+
+const { floatingStyles, update, middlewareData, finalPlacement } = createPopper()
 
 const isDisabled = (cur: Dayjs, min: Dayjs, max: Dayjs) => {
     if (min || max) {
@@ -79,11 +81,19 @@ const dateList = computed(() => {
     return result
 })
 
-const visible = ref(false)
 const { host } = useHost()
 const handlerInputClick = () => {
     if (props.disabled) return
     if (!visible.value) {
+        if (!props.value) {
+            const curDate = dayjs()
+            const data = {
+                hour: curDate.hour(),
+                minute: curDate.minute(),
+                second: curDate.second()
+            }
+            console.log(data, 'data')
+        }
         visible.value = true
     }
 }
@@ -105,23 +115,6 @@ const emit = defineEmits<{
     (e: 'change', val?: 'string'): void
     (e: 'clear'): void
 }>()
-
-const handlerClick = (e: MouseEvent) => {
-    const target = e.target as any
-    const val = target.dataset.value
-    if (!val) {
-        visible.value = false
-        return
-    }
-
-    if (val == inputEl.value?.value) {
-        visible.value = false
-        return
-    }
-    ;(inputEl.value as HTMLInputElement).value = val
-    emit('change', val)
-    visible.value = false
-}
 
 const handleClear = () => {
     if (props.disabled) return
@@ -154,7 +147,7 @@ onBeforeUnmount(() => {
 
 <template>
     <!-- <ivy-input ref="triggerRef" :placeholder="props.placeholder" readonly></ivy-input> -->
-    <div class="input-wrap" ref="triggerRef" @click="handlerInputClick">
+    <div class="input-wrap" ref="referenceEl" @click="handlerInputClick">
         <input
             :class="['input-inner', { 'input-inner-clearable': props.clearable }]"
             type="text"
@@ -167,7 +160,7 @@ onBeforeUnmount(() => {
         </div>
     </div>
     <transition name="dropdown">
-        <div class="dropdown" ref="targetRef" v-show="visible">
+        <div class="dropdown" ref="floatEl" v-if="visible">
             <Pane @change="handlePaneChange" />
         </div>
     </transition>
