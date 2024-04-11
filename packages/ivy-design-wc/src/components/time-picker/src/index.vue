@@ -31,9 +31,9 @@ const props = withDefaults(defineProps<Props>(), {
     format: 'HH:mm'
 })
 
-const { createPopper, visible, referenceEl, floatEl, floatArrow } = usePopper()
+const { createPopper, visible, referenceEl, floatEl } = usePopper()
 
-const { floatingStyles, update, middlewareData, finalPlacement } = createPopper()
+const { floatingStyles, finalPlacement } = createPopper()
 
 const isDisabled = (cur: Dayjs, min: Dayjs, max: Dayjs) => {
     if (min || max) {
@@ -160,7 +160,13 @@ onBeforeUnmount(() => {
         </div>
     </div>
     <transition name="dropdown">
-        <div class="dropdown" ref="floatEl" v-if="visible">
+        <div
+            class="dropdown"
+            ref="floatEl"
+            v-if="visible"
+            :data-placement="finalPlacement"
+            :style="floatingStyles"
+        >
             <Pane @change="handlePaneChange" />
         </div>
     </transition>

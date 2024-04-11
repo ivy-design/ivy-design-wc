@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import usePopper from '@/hooks/usePopper'
 import { toRef } from 'vue'
 
