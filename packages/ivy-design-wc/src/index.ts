@@ -79,6 +79,7 @@ import {
     CommandList,
     CommandSearch
 } from './components/command/index'
+import { Popover } from './components/popover'
 
 const comp: Record<string, CustomElementConstructor> = {
     Button,
@@ -156,7 +157,8 @@ const comp: Record<string, CustomElementConstructor> = {
     CommandItem,
     CommandSeparator,
     CommandList,
-    CommandSearch
+    CommandSearch,
+    Popover
 }
 
 const registerComponents = async (prefix = 'Ivy') => {
@@ -272,5 +274,6 @@ declare module 'vue' {
         CommandSeparator: typeof comp.CommandSeparator
         CommandList: typeof comp.CommandList
         CommandSearch: typeof comp.CommandSearch
+        Popover: typeof comp.Popover
     }
 }

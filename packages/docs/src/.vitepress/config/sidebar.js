@@ -62,6 +62,7 @@ const notify = [
   { text: "Message 消息提示", link: "/components/message" },
   { text: "MessageBox 消息弹出框", link: "/components/message-box" },
   { text: "Notification 通知框", link: "/components/notification" },
+  { text: "Popover 弹出框", link: "/components/popover" },
   { text: "Result 结果", link: "/components/result" },
   { text: "Alert 提示", link: "/components/alert" },
   { text: "Tooltip 文字提示", link: "/components/tooltip" },

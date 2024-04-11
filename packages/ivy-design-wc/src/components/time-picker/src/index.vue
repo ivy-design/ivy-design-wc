@@ -118,7 +118,7 @@ const emit = defineEmits<{
 
 const handleClear = () => {
     if (props.disabled) return
-    ;(inputEl.value as HTMLInputElement).value = null as unknown as string
+        ; (inputEl.value as HTMLInputElement).value = null as unknown as string
     emit('change')
     emit('clear')
 }
@@ -129,7 +129,7 @@ const handlePaneChange = (val: any) => {
 
 const setDefaultValue = () => {
     if (props.value && dateList.value.find((item) => item.value === props.value)) {
-        ;(inputEl.value as HTMLInputElement).value = props.value
+        ; (inputEl.value as HTMLInputElement).value = props.value
     }
 }
 
@@ -148,25 +148,14 @@ onBeforeUnmount(() => {
 <template>
     <!-- <ivy-input ref="triggerRef" :placeholder="props.placeholder" readonly></ivy-input> -->
     <div class="input-wrap" ref="referenceEl" @click="handlerInputClick">
-        <input
-            :class="['input-inner', { 'input-inner-clearable': props.clearable }]"
-            type="text"
-            ref="inputEl"
-            :placeholder="props.placeholder"
-            readonly
-        />
+        <input :class="['input-inner', { 'input-inner-clearable': props.clearable }]" type="text" ref="inputEl"
+            :placeholder="props.placeholder" readonly />
         <div class="input-close" v-if="props.clearable" @click.stop="handleClear">
             <Close />
         </div>
     </div>
     <transition name="dropdown">
-        <div
-            class="dropdown"
-            ref="floatEl"
-            v-if="visible"
-            :data-placement="finalPlacement"
-            :style="floatingStyles"
-        >
+        <div class="dropdown" ref="floatEl" v-if="visible" :data-placement="finalPlacement" :style="floatingStyles">
             <Pane @change="handlePaneChange" />
         </div>
     </transition>
@@ -194,10 +183,12 @@ onBeforeUnmount(() => {
 .input-inner:focus {
     border-color: var(--ivy-color-primary, #409eff);
 }
+
 .input {
     &-wrap {
         position: relative;
     }
+
     &-inner {
         background-color: #fff;
         background-image: none;
@@ -213,10 +204,12 @@ onBeforeUnmount(() => {
         transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
         width: 100%;
         font-size: var(--ivy-time-select-font-size);
+
         &-clearable {
             padding-right: 38px;
         }
     }
+
     &-close {
         display: inline-flex;
         cursor: pointer;
@@ -225,6 +218,7 @@ onBeforeUnmount(() => {
         top: 50%;
         right: 12px;
         transform: translate3d(0, -50%, 0);
+
         &:hover {
             color: var(--ivy-color-primary, #409eff);
         }
@@ -233,12 +227,14 @@ onBeforeUnmount(() => {
 
 :host([disabled]) {
     cursor: not-allowed;
+
     & .input-inner {
         background-color: #f5f7fa;
         border-color: #e4e7ed;
         color: #c0c4cc;
         cursor: not-allowed;
     }
+
     & .input-close {
         cursor: not-allowed;
         color: #a8abb2;
@@ -268,11 +264,13 @@ onBeforeUnmount(() => {
     max-height: 258px;
     overflow: hidden;
     font-size: 14px;
+
     &-list {
         flex: 0 1 80px;
         max-width: 140px;
         padding: 0 12px;
     }
+
     .item {
         display: block;
         height: 28px;
@@ -280,12 +278,15 @@ onBeforeUnmount(() => {
         text-align: center;
         border-radius: 2px;
         cursor: pointer;
+
         &:hover {
             background-color: #f5f5f5;
         }
+
         &-checked {
             background-color: var(--ivy-color-primary, #409eff);
             color: #fff;
+
             &:hover {
                 background-color: var(--ivy-color-primary, #409eff);
             }
@@ -294,6 +295,7 @@ onBeforeUnmount(() => {
 }
 
 .dropdown {
+
     &-enter-active,
     &-leave-active {
         transform-origin: top center;
