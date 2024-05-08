@@ -7,8 +7,6 @@ defineOptions({
     inheritAttrs: false
 })
 
-
-
 interface Props {
     content: string
     placement: string
@@ -25,8 +23,6 @@ const props = withDefaults(defineProps<Props>(), {
     trigger: 'hover'
 })
 
-
-
 const placement = toRef(props, 'placement')
 
 const { createPopper, visible, referenceEl, floatEl, floatArrow } = usePopper({
@@ -38,18 +34,16 @@ const { floatingStyles, middlewareData, finalPlacement } = createPopper()
 let timer: any = null
 
 const dispatchEvent = () => {
-
-
     if (timer !== null) {
         clearTimeout(timer)
         timer = null
     }
     timer = setTimeout(() => {
         visible.value = true
+        console.log('visible', visible.value)
     }, props.delay || 10)
 }
 const handleOpen = () => {
-
     if (props.trigger !== 'hover') return
     dispatchEvent()
 }
@@ -60,7 +54,13 @@ const handlerClick = () => {
 }
 
 const handlerContextmenu = () => {
-    if (props.trigger !== 'click') return
+    if (props.trigger !== 'contextmenu') return
+    dispatchEvent()
+}
+
+const handlerFocus = () => {
+    console.log('focus')
+    if (props.trigger !== 'focus') return
     dispatchEvent()
 }
 
@@ -72,25 +72,53 @@ const handleClose = () => {
     }
     visible.value = false
 }
+const handleBlur = () => {
+    if (props.trigger !== 'focus') return
+    if (timer !== null) {
+        clearTimeout(timer)
+        timer = null
+    }
+    visible.value = false
+}
 </script>
 
 <template>
-<div class="ivy-tooltip-ref" ref="referenceEl" @mouseenter="handleOpen" @mouseleave="handleClose" @click="handlerClick"
-    @contextmenu="handlerContextmenu">
-    <slot name="reference"></slot>
-</div>
-<transition name="ivy-fade">
-    <div class="content" ref="floatEl" v-if="visible" :data-placement="finalPlacement" :theme="props.theme"
-        :style="floatingStyles">
-        <div class="arrow" ref="floatArrow" :data-placement="finalPlacement" :style="{
-            left: middlewareData.arrow?.x != null ? `${middlewareData.arrow.x}px` : '',
-            top: middlewareData.arrow?.y != null ? `${middlewareData.arrow.y}px` : ''
-        }"></div>
-        <div class="text">
-            <slot name="content">{{ content }}</slot>
-        </div>
+    <div
+        tabindex="0"
+        class="ivy-tooltip-ref"
+        ref="referenceEl"
+        @mouseenter="handleOpen"
+        @mouseleave="handleClose"
+        @click="handlerClick"
+        @contextmenu.prevent="handlerContextmenu"
+        @focus="handlerFocus"
+        @blur="handleBlur"
+    >
+        <slot name="reference"></slot>
     </div>
-</transition>
+    <transition name="ivy-fade">
+        <div
+            class="content"
+            ref="floatEl"
+            v-if="visible"
+            :data-placement="finalPlacement"
+            :theme="props.theme"
+            :style="floatingStyles"
+        >
+            <div
+                class="arrow"
+                ref="floatArrow"
+                :data-placement="finalPlacement"
+                :style="{
+                    left: middlewareData.arrow?.x != null ? `${middlewareData.arrow.x}px` : '',
+                    top: middlewareData.arrow?.y != null ? `${middlewareData.arrow.y}px` : ''
+                }"
+            ></div>
+            <div class="text">
+                <slot name="content">{{ content }}</slot>
+            </div>
+        </div>
+    </transition>
 </template>
 
 <style lang="scss">
