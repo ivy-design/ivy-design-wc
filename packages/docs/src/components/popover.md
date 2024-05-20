@@ -14,39 +14,29 @@ Popover 是在 IvyTooltip 基础上开发出来的。 因此对于重复属性�
     trigger="hover"
     content="this is content, this is content, this is content"
   >
-    <ivy-button class="m-2" slot="reference">Hover to activate</ivy-button>
+    <ivy-button class="m-2" slot="reference">Hover 触发</ivy-button>
   </ivy-popover>
 
 <ivy-popover
+class="margin-left"
 placement="bottom"
 title="Title"
 :width="200"
 trigger="click"
-content="this is content, this is content, this is content"
->
-    <ivy-button slot="reference" class="m-2">Click to activate</ivy-button>
+content="this is content, this is content, this is content">
+<ivy-button slot="reference" class="m-2">Click 触发</ivy-button>
 </ivy-popover>
 
 <ivy-popover
-ref="popover"
-placement="right"
-title="Title"
-:width="200"
-trigger="focus"
-content="this is content, this is content, this is content"
->
-    <ivy-button slot="reference" class="m-2">Focus to activate</ivy-button>
-  </ivy-popover>
-
-<ivy-popover
+class="margin-left"
 ref="popover"
 title="Title"
 :width="200"
 trigger="contextmenu"
-content="this is content, this is content, this is content"
->
-    <ivy-button slot="reference" class="m-2">contextmenu to activate</ivy-button>
-  </ivy-popover>
+content="this is content, this is content, this is content">
+<ivy-button slot="reference" class="m-2">contextmenu 触发</ivy-button>
+</ivy-popover>
+
 </div>
 
 ## 可用的 css 变量
@@ -62,25 +52,36 @@ content="this is content, this is content, this is content"
     --ivy-tooltip-arrow-color: #fff;
     --ivy-tooltip-arrow-size: 8px;
     --ivy-tooltip-arrow-border-color: var(--ivy-border-color);
+    --ivy-popover-min-width: 160px;
 }
 ```
 
+## Api
+
 :::
 
-## Props
+### Props
 
 | 参数      | 说明             | 类型   | 可选值               | 默认值  |
 | --------- | ---------------- | ------ | -------------------- | ------- |
-| content   | tooltip 显示内容 | String | -                    | -       |
+| title     | 标题             | String | -                    | -       |
+| content   | popover 显示内容 | String | -                    | -       |
 | placement | 位置             | String | [`enum`](#placement) | `top`   |
 | theme     | 主题             | String | `light\dark`         | `light` |
 
-## Slots
+### Slots
 
-| name    | 说明             |
-| ------- | ---------------- |
-| content | tooltip 内容     |
-| default | 用于触发 tooltip |
+| name      | 说明             |
+| --------- | ---------------- |
+| default   | popover 内容     |
+| reference | 用于触发 popover |
+
+### Parts
+
+| name    | 说明                |
+| ------- | ------------------- |
+| title   | 设置 title 的样式   |
+| content | 设置 content 的样式 |
 
 <script setup>
 const placement = 'top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end'
