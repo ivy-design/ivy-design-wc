@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import usePopper from '@/hooks/usePopper'
-import { toRef } from 'vue'
+import { toRef, onMounted } from 'vue'
+import { useEventListener } from '@vueuse/core'
+import { useHost } from '@/hooks/useHostElement'
+
+const { getHostElement } = useHost()
 
 defineOptions({
     name: 'Popover',
@@ -8,14 +12,16 @@ defineOptions({
 })
 
 interface Props {
+    title: string
     content: string
     placement: string
     theme: string
     delay: number
-    trigger: string
+    trigger: 'hover' | 'click' | 'contextmenu'
 }
 
 const props = withDefaults(defineProps<Props>(), {
+    title: '',
     content: '',
     placement: 'top',
     theme: 'light',
@@ -58,12 +64,6 @@ const handlerContextmenu = () => {
     dispatchEvent()
 }
 
-const handlerFocus = () => {
-    console.log('focus')
-    if (props.trigger !== 'focus') return
-    dispatchEvent()
-}
-
 const handleClose = () => {
     if (props.trigger !== 'hover') return
     if (timer !== null) {
@@ -72,14 +72,32 @@ const handleClose = () => {
     }
     visible.value = false
 }
-const handleBlur = () => {
-    if (props.trigger !== 'focus') return
+const handleOtherClose = (e: Event) => {
+    const target = e.target as HTMLElement
+    const hostElement = getHostElement()
+
+    const isContains = hostElement.contains(target)
+    if (!isContains) {
+        if (timer !== null) {
+            clearTimeout(timer)
+            timer = null
+        }
+        visible.value = false
+    }
+}
+const handlerScroll = () => {
     if (timer !== null) {
         clearTimeout(timer)
         timer = null
     }
     visible.value = false
 }
+onMounted(() => {
+    if (props.trigger === 'click' || props.trigger === 'contextmenu') {
+        useEventListener(window, 'click', handleOtherClose)
+        useEventListener(window, 'scroll', handlerScroll)
+    }
+})
 </script>
 
 <template>
@@ -91,8 +109,6 @@ const handleBlur = () => {
         @mouseleave="handleClose"
         @click="handlerClick"
         @contextmenu.prevent="handlerContextmenu"
-        @focus="handlerFocus"
-        @blur="handleBlur"
     >
         <slot name="reference"></slot>
     </div>
@@ -114,8 +130,9 @@ const handleBlur = () => {
                     top: middlewareData.arrow?.y != null ? `${middlewareData.arrow.y}px` : ''
                 }"
             ></div>
-            <div class="text">
-                <slot name="content">{{ content }}</slot>
+            <div class="title" part="title" v-if="props.title">{{ props.title }}</div>
+            <div class="text" part="content">
+                <slot>{{ content }}</slot>
             </div>
         </div>
     </transition>
@@ -130,6 +147,7 @@ const handleBlur = () => {
     --ivy-tooltip-arrow-color: #fff;
     --ivy-tooltip-arrow-size: 8px;
     --ivy-tooltip-arrow-border-color: var(--ivy-border-color);
+    --ivy-popover-min-width: 160px;
     display: inline-flex;
     position: relative;
 }
@@ -148,6 +166,12 @@ const handleBlur = () => {
 .content {
     position: absolute;
     z-index: var(--ivy-tooltip-z-index);
+    border: 1px solid var(--ivy-tooltip-arrow-border-color);
+    border-radius: var(--ivy-border-radius);
+    background-color: var(--ivy-tooltip-background-color);
+    font-size: var(--ivy-tooltip-font-size);
+    color: var(--ivy-tooltip-color);
+    min-width: var(--ivy-popover-min-width);
 }
 
 .arrow {
@@ -185,16 +209,15 @@ const handleBlur = () => {
         right: calc(0px - var(--ivy-tooltip-arrow-size) / 2);
     }
 }
-
+.title {
+    padding: 2px 12px;
+    border-bottom: 1px solid var(--ivy-border-color);
+    color: var(--ivy-text-color-primary);
+    font-weight: 500;
+}
 .text {
     padding: 4px 12px;
-    word-break: keep-all;
-    white-space: nowrap;
-    border: 1px solid var(--ivy-tooltip-arrow-border-color);
-    border-radius: var(--ivy-border-radius);
-    background-color: var(--ivy-tooltip-background-color);
-    font-size: var(--ivy-tooltip-font-size);
-    color: var(--ivy-tooltip-color);
+    line-height: 1.5em;
 }
 
 .ivy-fade-enter-active,
