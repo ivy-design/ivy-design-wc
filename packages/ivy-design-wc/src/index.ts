@@ -80,6 +80,7 @@ import {
     CommandSearch
 } from './components/command/index'
 import { Popover } from './components/popover'
+import { ColorPicker } from './components/color-picker/index'
 
 const comp: Record<string, CustomElementConstructor> = {
     Button,
@@ -158,7 +159,8 @@ const comp: Record<string, CustomElementConstructor> = {
     CommandSeparator,
     CommandList,
     CommandSearch,
-    Popover
+    Popover,
+    ColorPicker
 }
 
 const registerComponents = async (prefix = 'Ivy') => {
@@ -275,5 +277,6 @@ declare module 'vue' {
         CommandList: typeof comp.CommandList
         CommandSearch: typeof comp.CommandSearch
         Popover: typeof comp.Popover
+        ColorPicker: typeof comp.ColorPicker
     }
 }
