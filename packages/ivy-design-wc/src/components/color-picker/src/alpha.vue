@@ -8,6 +8,7 @@ defineOptions({
 export interface HueProps {
     modelValue: number
     width: number
+    barColor: string
 }
 
 const props = defineProps<HueProps>()
@@ -72,27 +73,37 @@ watchEffect(() => {
 
 <template>
     <div
+        style="
+            background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+                linear-gradient(135deg, #ccc 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #ccc 75%),
+                linear-gradient(135deg, transparent 75%, #ccc 75%);
+            height: 12px;
+            position: relative;
+            background-size: 12px 12px;
+            background-position:
+                0 0,
+                6px 0,
+                6px -6px,
+                0 6px;
+        "
         @mousedown="handlerMouseDown"
         @mousemove="handlerMouseMove"
         @mouseup="handleMouseUp"
         @mouseleave="handleMouseLeave"
-        :style="{
-            width: `${props.width}px`,
-            height: '8px',
-            position: 'relative',
-            background: 'linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)'
-        }"
+        :style="{ width: `${props.width}px` }"
     >
+        <div :style="{ background: props.barColor, height: '100%' }"></div>
         <div
             :style="{
                 position: 'absolute',
                 left: `${x}px`,
                 top: 0,
                 cursor: 'pointer',
-                width: '3px',
+                width: '4px',
                 height: '100%',
+                borderRadius: '1px',
                 backgroundColor: 'white',
-                backgroundImage: `linear-gradient(45deg,#ccc 25%,transparent 25%),linear-gradient(135deg,#ccc 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ccc 75%),linear-gradient(135deg,transparent 75%,#ccc 75%)`,
                 boxSizing: 'border-box',
                 boxShadow: `0 0 2px rgba(0, 0, 0, 0.5)`,
                 pointerEvents: 'none'

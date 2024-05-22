@@ -78,7 +78,7 @@ watchEffect(() => {
         @mouseleave="handleMouseLeave"
         :style="{
             width: `${props.width}px`,
-            height: '8px',
+            height: '12px',
             position: 'relative',
             background: 'linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)'
         }"
@@ -89,11 +89,12 @@ watchEffect(() => {
                 left: `${x}px`,
                 top: 0,
                 cursor: 'pointer',
-                width: '3px',
+                width: '4px',
+                borderRadius: '1px',
                 height: '100%',
                 backgroundColor: 'white',
                 boxSizing: 'border-box',
-                boxShadow: `0 0 2px rgba(0, 0, 0, 0.5)`,
+                boxShadow: `0 0 2px #0009`,
                 pointerEvents: 'none'
             }"
         ></div>

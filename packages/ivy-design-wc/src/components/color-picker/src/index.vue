@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import usePopper from '@/hooks/usePopper'
-import { toRef, onMounted, ref, reactive, watch, computed } from 'vue'
-import { useEventListener, useThrottleFn } from '@vueuse/core'
+import { toRef, onMounted, reactive, watch, computed } from 'vue'
+import { useEventListener } from '@vueuse/core'
 import { useHost } from '@/hooks/useHostElement'
-import { color2HslMap, calcLightness, calcSaturation, type HslMap } from './utils'
+import { color2HslMap, type HslMap } from './utils'
 
 import Hue from './hue.vue'
 import Alpha from './alpha.vue'
+import ColorPane from './color-pane.vue'
 
 const { getHostElement } = useHost()
 
@@ -41,7 +42,8 @@ const { floatingStyles, middlewareData, finalPlacement } = createPopper()
 
 let timer: any = null
 
-const dispatchEvent = () => {
+const internalState = reactive<HslMap>({ h: 0, s: 0, l: 0, a: 1 })
+const handleOpen = () => {
     if (timer !== null) {
         clearTimeout(timer)
         timer = null
@@ -50,18 +52,6 @@ const dispatchEvent = () => {
         visible.value = true
         console.log('visible', visible.value)
     }, props.delay || 10)
-}
-let curColor = computed(() => {
-    return `hsl(${internalState.h}deg, 100%, 50%)`
-})
-const internalState = reactive<HslMap>({
-    h: 0,
-    s: 0,
-    l: 0,
-    a: 1
-})
-const handleOpen = () => {
-    dispatchEvent()
 }
 
 const handleOtherClose = (e: Event) => {
@@ -95,7 +85,6 @@ const init = () => {
     internalState.s = tmp?.s
     internalState.l = tmp?.l
     internalState.a = tmp?.a
-    console.log('curColor', curColor.value)
 }
 onMounted(() => {
     init()
@@ -103,68 +92,14 @@ onMounted(() => {
     useEventListener(window, 'scroll', handlerScroll)
 })
 
-const point = reactive({
-    x: 0,
-    y: 0
-})
-const updatePoint = (x: number, y: number) => {
-    let t = { x: x, y: y }
-    if (x < 0) {
-        t.x = 0
-    } else if (x > 260) {
-        t.x = 260
-    }
-
-    if (y < 0) {
-        t.y = 0
-    } else if (y > 140) {
-        t.y = 140
-    }
-
-    return t
-}
-let isPress = false
-const handleChooseDown = (ev: MouseEvent) => {
-    isPress = true
-    const { offsetX: x, offsetY: y } = ev
-    point.x = x
-    point.y = y
+const handleColorPaneChange = (val: Record<string, number>) => {
+    internalState.s = val.s
+    internalState.l = val.l
 }
 
-const handleChooseLeave = (ev: MouseEvent) => {
-    if (!isPress) return
-    isPress = false
-    const { offsetX, offsetY } = ev
-    const { x, y } = updatePoint(offsetX, offsetY)
-    point.x = x
-    point.y = y
-}
-
-const handleChooseUp = (ev: MouseEvent) => {
-    isPress = false
-    const { offsetX, offsetY } = ev
-    const { x, y } = updatePoint(offsetX, offsetY)
-    point.x = x
-    point.y = y
-}
-
-const handleChooseMove = useThrottleFn((ev: MouseEvent) => {
-    if (!isPress) return
-    const { offsetX: x, offsetY: y } = ev
-    point.x = x
-    point.y = y
-}, 10)
-
-watch(point, (val, oldVal) => {
-    const saturation = calcSaturation(val.x)
-    const lightness = calcLightness(val.y)
-    internalState.s = saturation
-    internalState.l = lightness
-    console.log(val, oldVal, internalState)
-})
 const emit = defineEmits<{ change: [val: string] }>()
 watch(internalState, (val) => {
-    emit('change', `hsla(${val.h}deg, ${val.s}%, ${val.l}%, ${val.a})`)
+    emit('change', `hsla(${val.h}deg, ${val.s}%, ${val.l}%, ${val.a / 100})`)
 })
 
 const alphaComponentBackground = computed(() => {
@@ -195,19 +130,8 @@ const alphaComponentBackground = computed(() => {
                 }"
             ></div>
             <div class="pane">
-                <div
-                    :style="{ backgroundColor: curColor }"
-                    class="pane-choose"
-                    @mousedown="handleChooseDown"
-                    @mousemove="handleChooseMove"
-                    @mouseup="handleChooseUp"
-                    @mouseleave="handleChooseLeave"
-                >
-                    <span
-                        class="pane-choose-utils"
-                        :style="{ left: `${point.x - 4}px`, top: `${point.y - 4}px` }"
-                    ></span>
-                </div>
+                <ColorPane :hue="internalState.h" @change="handleColorPaneChange" />
+
                 <div style="margin-top: 12px">
                     <div></div>
                     <div></div>
@@ -217,9 +141,7 @@ const alphaComponentBackground = computed(() => {
                             :width="200"
                             v-model="internalState.a"
                             class="alpha"
-                            :style="{
-                                background: alphaComponentBackground
-                            }"
+                            :bar-color="alphaComponentBackground"
                         />
                     </div>
                 </div>
@@ -314,27 +236,6 @@ const alphaComponentBackground = computed(() => {
 .ivy-fade-enter-to,
 .ivy-fade-leave-from {
     opacity: 1;
-}
-
-// color picker
-.pane {
-    width: 260px;
-    &-choose {
-        height: 140px;
-        background-image: linear-gradient(0deg, rgb(0, 0, 0), transparent),
-            linear-gradient(90deg, rgb(255, 255, 255), rgba(255, 255, 255, 0));
-        position: relative;
-        &-utils {
-            display: block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            box-sizing: border-box;
-            border: 1px solid white;
-            position: absolute;
-            pointer-events: none;
-        }
-    }
 }
 
 .alpha {
