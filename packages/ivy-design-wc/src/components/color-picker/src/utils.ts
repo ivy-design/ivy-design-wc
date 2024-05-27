@@ -101,7 +101,7 @@ export const hex2hsl = (hex: string): HslMap => {
         b = parseInt('0x' + hex[5] + hex[6], 16)
     }
 
-    return rgb2hsl(r, g, b, 1)
+    return rgb2hsl(r, g, b, 100)
 }
 
 const hsl2hslMap = (hsl: string): HslMap => {

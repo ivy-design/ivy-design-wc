@@ -5,13 +5,13 @@ defineOptions({
     name: 'Alpha'
 })
 
-export interface HueProps {
+export interface AlphaProps {
     modelValue: number
     width: number
     barColor: string
 }
 
-const props = defineProps<HueProps>()
+const props = defineProps<AlphaProps>()
 
 const emit = defineEmits<{ 'update:modelValue': [val: number] }>()
 
@@ -25,7 +25,8 @@ const value = computed({
 })
 
 const value2x = () => {
-    return Math.round((value.value / 100) * props.width)
+    console.log('alpha', Math.round((props.modelValue / 100) * props.width), props.modelValue)
+    return Math.round((props.modelValue / 100) * props.width)
 }
 
 const x = ref(value2x())

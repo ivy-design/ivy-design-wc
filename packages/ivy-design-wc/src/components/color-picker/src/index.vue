@@ -42,7 +42,7 @@ const { floatingStyles, middlewareData, finalPlacement } = createPopper()
 
 let timer: any = null
 
-const internalState = reactive<HslMap>({ h: 0, s: 0, l: 0, a: 100 })
+const internalState = reactive<HslMap>({ h: 0, s: 100, l: 50, a: 100 })
 const handleOpen = () => {
     if (timer !== null) {
         clearTimeout(timer)
@@ -84,7 +84,7 @@ const init = () => {
     internalState.h = tmp?.h
     internalState.s = tmp?.s
     internalState.l = tmp?.l
-    internalState.a = tmp?.a
+    internalState.a = tmp?.a || 100
 }
 onMounted(() => {
     init()
@@ -99,7 +99,6 @@ const handleColorPaneChange = (val: Record<string, number>) => {
 const curColor = computed(() => {
     if (!props.value) return null
     const rgba = hsl2rgb(internalState.h, internalState.s, internalState.l, internalState.a / 100)
-    console.log(rgba)
     return rgba
 })
 const emit = defineEmits<{ change: [val: string] }>()
@@ -144,7 +143,12 @@ const alphaComponentBackground = computed(() => {
                 }"
             ></div>
             <div class="pane">
-                <ColorPane :hue="internalState.h" @change="handleColorPaneChange" />
+                <ColorPane
+                    :hue="internalState.h"
+                    :s="internalState.s"
+                    :l="internalState.l"
+                    @change="handleColorPaneChange"
+                />
 
                 <div style="margin-top: 12px">
                     <Hue :width="260" v-model="internalState.h" />

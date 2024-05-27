@@ -5,16 +5,26 @@ import { calcLightness, calcSaturation } from './utils'
 
 const props = defineProps<{
     hue: number
+    s: number
+    l: number
     width?: number
 }>()
 
 const curColor = computed(() => {
-    return `hsl(${props.hue}deg, 100%, 50%)`
+    return `hsl(${props.hue}deg, ${props.s}%, ${props.l}%)`
 })
 
+const s2x = (s: number) => {
+    return (s / 100) * 140
+}
+
+const l2y = (l: number) => {
+    return -((l / 100) * 250 - 100)
+}
+
 const point = reactive({
-    x: 0,
-    y: 0
+    x: s2x(props.s),
+    y: l2y(props.l)
 })
 const updatePoint = (x: number, y: number) => {
     let t = { x: x, y: y }
