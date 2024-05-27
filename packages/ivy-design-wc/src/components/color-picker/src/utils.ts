@@ -6,46 +6,37 @@
 // 5. hsl2hex
 // 6. hex2hsl
 
-export const hsl2rgb = (h: number, s: number, l: number) => {
-    const c = (1 - Math.abs(2 * l - 1)) * s
-    const x = c * (1 - Math.abs(((h / 60) % 2) - 1))
-    const m = l - c / 2
+export const hsl2rgb = (h: number, s: number, l: number, a: number = 1): string => {
+    // 规范化色相范围到0-360度
+    h = h % 360
+    if (h < 0) h += 360
 
-    let r = 0,
-        g = 0,
-        b = 0
+    // 规范化饱和度和亮度范围到0-100%
+    s = Math.min(100, Math.max(0, s)) / 100
+    l = Math.min(100, Math.max(0, l)) / 100
 
-    if (0 <= h && h < 60) {
-        r = c
-        g = x
-        b = 0
-    } else if (60 <= h && h < 120) {
-        r = x
-        g = c
-        b = 0
-    } else if (120 <= h && h < 180) {
-        r = 0
-        g = c
-        b = x
-    } else if (180 <= h && h < 240) {
-        r = 0
-        g = x
-        b = c
-    } else if (240 <= h && h < 300) {
-        r = x
-        g = 0
-        b = c
-    } else if (300 <= h && h < 360) {
-        r = c
-        g = 0
-        b = x
+    let r: number, g: number, b: number
+
+    if (s === 0) {
+        r = g = b = l // achromatic
+    } else {
+        const hueToRgb = (p: number, q: number, t: number) => {
+            if (t < 0) t += 1
+            if (t > 1) t -= 1
+            if (t < 1 / 6) return p + (q - p) * 6 * t
+            if (t < 1 / 2) return q
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
+            return p
+        }
+
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s
+        const p = 2 * l - q
+        r = hueToRgb(p, q, h / 360 + 1 / 3)
+        g = hueToRgb(p, q, h / 360)
+        b = hueToRgb(p, q, h / 360 - 1 / 3)
     }
 
-    return {
-        r: Math.round((r + m) * 255),
-        g: Math.round((g + m) * 255),
-        b: Math.round((b + m) * 255)
-    }
+    return `rgba(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)}, ${a})`
 }
 
 export const hsl2hex = (h: number, s: number, l: number): string => {

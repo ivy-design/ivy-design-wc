@@ -3,7 +3,7 @@ import usePopper from '@/hooks/usePopper'
 import { toRef, onMounted, reactive, watch, computed } from 'vue'
 import { useEventListener } from '@vueuse/core'
 import { useHost } from '@/hooks/useHostElement'
-import { color2HslMap, type HslMap } from './utils'
+import { color2HslMap, type HslMap, hsl2rgb } from './utils'
 
 import Hue from './hue.vue'
 import Alpha from './alpha.vue'
@@ -42,7 +42,7 @@ const { floatingStyles, middlewareData, finalPlacement } = createPopper()
 
 let timer: any = null
 
-const internalState = reactive<HslMap>({ h: 0, s: 0, l: 0, a: 1 })
+const internalState = reactive<HslMap>({ h: 0, s: 0, l: 0, a: 100 })
 const handleOpen = () => {
     if (timer !== null) {
         clearTimeout(timer)
@@ -96,7 +96,12 @@ const handleColorPaneChange = (val: Record<string, number>) => {
     internalState.s = val.s
     internalState.l = val.l
 }
-
+const curColor = computed(() => {
+    if (!props.value) return null
+    const rgba = hsl2rgb(internalState.h, internalState.s, internalState.l, internalState.a / 100)
+    console.log(rgba)
+    return rgba
+})
 const emit = defineEmits<{ change: [val: string] }>()
 watch(internalState, (val) => {
     emit('change', `hsla(${val.h}deg, ${val.s}%, ${val.l}%, ${val.a / 100})`)
@@ -110,7 +115,16 @@ const alphaComponentBackground = computed(() => {
 </script>
 
 <template>
-    <div tabindex="0" class="ivy-tooltip-ref" ref="referenceEl" @click="handleOpen">Color</div>
+    <div tabindex="0" class="ivy-tooltip-ref" ref="referenceEl" @click="handleOpen">
+        <span
+            :style="{
+                display: 'block',
+                width: '100%',
+                height: '100%',
+                backgroundColor: curColor as string
+            }"
+        ></span>
+    </div>
     <transition name="ivy-fade">
         <div
             class="content"
@@ -155,7 +169,7 @@ const alphaComponentBackground = computed(() => {
     --ivy-tooltip-arrow-color: #fff;
     --ivy-tooltip-arrow-size: 8px;
     --ivy-tooltip-arrow-border-color: var(--ivy-border-color);
-    --ivy-popover-min-width: 160px;
+    --ivy-size-default: 32px;
     display: inline-flex;
     position: relative;
 }
@@ -168,8 +182,13 @@ const alphaComponentBackground = computed(() => {
 }
 
 .ivy-tooltip-ref {
-    display: inline-flex;
+    box-sizing: border-box;
     cursor: default;
+    width: var(--ivy-size-default);
+    height: var(--ivy-size-default);
+    padding: 5px;
+    border: 1px solid var(--ivy-border-color);
+    border-radius: var(--ivy-border-radius);
 }
 
 .content {
