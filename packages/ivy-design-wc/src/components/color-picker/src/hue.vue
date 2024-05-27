@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 
 defineOptions({
     name: 'Hue'
@@ -23,7 +23,11 @@ const value = computed({
     }
 })
 
-const x = ref(0)
+const value2x = () => {
+    return Math.round((value.value / 360) * props.width)
+}
+
+const x = ref(value2x())
 const updateX = (x: number) => {
     if (x < 0) {
         return 0
@@ -65,8 +69,8 @@ const handleMouseLeave = (e: MouseEvent) => {
     value.value = calcHue(x.value)
 }
 
-watchEffect(() => {
-    console.log(value.value, x.value)
+onMounted(() => {
+    console.log(1, value.value, x.value)
 })
 </script>
 

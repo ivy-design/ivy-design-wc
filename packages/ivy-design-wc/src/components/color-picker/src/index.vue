@@ -133,17 +133,13 @@ const alphaComponentBackground = computed(() => {
                 <ColorPane :hue="internalState.h" @change="handleColorPaneChange" />
 
                 <div style="margin-top: 12px">
-                    <div></div>
-                    <div></div>
-                    <div>
-                        <Hue :width="200" v-model="internalState.h" />
-                        <Alpha
-                            :width="200"
-                            v-model="internalState.a"
-                            class="alpha"
-                            :bar-color="alphaComponentBackground"
-                        />
-                    </div>
+                    <Hue :width="260" v-model="internalState.h" />
+                    <Alpha
+                        :width="260"
+                        v-model="internalState.a"
+                        class="alpha"
+                        :bar-color="alphaComponentBackground"
+                    />
                 </div>
             </div>
         </div>

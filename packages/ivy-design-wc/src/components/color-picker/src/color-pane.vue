@@ -78,7 +78,8 @@ watch(point, (val) => {
             height: '140px',
             backgroundImage:
                 'linear-gradient(0deg, rgb(0, 0, 0), transparent), linear-gradient(90deg, rgb(255, 255, 255), rgba(255, 255, 255, 0))',
-            position: 'relative'
+            position: 'relative',
+            width: '260px'
         }"
         class="pane-choose"
         @mousedown="handleChooseDown"

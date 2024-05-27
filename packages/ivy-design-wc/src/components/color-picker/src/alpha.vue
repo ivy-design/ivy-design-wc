@@ -24,7 +24,11 @@ const value = computed({
     }
 })
 
-const x = ref(0)
+const value2x = () => {
+    return Math.round((value.value / 100) * props.width)
+}
+
+const x = ref(value2x())
 const updateX = (x: number) => {
     if (x < 0) {
         return 0
