@@ -18,7 +18,6 @@ defineOptions({
 
 interface Props {
     value: string
-    content: string
     placement: string
     theme: string
     delay: number
@@ -26,7 +25,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    content: '',
     placement: 'bottom',
     theme: 'light',
     delay: 10
@@ -120,9 +118,20 @@ const alphaComponentBackground = computed(() => {
                 display: 'block',
                 width: '100%',
                 height: '100%',
-                backgroundColor: curColor as string
+                backgroundImage: `linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(135deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(135deg, transparent 75%, #ccc 75%)`,
+                backgroundSize: `12px 12px`,
+                backgroundPosition: `0 0, 6px 0, 6px -6px, 0 6px`
             }"
-        ></span>
+        >
+            <span
+                :style="{
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: curColor as string
+                }"
+            ></span>
+        </span>
     </div>
     <transition name="ivy-fade">
         <div
