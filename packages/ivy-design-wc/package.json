@@ -1,6 +1,6 @@
 {
     "name": "@ivy-design/ce",
-    "version": "1.7.1",
+    "version": "1.7.2",
     "private": false,
     "type": "module",
     "main": "dist/ivy-design.js",
@@ -39,7 +39,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/ivy-design/ivy-design-wc.git"
+        "url": "git+https://github.com/ivy-design/ivy-design-wc.git"
     },
     "license": "MIT",
     "scripts": {
