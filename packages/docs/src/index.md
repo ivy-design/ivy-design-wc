@@ -3,9 +3,12 @@
 layout: home
 
 hero:
-  name: "ivy-design"
-  text: Web Component
-  tagline: "由 Vite 和 Vue 驱动的面向未来的原生组件库"
+  name: "Ivy Design"
+  tagline: Web Component
+  text: "由 Vite 和 Vue 驱动的面向未来的原生组件库"
+  image:
+    src: /images/logo.png
+    alt: ivyDesign
   actions:
     - theme: brand
       text: 快速开始

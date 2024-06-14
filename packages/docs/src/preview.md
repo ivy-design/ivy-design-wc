@@ -1,3 +1,8 @@
+---
+sidebar: false
+layout: home
+---
+
 # 组件预览
 
 ## Icon 图标
@@ -140,3 +145,9 @@
 <ivy-tip type="success" class="margin-top">成功消息提示的文案</ivy-tip>
 <ivy-tip type="warning" class="margin-top">警告消息提示的文案</ivy-tip>
 <ivy-tip type="danger" class="margin-top">错误消息提示的文案</ivy-tip>
+
+## Circle
+
+<ivy-circle value="60">60%</ivy-circle>
+<ivy-circle value="100" status="success"><ivy-icon name="check" color="var(--ivy-color-success)" size="30px"></ivy-icon></ivy-circle>
+<ivy-circle value="60" status="danger"><ivy-icon name="close" color="var(--ivy-color-danger)" size="30px"></ivy-icon></ivy-circle>

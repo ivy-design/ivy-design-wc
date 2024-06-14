@@ -4,13 +4,23 @@
 
 ## 基础用法
 
-<ivy-pagination total="700" prev-text="上一页" next-text="下一页"></ivy-pagination>
+<ivy-pagination total="700"></ivy-pagination>
 
 ## 设置最大页码按钮数
 
 默认情况下，当总页数超过 7 页时，Pagination 会折叠多余的页码按钮。 通过 `pager-count` 属性可以设置最大页码按钮数。
 
-<ivy-pagination total="700" pager-count="9" prev-text="上一页" next-text="下一页"></ivy-pagination>
+<ivy-pagination total="700" pager-count="9"></ivy-pagination>
+
+## 自定义上一页和下一页的文案
+
+<ivy-pagination total="700" prev-text="上一页" next-text="下一页"></ivy-pagination>
+
+## 带有背景色的分页
+
+设置 `background` 属性可以为分页按钮添加背景色。
+
+<ivy-pagination total="700" pager-count="9" background></ivy-pagination>
 
 ## Props
 
@@ -20,8 +30,9 @@
 | size        | 每页显示条目个数                         | `boolean` | -      | 10     |
 | total       | 总条目数                                 | `boolean` | -      | 0      |
 | pager-count | 最大页码按钮数。当总页数超过该值时会折叠 | `string`  | -      | 7      |
-| prev-text   | 显示的上一页文字                         | `string`  | -      | Prev   |
-| next-text   | 显示的下一页文字                         | `string`  | -      | Next   |
+| prev-text   | 显示的上一页文字                         | `string`  | -      | -      |
+| next-text   | 显示的下一页文字                         | `string`  | -      | -      |
+| background  | 显示页码的背景                           | `boolean` | -      | -      |
 
 ## Events
 

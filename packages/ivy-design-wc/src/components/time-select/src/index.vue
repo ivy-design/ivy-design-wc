@@ -10,7 +10,9 @@ defineOptions({
     inheritAttrs: false
 })
 
-const { triggerRef, targetRef, arrowRef } = usePopper()
+const { createPopper, visible, floatEl, referenceEl, floatArrow } = usePopper()
+
+const { floatingStyles } = createPopper()
 
 export interface Props {
     start: string
@@ -78,7 +80,6 @@ const dateList = computed(() => {
     return result
 })
 
-const visible = ref(false)
 const { host } = useHost()
 const handlerInputClick = () => {
     if (props.disabled) return
@@ -108,6 +109,8 @@ const emit = defineEmits<{
 const handlerClick = (e: MouseEvent) => {
     const target = e.target as any
     const val = target.dataset.value
+    const disabled = target.dataset.disabled
+    if (disabled === 'true') return
     if (!val) {
         visible.value = false
         return
@@ -148,8 +151,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <!-- <ivy-input ref="triggerRef" :placeholder="props.placeholder" readonly></ivy-input> -->
-    <div class="input-wrap" ref="triggerRef" @click="handlerInputClick">
+    <div class="input-wrap" ref="referenceEl" @click="handlerInputClick">
         <input
             :class="['input-inner', { 'input-inner-clearable': props.clearable }]"
             type="text"
@@ -162,8 +164,8 @@ onBeforeUnmount(() => {
         </div>
     </div>
     <transition name="dropdown">
-        <div class="select-option-wrap" ref="targetRef" v-show="visible">
-            <div class="select-arrow" ref="arrowRef"></div>
+        <div class="select-option-wrap" ref="floatEl" v-if="visible" :style="floatingStyles">
+            <div class="select-arrow" ref="floatArrow"></div>
             <ivy-scrollbar class="select-option-scroll" max-height="274px" @click="handlerClick">
                 <div
                     v-for="item in dateList"
@@ -258,21 +260,21 @@ onBeforeUnmount(() => {
     min-width: 240px;
     left: 0;
     top: calc(var(--ivy-time-select-height) + 2px);
-    border-radius: 2px;
     overflow: hidden;
     z-index: 10;
     padding: 6px 0;
-}
-
-.select-option-scroll {
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid var(--ivy-border-color, #dcdfe6);
     box-shadow: var(
         --ivy-box-shadow,
         0px 12px 32px 4px rgba(0, 0, 0, 0.04),
         0px 8px 20px rgba(0, 0, 0, 0.08)
     );
+    border: 1px solid var(--ivy-border-color, #dcdfe6);
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.select-option-scroll {
+    border-radius: 4px;
 }
 
 .select-arrow {

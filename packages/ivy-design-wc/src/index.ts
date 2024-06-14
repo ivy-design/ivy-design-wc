@@ -22,7 +22,7 @@ import { Result } from './components/result/index'
 import { Progress } from './components/progress/index'
 import { Drawer } from './components/drawer/index'
 import { Input } from './components/input/index'
-import { Tip } from './components/tip/index'
+import { Alert } from './components/alert/index'
 import { Select, Option } from './components/select/index'
 
 import { Loading } from './components/loading/index'
@@ -70,6 +70,17 @@ import { Split } from './components/split/index'
 import { Notification, notify } from './components/notification/index'
 import { Tour, createTour } from './components/tour/index'
 import { Textarea } from './components/textarea/index'
+import {
+    Command,
+    CommandDialog,
+    CommandGroup,
+    CommandItem,
+    CommandSeparator,
+    CommandList,
+    CommandSearch
+} from './components/command/index'
+import { Popover } from './components/popover'
+import { ColorPicker } from './components/color-picker/index'
 
 const comp: Record<string, CustomElementConstructor> = {
     Button,
@@ -94,7 +105,7 @@ const comp: Record<string, CustomElementConstructor> = {
     Progress,
     Drawer,
     Input,
-    Tip,
+    Alert,
     Select,
     Option,
     Loading,
@@ -140,7 +151,16 @@ const comp: Record<string, CustomElementConstructor> = {
     Split,
     Notification,
     Tour,
-    Textarea
+    Textarea,
+    Command,
+    CommandDialog,
+    CommandGroup,
+    CommandItem,
+    CommandSeparator,
+    CommandList,
+    CommandSearch,
+    Popover,
+    ColorPicker
 }
 
 const registerComponents = async (prefix = 'Ivy') => {
@@ -202,7 +222,7 @@ declare module 'vue' {
         Progress: typeof comp.Progress
         Drawer: typeof comp.Drawer
         Input: typeof comp.Input
-        Tip: typeof comp.Tip
+        Alert: typeof comp.Alert
         Select: typeof comp.Select
         Option: typeof comp.Option
         Loading: typeof comp.Loading
@@ -249,5 +269,14 @@ declare module 'vue' {
         Notification: typeof comp.Notification
         Tour: typeof comp.Tour
         Textarea: typeof comp.Textarea
+        Command: typeof comp.Command
+        CommandDialog: typeof comp.CommandDialog
+        CommandGroup: typeof comp.CommandGroup
+        CommandItem: typeof comp.CommandItem
+        CommandSeparator: typeof comp.CommandSeparator
+        CommandList: typeof comp.CommandList
+        CommandSearch: typeof comp.CommandSearch
+        Popover: typeof comp.Popover
+        ColorPicker: typeof comp.ColorPicker
     }
 }

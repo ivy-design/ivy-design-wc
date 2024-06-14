@@ -1,4 +1,5 @@
 import type { FunctionalComponent } from 'vue'
+import { DArrowLeft, DArrowRight, More, ArrowLeft, ArrowRight } from '@/utils/icons'
 
 interface Props {
     text?: string
@@ -17,18 +18,19 @@ export const Prev: FunctionalComponent<Props, Events> = (props, ctx) => {
             class={['ivy-pagination-prev', { 'is-disabled': props.disabled }]}
             onClick={handleClick}
         >
-            <slot name="prev">
-                <span>{props.text}</span>
-            </slot>
+            {props.text ? (
+                <slot name="prev">
+                    <span>{props.text}</span>
+                </slot>
+            ) : (
+                <ArrowLeft />
+            )}
         </div>
     )
 }
 Prev.emits = ['click']
 Prev.props = {
-    text: {
-        type: String,
-        default: 'Prev'
-    },
+    text: String,
     disabled: Boolean
 }
 
@@ -42,18 +44,19 @@ export const Next: FunctionalComponent<Props, Events> = (props, ctx) => {
             class={['ivy-pagination-next', { 'is-disabled': props.disabled }]}
             onClick={handleClick}
         >
-            <slot name="next">
-                <span>{props.text}</span>
-            </slot>
+            {props.text ? (
+                <slot name="next">
+                    <span>{props.text}</span>
+                </slot>
+            ) : (
+                <ArrowRight />
+            )}
         </div>
     )
 }
 Next.emits = ['click']
 Next.props = {
-    text: {
-        type: String,
-        default: 'Next'
-    },
+    text: String,
     disabled: Boolean
 }
 
@@ -70,25 +73,45 @@ export const Pager: FunctionalComponent<PagerProps, PagerEvents> = (props, ctx) 
         ctx.emit('click', page, status)
     }
     return (
-        <div class="ivy-pagination-wrap">
+        <ul class="ivy-pagination-wrap">
             {props.data.map((c) => {
-                return (
-                    <a
-                        class={[
-                            'ivy-pagination-item',
-                            {
-                                'is-active': c.value === props.current,
-                                'is-prev': c.status === 'prev',
-                                'is-next': c.status === 'next'
-                            }
-                        ]}
-                        onClick={() => handleClick(c.value, c.status)}
-                    >
-                        {c.status === 'page' ? c.value : '···'}
-                    </a>
-                )
+                if (c.status === 'prev') {
+                    return (
+                        <li
+                            class="ivy-pagination-item is-prev"
+                            onClick={() => handleClick(c.value, c.status)}
+                        >
+                            <More class="more" />
+                            <DArrowLeft class="arrow" />
+                        </li>
+                    )
+                } else if (c.status === 'next') {
+                    return (
+                        <li
+                            class="ivy-pagination-item is-next"
+                            onClick={() => handleClick(c.value, c.status)}
+                        >
+                            <More class="more" />
+                            <DArrowRight class="arrow" />
+                        </li>
+                    )
+                } else {
+                    return (
+                        <li
+                            class={[
+                                'ivy-pagination-item',
+                                {
+                                    'is-active': c.value === props.current
+                                }
+                            ]}
+                            onClick={() => handleClick(c.value, c.status)}
+                        >
+                            {c.value}
+                        </li>
+                    )
+                }
             })}
-        </div>
+        </ul>
     )
 }
 Pager.props = ['data', 'current']

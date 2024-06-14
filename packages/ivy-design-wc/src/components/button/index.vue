@@ -65,11 +65,10 @@ const props = defineProps({
     --ivy-button-disabled-border-color: var(--ivy-color-primary-light-5, #a0cfff);
 
     --ivy-button-height: var(--ivy-size-medium, 32px);
-    margin-right: 12px;
     position: relative;
 }
-:host(:last-child) {
-    margin-right: 0;
+:host + :host {
+    margin-left: 12px;
 }
 .ivy-button {
     display: flex;
