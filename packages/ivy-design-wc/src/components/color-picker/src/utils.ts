@@ -146,12 +146,12 @@ export const color2HslMap = (val: string): HslMap | null => {
     }
 }
 
-export const calcSaturation = (x: number, total = 140) => {
+export const calcSaturation = (x: number, total = 260) => {
     const tmp = (x / total) * 100
     return parseFloat(tmp.toFixed(2))
 }
 
-export const calcLightness = (y: number, total = 260) => {
+export const calcLightness = (y: number, total = 140) => {
     const tmp = ((100 - y) / total) * 100
     return parseFloat(tmp.toFixed(2))
 }
