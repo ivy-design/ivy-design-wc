@@ -1,3 +1,4 @@
+import tinycolor from 'tinycolor2'
 // q: hsl 颜色转换成 rgb 颜色
 // 1. hsl2rgb
 // 2. rgb2hsl
@@ -126,33 +127,22 @@ export const getColorType = (color: string) => {
     return ''
 }
 
-export const colorToHsl = (color: string) => {
-    if (!color) return ''
-    const type = getColorType(color)
-    if (type === 'hex') {
-        return hex2hsl(color)
-    } else if (type === 'rgb') {
-        const arr = color.match(/\d+/g)?.map(Number)
-
-        return arr ? rgb2hsl(...(arr as [number, number, number])) : null // Fix: Cast arr as [number, number, number] to ensure it is treated as a tuple
-    } else if (type === 'hsl') {
-        return hsl2hslMap(color)
-    }
+export const colorToHsl = (val: string) => {
+    const color = tinycolor(val)
+    if (!color.isValid) return null
+    return color.toHslString()
 }
 
-export const color2HslMap = (color: string): HslMap | null => {
-    if (!color) return null
-    const type = getColorType(color)
-    if (type === 'hex') {
-        return hex2hsl(color)
-    } else if (type === 'rgb') {
-        const arr = color.match(/\d+/g)?.map(Number)
-
-        return arr ? rgb2hsl(...(arr as [number, number, number])) : null // Fix: Cast arr as [number, number, number] to ensure it is treated as a tuple
-    } else if (type === 'hsl') {
-        return hsl2hslMap(color)
-    } else {
-        return null
+export const color2HslMap = (val: string): HslMap | null => {
+    const color = tinycolor(val)
+    if (!color.isValid) return null
+    const cur = color.toHsl()
+    console.log('color', cur)
+    return {
+        h: cur.h,
+        s: cur.s * 100,
+        l: cur.l * 100,
+        a: cur.a * 100
     }
 }
 
