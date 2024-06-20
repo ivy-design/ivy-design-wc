@@ -14,6 +14,10 @@ const curColor = computed(() => {
     return `hsl(${props.hue}deg, ${props.s}%, ${props.l}%)`
 })
 
+const paneColor = computed(() => {
+    return `hsl(${props.hue}deg, 100%, 50%)`
+})
+
 const s2x = (s: number) => {
     return (s / 100) * 140
 }
@@ -84,7 +88,7 @@ watch(point, (val) => {
 <template>
     <div
         :style="{
-            backgroundColor: curColor,
+            backgroundColor: paneColor,
             height: '140px',
             backgroundImage:
                 'linear-gradient(0deg, rgb(0, 0, 0), transparent), linear-gradient(90deg, rgb(255, 255, 255), rgba(255, 255, 255, 0))',
@@ -108,6 +112,7 @@ watch(point, (val) => {
                 border: '1px solid white',
                 position: 'absolute',
                 pointerEvents: 'none',
+                backgroundColor: curColor,
                 left: `${point.x - 4}px`,
                 top: `${point.y - 4}px`
             }"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 defineOptions({
     name: 'Hue'
@@ -69,9 +69,12 @@ const handleMouseLeave = (e: MouseEvent) => {
     value.value = calcHue(x.value)
 }
 
-onMounted(() => {
-    console.log(1, value.value, x.value)
-})
+watch(
+    () => props.modelValue,
+    () => {
+        x.value = value2x()
+    }
+)
 </script>
 
 <template>

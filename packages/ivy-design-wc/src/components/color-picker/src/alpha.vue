@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 defineOptions({
     name: 'Alpha'
@@ -25,7 +25,6 @@ const value = computed({
 })
 
 const value2x = () => {
-    console.log('alpha', Math.round((props.modelValue / 100) * props.width), props.modelValue)
     return Math.round((props.modelValue / 100) * props.width)
 }
 
@@ -71,9 +70,12 @@ const handleMouseLeave = (e: MouseEvent) => {
     value.value = calcAlpha(x.value)
 }
 
-watchEffect(() => {
-    console.log(value.value, x.value)
-})
+watch(
+    () => props.modelValue,
+    () => {
+        x.value = value2x()
+    }
+)
 </script>
 
 <template>
