@@ -14,16 +14,24 @@ const curColor = computed(() => {
     return `hsl(${props.hue}deg, ${props.s}%, ${props.l}%)`
 })
 
-const paneColor = computed(() => {
-    return `hsl(${props.hue}deg, 100%, 50%)`
+const emit = defineEmits<{ 'update:hue': [val: number]; change: [val: Record<string, number>] }>()
+
+const paneColor = computed({
+    set: (val) => {
+        emit('update:hue', val as unknown as number)
+    },
+    get: () => {
+        return `hsl(${props.hue}deg, 100%, 50%)`
+    }
 })
 
 const s2x = (s: number) => {
-    return (s / 100) * 140
+    return (s / 100) * 260
 }
 
 const l2y = (l: number) => {
-    return -((l / 100) * 250 - 100)
+    // return -((l / 100) * 140 - 100)
+    return ((100 - l) / 100) * 140
 }
 
 const point = reactive({
@@ -50,6 +58,7 @@ let isPress = false
 const handleChooseDown = (ev: MouseEvent) => {
     isPress = true
     const { offsetX: x, offsetY: y } = ev
+    console.log('down', x, y)
     point.x = x
     point.y = y
 }
@@ -77,12 +86,22 @@ const handleChooseMove = useThrottleFn((ev: MouseEvent) => {
     point.x = x
     point.y = y
 }, 10)
-const emit = defineEmits<{ change: [val: Record<string, number>] }>()
+
 watch(point, (val) => {
     const saturation = calcSaturation(val.x)
-    const lightness = calcLightness(val.y)
+    const lightness = calcLightness(val.y, val.x)
     emit('change', { s: saturation, l: lightness })
 })
+
+watch(
+    () => props.hue,
+    () => {
+        point.x = s2x(props.s)
+        point.y = l2y(props.l)
+        console.log('hue change', props.s, props.l)
+        console.log('hue change', point.x, point.y)
+    }
+)
 </script>
 
 <template>

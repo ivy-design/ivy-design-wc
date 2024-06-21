@@ -105,16 +105,6 @@ export const hex2hsl = (hex: string): HslMap => {
     return rgb2hsl(r, g, b, 100)
 }
 
-const hsl2hslMap = (hsl: string): HslMap => {
-    const [h, s, l, a = 0] = hsl.match(/\d+/g)?.map(Number) || [0, 0, 0, 0]
-    return {
-        h,
-        s,
-        l,
-        a
-    }
-}
-
 // 获取颜色类型
 export const getColorType = (color: string) => {
     if (color.startsWith('#')) {
@@ -137,7 +127,6 @@ export const color2HslMap = (val: string): HslMap | null => {
     const color = tinycolor(val)
     if (!color.isValid) return null
     const cur = color.toHsl()
-    console.log('color', cur)
     return {
         h: cur.h,
         s: cur.s * 100,
@@ -151,7 +140,11 @@ export const calcSaturation = (x: number, total = 260) => {
     return parseFloat(tmp.toFixed(2))
 }
 
-export const calcLightness = (y: number, total = 140) => {
-    const tmp = ((100 - y) / total) * 100
+// 从上到下饱和度100%到0%
+export const calcLightness = (y: number, x: number = 260, total = 140 * 2) => {
+    if (y === 140) {
+        return '0'
+    }
+    const tmp = 50 - (y / total) * 100 + (100 - calcSaturation(x)) / 2
     return parseFloat(tmp.toFixed(2))
 }
