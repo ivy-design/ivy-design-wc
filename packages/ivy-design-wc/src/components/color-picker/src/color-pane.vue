@@ -14,7 +14,10 @@ const curColor = computed(() => {
     return `hsl(${props.hue}deg, ${props.s}%, ${props.l}%)`
 })
 
-const emit = defineEmits<{ 'update:hue': [val: number]; change: [val: Record<string, number>] }>()
+const emit = defineEmits<{
+    'update:hue': [val: number]
+    change: [val: Record<string, number>]
+}>()
 
 const paneColor = computed({
     set: (val) => {
@@ -90,7 +93,7 @@ const handleChooseMove = useThrottleFn((ev: MouseEvent) => {
 watch(point, (val) => {
     const saturation = calcSaturation(val.x)
     const lightness = calcLightness(val.y, val.x)
-    emit('change', { s: saturation, l: lightness })
+    emit('change', { s: saturation, l: lightness as number })
 })
 
 watch(
