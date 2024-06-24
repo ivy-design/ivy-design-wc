@@ -45,6 +45,7 @@
     "scripts": {
         "dev": "vite build -w --mode dev",
         "build": "vite build",
+        "build:es": "vite build --mode es",
         "preview": "vite preview",
         "test:unit": "vitest",
         "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
