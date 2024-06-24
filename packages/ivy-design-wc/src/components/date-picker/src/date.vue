@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ArrowLeft, ArrowRight, DArrowLeft, DArrowRight } from '@/utils/icons'
+
 interface Props {
     data: Array<{ value: number; type: string }>
 }
@@ -18,15 +20,24 @@ const handlerClick = (type: string, val?: any) => {
 
 <template>
     <div class="box">
-        <div>
+        <div
+            style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+                padding: 12px 16px;
+                gap: 16px;
+            "
+        >
             <div style="font-size: 16px">
-                <span @click="handlerClick('prevYear')">&lt;</span>
-                <span @click="handlerClick('prevMonth')">&lt;&lt;</span>
+                <DArrowLeft @click="handlerClick('prevYear')" />
+                <ArrowLeft @click="handlerClick('prevMonth')" />
             </div>
             <span>2024-01-31</span>
             <div>
-                <span @click="handlerClick('nextMonth')">&gt;</span>
-                <ivy-icon name="d-arrow-right" @click="handlerClick('nextYear')"></ivy-icon>
+                <ArrowRight @click="handlerClick('nextMonth')" />
+                <DArrowRight @click="handlerClick('nextYear')" />
             </div>
         </div>
         <ul class="year">

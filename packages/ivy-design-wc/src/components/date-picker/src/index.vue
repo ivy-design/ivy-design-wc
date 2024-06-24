@@ -12,7 +12,7 @@ defineOptions({
     inheritAttrs: false
 })
 
-const { triggerRef, targetRef, arrowRef } = usePopper()
+const { referenceEl: triggerRef, floatEl: targetRef, floatArrow: arrowRef } = usePopper()
 
 export type PropType = 'date' | 'month' | 'year'
 
