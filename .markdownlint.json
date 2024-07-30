@@ -81,7 +81,8 @@
             "ivy-command-separator",
             "ivy-command-search",
             "ivy-popover",
-            "ivy-color-picker"
+            "ivy-color-picker",
+            "ivy-gradient-text"
         ]
     }
 }

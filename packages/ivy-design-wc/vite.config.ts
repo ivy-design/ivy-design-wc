@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
         )
     }
     let build = {}
-    if (mode === 'production') {
+    if (mode === 'production' || mode === 'dev') {
         build = {
             target: 'es2017',
             lib: {

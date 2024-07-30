@@ -21,7 +21,7 @@ export interface Props {
     value: string
     minTime: string
     maxTime: string
-    clearable: boolean
+    clearable?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
     start: '09:00',
@@ -118,7 +118,7 @@ const emit = defineEmits<{
 
 const handleClear = () => {
     if (props.disabled) return
-        ; (inputEl.value as HTMLInputElement).value = null as unknown as string
+    ;(inputEl.value as HTMLInputElement).value = null as unknown as string
     emit('change')
     emit('clear')
 }
@@ -129,7 +129,7 @@ const handlePaneChange = (val: any) => {
 
 const setDefaultValue = () => {
     if (props.value && dateList.value.find((item) => item.value === props.value)) {
-        ; (inputEl.value as HTMLInputElement).value = props.value
+        ;(inputEl.value as HTMLInputElement).value = props.value
     }
 }
 
@@ -148,14 +148,25 @@ onBeforeUnmount(() => {
 <template>
     <!-- <ivy-input ref="triggerRef" :placeholder="props.placeholder" readonly></ivy-input> -->
     <div class="input-wrap" ref="referenceEl" @click="handlerInputClick">
-        <input :class="['input-inner', { 'input-inner-clearable': props.clearable }]" type="text" ref="inputEl"
-            :placeholder="props.placeholder" readonly />
+        <input
+            :class="['input-inner', { 'input-inner-clearable': props.clearable }]"
+            type="text"
+            ref="inputEl"
+            :placeholder="props.placeholder"
+            readonly
+        />
         <div class="input-close" v-if="props.clearable" @click.stop="handleClear">
             <Close />
         </div>
     </div>
     <transition name="dropdown">
-        <div class="dropdown" ref="floatEl" v-if="visible" :data-placement="finalPlacement" :style="floatingStyles">
+        <div
+            class="dropdown"
+            ref="floatEl"
+            v-if="visible"
+            :data-placement="finalPlacement"
+            :style="floatingStyles"
+        >
             <Pane @change="handlePaneChange" />
         </div>
     </transition>
@@ -295,7 +306,6 @@ onBeforeUnmount(() => {
 }
 
 .dropdown {
-
     &-enter-active,
     &-leave-active {
         transform-origin: top center;
