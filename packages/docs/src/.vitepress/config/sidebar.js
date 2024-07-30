@@ -21,6 +21,7 @@ const basic = [
     { text: "Scrollbar 滚动条", link: "/components/scrollbar" },
     { text: "Link 链接", link: "/components/link" },
     { text: "Text 文字", link: "/components/text" },
+    { text: "GradientText 渐变文字", link: "/components/gradient-text" },
 ];
 
 const form = [
