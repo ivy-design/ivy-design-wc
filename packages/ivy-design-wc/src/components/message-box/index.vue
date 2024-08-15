@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { CloseIcon, Success, Warning, Error, Info } from '@/utils/icons'
-import useExpose from '@/hooks/useExpose'
+
 import { useHost } from '@/hooks/useHostElement'
 import { getType, isFunction } from '@/utils/utils'
 
@@ -104,14 +104,13 @@ const handlePromptInput = (ev: CustomEvent) => {
     }
 }
 
-const { setExposes } = useExpose()
+defineExpose({
+    open
+})
 
 onMounted(() => {
     errorMessage.value = props.inputErrorMessage as string
     promptValue.value = props.inputValue as string
-    setExposes({
-        open
-    })
 })
 </script>
 

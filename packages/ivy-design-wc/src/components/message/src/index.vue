@@ -4,10 +4,7 @@ import { useHost } from '@/hooks/useHostElement'
 import { curMessageIndex } from './utils'
 import useBroadCastChannel from '@/hooks/useBroadcastChannel'
 import { Success, Warning, Error, Info } from '@/utils/icons'
-import useExpose from '@/hooks/useExpose'
 import { useEventListener } from '@vueuse/core'
-
-const { setExpose } = useExpose()
 
 defineOptions({
     name: 'Message',
@@ -55,10 +52,12 @@ const broadCastCallback = (data: any, host: HTMLElement) => {
 const open = () => {
     visible.value = true
 }
-
+defineExpose({
+    open
+})
 onMounted(() => {
     // visible.value = true
-    setExpose('open', open)
+
     const host = getHostElement() as HTMLElement
     initBroadcastChannel((data: any) => broadCastCallback(data, host))
     useEventListener(wrap.value, 'transitionstart', () => {

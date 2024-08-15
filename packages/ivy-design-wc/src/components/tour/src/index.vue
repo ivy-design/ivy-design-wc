@@ -1,7 +1,6 @@
 <script setup lang="tsx">
 import { onMounted, ref, reactive, computed } from 'vue'
 import { getType } from '@/utils/index'
-import { useExpose } from '@/hooks/useExpose'
 import { useAppendTo } from '@/hooks/useAppendTo'
 import { CloseIcon as Close } from '@/utils/icons'
 import { usePopper } from '@/hooks/usePopper'
@@ -126,16 +125,17 @@ const path = computed(() => {
     } a2,2 0 0 1 2,-2 z`
 })
 
-const { setExposes } = useExpose()
 const { appendTo } = useAppendTo()
 onMounted(() => {
     const rect = document.body.getBoundingClientRect()
     client.width = rect.width
     client.height = rect.height
-    setExposes({
-        open: openTour
-    })
+
     if (props.appendToBody) appendTo()
+})
+
+defineExpose({
+    open: openTour
 })
 </script>
 
