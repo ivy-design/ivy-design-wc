@@ -41,7 +41,7 @@
     "@floating-ui/vue": "^1.0.6",
     "@vueuse/core": "^10.6.1",
     "dayjs": "^1.11.10",
-    "vue": "^3.4.27"
+    "vue": "^3.5.0-beta.1"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
