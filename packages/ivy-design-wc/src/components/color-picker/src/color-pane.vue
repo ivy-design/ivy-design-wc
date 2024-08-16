@@ -33,7 +33,7 @@ const s2x = (s: number) => {
 }
 
 const l2y = (l: number) => {
-    // return -((l / 100) * 140 - 100)
+    // todo: 位置计算错误，需重新计算
     return ((100 - l) / 100) * 140
 }
 
@@ -61,7 +61,6 @@ let isPress = false
 const handleChooseDown = (ev: MouseEvent) => {
     isPress = true
     const { offsetX: x, offsetY: y } = ev
-    console.log('down', x, y)
     point.x = x
     point.y = y
 }
@@ -93,6 +92,7 @@ const handleChooseMove = useThrottleFn((ev: MouseEvent) => {
 watch(point, (val) => {
     const saturation = calcSaturation(val.x)
     const lightness = calcLightness(val.y, val.x)
+
     emit('change', { s: saturation, l: lightness as number })
 })
 
@@ -101,8 +101,6 @@ watch(
     () => {
         point.x = s2x(props.s)
         point.y = l2y(props.l)
-        console.log('hue change', props.s, props.l)
-        console.log('hue change', point.x, point.y)
     }
 )
 </script>

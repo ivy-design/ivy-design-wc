@@ -50,7 +50,6 @@ const handleOpen = () => {
     }
     timer = setTimeout(() => {
         visible.value = true
-        console.log('visible', visible.value)
     }, props.delay || 10)
 }
 
@@ -97,8 +96,9 @@ const handleColorPaneChange = (val: Record<string, number>) => {
     internalState.l = val.l
 }
 const curColor = computed(() => {
-    if (!props.value) return null
+    if (!props.value) return 'rgba(255,255,255,1)'
     const rgba = hsl2rgb(internalState.h, internalState.s, internalState.l, internalState.a / 100)
+
     return rgba
 })
 const emit = defineEmits<{ change: [val: string] }>()
@@ -114,7 +114,7 @@ const alphaComponentBackground = computed(() => {
 
 const handleDefineChange = (color: string) => {
     const tmp = color2HslMap(color) as HslMap
-    console.log('color', color, tmp)
+
     internalState.h = tmp?.h
     internalState.s = tmp?.s
     internalState.l = tmp?.l
