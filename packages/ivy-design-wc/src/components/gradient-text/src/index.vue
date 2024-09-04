@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useHost } from '@/hooks/useHostElement'
+import { onMounted, useHost } from 'vue'
 
 defineOptions({
     name: 'GradientText',
@@ -18,14 +17,13 @@ const props = defineProps({
     }
 })
 
-const { host } = useHost()
+const host: any = useHost()
 onMounted(() => {
     if (props.gradient) {
-        console.log(props.gradient, host.value)
-        host.value.style.backgroundImage = `linear-gradient(${props.gradient})`
+        host.style.backgroundImage = `linear-gradient(${props.gradient})`
     }
     if (props.size) {
-        host.value.style.fontSize = props.size
+        host.style.fontSize = props.size
     }
 })
 </script>

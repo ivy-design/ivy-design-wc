@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { watch } from 'vue'
-import { useHostElement } from '@/hooks/useHostElement'
+import { watch, useHost, ref } from 'vue'
 
 defineOptions({
     name: 'Dialog',
@@ -37,10 +36,10 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['sure', 'close', 'change'])
-
-const { el, getHostElement } = useHostElement()
+const el = ref()
+const host: any = useHost()
 const handleClose = (type = 'close') => {
-    ;(getHostElement() as any).open = false
+    host.open = false
     emit('close', type)
 }
 

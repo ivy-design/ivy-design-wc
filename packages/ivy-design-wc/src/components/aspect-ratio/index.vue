@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, watch } from 'vue'
-import useHostElement from '@/hooks/useHostElement'
+import { onMounted, onBeforeUnmount, watch, useHost } from 'vue'
 
 defineOptions({
     name: 'AspectRatio',
     inheritAttrs: false
 })
 
-const { el, getHostElement } = useHostElement()
+const host = useHost()
 
 const props = defineProps({
     ratio: {
@@ -20,11 +19,10 @@ const props = defineProps({
     }
 })
 const resize = () => {
-    const host = getHostElement()
     if (!host) (host as any).style.height = 0
-    const rect = host.getBoundingClientRect()
+    const rect = host?.getBoundingClientRect()
     const [ratioX = 1, ratioY = 1] = props.ratio.split('/')
-    const width = rect.width
+    const width = rect?.width || 0
     const height = (width / Number(ratioX)) * Number(ratioY)
     ;(host as any).style.height = `${height}px`
 }

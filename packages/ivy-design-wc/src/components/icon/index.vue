@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useHost } from '@/hooks/useHostElement'
+import { onMounted, useHost } from 'vue'
 import type { StyleValue } from 'vue'
 
 defineOptions({
@@ -26,15 +25,15 @@ const getClass = () => {
     if (props.name) target.push(`ivy-icon-${props.name}`)
     return target
 }
-const { host } = useHost()
+const host = useHost()
 onMounted(() => {
-    if (!host.value) return
+    if (!host) return
     const classList = getClass()
 
-    host.value.classList.add(...classList)
+    host?.classList.add(...classList)
     const styles = getStyle()
     for (let key in styles) {
-        host.value.style.setProperty(key, styles[key] as string)
+        host?.style.setProperty(key, styles[key] as string)
     }
 })
 </script>

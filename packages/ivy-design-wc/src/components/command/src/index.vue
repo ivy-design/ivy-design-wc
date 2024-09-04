@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, provide } from 'vue'
-import { useHost } from '@/hooks/useHostElement'
+import { ref, provide, useHost } from 'vue'
 import { inject } from 'vue'
 
 defineOptions({
@@ -35,14 +34,12 @@ provide('handleSearch', handleSearch)
 
 const handleClose: any = inject('handleClose', null)
 
-// const emit = defineEmits(['command'])
-
-const { host } = useHost()
+const host = useHost()
 const handleClick = (item: any) => {
     const event = new CustomEvent('command', {
         detail: item
     })
-    host.value?.dispatchEvent(event)
+    host?.dispatchEvent(event)
     if (handleClose) handleClose?.()
     dest.value = null
 }

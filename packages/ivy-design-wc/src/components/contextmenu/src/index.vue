@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, useHost } from 'vue'
 import usePopper from '@/hooks/usePopper'
 import { shift, type VirtualElement } from '@floating-ui/vue'
 import { useEventListener } from '@vueuse/core'
-import { useHost } from '@/hooks/useHostElement'
 
 defineOptions({
     name: 'Contextmenu',
@@ -49,14 +48,14 @@ const handleScroll = () => {
     handleClose()
 }
 
-const { host } = useHost()
+const host = useHost()
 const handleCommand = (ev: any) => {
     const target: HTMLElement = ev.target
 
     const isCommandItem = target.dataset.command
     if (isCommandItem) {
         const command = target.getAttribute('command')
-        host.value?.dispatchEvent(
+        host?.dispatchEvent(
             new CustomEvent('command', {
                 detail: command
             })

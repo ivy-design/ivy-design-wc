@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { useThrottleFn } from '@vueuse/core'
-import { ref, onBeforeUnmount, onMounted } from 'vue'
-import { useHost } from '@/hooks/useHostElement'
+import { ref, onBeforeUnmount, onMounted, useHost } from 'vue'
 
-const { host } = useHost()
+const host = useHost()
 
 defineOptions({
     name: 'Affix',
@@ -39,17 +38,17 @@ const scrollTop = ref(0)
 const fixed = ref(false)
 const handlerScroll = useThrottleFn(() => {
     scrollTop.value = window.scrollY
-    if (host.value === null) return
+    if (host === null) return
 
-    const rect = host.value?.getBoundingClientRect()
+    const rect = host?.getBoundingClientRect()
     const y = rect?.y || 0
 
     const diff = y - props.offset
     const styles = getTargetStyle()
     if (diff < 0) {
         if (!fixed.value) {
-            host.value?.style.setProperty('width', styles.width as string)
-            host.value?.style.setProperty('height', styles.height as string)
+            host?.style.setProperty('width', styles.width as string)
+            host?.style.setProperty('height', styles.height as string)
             targetRef.value?.style.setProperty('width', styles.width as string)
             targetRef.value?.style.setProperty('height', styles.height as string)
             emit('change', { fixed: true })
@@ -57,8 +56,8 @@ const handlerScroll = useThrottleFn(() => {
         }
     } else {
         if (fixed.value) {
-            host.value?.style.setProperty('width', null)
-            host.value?.style.setProperty('height', null)
+            host?.style.setProperty('width', null)
+            host?.style.setProperty('height', null)
             targetRef.value?.style.setProperty('width', null)
             targetRef.value?.style.setProperty('height', null)
             emit('change', { fixed: false })

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { type PropType, onBeforeUnmount, onMounted, ref } from 'vue'
-import useHostElement from '@/hooks/useHostElement'
+import { type PropType, onBeforeUnmount, onMounted, ref, useHost } from 'vue'
 
 defineOptions({
     name: 'Image',
@@ -16,7 +15,7 @@ const props = defineProps({
     lazy: Boolean
 })
 
-const { el, getHostElement } = useHostElement()
+const host = useHost()
 const imgSrc = ref<string | undefined>(undefined)
 const success = ref<boolean>(true)
 const loadStyle = ref({})
@@ -65,7 +64,6 @@ const handleScroll = () => {
                 // entry.time //时间戳
             })
         })
-        const host = getHostElement()
         if (host) observer.observe(host as HTMLElement)
     })
 }
@@ -85,7 +83,6 @@ onBeforeUnmount(() => {
 
 <template>
     <img
-        ref="el"
         class="image-inner"
         :src="imgSrc"
         :style="{ display: success ? 'inherit' : 'none', objectFit: props.fit }"

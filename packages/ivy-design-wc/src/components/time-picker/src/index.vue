@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import usePopper from '@/hooks/usePopper'
 import dayjs, { type Dayjs } from 'dayjs'
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { useHost } from '@/hooks/useHostElement'
+import { ref, computed, onMounted, onBeforeUnmount, useHost } from 'vue'
 import { CloseIcon as Close } from '@/utils/icons'
 import Pane from './pane.vue'
 
@@ -81,7 +80,7 @@ const dateList = computed(() => {
     return result
 })
 
-const { host } = useHost()
+const host = useHost()
 const handlerInputClick = () => {
     if (props.disabled) return
     if (!visible.value) {
@@ -101,7 +100,7 @@ const handlerInputClick = () => {
 const handlerHideDrop = (e: MouseEvent) => {
     const target = e.target as HTMLElement
 
-    const isContains = host.value?.contains(target)
+    const isContains = host?.contains(target)
     if (!isContains) {
         visible.value = false
     }

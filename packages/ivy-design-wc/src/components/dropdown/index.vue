@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref, onBeforeUnmount, onMounted } from 'vue'
-import { useHostElement } from '@/hooks/useHostElement'
+import { ref, onBeforeUnmount, onMounted, useHost } from 'vue'
 
 defineOptions({
     name: 'Dropdown'
 })
 
-const { el, getHostElement } = useHostElement()
+const host = useHost()
 
 const props = defineProps({
     disabled: Boolean,
@@ -40,9 +39,8 @@ const handlerMenuItemClick = (e: Event) => {
 
 const handlerHideDrop = (e: MouseEvent) => {
     const target = e.target as HTMLElement
-    const hostElement = getHostElement()
 
-    const isContains = hostElement.contains(target)
+    const isContains = host?.contains(target)
     if (!isContains) {
         visible.value = false
     }

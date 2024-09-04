@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, useHost } from 'vue'
 import { CloseIcon, Success, Warning, Error, Info } from '@/utils/icons'
 
-import { useHost } from '@/hooks/useHostElement'
 import { getType, isFunction } from '@/utils/utils'
 
 defineOptions({
@@ -75,10 +74,10 @@ function confirm() {
     visible.value = false
 }
 
-const { host } = useHost()
+const host = useHost()
 const handleTransitionend = () => {
     if (visible.value === false) {
-        host.value?.remove()
+        host?.remove()
     }
 }
 

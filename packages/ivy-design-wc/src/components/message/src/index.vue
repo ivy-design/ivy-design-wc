@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { useHost } from '@/hooks/useHostElement'
+import { onMounted, ref, useHost } from 'vue'
 import { curMessageIndex } from './utils'
 import useBroadCastChannel from '@/hooks/useBroadcastChannel'
 import { Success, Warning, Error, Info } from '@/utils/icons'
@@ -25,7 +24,7 @@ const props = withDefaults(defineProps<MessageProps>(), {
     duration: 3000
 })
 
-const { getHostElement } = useHost()
+const host: any = useHost()
 
 const visible = ref(false)
 const wrap = ref<HTMLElement>()
@@ -58,7 +57,6 @@ defineExpose({
 onMounted(() => {
     // visible.value = true
 
-    const host = getHostElement() as HTMLElement
     initBroadcastChannel((data: any) => broadCastCallback(data, host))
     useEventListener(wrap.value, 'transitionstart', () => {
         if (visible.value) {
@@ -77,7 +75,7 @@ onMounted(() => {
                 curMessageIndex.value = 0
             }
 
-            host.remove()
+            host?.remove()
         } else {
             const timer = setTimeout(() => {
                 visible.value = false
@@ -95,7 +93,7 @@ onMounted(() => {
                 curMessageIndex.value = 0
             }
 
-            host.remove()
+            host?.remove()
         } else {
             const timer = setTimeout(() => {
                 visible.value = false

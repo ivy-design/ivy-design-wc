@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import usePopper from '@/hooks/usePopper'
-import { toRef, onMounted, reactive, watch, computed } from 'vue'
+import { toRef, onMounted, reactive, watch, computed, useHost } from 'vue'
 import { useEventListener } from '@vueuse/core'
-import { useHost } from '@/hooks/useHostElement'
 import { color2HslMap, type HslMap, hsl2rgb } from './utils'
 
 import Hue from './hue.vue'
@@ -10,7 +9,7 @@ import Alpha from './alpha.vue'
 import ColorPane from './color-pane.vue'
 import Predefine from './predefine.vue'
 
-const { getHostElement } = useHost()
+const host: any = useHost()
 
 defineOptions({
     name: 'ColorPicker',
@@ -55,9 +54,8 @@ const handleOpen = () => {
 
 const handleOtherClose = (e: Event) => {
     const target = e.target as HTMLElement
-    const hostElement = getHostElement()
 
-    const isContains = hostElement.contains(target)
+    const isContains = host.contains(target)
     if (!isContains) {
         if (timer !== null) {
             clearTimeout(timer)

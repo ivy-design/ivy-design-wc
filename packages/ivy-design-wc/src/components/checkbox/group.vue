@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import useHostElement from '@/hooks/useHostElement'
+import { ref, onMounted, useHost } from 'vue'
 import { getElementsByTagName } from '@/utils/dom'
 
 defineOptions({
@@ -13,10 +12,9 @@ const props = defineProps({
 
 const val = ref<any[]>([])
 
-const { el, getHostElement } = useHostElement()
+const host = useHost()
 
 const getChildren = () => {
-    const host = getHostElement()
     const children = getElementsByTagName(host as HTMLElement, 'ivy-checkbox')
     return children
 }
@@ -51,15 +49,16 @@ const handlerClick = (ev: MouseEvent) => {
             val.value.push(label)
             target.checked = true
         }
-        const host = getHostElement() as any
-        host.setAttribute('value', val.value.join(','))
+
+        host?.setAttribute('value', val.value.join(','))
+        // @ts-ignore
         host.value = val.value
     }
 }
 </script>
 
 <template>
-    <div :disabled="props.disabled" ref="el" @click="handlerClick">
+    <div :disabled="props.disabled" @click="handlerClick">
         <slot></slot>
     </div>
 </template>

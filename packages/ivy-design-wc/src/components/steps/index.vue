@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { onMounted, watch, toRef } from 'vue'
-import { useHostElement } from '@/hooks/useHostElement'
+import { onMounted, watch, toRef, ref } from 'vue'
 
 defineOptions({
     name: 'Steps',
@@ -16,7 +15,7 @@ const props = defineProps({
 
 const currentIndex = toRef(props, 'current')
 
-const { el } = useHostElement()
+const el = ref()
 const init = () => {
     let children = (el.value as HTMLSlotElement)
         .assignedElements()

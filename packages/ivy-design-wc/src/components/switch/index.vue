@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { useHostElement } from '@/hooks/useHostElement'
+import { onMounted, ref, useHost } from 'vue'
 
-const { el, getHostElement } = useHostElement()
+const host = useHost()
 defineOptions({
     name: 'Switch'
 })
@@ -20,11 +19,10 @@ const changeHandler = (ev: any) => {
     const checked = ev.target.checked
 
     isCheck.value = checked
-    const host = getHostElement()
     if (checked) {
-        host.setAttribute('checked', '')
+        host?.setAttribute('checked', '')
     } else {
-        host.removeAttribute('checked')
+        host?.removeAttribute('checked')
     }
     emit('change', isCheck.value)
 }
@@ -35,7 +33,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <label class="ivy-switch" for="ivy-switch" ref="el">
+    <label class="ivy-switch" for="ivy-switch">
         <input
             id="ivy-switch"
             type="checkbox"

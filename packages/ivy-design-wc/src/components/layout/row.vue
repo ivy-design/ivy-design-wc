@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineOptions({
-    name: 'Row'
+    name: 'Row',
+    inheritAttrs: false
 })
 </script>
 
