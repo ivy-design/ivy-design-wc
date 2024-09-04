@@ -15,7 +15,7 @@
     "license": "MIT",
     "dependencies": {
         "@ivy-design/ce": "workspace:*",
-        "vue": "^3.3.8"
+        "vue": "^3.5.0"
     },
     "devDependencies": {
         "vitepress": "1.2.0"

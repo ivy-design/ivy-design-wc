@@ -57,7 +57,7 @@
         "@vueuse/core": "^10.6.1",
         "dayjs": "^1.11.10",
         "tinycolor2": "^1.6.0",
-        "vue": "^3.5.0-beta.1"
+        "vue": "^3.5.0"
     },
     "devDependencies": {
         "@rushstack/eslint-patch": "^1.6.0",
