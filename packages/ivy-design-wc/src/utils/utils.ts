@@ -1,5 +1,3 @@
-import { ref } from 'vue'
-
 export const getType = <T>(val: T): string => {
     return Object.prototype.toString.call(val).slice(8, -1).toLowerCase()
 }
