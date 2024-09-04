@@ -18,13 +18,13 @@
 
 ```html
 <ivy-badge value="12">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="10" class="margin-left-large">
-  <ivy-button>踩</ivy-button>
+    <ivy-button>踩</ivy-button>
 </ivy-badge>
 <ivy-badge value="22" class="margin-left-large">
-  <ivy-button>点赞</ivy-button>
+    <ivy-button>点赞</ivy-button>
 </ivy-badge>
 ```
 
@@ -41,10 +41,10 @@
 
 ```html
 <ivy-badge value="100">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="100" max="10" class="margin-left-large">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 ```
 
@@ -61,10 +61,10 @@
 
 ```html
 <ivy-badge value="new">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="hot" class="margin-left-large">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 ```
 
@@ -81,10 +81,10 @@
 
 ```html
 <ivy-badge is-dot>
-  <ivy-icon name="chat-dot-round"></ivy-icon>
+    <ivy-icon name="chat-dot-round"></ivy-icon>
 </ivy-badge>
 <ivy-badge is-dot class="margin-left-large">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 ```
 
@@ -110,32 +110,30 @@
 
 ```html
 <ivy-badge value="12">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="12" type="primary" class="margin-left-large">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="12" type="success" class="margin-left-large">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="12" type="warning" class="margin-left-large">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 <ivy-badge value="12" type="info" class="margin-left-large">
-  <ivy-button>评论</ivy-button>
+    <ivy-button>评论</ivy-button>
 </ivy-badge>
 ```
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Props
 
 | 属性名 | 描述                           | 类型   | 可选值                                | 默认值   |
 | ------ | ------------------------------ | ------ | ------------------------------------- | -------- |
 | value  | 数量，输入非数字字符时显示汉字 | string | -                                     | -        |
 | max    | 最大值                         | string | -                                     | `99`     |
 | type   | 类型                           | string | `primary/success/warning/danger/info` | `danger` |
-
-<style scoped>
-.ml-40{
-    margin-left: 40px;
-}
-</style>

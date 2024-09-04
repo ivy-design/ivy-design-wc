@@ -1,6 +1,6 @@
-# Checkbox 多选框
+# Radio 单选框
 
-一组备选项中进行多选
+一组备选项中进行单选
 
 :::warning 注意
 `radio` 组件必须搭配 `radioGroup` 组件
@@ -16,9 +16,9 @@
 
 ```html
 <ivy-radio-group value="1" onchange="console.log(this.value)">
-  <ivy-radio label="1">苹果</ivy-radio>
-  <ivy-radio label="2">橘子</ivy-radio>
-  <ivy-radio label="3">香蕉</ivy-radio>
+    <ivy-radio label="1">苹果</ivy-radio>
+    <ivy-radio label="2">橘子</ivy-radio>
+    <ivy-radio label="3">香蕉</ivy-radio>
 </ivy-radio-group>
 ```
 
@@ -34,9 +34,9 @@
 
 ```html
 <ivy-radio-group disabled value="1">
-  <ivy-radio label="1">苹果</ivy-radio>
-  <ivy-radio label="2">橘子</ivy-radio>
-  <ivy-radio label="3">香蕉</ivy-radio>
+    <ivy-radio label="1">苹果</ivy-radio>
+    <ivy-radio label="2">橘子</ivy-radio>
+    <ivy-radio label="3">香蕉</ivy-radio>
 </ivy-radio-group>
 ```
 
@@ -52,27 +52,29 @@
 
 ```html
 <ivy-radio-group disabled value="1">
-  <ivy-radio label="1">苹果</ivy-radio>
-  <ivy-radio label="2">橘子</ivy-radio>
-  <ivy-radio label="3">香蕉</ivy-radio>
+    <ivy-radio label="1">苹果</ivy-radio>
+    <ivy-radio label="2">橘子</ivy-radio>
+    <ivy-radio label="3">香蕉</ivy-radio>
 </ivy-radio-group>
 ```
 
-## Radio Props
+## Api
+
+### Radio Props
 
 | Prop     | 描述       | 类型      | 可选值 | 默认值  |
 | -------- | ---------- | --------- | ------ | ------- |
 | label    | radio 的值 | _string_  | -      | -       |
 | disabled | 是否禁用   | _boolean_ | -      | `false` |
 
-## Radio Group Props
+### Radio Group Props
 
 | Prop     | 描述     | 类型      | 可选值 | 默认值  |
 | -------- | -------- | --------- | ------ | ------- |
 | value    | 默认值   | _string_  | -      | -       |
 | disabled | 是否禁用 | _boolean_ | -      | `false` |
 
-## Radio Group Event
+### Radio Group Event
 
 | Event  | 描述             |
 | ------ | ---------------- |

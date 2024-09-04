@@ -5,47 +5,24 @@
 常规用法
 
 <ivy-grid class="grid-row">
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
 </ivy-grid>
 
 ```html
 <ivy-grid class="grid-row">
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item
-    span="12"
-    class="grid-item"
-    style="background-color: #67C23A;height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item
-    span="12"
-    class="grid-item"
-    style="background-color: #67C23A;height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item
-    span="12"
-    class="grid-item"
-    style="background-color: #67C23A;height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
 </ivy-grid>
 ```
 
@@ -54,38 +31,24 @@
 通过`border`设置 grid 组件的边框
 
 <ivy-grid class="grid-row" border>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item" style="height: 100px">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem1">12</ivy-grid-item>
 </ivy-grid>
 
 ```html
 <ivy-grid class="grid-row" border>
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
-  <ivy-grid-item span="12" class="grid-item" style="height: 100px"
-    >12</ivy-grid-item
-  >
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
 </ivy-grid>
 ```
 
@@ -94,24 +57,24 @@
 通过 `square` 设置宽高一样
 
 <ivy-grid class="grid-row" border square>
-    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem">12</ivy-grid-item>
+    <ivy-grid-item span="12" :class="$style.gridItem">12</ivy-grid-item>
 </ivy-grid>
 
 ```html
 <ivy-grid class="grid-row" border square>
-  <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-  <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-  <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-  <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-  <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-  <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
-  <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
+    <ivy-grid-item span="12" class="grid-item">12</ivy-grid-item>
 </ivy-grid>
 ```
 
@@ -121,13 +84,17 @@
 
 ```css
 :host {
-  --ivy-grid-border-color: var(--ivy-border-color, #dcdfe6);
+    --ivy-grid-border-color: var(--ivy-border-color, #dcdfe6);
 }
 ```
 
 :::
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Props
 
 | 属性名 | 说明         | 可选值    | 默认值 |
 | ------ | ------------ | --------- | ------ |
@@ -136,10 +103,15 @@
 | border | 是否显示边框 | -         | -      |
 | cols   | 列数         | -         | `3`    |
 
-<style scoped>
-.grid-item {
+<style module>
+.gridItem {
     line-height: 32px;
     text-align: center;
+}
+.gridItem1{
+    line-height: 32px;
+    text-align: center;
+    height: 100px;
 }
 
 </style>

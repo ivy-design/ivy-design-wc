@@ -10,7 +10,7 @@
 
 ```html
 <ivy-details>
-  十八年来坠世间，吹花嚼蕊弄冰弦，多情情寄阿谁边？紫玉钗斜灯影背，红绵粉冷枕函边。相看好处却无言。
+    十八年来坠世间，吹花嚼蕊弄冰弦，多情情寄阿谁边？紫玉钗斜灯影背，红绵粉冷枕函边。相看好处却无言。
 </ivy-details>
 ```
 
@@ -24,7 +24,7 @@
 
 ```html
 <ivy-details summary="浣溪沙">
-  十八年来坠世间，吹花嚼蕊弄冰弦，多情情寄阿谁边？紫玉钗斜灯影背，红绵粉冷枕函边。相看好处却无言。
+    十八年来坠世间，吹花嚼蕊弄冰弦，多情情寄阿谁边？紫玉钗斜灯影背，红绵粉冷枕函边。相看好处却无言。
 </ivy-details>
 ```
 
@@ -38,7 +38,7 @@
 
 ```html
 <ivy-details summary="浣溪沙" remove-transition>
-  十八年来坠世间，吹花嚼蕊弄冰弦，多情情寄阿谁边？紫玉钗斜灯影背，红绵粉冷枕函边。相看好处却无言。
+    十八年来坠世间，吹花嚼蕊弄冰弦，多情情寄阿谁边？紫玉钗斜灯影背，红绵粉冷枕函边。相看好处却无言。
 </ivy-details>
 ```
 
@@ -50,18 +50,22 @@
 
 ```css
 :host {
-  --ivy-details-border-radius: 8px;
-  --ivy-background-color: #f7f7f7;
-  --ivy-details-summary-color: #666;
-  --ivy-details-color: #515a6e;
-  --ivy-details-font-size: 13px;
-  --ivy-details-summary-font-size: 14px;
+    --ivy-details-border-radius: 8px;
+    --ivy-background-color: #f7f7f7;
+    --ivy-details-summary-color: #666;
+    --ivy-details-color: #515a6e;
+    --ivy-details-font-size: 13px;
+    --ivy-details-summary-font-size: 14px;
 }
 ```
 
 :::
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### 属性
 
 | Prop                | 描述     | 类型      | 可选值 | 默认值     |
 | ------------------- | -------- | --------- | ------ | ---------- |

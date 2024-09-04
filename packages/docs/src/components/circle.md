@@ -39,14 +39,18 @@
 
 ```css
 :host {
-  --ivy-circle-color: var(--ivy-color-primary, #409eff);
-  --ivy-circle-track-color: var(--ivy-color-border, #e5e9f2);
+    --ivy-circle-color: var(--ivy-color-primary, #409eff);
+    --ivy-circle-track-color: var(--ivy-color-border, #e5e9f2);
 }
 ```
 
 :::
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Props
 
 | Prop         | 描述                     | 类型             | 可选值                   | 默认值    |
 | ------------ | ------------------------ | ---------------- | ------------------------ | --------- |
@@ -56,7 +60,7 @@
 | size         | 进度环的宽度和高度（px） | `number\|string` | -                        | `126`     |
 | color        | 进度条的颜色(优先级最高) | `string`         | -                        | `false`   |
 
-## Slots
+### Slots
 
 | 名称 | 说明                                 |
 | ---- | ------------------------------------ |

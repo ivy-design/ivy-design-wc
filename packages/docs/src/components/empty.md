@@ -21,7 +21,11 @@
 
 ```html
 <ivy-empty>
-    <ivy-icon name="picture-outline" size="160" color="#cfcfcf" slot="image"></ivy-icon>
+    <ivy-icon
+        name="picture-outline"
+        size="160"
+        color="#cfcfcf"
+        slot="image"></ivy-icon>
     暂无数据
 </ivy-empty>
 ```
@@ -29,16 +33,22 @@
 ## 可用的 CSS 变量
 
 ::: details
+
 ```css
 :host {
     --ivy-empty-text-color: var(--ivy-text-color-regular, #606266);
 }
 ```
+
 :::
 
-## Slots
+<!-- 增加注释，否则页面显示不完整 -->
 
-| slot 名称 | 描述      |
-|---------|---------|
-| default | 内容为空的提示 |
-| image   | 图标      |
+## Api
+
+### Slots
+
+| slot 名称 | 描述           |
+| --------- | -------------- |
+| default   | 内容为空的提示 |
+| image     | 图标           |

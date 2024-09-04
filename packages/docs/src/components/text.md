@@ -34,12 +34,12 @@
 
 ```html
 <ivy-text truncated style="width: 200px">
-  这里是测试超出宽度显示省略号功能的
+    这里是测试超出宽度显示省略号功能的
 </ivy-text>
 <ivy-text truncated line-clamp="2">
-  这个功能是使用 CSS 属性 -webkit-line-clamp<br />
-  来设置显示行数的，超出<br />
-  的内容将不显示。
+    这个功能是使用 CSS 属性 -webkit-line-clamp<br />
+    来设置显示行数的，超出<br />
+    的内容将不显示。
 </ivy-text>
 ```
 
@@ -55,7 +55,7 @@
 <ivy-text>默认</ivy-text>
 <ivy-text style="--ivy-text-color: darkblue;">自定义颜色</ivy-text>
 <ivy-text style="--ivy-text-color: darkblue; --ivy-text-font-size: 20px;">
-  自定义颜色和字体大小
+    自定义颜色和字体大小
 </ivy-text>
 ```
 
@@ -67,12 +67,16 @@
 
 ```css
 :host {
-  --ivy-text-color: var(--ivy-text-color-regular, #606266);
-  --ivy-text-font-size: var(--ivy-font-size, 14px);
+    --ivy-text-color: var(--ivy-text-color-regular, #606266);
+    --ivy-text-font-size: var(--ivy-font-size, 14px);
 }
 ```
 
 :::
+
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
 
 ## Props
 

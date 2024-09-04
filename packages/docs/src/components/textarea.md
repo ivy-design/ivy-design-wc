@@ -30,13 +30,16 @@
 
 ```html
 <ivy-textarea
-  placeholder="请输入"
-  maxlength="200"
-  show-word-limit
-></ivy-textarea>
+    placeholder="请输入"
+    maxlength="200"
+    show-word-limit></ivy-textarea>
 ```
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Props
 
 | Prop            | 描述            | 类型      | 可选值      | 默认值  |
 | --------------- | --------------- | --------- | ----------- | ------- |

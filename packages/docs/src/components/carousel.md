@@ -17,11 +17,11 @@
 
 ```html
 <ivy-carousel>
-  <ivy-carousel-item>1</ivy-carousel-item>
-  <ivy-carousel-item>2</ivy-carousel-item>
-  <ivy-carousel-item>3</ivy-carousel-item>
-  <ivy-carousel-item>4</ivy-carousel-item>
-  <ivy-carousel-item>5</ivy-carousel-item>
+    <ivy-carousel-item>1</ivy-carousel-item>
+    <ivy-carousel-item>2</ivy-carousel-item>
+    <ivy-carousel-item>3</ivy-carousel-item>
+    <ivy-carousel-item>4</ivy-carousel-item>
+    <ivy-carousel-item>5</ivy-carousel-item>
 </ivy-carousel>
 ```
 
@@ -42,11 +42,11 @@
 
 ```html
 <ivy-carousel arrow="always">
-  <ivy-carousel-item>1</ivy-carousel-item>
-  <ivy-carousel-item>2</ivy-carousel-item>
-  <ivy-carousel-item>3</ivy-carousel-item>
-  <ivy-carousel-item>4</ivy-carousel-item>
-  <ivy-carousel-item>5</ivy-carousel-item>
+    <ivy-carousel-item>1</ivy-carousel-item>
+    <ivy-carousel-item>2</ivy-carousel-item>
+    <ivy-carousel-item>3</ivy-carousel-item>
+    <ivy-carousel-item>4</ivy-carousel-item>
+    <ivy-carousel-item>5</ivy-carousel-item>
 </ivy-carousel>
 ```
 
@@ -64,10 +64,21 @@
 
 ```html
 <ivy-carousel trigger="click">
-  <ivy-carousel-item>1</ivy-carousel-item>
-  <ivy-carousel-item>2</ivy-carousel-item>
-  <ivy-carousel-item>3</ivy-carousel-item>
-  <ivy-carousel-item>4</ivy-carousel-item>
-  <ivy-carousel-item>5</ivy-carousel-item>
+    <ivy-carousel-item>1</ivy-carousel-item>
+    <ivy-carousel-item>2</ivy-carousel-item>
+    <ivy-carousel-item>3</ivy-carousel-item>
+    <ivy-carousel-item>4</ivy-carousel-item>
+    <ivy-carousel-item>5</ivy-carousel-item>
 </ivy-carousel>
 ```
+
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Carousel Props
+
+| 属性    | 描述               | 类型     | 可选值               | 默认值  |
+| ------- | ------------------ | -------- | -------------------- | ------- |
+| trigger | 切换的方式         | `string` | `hover/click`        | `hover` |
+| arrow   | 显示切换箭头的方式 | string   | `hover/always/never` | `hover` |

@@ -69,8 +69,8 @@ dark：
 
 ```html
 <ivy-tag
-  style="--ivy-tag-color: #008000;--ivy-tag-border-color: red; --ivy-tag-bg-color: white;"
-  >#008000</ivy-tag
+    style="--ivy-tag-color: #008000;--ivy-tag-border-color: red; --ivy-tag-bg-color: white;"
+    >#008000</ivy-tag
 >
 ```
 
@@ -80,15 +80,19 @@ dark：
 
 ```css
 :host {
-  --ivy-tag-color: var(--ivy-color-primary, #409eff);
-  --ivy-tag-border-color: var(--ivy-color-primary-light-8, #d9ecff);
-  --ivy-tag-bg-color: var(--ivy-color-primary-light-9, #ecf5ff);
+    --ivy-tag-color: var(--ivy-color-primary, #409eff);
+    --ivy-tag-border-color: var(--ivy-color-primary-light-8, #d9ecff);
+    --ivy-tag-bg-color: var(--ivy-color-primary-light-9, #ecf5ff);
 }
 ```
 
 :::
 
-## props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### props
 
 | 属性名 | 说明 | 可选值                                | 默认值    |
 | ------ | ---- | ------------------------------------- | --------- |
