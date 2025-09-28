@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import usePopper from '@/hooks/usePopper'
-import { toRef, onMounted, reactive, watch, computed, useHost } from 'vue'
+import { toRef, onMounted, reactive, watch, computed, useHost, ref } from 'vue'
 import { useEventListener } from '@vueuse/core'
 import { color2HslMap, type HslMap, hsl2rgb } from './utils'
 
@@ -90,11 +90,13 @@ onMounted(() => {
 })
 
 const handleColorPaneChange = (val: Record<string, number>) => {
+    if (internalCurColor.value == null) internalCurColor.value = '1'
     internalState.s = val.s
     internalState.l = val.l
 }
+const internalCurColor = ref<string | null>(null)
 const curColor = computed(() => {
-    if (!props.value) return 'rgba(255,255,255,1)'
+    if (!props.value && internalCurColor.value == null) return 'rgba(255,255,255,1)'
     const rgba = hsl2rgb(internalState.h, internalState.s, internalState.l, internalState.a / 100)
 
     return rgba
