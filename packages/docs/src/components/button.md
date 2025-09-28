@@ -86,37 +86,44 @@
 
 ```css
 :host {
-  --ivy-button-border-color: var(--ivy-border-color, #dcdfe6);
-  --ivy-button-text-color: var(--ivy-text-color, #303133);
-  --ivy-button-background-color: var(--ivy-color-white, #fff);
+    --ivy-button-border-color: var(--ivy-border-color, #dcdfe6);
+    --ivy-button-text-color: var(--ivy-text-color, #303133);
+    --ivy-button-background-color: var(--ivy-color-white, #fff);
 
-  --ivy-button-hover-text-color: var(--el-color-white, #fff);
-  --ivy-button-hover-background-color: var(
-    --ivy-color-primary-light-3,
-    #79bbff
-  );
-  --ivy-button-hover-border-color: var(--ivy-color-primary-light-3, #79bbff);
+    --ivy-button-hover-text-color: var(--el-color-white, #fff);
+    --ivy-button-hover-background-color: var(
+        --ivy-color-primary-light-3,
+        #79bbff
+    );
+    --ivy-button-hover-border-color: var(--ivy-color-primary-light-3, #79bbff);
 
-  --ivy-button-active-background-color: var(
-    --ivy-color-primary-dark-2,
-    #337ecc
-  );
-  --ivy-button-active-border-color: var(--ivy-color-primary-dark-2, #337ecc);
+    --ivy-button-active-background-color: var(
+        --ivy-color-primary-dark-2,
+        #337ecc
+    );
+    --ivy-button-active-border-color: var(--ivy-color-primary-dark-2, #337ecc);
 
-  --ivy-button-disabled-text-color: var(--ivy-color-white, #fff);
-  --ivy-button-disabled-background-color: var(
-    --ivy-color-primary-light-5,
-    #a0cfff
-  );
-  --ivy-button-disabled-border-color: var(--ivy-color-primary-light-5, #a0cfff);
+    --ivy-button-disabled-text-color: var(--ivy-color-white, #fff);
+    --ivy-button-disabled-background-color: var(
+        --ivy-color-primary-light-5,
+        #a0cfff
+    );
+    --ivy-button-disabled-border-color: var(
+        --ivy-color-primary-light-5,
+        #a0cfff
+    );
 
-  --ivy-button-height: var(--ivy-size-medium, 32px);
+    --ivy-button-height: var(--ivy-size-medium, 32px);
 }
 ```
 
 :::
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## api
+
+### Props
 
 | 属性名   | 说明   | 可选值                                      | 默认值    |
 | -------- | ------ | ------------------------------------------- | --------- |

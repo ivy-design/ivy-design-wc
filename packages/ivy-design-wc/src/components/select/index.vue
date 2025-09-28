@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useHostElement } from '@/hooks/useHostElement'
+import { nextTick, onBeforeUnmount, onMounted, ref, useHost } from 'vue'
 
-const { el, getHostElement } = useHostElement()
+const host = useHost()
 
 defineOptions({
     name: 'Select'
@@ -43,7 +42,7 @@ const handlerClick = (e: MouseEvent) => {
             curValue.value = optionValue
             emit('change', curValue.value)
             ;(inputEl.value as HTMLElement).setAttribute('value', target.label)
-            getHostElement().setAttribute('value', curValue.value as string)
+            host?.setAttribute('value', curValue.value as string)
         }
     }
     curVisible.value = false
@@ -60,9 +59,8 @@ const handlerInputClick = () => {
 
 const handlerHideDrop = (e: MouseEvent) => {
     const target = e.target as HTMLElement
-    const hostElement = getHostElement()
 
-    const isContains = hostElement.contains(target)
+    const isContains = host?.contains(target)
     if (!isContains) {
         curVisible.value = false
     }
@@ -75,7 +73,7 @@ const handlerScroll = () => {
 onMounted(() => {
     curValue.value = props.value
     nextTick(() => {
-        const children = getHostElement().children
+        const children = host?.children || []
 
         for (let i = 0; i < children.length; i++) {
             const child = children[i] as any
@@ -101,7 +99,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div @click="handlerInputClick" ref="el">
+    <div @click="handlerInputClick">
         <input
             ref="inputEl"
             type="text"

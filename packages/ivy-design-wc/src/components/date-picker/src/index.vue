@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import usePopper from '@/hooks/usePopper'
 import dayjs, { type Dayjs } from 'dayjs'
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { useHost } from '@/hooks/useHostElement'
+import { ref, useHost, onMounted, onBeforeUnmount } from 'vue'
 import { CloseIcon as Close } from '@/utils/icons'
 import CompDate from './date.vue'
 import { genDateList } from './utils'
@@ -12,7 +11,7 @@ defineOptions({
     inheritAttrs: false
 })
 
-const { triggerRef, targetRef, arrowRef } = usePopper()
+const { referenceEl: triggerRef, floatEl: targetRef, floatArrow: arrowRef } = usePopper()
 
 export type PropType = 'date' | 'month' | 'year'
 
@@ -34,7 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
 const inputEl = ref<HTMLInputElement>()
 
 const visible = ref(false)
-const { host } = useHost()
+const host = useHost()
 const handlerInputClick = () => {
     if (props.disabled) return
     if (!visible.value) {
@@ -45,7 +44,7 @@ const handlerInputClick = () => {
 const handlerHideDrop = (e: MouseEvent) => {
     const target = e.target as HTMLElement
 
-    const isContains = host.value?.contains(target)
+    const isContains = host?.contains(target)
     if (!isContains) {
         visible.value = false
     }

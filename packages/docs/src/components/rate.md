@@ -60,12 +60,12 @@
 
 ```vue
 <template>
-  <ivy-rate value="2" @change="handleChange" trigger="click"></ivy-rate>
+    <ivy-rate value="2" @change="handleChange" trigger="click"></ivy-rate>
 </template>
 <script setup>
 const handleChange = (ev) => {
-  // 由于 vue 的限制，`ev.detail` 只能是一个数组
-  alert(`当前的value：${ev.detail[0]}`);
+    // 由于 vue 的限制，`ev.detail` 只能是一个数组
+    alert(`当前的value：${ev.detail[0]}`);
 };
 </script>
 ```
@@ -80,7 +80,11 @@ rate.addEventListener('change',function(ev){
 </script>
 ```
 
-## Rate Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Rate Props
 
 | 名称         | 说明         | 类型   | 可选值 | 默认值 |
 | ------------ | ------------ | ------ | ------ | ------ |

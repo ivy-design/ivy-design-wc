@@ -10,7 +10,7 @@ const genInput = () => {
     const target: any = {}
     const dir = readdirSync('./src/components')
     dir.forEach((name) => {
-        target[`components/${name}`] = fileURLToPath(
+        target[`${name}`] = fileURLToPath(
             new URL(`./src/components/${name}/index.ts`, import.meta.url)
         )
     })
@@ -37,6 +37,40 @@ export default defineConfig(({ mode }) => {
             })
         )
     }
+    let build = {}
+    if (mode === 'production' || mode === 'dev') {
+        build = {
+            target: 'es2017',
+            lib: {
+                entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+                name: 'ivy-design',
+                fileName: (format: string) => {
+                    if (format === 'es') return 'ivy-design.mjs'
+                    return 'ivy-design.js'
+                }
+            },
+            rollupOptions: {
+                output: {
+                    exports: 'named'
+                }
+            },
+
+            cssTarget: 'chrome61'
+        }
+    } else if (mode === 'es') {
+        build = {
+            outDir: 'dist/es',
+            lib: {
+                entry: genInput(),
+                formats: ['es']
+            },
+            rollupOptions: {
+                output: {
+                    exports: 'named'
+                }
+            }
+        }
+    }
     return {
         appType: 'custom',
         publicDir: false,
@@ -46,36 +80,6 @@ export default defineConfig(({ mode }) => {
                 '@': fileURLToPath(new URL('./src', import.meta.url))
             }
         },
-        build: {
-            target: 'es2017',
-            lib: {
-                entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
-                name: 'ivy-design',
-                fileName: (format) => {
-                    if (format === 'es') return 'ivy-design.mjs'
-                    return 'ivy-design.js'
-                }
-            },
-            rollupOptions: {
-                // treeshake: false,
-                // input: {
-                //     'ivy-design': fileURLToPath(new URL('./src/index.ts', import.meta.url)),
-                //     ...genInput()
-                // },
-                output: {
-                    // interop: 'auto',
-                    // format: 'es',
-                    // entryFileNames: '[name].js',
-                    // assetFileNames: (assetInfo) => {
-                    //     if (assetInfo.name === 'ivy-design.css') return 'style.css'
-
-                    //     return 'assets/[name][extname]'
-                    // },
-                    exports: 'named'
-                }
-            },
-
-            cssTarget: 'chrome61'
-        }
+        build
     }
 })

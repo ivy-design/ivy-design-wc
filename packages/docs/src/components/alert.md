@@ -64,28 +64,32 @@
 
 ```css
 :host {
-  --ivy-alert-color: var(--ivy-color-primary, #409eff);
-  --ivy-alert-bg-color: var(--ivy-color-primary-light-9, #ecf5ff);
-  --ivy-alert-line-color: var(--ivy-color-primary, #409eff);
-  --ivy-alert-font-size: 13px;
-  --ivy-alert-title-font-size: 14px;
-  --ivy-alert-line-width: 4px;
-  --ivy-alert-border-radius: var(--ivy-border-radius, 4px);
+    --ivy-alert-color: var(--ivy-color-primary, #409eff);
+    --ivy-alert-bg-color: var(--ivy-color-primary-light-9, #ecf5ff);
+    --ivy-alert-line-color: var(--ivy-color-primary, #409eff);
+    --ivy-alert-font-size: 13px;
+    --ivy-alert-title-font-size: 14px;
+    --ivy-alert-line-width: 4px;
+    --ivy-alert-border-radius: var(--ivy-border-radius, 4px);
 }
 ```
 
 :::
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
 
-| 参数    | 说明             | 类型    | 可选值                      | 默认值 |
-| ------- | ---------------- | ------- | --------------------------- | ------ |
-| header  | 标题             | String  | -                           | -      |
-| content | 标题             | String  | -                           | -      |
-| type    | 类型             | String  | info/success/warning/danger | -      |
-| line    | 是否显示左侧竖线 | Boolean | -                           | false  |
+## Api
 
-## Slots
+### Props
+
+| 参数    | 说明             | 类型    | 可选值                        | 默认值  |
+| ------- | ---------------- | ------- | ----------------------------- | ------- |
+| header  | 标题             | String  | -                             | -       |
+| content | 标题             | String  | -                             | -       |
+| type    | 类型             | String  | `info/success/warning/danger` | -       |
+| line    | 是否显示左侧竖线 | Boolean | -                             | `false` |
+
+### Slots
 
 | name    | 说明                                         |
 | ------- | -------------------------------------------- |

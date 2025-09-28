@@ -2,7 +2,6 @@
 import { computed, ref, onMounted, reactive } from 'vue'
 import { useThrottleFn, useElementHover, useEventListener, useResizeObserver } from '@vueuse/core'
 import { getType } from '@/utils/utils'
-import useExpose from '@/hooks/useExpose'
 
 defineOptions({
     name: 'Scrollbar',
@@ -32,7 +31,7 @@ const conf = computed(() => {
 
 const root = ref()
 
-const isHovered = useElementHover(root, {
+const isHovered = useElementHover(root.value, {
     delayEnter: 10,
     delayLeave: 10
 })
@@ -167,8 +166,6 @@ const handleMousemove = useThrottleFn((ev: any) => {
     }
 }, 10)
 
-const { setExpose } = useExpose()
-
 interface ScrollToConf {
     top?: number
     left?: number
@@ -193,8 +190,11 @@ const exposeScrollTo = (conf: ScrollToConf | number, isHorizontal: boolean = fal
     }
 }
 
+defineExpose({
+    scrollTo: exposeScrollTo
+})
+
 onMounted(() => {
-    setExpose('scrollTo', exposeScrollTo)
     useEventListener(document, 'mouseup', handleMouseup)
     useEventListener(document, 'mousemove', handleMousemove)
     handleWrapSizeChange()

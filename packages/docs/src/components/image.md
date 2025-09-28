@@ -14,34 +14,29 @@
 
 ```html
 <ivy-image
-  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-  style="height: 100px;width: 100px;"
-  fit="fit"
-></ivy-image>
+    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+    style="height: 100px;width: 100px;"
+    fit="fit"></ivy-image>
 <ivy-image
-  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-  style="height: 100px;width: 100px;"
-  fit="contain"
-  class="margin-left"
-></ivy-image>
+    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+    style="height: 100px;width: 100px;"
+    fit="contain"
+    class="margin-left"></ivy-image>
 <ivy-image
-  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-  style="height: 100px;width: 100px;"
-  fit="cover"
-  class="margin-left"
-></ivy-image>
+    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+    style="height: 100px;width: 100px;"
+    fit="cover"
+    class="margin-left"></ivy-image>
 <ivy-image
-  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-  style="height: 100px;width: 100px;"
-  fit="none"
-  class="margin-left"
-></ivy-image>
+    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+    style="height: 100px;width: 100px;"
+    fit="none"
+    class="margin-left"></ivy-image>
 <ivy-image
-  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-  style="height: 100px;width: 100px;"
-  fit="scale-down"
-  class="margin-left"
-></ivy-image>
+    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+    style="height: 100px;width: 100px;"
+    fit="scale-down"
+    class="margin-left"></ivy-image>
 ```
 
 ## 占位内容
@@ -57,14 +52,12 @@
 
 ```html
 <ivy-image
-  src="https://blog.jikun.dev/images/basic/filter.jpg"
-  style="width: 300px;height: 200px;"
-></ivy-image>
+    src="https://blog.jikun.dev/images/basic/filter.jpg"
+    style="width: 300px;height: 200px;"></ivy-image>
 <ivy-image
-  src="https://blog.jikun.dev/images/basic/filter.jpg"
-  style="width: 300px;height: 200px;"
->
-  <ivy-icon name="refresh" size="28" spin slot="placeholder"></ivy-icon>
+    src="https://blog.jikun.dev/images/basic/filter.jpg"
+    style="width: 300px;height: 200px;">
+    <ivy-icon name="refresh" size="28" spin slot="placeholder"></ivy-icon>
 </ivy-image>
 ```
 
@@ -82,11 +75,15 @@
 ```html
 <ivy-image style="width: 300px;height: 200px;"></ivy-image>
 <ivy-image style="width: 300px;height: 200px;">
-  <ivy-icon name="picture" size="28" slot="error"></ivy-icon>
+    <ivy-icon name="picture" size="28" slot="error"></ivy-icon>
 </ivy-image>
 ```
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Props
 
 | 属性名 | 说明                     | 类型      | 可选值                               | 默认值  |
 | ------ | ------------------------ | --------- | ------------------------------------ | ------- |
@@ -95,7 +92,7 @@
 | alt    | 图片 alt                 | `string`  | -                                    | -       |
 | lazy   | 懒加载                   | `boolean` | -                                    | `false` |
 
-<style scoped>
+<style module>
 ivy-image+ivy-image{
     margin-left: 24px;
 }

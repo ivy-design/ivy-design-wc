@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import useExpose from '@/hooks/useExpose'
 import { Loading } from '@/utils/icons'
 
 defineOptions({
@@ -87,11 +86,10 @@ const setData = (data: []) => {
     _data_row_.value = data
 }
 
-const { setExposes } = useExpose()
+defineExpose({
+    setData
+})
 onMounted(() => {
-    setExposes({
-        setData
-    })
     getRootWidth()
     initCol()
 })

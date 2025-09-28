@@ -81,7 +81,17 @@
             "ivy-command-separator",
             "ivy-command-search",
             "ivy-popover",
-            "ivy-color-picker"
+            "ivy-color-picker",
+            "ivy-gradient-text",
+            "ivy-row",
+            "ivy-col",
+            "ivy-grid",
+            "ivy-grid-item",
+            "ivy-empty",
+            "ivy-progress",
+            "ivy-loading",
+            "ivy-breadcrumb",
+            "ivy-breadcrumb-item"
         ]
     }
 }

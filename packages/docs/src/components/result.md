@@ -47,13 +47,16 @@
 ## Custom
 
 <ivy-result  header="操作成功" description="Please check and modify the following information before resubmitting.">
-    <img src="/images/icon-1.svg" slot="icon" />
+    <img src="/images/icon-1.svg" alt="icon" slot="icon" />
     <div slot="extra">
         <ivy-button>返回上一页</ivy-button>
     </div>
 </ivy-result>
+<!-- 增加注释，否则页面显示不完整 -->
 
-## Attributes
+## Api
+
+### Attributes
 
 | 属性名      | 描述       | 类型     | 默认值    | 可选值                       |
 | ----------- | ---------- | -------- | --------- | ---------------------------- |
@@ -61,7 +64,7 @@
 | header      | 标题       | `string` | -         | -                            |
 | description | 描述       | `string` | -         | -                            |
 
-## Slots
+### Slots
 
 | 插槽名  | 描述        |
 | ------- | ----------- |

@@ -34,7 +34,11 @@
 <ivy-time-select start="08:30" step="01:00" end="18:30" placeholder="开始时间" ref="startRef" @change="startChange"></ivy-time-select>
 <ivy-time-select start="08:30" step="01:00" end="18:30" placeholder="结束时间" ref="endRef" @change="endChange"></ivy-time-select>
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Props
 
 | 属性名      | 说明                                 | 类型      | 可选值 | 默认值 |
 | ----------- | ------------------------------------ | --------- | ------ | ------ |
@@ -49,7 +53,7 @@
 | max-time    | 最晚时间，晚于该时间的时间段将被禁用 | `string`  | -      | -      |
 | format      | 设置时间格式                         | `string`  | -      | HH:mm  |
 
-## Events
+### Events
 
 | 事件名 | 说明                   | 类型                      |
 | ------ | ---------------------- | ------------------------- |

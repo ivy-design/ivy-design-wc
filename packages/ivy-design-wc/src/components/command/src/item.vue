@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, useHost } from 'vue'
 import { inject, ref } from 'vue'
-import { useHost } from '@/hooks/useHostElement'
 import { useEventListener } from '@vueuse/core'
 
 defineOptions({
@@ -40,9 +39,9 @@ const handleClickItem = () => {
     if (props.disabled) return
     handleClick?.(props.label)
 }
-const { host } = useHost()
+const host = useHost()
 onMounted(() => {
-    useEventListener(host.value, 'click', handleClickItem)
+    useEventListener(host, 'click', handleClickItem)
 })
 </script>
 

@@ -1,0 +1,25 @@
+name: Typescript Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-ts-type:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.15.0
+      - name: Install frontend dependencies
+        run: pnpm install
+      - name: Check types
+        run: pnpm run type-check

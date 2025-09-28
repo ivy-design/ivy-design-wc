@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
-import useHostElement from '../..//hooks/useHostElement'
+import { computed, onMounted, useHost } from 'vue'
 
 defineOptions({
     name: 'Description',
@@ -35,11 +34,10 @@ const conf = computed(() => {
     }
 })
 
-const { el, getHostElement } = useHostElement()
+const host = useHost()
 
 const init = () => {
-    const host = getHostElement() as Element
-    const list = [...(host.children || [])].filter((c: Element) => {
+    const list = [...(host?.children || [])].filter((c: Element) => {
         return c.tagName.toLowerCase() === 'ivy-description-item'
     })
 

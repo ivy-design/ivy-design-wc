@@ -5,38 +5,38 @@
 常规用法，只设置`span`属性
 
 <ivy-row class="grid-row">
-    <ivy-col span="12" class="grid-item">12</ivy-col>
-    <ivy-col span="12" class="grid-item" style="background-color: #67C23A;">12</ivy-col>
+<ivy-col span="12" :class="$style['grid-item']">12</ivy-col>
+<ivy-col span="12" :class="$style['grid-item']">12</ivy-col>
 </ivy-row>
 &nbsp;
 <ivy-row class="grid-row">
-    <ivy-col span="8" class="grid-item">8</ivy-col>
-    <ivy-col span="8" class="grid-item" style="background-color: #67C23A;">8</ivy-col>
-    <ivy-col span="8" class="grid-item">8</ivy-col>
+<ivy-col span="8" :class="$style['grid-item']">8</ivy-col>
+<ivy-col span="8" :class="$style['grid-item']">8</ivy-col>
+<ivy-col span="8" :class="$style['grid-item']">8</ivy-col>
 </ivy-row>
 &nbsp;
 <ivy-row class="grid-row">
-    <ivy-col span="6" class="grid-item">6</ivy-col>
-    <ivy-col span="6" class="grid-item" style="background-color: #67C23A;">6</ivy-col>
-    <ivy-col span="6" class="grid-item">6</ivy-col>
-    <ivy-col span="6" class="grid-item" style="background-color: #67C23A;">6</ivy-col>
+<ivy-col span="6" :class="$style['grid-item']">6</ivy-col>
+<ivy-col span="6" :class="$style['grid-item']">6</ivy-col>
+<ivy-col span="6" :class="$style['grid-item']">6</ivy-col>
+<ivy-col span="6" :class="$style['grid-item']">6</ivy-col>
 </ivy-row>
 
 ```html
 <ivy-row>
-  <ivy-col span="12">12</ivy-col>
-  <ivy-col span="12" style="background-color: #67C23A;">12</ivy-col>
+    <ivy-col span="12">12</ivy-col>
+    <ivy-col span="12">12</ivy-col>
 </ivy-row>
 <ivy-row>
-  <ivy-col span="8">8</ivy-col>
-  <ivy-col span="8" style="background-color: #67C23A;">8</ivy-col>
-  <ivy-col span="8">8</ivy-col>
+    <ivy-col span="8">8</ivy-col>
+    <ivy-col span="8">8</ivy-col>
+    <ivy-col span="8">8</ivy-col>
 </ivy-row>
 <ivy-row>
-  <ivy-col span="6">6</ivy-col>
-  <ivy-col span="6" style="background-color: #67C23A;">6</ivy-col>
-  <ivy-col span="6">6</ivy-col>
-  <ivy-col span="6" style="background-color: #67C23A;">6</ivy-col>
+    <ivy-col span="6">6</ivy-col>
+    <ivy-col span="6">6</ivy-col>
+    <ivy-col span="6">6</ivy-col>
+    <ivy-col span="6">6</ivy-col>
 </ivy-row>
 ```
 
@@ -65,16 +65,16 @@
 通过`Offset`设置偏移量
 
 <ivy-row class="grid-row">
-    <ivy-col span="8" class="grid-item">8</ivy-col>
-    <ivy-col span="4" class="grid-item" offset="4">4</ivy-col>
-    <ivy-col span="8" class="grid-item">8</ivy-col>
+    <ivy-col span="8" :class="$style['grid-item']">8</ivy-col>
+    <ivy-col span="4" :class="$style['grid-item']" offset="4">4</ivy-col>
+    <ivy-col span="8" :class="$style['grid-item']">8</ivy-col>
 </ivy-row>
 
 ```html
 <ivy-row>
-  <ivy-col span="8">8</ivy-col>
-  <ivy-col span="4" offset="4" style="background-color: #67C23A;">4</ivy-col>
-  <ivy-col span="8">8</ivy-col>
+    <ivy-col span="8">8</ivy-col>
+    <ivy-col span="4" offset="4">4</ivy-col>
+    <ivy-col span="8">8</ivy-col>
 </ivy-row>
 ```
 
@@ -85,7 +85,7 @@
 | span   | 占有的列数     | -      | `24`   |
 | offset | 向右偏移的列数 | -      | `0`    |
 
-<style scoped>
+<style module>
 .grid-item {
     height: 32px;
     line-height: 32px;

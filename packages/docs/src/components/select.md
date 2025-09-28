@@ -24,10 +24,10 @@
 
 ```html
 <ivy-select>
-  <ivy-option value="1" label="苹果"></ivy-option>
-  <ivy-option value="2" label="香蕉"></ivy-option>
-  <ivy-option value="3" label="橘子"></ivy-option>
-  <ivy-option value="4" label="芒果"></ivy-option>
+    <ivy-option value="1" label="苹果"></ivy-option>
+    <ivy-option value="2" label="香蕉"></ivy-option>
+    <ivy-option value="3" label="橘子"></ivy-option>
+    <ivy-option value="4" label="芒果"></ivy-option>
 </ivy-select>
 ```
 
@@ -42,10 +42,10 @@
 
 ```html
 <ivy-select>
-  <ivy-option value="1" label="苹果"></ivy-option>
-  <ivy-option value="2" label="香蕉"></ivy-option>
-  <ivy-option value="3" label="橘子"></ivy-option>
-  <ivy-option value="4" label="芒果"></ivy-option>
+    <ivy-option value="1" label="苹果"></ivy-option>
+    <ivy-option value="2" label="香蕉"></ivy-option>
+    <ivy-option value="3" label="橘子"></ivy-option>
+    <ivy-option value="4" label="芒果"></ivy-option>
 </ivy-select>
 ```
 
@@ -71,7 +71,11 @@
     <ivy-option value="4" label="芒果"></ivy-option>
 </ivy-select>
 
-## Select Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Select Props
 
 | 参数        | 说明     | 类型    | 默认值 |
 | ----------- | -------- | ------- | ------ |
@@ -79,7 +83,7 @@
 | disabled    | 是否禁用 | boolean | false  |
 | placeholder | 占位符   | string  | -      |
 
-## Option Props
+### Option Props
 
 | 参数     | 说明       | 类型    | 默认值 |
 | -------- | ---------- | ------- | ------ |

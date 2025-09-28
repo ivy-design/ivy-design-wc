@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
-import { useHostElement } from '@/hooks/useHostElement'
+import { computed, ref, watch, useHost } from 'vue'
 
 defineOptions({
     name: 'Drawer',
@@ -37,13 +36,12 @@ watch(
     }
 )
 
-const { el: maskRef, getHostElement } = useHostElement()
+const host: any = useHost()
 const maskClose = () => {
     if (props.maskClosable) {
         visible.value = false
         emit('update:open', false)
-        const host = getHostElement()
-        ;(host as any).open = false
+        host.open = false
         emit('close')
     }
 }
@@ -58,7 +56,7 @@ const getStyle = computed(() => {
 
 <template>
     <transition name="fade">
-        <div class="ivy-mask" @click="maskClose" ref="maskRef"></div>
+        <div class="ivy-mask" @click="maskClose" v-if="visible"></div>
     </transition>
     <div class="ivy-drawer" :style="getStyle">
         <div class="ivy-drawer-header" v-if="$props.header">

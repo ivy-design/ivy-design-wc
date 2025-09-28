@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import usePopper from '@/hooks/usePopper'
-import { toRef, onMounted, reactive, watch, computed } from 'vue'
+import { toRef, onMounted, reactive, watch, computed, useHost, ref } from 'vue'
 import { useEventListener } from '@vueuse/core'
-import { useHost } from '@/hooks/useHostElement'
 import { color2HslMap, type HslMap, hsl2rgb } from './utils'
 
 import Hue from './hue.vue'
 import Alpha from './alpha.vue'
 import ColorPane from './color-pane.vue'
+import Predefine from './predefine.vue'
 
-const { getHostElement } = useHost()
+const host: any = useHost()
 
 defineOptions({
     name: 'ColorPicker',
@@ -22,6 +22,7 @@ interface Props {
     theme: string
     delay: number
     alpha: boolean
+    predefine: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -48,15 +49,13 @@ const handleOpen = () => {
     }
     timer = setTimeout(() => {
         visible.value = true
-        console.log('visible', visible.value)
     }, props.delay || 10)
 }
 
 const handleOtherClose = (e: Event) => {
     const target = e.target as HTMLElement
-    const hostElement = getHostElement()
 
-    const isContains = hostElement.contains(target)
+    const isContains = host.contains(target)
     if (!isContains) {
         if (timer !== null) {
             clearTimeout(timer)
@@ -91,12 +90,15 @@ onMounted(() => {
 })
 
 const handleColorPaneChange = (val: Record<string, number>) => {
+    if (internalCurColor.value == null) internalCurColor.value = '1'
     internalState.s = val.s
     internalState.l = val.l
 }
+const internalCurColor = ref<string | null>(null)
 const curColor = computed(() => {
-    if (!props.value) return null
+    if (!props.value && internalCurColor.value == null) return 'rgba(255,255,255,1)'
     const rgba = hsl2rgb(internalState.h, internalState.s, internalState.l, internalState.a / 100)
+
     return rgba
 })
 const emit = defineEmits<{ change: [val: string] }>()
@@ -109,18 +111,25 @@ const alphaComponentBackground = computed(() => {
     const b = `hsla(${internalState.h}deg, ${internalState.s}%, ${internalState.l}%, 1)`
     return `linear-gradient(to right, ${a}, ${b})`
 })
+
+const handleDefineChange = (color: string) => {
+    const tmp = color2HslMap(color) as HslMap
+
+    internalState.h = tmp?.h
+    internalState.s = tmp?.s
+    internalState.l = tmp?.l
+    internalState.a = tmp?.a || 100
+}
 </script>
 
 <template>
     <div tabindex="0" class="ivy-tooltip-ref" ref="referenceEl" @click="handleOpen">
         <span
+            class="color-preview"
             :style="{
                 display: 'block',
                 width: '100%',
-                height: '100%',
-                backgroundImage: `linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(135deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(135deg, transparent 75%, #ccc 75%)`,
-                backgroundSize: `12px 12px`,
-                backgroundPosition: `0 0, 6px 0, 6px -6px, 0 6px`
+                height: '100%'
             }"
         >
             <span
@@ -168,6 +177,12 @@ const alphaComponentBackground = computed(() => {
                         :bar-color="alphaComponentBackground"
                     />
                 </div>
+                <Predefine
+                    v-if="props.predefine"
+                    :data="props.predefine"
+                    style="margin-top: 12px"
+                    @select="handleDefineChange"
+                />
             </div>
         </div>
     </transition>
@@ -268,5 +283,31 @@ const alphaComponentBackground = computed(() => {
 
 .alpha {
     margin-top: 8px;
+}
+.color-preview {
+    background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(135deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(135deg, transparent 75%, #ccc 75%);
+    background-size: 12px 12px;
+    background-position:
+        0 0,
+        6px 0,
+        6px -6px,
+        0 6px;
+
+    &-box {
+        box-sizing: border-box;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        border: 1px solid var(--ivy-border-color);
+        border-radius: var(--ivy-border-radius);
+    }
+}
+.color-predefine {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 </style>

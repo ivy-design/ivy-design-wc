@@ -15,10 +15,10 @@
 
 ```html
 <ivy-split style="height: 100px;" value="200">
-  <div slot="start">
-    <p>左侧面板</p>
-  </div>
-  <div slot="end">右侧面板</div>
+    <div slot="start">
+        <p>左侧面板</p>
+    </div>
+    <div slot="end">右侧面板</div>
 </ivy-split>
 ```
 
@@ -37,8 +37,8 @@
 
 ```html
 <ivy-split vertical>
-  <div slot="start">顶部面板</div>
-  <div slot="end">底部面板</div>
+    <div slot="start">顶部面板</div>
+    <div slot="end">底部面板</div>
 </ivy-split>
 ```
 
@@ -66,15 +66,15 @@
 
 ```html
 <ivy-split value="200" unit="px">
-  <div slot="start">
-    <p>左侧面板</p>
-  </div>
-  <div slot="end">
-    <ivy-split vertical style="height: 500px">
-      <div slot="start">顶部面板</div>
-      <div slot="end">底部面板</div>
-    </ivy-split>
-  </div>
+    <div slot="start">
+        <p>左侧面板</p>
+    </div>
+    <div slot="end">
+        <ivy-split vertical style="height: 500px">
+            <div slot="start">顶部面板</div>
+            <div slot="end">底部面板</div>
+        </ivy-split>
+    </div>
 </ivy-split>
 ```
 
@@ -84,11 +84,15 @@
 
 ```css
 :host {
-  --ivy-split-border-color: var(--ivy-border-color, #dcdfe6);
+    --ivy-split-border-color: var(--ivy-border-color, #dcdfe6);
 }
 ```
 
 :::
+
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
 
 ### Props
 
@@ -101,23 +105,17 @@
 | vertical    | 竖向                | boolean | -      | false                        |
 | triggerSize | 分割线的大小        | string  | -      | 4px                          |
 
-## Slots
+### Slots
 
 | 插槽名 | 描述              |
 | ------ | ----------------- |
 | start  | 左边面板/顶部面板 |
 | end    | 右边面板/底部面板 |
 
-## Events
+### Events
 
 | 事件名     | 描述     | 类型                                  |
 | ---------- | -------- | ------------------------------------- |
 | move-start | 拖拽开始 | Event                                 |
 | moving     | 拖拽中   | Event-event.detail中为start部分的大小 |
 | move-end   | 拖拽结束 | Event                                 |
-
-<style>
-.ml-40{
-    margin-left: 40px;
-}
-</style>

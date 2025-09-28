@@ -18,21 +18,19 @@ Avatar 组件可以用来代表人物或对象， 支持使用图片、图标或
 
 ```html
 <ivy-space size="custom" gap="24px">
-  <ivy-avatar content="U" style="--ivy-avatar-size: 28px"></ivy-avatar>
-  <ivy-avatar content="User"></ivy-avatar>
-  <ivy-avatar content="User" style="--ivy-avatar-size: 60px"></ivy-avatar>
+    <ivy-avatar content="U" style="--ivy-avatar-size: 28px"></ivy-avatar>
+    <ivy-avatar content="User"></ivy-avatar>
+    <ivy-avatar content="User" style="--ivy-avatar-size: 60px"></ivy-avatar>
 
-  <ivy-avatar
-    content="U"
-    shape="square"
-    style="--ivy-avatar-size: 28px"
-  ></ivy-avatar>
-  <ivy-avatar content="User" shape="square"></ivy-avatar>
-  <ivy-avatar
-    content="User"
-    shape="square"
-    style="--ivy-avatar-size: 60px"
-  ></ivy-avatar>
+    <ivy-avatar
+        content="U"
+        shape="square"
+        style="--ivy-avatar-size: 28px"></ivy-avatar>
+    <ivy-avatar content="User" shape="square"></ivy-avatar>
+    <ivy-avatar
+        content="User"
+        shape="square"
+        style="--ivy-avatar-size: 60px"></ivy-avatar>
 </ivy-space>
 ```
 
@@ -48,15 +46,18 @@ Avatar 组件可以用来代表人物或对象， 支持使用图片、图标或
 
 ```html
 <ivy-space size="custom" gap="24px">
-  <ivy-avatar content="User"></ivy-avatar>
-  <ivy-avatar
-    src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-  ></ivy-avatar>
-  <ivy-avatar><ivy-icon name="user" size="20px"></ivy-icon></ivy-avatar>
+    <ivy-avatar content="User"></ivy-avatar>
+    <ivy-avatar
+        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></ivy-avatar>
+    <ivy-avatar><ivy-icon name="user" size="20px"></ivy-icon></ivy-avatar>
 </ivy-space>
 ```
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Props
 
 | 属性名  | 描述                                         | 类型   | 可选值                                | 默认值   |
 | ------- | -------------------------------------------- | ------ | ------------------------------------- | -------- |

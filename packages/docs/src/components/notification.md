@@ -62,9 +62,9 @@ Ivy Design 为 Notification 组件准备了四种通知类型：`success`, `warn
 
 ```css
 :host {
-  --ivy-notification-font-size: var(--ivy-font-size);
-  --ivy-notification-title-font-size: 16px;
-  --ivy-notification-width: 340px;
+    --ivy-notification-font-size: var(--ivy-font-size);
+    --ivy-notification-title-font-size: 16px;
+    --ivy-notification-width: 340px;
 }
 ```
 
@@ -72,24 +72,24 @@ Ivy Design 为 Notification 组件准备了四种通知类型：`success`, `warn
 
 ## API
 
-### 属性
+### Props
 
-| 名称          | 说明                            | 类型     | 可选值                        | 默认值    |
-| ------------- | ------------------------------- | -------- | ----------------------------- | --------- |
-| type          | 通知的类型                      | string   | `success/info/warning/error`  | -         |
-| title         | 通知的标题                      | string   | -                             | '通知'    |
-| message       | 正文内容                        | string   | -                             | -         |
-| useHtmlString | message 作为 HTML 处理          | boolean  | -                             | false     |
-| show-close    | 是否显示右上角关闭按钮          | boolean  | -                             | true      |
-| duration      | 显示时间(ms)。 0 则不会自动关闭 | number   | -                             | 4500      |
-| onClose       | 关闭时的回调函数                | Function | -                             | -         |
-| position      | 关闭时的回调函数                | string   | `(top\|bottom)-(left\|right)` | top-right |
+| 名称          | 说明                       | 类型     | 可选值                        | 默认值    |
+| ------------- | -------------------------- | -------- | ----------------------------- | --------- |
+| type          | 通知的类型                 | string   | `success/info/warning/error`  | -         |
+| title         | 通知的标题                 | string   | -                             | '通知'    |
+| message       | 正文内容                   | string   | -                             | -         |
+| useHtmlString | message 作为 HTML 处理     | boolean  | -                             | false     |
+| show-close    | 是否显示右上角关闭按钮     | boolean  | -                             | true      |
+| duration      | 显示时间-ms,0 不会自动关闭 | number   | -                             | 4500      |
+| onClose       | 关闭时的回调函数           | Function | -                             | -         |
+| position      | 关闭时的回调函数           | string   | `(top\|bottom)-(left\|right)` | top-right |
 
-## Methods
+### Methods
 
-| 方法名 | 说明                    | 类型               |
-| ------ | ----------------------- | ------------------ |
-| close  | 关闭当前的 Notification | `function()=>void` |
+| 方法名 | 说明                    | 类型                 |
+| ------ | ----------------------- | -------------------- |
+| close  | 关闭当前的 Notification | `function() => void` |
 
 <script setup>
 import { $notify } from '@ivy-design/ce';

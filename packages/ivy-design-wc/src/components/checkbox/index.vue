@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import useHostElement from '@/hooks/useHostElement'
+import { ref, useHost } from 'vue'
 
 defineOptions({
     name: 'Checkbox'
@@ -25,7 +24,7 @@ const emit = defineEmits(['change'])
 
 const checked = ref(!!props.checked)
 
-const { el, getHostElement } = useHostElement()
+const host = useHost()
 
 const handlerClick = () => {
     if (props.__GROUP__) return
@@ -34,17 +33,14 @@ const handlerClick = () => {
     const value = checked.value ? props.trueLabel : props.falseLabel
 
     emit('change', value)
-    const host = getHostElement() as any
-
-    host.checked = checked.value
-    host.value = value
+    ;(host as any).checked = checked.value
+    ;(host as any).value = value
 }
 </script>
 
 <template>
     <div
         :class="['ivy-checkbox', { 'is-checked': checked, 'is-disabled': props.disabled }]"
-        ref="el"
         @click="handlerClick"
     >
         <span class="ivy-checkbox-input"> </span>
@@ -84,7 +80,8 @@ const handlerClick = () => {
     height: 14px;
     background-color: #fff;
     z-index: 1;
-    transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
+    transition:
+        border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
         background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
 }
 

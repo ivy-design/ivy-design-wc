@@ -68,7 +68,11 @@
 <ivy-icon name="loading" color="green" class="margin-left"></ivy-icon>
 ```
 
-## Attrs
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Attrs
 
 | 属性名 | 说明                      | 类型     | 可选值 | 默认值 |
 | ------ | ------------------------- | -------- | ------ | ------ |
@@ -78,7 +82,7 @@
 
 ## 所有 icon
 
-<div id="icons" class="icons">
+<div id="icons" :class="$style.icons">
 <ivy-icon name="shopping-trolley"></ivy-icon>
 <ivy-icon name="smoking"></ivy-icon>
 <ivy-icon name="soccer"></ivy-icon>
@@ -407,7 +411,7 @@ onMounted(() => {
 })
 
 </script>
-<style scoped>
+<style module>
 .icons {
     display:flex;
     flex-wrap: wrap;

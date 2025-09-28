@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted, useHost } from 'vue'
 
 defineOptions({
-    name: 'Col'
+    name: 'Col',
+    inheritAttrs: false
 })
 
 const props = defineProps({
@@ -15,16 +16,15 @@ const props = defineProps({
         default: 0
     }
 })
-const el = ref<HTMLSlotElement>()
+const host: any = useHost()
 onMounted(() => {
-    const host = (el.value as any).parentNode.host
     host.style.setProperty('--ivy-span', props.span.toString())
     host.style.setProperty('--ivy-offset', props.offset.toString())
 })
 </script>
 
 <template>
-    <slot ref="el"></slot>
+    <slot></slot>
 </template>
 
 <style lang="scss">

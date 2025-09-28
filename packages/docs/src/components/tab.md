@@ -15,10 +15,10 @@
 
 ```html
 <ivy-tabs>
-  <ivy-tab-pane label="用户管理"> 用户管理 </ivy-tab-pane>
-  <ivy-tab-pane label="配置管理"> 配置管理 </ivy-tab-pane>
-  <ivy-tab-pane label="角色管理"> 角色管理 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+    <ivy-tab-pane label="用户管理"> 用户管理 </ivy-tab-pane>
+    <ivy-tab-pane label="配置管理"> 配置管理 </ivy-tab-pane>
+    <ivy-tab-pane label="角色管理"> 角色管理 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
 </ivy-tabs>
 ```
 
@@ -35,10 +35,10 @@
 
 ```html
 <ivy-tabs>
-  <ivy-tab-pane label="用户管理"> 用户管理 </ivy-tab-pane>
-  <ivy-tab-pane label="配置管理"> 配置管理 </ivy-tab-pane>
-  <ivy-tab-pane label="角色管理" disabled> 角色管理 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+    <ivy-tab-pane label="用户管理"> 用户管理 </ivy-tab-pane>
+    <ivy-tab-pane label="配置管理"> 配置管理 </ivy-tab-pane>
+    <ivy-tab-pane label="角色管理" disabled> 角色管理 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
 </ivy-tabs>
 ```
 
@@ -59,16 +59,15 @@
 
 ```html
 <ivy-tabs active="b" id="tab3">
-  <ivy-tab-pane label="用户管理" index="a"> 用户管理 </ivy-tab-pane>
-  <ivy-tab-pane label="配置管理" index="b"> 配置管理 </ivy-tab-pane>
-  <ivy-tab-pane label="角色管理" index="c"> 角色管理 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理" index="d"> 权限管理 </ivy-tab-pane>
+    <ivy-tab-pane label="用户管理" index="a"> 用户管理 </ivy-tab-pane>
+    <ivy-tab-pane label="配置管理" index="b"> 配置管理 </ivy-tab-pane>
+    <ivy-tab-pane label="角色管理" index="c"> 角色管理 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理" index="d"> 权限管理 </ivy-tab-pane>
 </ivy-tabs>
 <ivy-button
-  type="success"
-  onclick="document.getElementById('tab3').setActive('d')"
->
-  跳转到-权限管理
+    type="success"
+    onclick="document.getElementById('tab3').setActive('d')">
+    跳转到-权限管理
 </ivy-button>
 ```
 
@@ -94,35 +93,39 @@
 
 ```html
 <ivy-tabs active="2" id="tab1">
-  <ivy-tab-pane label="用户管理"> 用户管理 </ivy-tab-pane>
-  <ivy-tab-pane label="配置管理"> 配置管理 </ivy-tab-pane>
-  <ivy-tab-pane label="角色管理"> 角色管理 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理1 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理2 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理3 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理4 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理5 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理6 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理7 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理8 </ivy-tab-pane>
-  <ivy-tab-pane label="权限管理"> 权限管理9 </ivy-tab-pane>
+    <ivy-tab-pane label="用户管理"> 用户管理 </ivy-tab-pane>
+    <ivy-tab-pane label="配置管理"> 配置管理 </ivy-tab-pane>
+    <ivy-tab-pane label="角色管理"> 角色管理 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理1 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理2 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理3 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理4 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理5 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理6 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理7 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理8 </ivy-tab-pane>
+    <ivy-tab-pane label="权限管理"> 权限管理9 </ivy-tab-pane>
 </ivy-tabs>
 ```
 
-## Tabs Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Tabs Props
 
 | 参数   | 说明                         | 类型     | 可选值 | 默认值 |
 | ------ | ---------------------------- | -------- | ------ | ------ |
 | active | 绑定值，选中选项卡的 `index` | `string` | —      | -      |
 
-## Tabs Events
+### Tabs Events
 
 | 事件名称 | 说明                | 类型     |
 | -------- | ------------------- | -------- |
 | change   | `active` 改变时触发 | Function |
 
-## TabPane Props
+### TabPane Props
 
 | 参数     | 说明     | 类型      | 可选值 | 默认值 |
 | -------- | -------- | --------- | ------ | ------ |

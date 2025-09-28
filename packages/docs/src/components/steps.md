@@ -14,9 +14,9 @@
 
 ```html
 <ivy-steps>
-  <ivy-step header="验证手机号"></ivy-step>
-  <ivy-step header="修改密码"></ivy-step>
-  <ivy-step header="完成"></ivy-step>
+    <ivy-step header="验证手机号"></ivy-step>
+    <ivy-step header="修改密码"></ivy-step>
+    <ivy-step header="完成"></ivy-step>
 </ivy-steps>
 ```
 
@@ -32,11 +32,27 @@
 
 ```html
 <ivy-steps current="2">
-  <ivy-step header="验证手机号">验证手机号是否正确</ivy-step>
-  <ivy-step header="修改密码">设置新密码</ivy-step>
-  <ivy-step header="完成">修改完成</ivy-step>
+    <ivy-step header="验证手机号">验证手机号是否正确</ivy-step>
+    <ivy-step header="修改密码">设置新密码</ivy-step>
+    <ivy-step header="完成">修改完成</ivy-step>
 </ivy-steps>
 ```
+
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Steps Props
+
+| 属性    | 说明     | 类型   | 可选值 | 默认值 |
+| ------- | -------- | ------ | ------ | ------ |
+| current | 当前位置 | String | -      | `1`    |
+
+### Step Props
+
+| 属性   | 说明 | 类型   | 可选值 | 默认值 |
+| ------ | ---- | ------ | ------ | ------ |
+| header | 标题 | String | -      | -      |
 
 <script setup>
 import { ref } from 'vue';

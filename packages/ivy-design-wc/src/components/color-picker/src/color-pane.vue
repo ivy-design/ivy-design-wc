@@ -14,12 +14,27 @@ const curColor = computed(() => {
     return `hsl(${props.hue}deg, ${props.s}%, ${props.l}%)`
 })
 
+const emit = defineEmits<{
+    'update:hue': [val: number]
+    change: [val: Record<string, number>]
+}>()
+
+const paneColor = computed({
+    set: (val) => {
+        emit('update:hue', val as unknown as number)
+    },
+    get: () => {
+        return `hsl(${props.hue}deg, 100%, 50%)`
+    }
+})
+
 const s2x = (s: number) => {
-    return (s / 100) * 140
+    return (s / 100) * 260
 }
 
 const l2y = (l: number) => {
-    return -((l / 100) * 250 - 100)
+    // todo: 位置计算错误，需重新计算
+    return ((100 - l) / 100) * 140
 }
 
 const point = reactive({
@@ -73,18 +88,27 @@ const handleChooseMove = useThrottleFn((ev: MouseEvent) => {
     point.x = x
     point.y = y
 }, 10)
-const emit = defineEmits<{ change: [val: Record<string, number>] }>()
+
 watch(point, (val) => {
     const saturation = calcSaturation(val.x)
-    const lightness = calcLightness(val.y)
-    emit('change', { s: saturation, l: lightness })
+    const lightness = calcLightness(val.y, val.x)
+
+    emit('change', { s: saturation, l: lightness as number })
 })
+
+watch(
+    () => props.hue,
+    () => {
+        point.x = s2x(props.s)
+        point.y = l2y(props.l)
+    }
+)
 </script>
 
 <template>
     <div
         :style="{
-            backgroundColor: curColor,
+            backgroundColor: paneColor,
             height: '140px',
             backgroundImage:
                 'linear-gradient(0deg, rgb(0, 0, 0), transparent), linear-gradient(90deg, rgb(255, 255, 255), rgba(255, 255, 255, 0))',
@@ -108,6 +132,7 @@ watch(point, (val) => {
                 border: '1px solid white',
                 position: 'absolute',
                 pointerEvents: 'none',
+                backgroundColor: curColor,
                 left: `${point.x - 4}px`,
                 top: `${point.y - 4}px`
             }"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted, ref, nextTick } from 'vue'
-import { useExpose } from '@/hooks/useExpose'
 import { ArrowRight, ArrowLeft } from '@/utils/icons'
 
 defineOptions({
@@ -114,11 +113,12 @@ const jumpTo = (val: string) => {
     setTabBodyShow(current.value)
     setActive()
 }
-const { setExposes } = useExpose()
+
+defineExpose({
+    setActive: jumpTo
+})
+
 onMounted(() => {
-    setExposes({
-        setActive: jumpTo
-    })
     current.value = props.active || '0'
     const list = getChildren()
     // console.log(list, 'list')

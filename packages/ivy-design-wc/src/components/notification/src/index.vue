@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { CloseIcon as Close, Success, Warning, Error, Info } from '@/utils/icons'
-import { useExpose } from '@/hooks/useExpose'
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, useHost } from 'vue'
 import { useEventListener } from '@vueuse/core'
-import { useHost } from '@/hooks/useHostElement'
 
-const { host } = useHost()
+const host = useHost()
 
 const iconMap = {
     success: Success,
@@ -47,7 +45,7 @@ const handleClose = () => {
     visible.value = false
     clearTimeout(timer.value)
 }
-const { setExposes } = useExpose()
+
 const timer = ref()
 
 const autoClose = () => {
@@ -63,16 +61,16 @@ const handleTransitionEnd = () => {
     if (visible.value) {
         autoClose()
     } else {
-        host.value?.remove()
+        host?.remove()
         props.onClose?.()
     }
 }
-onMounted(() => {
-    setExposes({
-        open: openMethod,
-        close: handleClose
-    })
 
+defineExpose({
+    open: openMethod,
+    close: handleClose
+})
+onMounted(() => {
     useEventListener(wrapEl.value, 'transitioncancel', handleTransitionEnd)
     useEventListener(wrapEl.value, 'transitionend', handleTransitionEnd)
 })

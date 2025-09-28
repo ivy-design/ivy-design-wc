@@ -42,8 +42,7 @@
 
 ```html
 <ivy-switch
-  style="--ivy-switch-on-color: #67c23a; --ivy-switch-off-color: #f56c6c;"
-></ivy-switch>
+    style="--ivy-switch-on-color: #67c23a; --ivy-switch-off-color: #f56c6c;"></ivy-switch>
 ```
 
 ## 可用的 CSS 变量
@@ -51,22 +50,26 @@
 :::details 点击查看代码
 
 ```css
-:hsot {
-  --ivy-switch-on-color: var(--ivy-color-primary, #409eff);
-  --ivy-switch-off-color: var(--ivy-border-color, #dcdfe6);
+:host {
+    --ivy-switch-on-color: var(--ivy-color-primary, #409eff);
+    --ivy-switch-off-color: var(--ivy-border-color, #dcdfe6);
 }
 ```
 
 :::
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Props
 
 | 参数     | 说明     | 类型    | 可选值 | 默认值 |
 | -------- | -------- | ------- | ------ | ------ |
 | checked  | 是否选中 | boolean | —      | false  |
 | disabled | 是否禁用 | boolean | —      | false  |
 
-## Events
+### Events
 
 | 事件名称 | 说明                   | 回调参数 |
 | -------- | ---------------------- | -------- |

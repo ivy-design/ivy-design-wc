@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import usePopper from '@/hooks/usePopper'
-import { toRef, onMounted } from 'vue'
+import { toRef, onMounted, useHost } from 'vue'
 import { useEventListener } from '@vueuse/core'
-import { useHost } from '@/hooks/useHostElement'
 
-const { getHostElement } = useHost()
+const host = useHost()
 
 defineOptions({
     name: 'Popover',
@@ -74,9 +73,8 @@ const handleClose = () => {
 }
 const handleOtherClose = (e: Event) => {
     const target = e.target as HTMLElement
-    const hostElement = getHostElement()
 
-    const isContains = hostElement.contains(target)
+    const isContains = host?.contains(target)
     if (!isContains) {
         if (timer !== null) {
             clearTimeout(timer)

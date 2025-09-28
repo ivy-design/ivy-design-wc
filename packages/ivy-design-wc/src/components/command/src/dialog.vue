@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, provide } from 'vue'
-import { useExpose } from '@/hooks/useExpose'
+import { ref, provide } from 'vue'
 
 defineOptions({
     name: 'CommandDialog',
@@ -13,10 +12,9 @@ provide('visible', visible)
 const handleOpen = () => {
     visible.value = true
 }
-const { setExpose } = useExpose()
 
-onMounted(() => {
-    setExpose('open', handleOpen)
+defineExpose({
+    open: handleOpen
 })
 
 const handleClose = () => {

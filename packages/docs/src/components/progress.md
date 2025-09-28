@@ -20,10 +20,9 @@
 ```html
 <ivy-progress value="70"></ivy-progress>
 <ivy-progress
-  value="70"
-  color="red"
-  style="--ivy-progress-color: red"
-></ivy-progress>
+    value="70"
+    color="red"
+    style="--ivy-progress-color: red"></ivy-progress>
 ```
 
 ## 设置进度条的粗细
@@ -35,13 +34,11 @@
 
 ```html
 <ivy-progress
-  value="70"
-  style="--ivy-progress-stroke-width: 24px"
-></ivy-progress>
+    value="70"
+    style="--ivy-progress-stroke-width: 24px"></ivy-progress>
 <ivy-progress
-  value="70"
-  style="--ivy-progress-stroke-width: 15px"
-></ivy-progress>
+    value="70"
+    style="--ivy-progress-stroke-width: 15px"></ivy-progress>
 ```
 
 ## 显示描述文字
@@ -79,7 +76,11 @@
 
 :::
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Props
 
 | 属性名    | 描述                             | 类型    | 可选值 | 默认值     |
 | --------- | -------------------------------- | ------- | ------ | ---------- |

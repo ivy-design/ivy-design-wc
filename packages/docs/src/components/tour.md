@@ -39,30 +39,34 @@ placement：<br>
 
 ```css
 :host {
-  --ivy-tour-width: 420px;
-  --ivy-tour-padding-primary: 16px;
-  --ivy-tour-font-line-height: var(--ivy-font-line-height-primary);
-  --ivy-tour-title-font-size: 16px;
-  --ivy-tour-title-text-color: var(--ivy-text-color-primary);
-  --ivy-tour-title-font-weight: 400;
-  --ivy-tour-font-size: 14px;
-  --ivy-tour-color: var(--ivy-text-color-primary);
-  --ivy-tour-bg-color: #ffffff;
-  --ivy-tour-border-radius: var(--ivy-border-radius);
-  --ivy-tour-border-color: var(--ivy-border-color-lighter);
+    --ivy-tour-width: 420px;
+    --ivy-tour-padding-primary: 16px;
+    --ivy-tour-font-line-height: var(--ivy-font-line-height-primary);
+    --ivy-tour-title-font-size: 16px;
+    --ivy-tour-title-text-color: var(--ivy-text-color-primary);
+    --ivy-tour-title-font-weight: 400;
+    --ivy-tour-font-size: 14px;
+    --ivy-tour-color: var(--ivy-text-color-primary);
+    --ivy-tour-bg-color: #ffffff;
+    --ivy-tour-border-radius: var(--ivy-border-radius);
+    --ivy-tour-border-color: var(--ivy-border-color-lighter);
 }
 ```
 
 :::
 
-## Tour Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Tour Props
 
 | 参数      | 说明 | 类型         | 可选值               | 默认值 |
 | --------- | ---- | ------------ | -------------------- | ------ |
 | steps     | 内容 | Array\<Step> | -                    | -      |
 | placement | 位置 | String       | [`enum`](#placement) | `top`  |
 
-### Step
+#### Step Properties
 
 | 参数      | 说明                   | 类型                  | 可选值               | 默认值 |
 | --------- | ---------------------- | --------------------- | -------------------- | ------ |
@@ -72,7 +76,7 @@ placement：<br>
 | allowHtml | 内容可以是 html 字符串 | string                | -                    | -      |
 | placement | 位置                   | String                | [`enum`](#placement) | `top`  |
 
-## Tour Events
+### Tour Events
 
 | 事件名称 | 说明                 | 类型                     |
 | -------- | -------------------- | ------------------------ |

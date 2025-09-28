@@ -10,14 +10,24 @@ describe('utils/index.ts', () => {
         expect(hasOwn({ a: 1 }, 'b')).toEqual(false)
     })
 
-    test('hasOwn success', () => {
-        function Person() {
-            this.a = 1
-            this.b = 2
+    test('hasOwn extends', () => {
+        interface IPerson {
+            name: string
+            age?: number
         }
-        Person.prototype.c = 3
-        const target = new Person()
 
-        expect(hasOwn(target, 'c')).toEqual(false)
+        class Person implements IPerson {
+            name: string
+            age?: number
+
+            constructor() {
+                this.name = 'Tom'
+            }
+        }
+
+        Person.prototype.age = 18
+        const Tom: IPerson = new Person()
+
+        expect(hasOwn(Tom, 'age')).toEqual(false)
     })
 })

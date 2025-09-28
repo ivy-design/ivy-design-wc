@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, useHost } from 'vue'
 import { copyNode, copyText } from '@/utils/clipboard'
-import useHostElement from '@/hooks/useHostElement'
 
 defineOptions({
     name: 'CopyToClipboard',
@@ -66,23 +65,21 @@ function blurred(event: any) {
     event.currentTarget.removeEventListener('keydown', keydown)
 }
 
-const { el, getHostElement } = useHostElement()
+const host = useHost()
 
 onMounted(() => {
-    const host = getHostElement()
-    host.addEventListener('click', clicked)
-    host.addEventListener('focus', focused)
-    host.addEventListener('blur', blurred)
+    host?.addEventListener('click', clicked)
+    host?.addEventListener('focus', focused)
+    host?.addEventListener('blur', blurred)
 })
 
 onBeforeUnmount(() => {
-    const host = getHostElement()
-    host.removeEventListener('click', clicked)
-    host.removeEventListener('focus', focused)
-    host.removeEventListener('blur', blurred)
+    host?.removeEventListener('click', clicked)
+    host?.removeEventListener('focus', focused)
+    host?.removeEventListener('blur', blurred)
 })
 </script>
 
 <template>
-    <slot ref="el"></slot>
+    <slot></slot>
 </template>

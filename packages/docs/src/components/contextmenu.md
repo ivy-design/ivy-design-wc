@@ -32,30 +32,30 @@
 
 ```html
 <ivy-contextmenu @command="menuClick">
-  <div>这里是显示右键菜单的区域</div>
-  <p>这里是显示右键菜单的区域</p>
-  <p>这里是显示右键菜单的区域</p>
-  <p>这里是显示右键菜单的区域</p>
-  <p>这里是显示右键菜单的区域</p>
-  <p>这里是显示右键菜单的区域</p>
-  <p>这里是显示右键菜单的区域</p>
-  <p>这里是显示右键菜单的区域</p>
-  <div>这里是显示右键菜单的区域</div>
+    <div>这里是显示右键菜单的区域</div>
+    <p>这里是显示右键菜单的区域</p>
+    <p>这里是显示右键菜单的区域</p>
+    <p>这里是显示右键菜单的区域</p>
+    <p>这里是显示右键菜单的区域</p>
+    <p>这里是显示右键菜单的区域</p>
+    <p>这里是显示右键菜单的区域</p>
+    <p>这里是显示右键菜单的区域</p>
+    <div>这里是显示右键菜单的区域</div>
 
-  <div slot="menu" data-command="item" command="copy">复制</div>
-  <div slot="menu" data-command="item" command="cute">剪切</div>
-  <div slot="menu" data-command="item" command="paste">粘贴</div>
-  <div slot="menu" data-command="line"></div>
-  <div slot="menu" data-command="item" command="print">打印</div>
-  <div slot="menu" data-command="item" command="saveAs">另存为</div>
-  <div slot="menu" data-command="item" command="translate">翻译</div>
-  <div slot="menu" data-command="item" command="snip">截图</div>
+    <div slot="menu" data-command="item" command="copy">复制</div>
+    <div slot="menu" data-command="item" command="cute">剪切</div>
+    <div slot="menu" data-command="item" command="paste">粘贴</div>
+    <div slot="menu" data-command="line"></div>
+    <div slot="menu" data-command="item" command="print">打印</div>
+    <div slot="menu" data-command="item" command="saveAs">另存为</div>
+    <div slot="menu" data-command="item" command="translate">翻译</div>
+    <div slot="menu" data-command="item" command="snip">截图</div>
 </ivy-contextmenu>
 <script setup>
-  import { message } from "@ivy-design/ce";
-  const menuClick = (ev) => {
-    message.success(`点击了菜单：${ev.detail}`);
-  };
+    import { message } from "@ivy-design/ce";
+    const menuClick = (ev) => {
+        message.success(`点击了菜单：${ev.detail}`);
+    };
 </script>
 ```
 
@@ -66,7 +66,7 @@
   };
 </script>
 
-<style scoped>
+<style module>
 .menu-wrap{
     display: block;
     background-color: #fff;

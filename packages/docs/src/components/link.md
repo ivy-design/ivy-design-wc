@@ -68,17 +68,21 @@
 
 ```css
 :host {
-  --ivy-link-font-size: var(--ivy-font-size, 14px);
-  --ivy-link-font-weight: var(--ivy-font-weight-primary);
-  --ivy-link-text-color: var(--ivy-text-color-regular);
-  --ivy-link-hover-text-color: var(--ivy-color-primary);
-  --ivy-link-disabled-text-color: var(--ivy-text-color-placeholder);
+    --ivy-link-font-size: var(--ivy-font-size, 14px);
+    --ivy-link-font-weight: var(--ivy-font-weight-primary);
+    --ivy-link-text-color: var(--ivy-text-color-regular);
+    --ivy-link-hover-text-color: var(--ivy-color-primary);
+    --ivy-link-disabled-text-color: var(--ivy-text-color-placeholder);
 }
 ```
 
 :::
 
-## Props
+<!-- 增加注释，否则页面显示不完整 -->
+
+## Api
+
+### Props
 
 | 属性名    | 说明             | 类型      | 可选值                                | 默认值 |
 | --------- | ---------------- | --------- | ------------------------------------- | ------ |

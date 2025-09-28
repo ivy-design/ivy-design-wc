@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useHost } from '@/hooks/useHostElement'
+import { ref, onMounted, useHost } from 'vue'
 import { getElementsByTagName } from '@/utils/dom'
 
 defineOptions({
@@ -21,10 +20,10 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits(['beforeChange', 'change'])
 
 const value = ref(props.value)
-const { host } = useHost()
+const host: any = useHost()
 
 const getChildren = () => {
-    return getElementsByTagName(host.value as HTMLElement, 'ivy-radio')
+    return getElementsByTagName(host as HTMLElement, 'ivy-radio')
 }
 
 const setChecked = () => {
@@ -53,7 +52,7 @@ const handlerClick = (ev: Event) => {
         emit('beforeChange', label)
         value.value = label
         setChecked()
-        ;(host.value as any).value = label
+        host.value = label
         emit('change', label)
     }
 }

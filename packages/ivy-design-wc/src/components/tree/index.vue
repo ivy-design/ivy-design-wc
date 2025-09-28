@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { TreeItem } from './child'
-import useExpose from '@/hooks/useExpose'
 
 defineOptions({
     name: 'Tree',
@@ -54,23 +53,20 @@ const parseData = (data: DataSources) => {
     })
 }
 
-const { setExposes } = useExpose()
-
 const setData = (data: DataSources) => {
     dataSources.value = parseData(data)
 }
-onMounted(() => {
-    setExposes({
-        setCheckedKeys: (keys: string[]) => {
-            console.log(keys)
-            checkedKeys.value = keys
-        },
-        setData,
-        setExpandKeys(keys: string[]) {
-            expandKeys.value = keys
-            setData(dataSources.value)
-        }
-    })
+
+defineExpose({
+    setCheckedKeys: (keys: string[]) => {
+        console.log(keys)
+        checkedKeys.value = keys
+    },
+    setData,
+    setExpandKeys(keys: string[]) {
+        expandKeys.value = keys
+        setData(dataSources.value)
+    }
 })
 </script>
 
