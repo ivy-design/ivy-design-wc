@@ -3,6 +3,7 @@ import usePopper from '@/hooks/usePopper'
 import { toRef, onMounted, reactive, watch, computed, useHost, ref } from 'vue'
 import { useEventListener } from '@vueuse/core'
 import { color2HslMap, type HslMap, hsl2rgb } from './utils'
+import TinyColor from 'tinycolor2'
 
 import Hue from './hue.vue'
 import Alpha from './alpha.vue'
@@ -118,7 +119,9 @@ const handleDefineChange = (color: string) => {
     internalState.h = tmp?.h
     internalState.s = tmp?.s
     internalState.l = tmp?.l
-    internalState.a = tmp?.a || 100
+    internalState.a = tmp?.a ?? 100
+
+    
 }
 </script>
 

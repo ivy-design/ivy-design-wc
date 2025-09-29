@@ -8,36 +8,10 @@ import tinycolor from 'tinycolor2'
 // 6. hex2hsl
 
 export const hsl2rgb = (h: number, s: number, l: number, a: number = 1): string => {
-    // 规范化色相范围到0-360度
-    h = h % 360
-    if (h < 0) h += 360
+    const hslaObject = { h, s: s / 100, l: l / 100, a }
+    const rgbObject = tinycolor(hslaObject)
 
-    // 规范化饱和度和亮度范围到0-100%
-    s = Math.min(100, Math.max(0, s)) / 100
-    l = Math.min(100, Math.max(0, l)) / 100
-
-    let r: number, g: number, b: number
-
-    if (s === 0) {
-        r = g = b = l // achromatic
-    } else {
-        const hueToRgb = (p: number, q: number, t: number) => {
-            if (t < 0) t += 1
-            if (t > 1) t -= 1
-            if (t < 1 / 6) return p + (q - p) * 6 * t
-            if (t < 1 / 2) return q
-            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
-            return p
-        }
-
-        const q = l < 0.5 ? l * (1 + s) : l + s - l * s
-        const p = 2 * l - q
-        r = hueToRgb(p, q, h / 360 + 1 / 3)
-        g = hueToRgb(p, q, h / 360)
-        b = hueToRgb(p, q, h / 360 - 1 / 3)
-    }
-
-    return `rgba(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)}, ${a})`
+    return rgbObject.toRgbString()
 }
 
 export const hsl2hex = (h: number, s: number, l: number): string => {
@@ -127,6 +101,7 @@ export const color2HslMap = (val: string): HslMap | null => {
     const color = tinycolor(val)
     if (!color.isValid) return null
     const cur = color.toHsl()
+
     return {
         h: cur.h,
         s: cur.s * 100,
@@ -135,16 +110,57 @@ export const color2HslMap = (val: string): HslMap | null => {
     }
 }
 
-export const calcSaturation = (x: number, total = 260) => {
-    const tmp = (x / total) * 100
-    return parseFloat(tmp.toFixed(2))
+const clamp01 = (value: number) => {
+    if (Number.isNaN(value)) return 0
+    if (value < 0) return 0
+    if (value > 1) return 1
+    return value
 }
 
-// 从上到下饱和度100%到0%
-export const calcLightness = (y: number, x: number = 260, total = 140 * 2) => {
-    if (y === 140) {
-        return '0'
+const formatPercent = (value: number) => parseFloat((clamp01(value) * 100).toFixed(2))
+
+export const hslToHsvNormalized = (s: number, l: number) => {
+    const sNorm = clamp01(s)
+    const lNorm = clamp01(l)
+    const v = lNorm + sNorm * Math.min(lNorm, 1 - lNorm)
+    let sHsv = 0
+    if (v > 0) {
+        sHsv = 2 * (1 - lNorm / v)
     }
-    const tmp = 50 - (y / total) * 100 + (100 - calcSaturation(x)) / 2
-    return parseFloat(tmp.toFixed(2))
+    return {
+        s: clamp01(sHsv),
+        v: clamp01(v)
+    }
+}
+
+export const hsvToHslNormalized = (s: number, v: number) => {
+    const sNorm = clamp01(s)
+    const vNorm = clamp01(v)
+    const l = vNorm * (1 - sNorm / 2)
+    let sHsl = 0
+    if (l > 0 && l < 1) {
+        sHsl = (vNorm - l) / Math.min(l, 1 - l)
+    }
+    return {
+        s: clamp01(sHsl),
+        l: clamp01(l)
+    }
+}
+
+export const pointToHsl = (x: number, y: number, width = 260, height = 140) => {
+    const sV = clamp01(x / width)
+    const v = clamp01(1 - y / height)
+    const { s, l } = hsvToHslNormalized(sV, v)
+    return {
+        s: formatPercent(s),
+        l: formatPercent(l)
+    }
+}
+
+export const hslToPoint = (s: number, l: number, width = 260, height = 140) => {
+    const { s: sV, v } = hslToHsvNormalized(s / 100, l / 100)
+    return {
+        x: clamp01(sV) * width,
+        y: (1 - clamp01(v)) * height
+    }
 }

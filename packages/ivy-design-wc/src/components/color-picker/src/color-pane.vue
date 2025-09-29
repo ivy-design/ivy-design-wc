@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, watch } from 'vue'
 import { useThrottleFn } from '@vueuse/core'
-import { calcLightness, calcSaturation } from './utils'
+import { hslToPoint, pointToHsl } from './utils'
 
 const props = defineProps<{
     hue: number
@@ -28,31 +28,31 @@ const paneColor = computed({
     }
 })
 
-const s2x = (s: number) => {
-    return (s / 100) * 260
-}
-
-const l2y = (l: number) => {
-    // todo: 位置计算错误，需重新计算
-    return ((100 - l) / 100) * 140
-}
+const PANE_WIDTH = 260
+const PANE_HEIGHT = 140
 
 const point = reactive({
-    x: s2x(props.s),
-    y: l2y(props.l)
+    x: 0,
+    y: 0
 })
+
+const syncPointFromProps = () => {
+    const { x, y } = hslToPoint(props.s, props.l, PANE_WIDTH, PANE_HEIGHT)
+    point.x = x
+    point.y = y
+}
 const updatePoint = (x: number, y: number) => {
     let t = { x: x, y: y }
     if (x < 0) {
         t.x = 0
-    } else if (x > 260) {
-        t.x = 260
+    } else if (x > PANE_WIDTH) {
+        t.x = PANE_WIDTH
     }
 
     if (y < 0) {
         t.y = 0
-    } else if (y > 140) {
-        t.y = 140
+    } else if (y > PANE_HEIGHT) {
+        t.y = PANE_HEIGHT
     }
 
     return t
@@ -61,8 +61,9 @@ let isPress = false
 const handleChooseDown = (ev: MouseEvent) => {
     isPress = true
     const { offsetX: x, offsetY: y } = ev
-    point.x = x
-    point.y = y
+    const { x: nx, y: ny } = updatePoint(x, y)
+    point.x = nx
+    point.y = ny
 }
 
 const handleChooseLeave = (ev: MouseEvent) => {
@@ -85,24 +86,27 @@ const handleChooseUp = (ev: MouseEvent) => {
 const handleChooseMove = useThrottleFn((ev: MouseEvent) => {
     if (!isPress) return
     const { offsetX: x, offsetY: y } = ev
-    point.x = x
-    point.y = y
+    const { x: nx, y: ny } = updatePoint(x, y)
+    point.x = nx
+    point.y = ny
 }, 10)
 
 watch(point, (val) => {
-    const saturation = calcSaturation(val.x)
-    const lightness = calcLightness(val.y, val.x)
-
-    emit('change', { s: saturation, l: lightness as number })
+    const { s, l } = pointToHsl(val.x, val.y, PANE_WIDTH, PANE_HEIGHT)
+    emit('change', { s, l })
 })
 
 watch(
-    () => props.hue,
+    [() => props.s, () => props.l],
     () => {
-        point.x = s2x(props.s)
-        point.y = l2y(props.l)
-    }
+        if (!isPress) {
+            syncPointFromProps()
+        }
+    },
+    { immediate: true }
 )
+
+syncPointFromProps()
 </script>
 
 <template>
