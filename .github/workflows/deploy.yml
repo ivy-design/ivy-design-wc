@@ -52,7 +52,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: packages/docs/src/.vitepress/dis
+          path: packages/docs/src/.vitepress/dist
 
   # 部署工作
   deploy:
